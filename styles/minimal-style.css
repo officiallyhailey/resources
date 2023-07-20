@@ -1,0 +1,10 @@
+html {
+    margin: 0;
+    background-image:radial-gradient(black 90%, gray);
+}
+
+body {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    color: darkslategray;
+}

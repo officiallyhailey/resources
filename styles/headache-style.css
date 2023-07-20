@@ -8,3 +8,7 @@ body {
     font-family: "Montserrat", sans-serif;
     color: darkslategray;
 }
+
+head {
+    margin: 0;
+    }

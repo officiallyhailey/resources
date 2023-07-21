@@ -29,7 +29,7 @@ margin: 0;
     background-color: var(--background-color);
     min-height: 20vh;
     font-family: "Montserrat", sans-serif;
-    font-size: clamp(1.5rem, 1rem + 8vw, 15rem);
+    font-size: clamp(1.5rem, 1rem + 5vw, 15rem);
     font-weight:500;
     text-transform: uppercase;
     color: var(--text-color);

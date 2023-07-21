@@ -1,6 +1,6 @@
 html {
     margin: 0;
-    background-image:radial-gradient(black 90%, gray);
+    background-color: black;
 }
 
 body {
@@ -14,7 +14,7 @@ margin: 0;
 }
 
     #head-wrap-text {
-        background-image: linear-gradient(to top, black 90%, gray);
+        background-color: black;
     }
 
 :root {
@@ -29,22 +29,22 @@ margin: 0;
     background-color: var(--background-color);
     min-height: 20vh;
     font-family: "Montserrat", sans-serif;
-    font-size: clamp(1.5rem, 1rem + 8vw, 15rem);
+    font-size: clamp(1.5rem, 1rem + 5vw, 15rem);
     font-weight:500;
     text-transform: uppercase;
     color: var(--text-color);
 }
 .wrapper > div {
-    grid-area: 1/1/-1/-1;
+    grid-area: 1/1/-1/1;
 }
 .top {
     clip-path: polygon(0% 0%, 100% 0%, 100% 48%, 0% 58%);
 }
 .bottom {
-    clip-path: polygon(0% 60%, 100% 50%, 100% 100%, 0% 100%);
+    clip-path: polygon(0% 60%, 1000% 50%, 100% 100%, 0% 100%);
     color: transparent;
     background: -webkit-linear-gradient(177deg, black 53%, var(--text-color) 65%);
-    background: linear-gradient(177deg, rgb(34, 128, 228) 53%, var(--text-color) 65%);
+    background: linear-gradient(177deg, rgb(255, 255, 255) 53%, var(--text-color) 65%);
     background-clip: text;
     -webkit-background-clip: text;
     transform: translateX(-0.02em);

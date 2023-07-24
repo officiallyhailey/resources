@@ -1,23 +1,23 @@
 body {
-    background: radial-gradient(ellipse at center, rgba(127, 0, 173, 0.6) 0%,
+    background radial-gradient(ellipse at center, rgba(127, 0, 173, 0.6) 0%,
             rgba(0, 0, 0, 0.8) 60%,
             rgba(0, 0, 0, 1) 90%),
         url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/31787/stars.jpg);
-    background-size: cover;
-    z-index: -5;
+    background-size: 100%;
+    z-index: -4;
     color: rgb(0, 0, 0);
     overflow: hidden;
     font-family: 'Monoton', monospace;
     font-size: 1em;
 }
 .nav {
-background-color: black;
+background-color black;
 font-size: 1.2em;
 text-align: center;
-padding-top: 120px;
+padding-top: 10%;
 }
 .head-wrapper {
-    animation: neon1 1.5s ease-in-out infinite alternate;
+    animation: neon1 .5s ease-in-out infinite alternate;
 }
 
 .head-wrapper {
@@ -171,15 +171,15 @@ padding-top: 120px;
 
 @keyframes neon1 {
     from {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF11A7, 0 0 70px #FF11A7, 0 0 80px #FF11A7, 0 0 100px #FF11A7, 0 0 150px #FF1177;
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #11ffff, 0 0 70px #11ebff, 0 0 80px #ff7411, 0 0 100px #11ff21, 0 0 150px #dbff11;
     }
 
     to {
-        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF11A7, 0 0 35px #FF11A7, 0 0 40px #FF11A7, 0 0 50px #FF11A7, 0 0 75px #FF11A7;
+        text-shadow: 0 0 5px #fff, 0 0 10px #f60909, 0 0 15px #e51919, 0 0 20px #fffb11, 0 0 35px #ece6e4, 0 0 40px #9cff11, 0 0 50px #11ffa4, 0 0 75px #2911ff;
     }
 }
 
-@keyframes layerupanim {
+@ keyframes layerupanim {
     from {
         height: 140px;
     }

@@ -1,6 +1,8 @@
 /* header background */
 
-
+body {
+margin: 0;    
+}
 
 #page-links {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -163,8 +165,7 @@
         height: 100%;
     }
 }
-/* GRID DETAILS */
-
+/* GRID layout 1
 #grid {
     display: grid;
     grid-template: 80px 300px 120px / 70% auto;
@@ -190,6 +191,57 @@
 #grid div:nth-child(4) {
     grid-column: 1 / span 2;
     background-color: rgba(0, 0, 0, 0.729);
+    
+}
+*/
+
+/* GRID layout 2 */
+
+#grid {
+display: grid;
+grid-template: 310px 310px / 310px 310px 310px;
+grid-template-areas:
+"A B C"
+"D E F"
+}
+
+.grid {  
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+#grid div:nth-child(1) {
+grid-area: A;
+background-color: rgba(255, 255, 255, 0.456);
+}
+
+#forest-img {
+height: 300px;
+width: 300px;
+margin: 4px;
+opacity: 0.5;
+}
+
+#grid div:nth-child(2) {
+    grid-area: B;
+    border: black 3px solid;
+}
+#grid div:nth-child(3) {
+    grid-area: C;
+    border: black 3px solid;
+}
+#grid div:nth-child(4) {
+    grid-area: D;
+    border: black 3px solid;
+}
+#grid div:nth-child(5) {
+    grid-area: E;
+    border: black 3px solid;
+}
+#grid div:nth-child(6) {
+    grid-area: F;
+    border: black 3px solid;
 }
 
 /* SPLIT TEXT HEADER CODE */

@@ -1,34 +1,41 @@
+/* header background */
+
+
 
 #page-links {
-    background-color: rgba(255, 255, 255, 0.793);
-    font-size: 2vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-transform: uppercase;
     text-align: center;
-    font-family: monospace;
-    text-transform: lowercase;
-    scrollbar-base-color: #1149ff;
-    padding: 0;
-    margin: 0;
-    }
+}
 
-   
-    .head-wrapper {
-        animation: neon1 1.5s ease-in-out infinite alternate;
-    }
+#minimal {
+    padding: 5px 20px 5px 20px;
+    color: white;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    border-radius: 20px;
+    ;
+}
 
-.head-wrapper {
+#portfolio {
+    padding: 5px 10px 5px 10px;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    color: white;
+    border-radius: 20px;
+}
+
+#homepage {
+    padding: 5px 10px 5px 10px;
+    color: rgb(0, 34, 255);
+    background-color: hsla(0, 0%, 0%, 0.5);
+    border-radius: 20px;
+}
+
+.top , .bottom {
     animation: neon1 3.5s ease-in-out infinite alternate;
 }
 
-#split-head {
-    margin: 0;
-    padding: 0;
-    position:auto;
-    width: auto;
-    text-align: center;
-    font-size: 8vh;
-    font-family: "Montserrat", sans-serif;
-    text-transform: uppercase;
-    color: rgb(91, 89, 89);
+.head-section {
+    animation: neon1 1.5s ease-in-out infinite alternate;    
 }
 
 #layer-0 {
@@ -105,12 +112,12 @@
     right: 0;
     margin: auto;
     z-index: -5;
-    animation: layercorneranim 3s ease-in-out infinite alternate;
+    animation: layercorneranim 1.5s ease-in-out infinite alternate;
 }
 
 #hey {
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.995);
+    background-color: rgb(255, 255, 255);
     position: absolute;
     bottom: 36%;
     right: 0;
@@ -121,7 +128,7 @@
 }
 
 
-#lines {
+# lines {
     background-size: 40px 40px;
     background-image: repeating-linear-gradient(0deg, #000000, #878888 2px, transparent 1px, transparent 40px), repeating-linear-gradient(-90deg, #f8efef, #3725daeb 2px, transparent 2px, transparent 40px);
     height:100%;
@@ -133,33 +140,94 @@
     z-index: -4;
 }
 
+/* Header text background color effect */
 
-@keyframes neon1 {
+@ keyframes neon1 {
     from {
-        text-shadow: 0 0 10px #f2ff04, 0 0 20px #ffffff, 0 0 30px #fff, 0 0 40px #ffe1fe, 0 0 70px #f5f06c, 0 0 80px #9135e8, 0 0 20px #f30bbd, 0 0 200px #c0ff11;
+        text-shadow: 0 0 10px #0471ff, 0 0 20px #ffffff, 0 0 30px #fff, 0 0 40px #ffe1fe, 0 0 70px #6cf5aa, 0 0 80px #9135e8, 0 0 20px #f30bbd, 0 0 200px #c0ff11;
     }
 
     to {
-        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #1149ff, 0 0 40px #39ff11, 0 0 20px #11c7ff, 0 0 20px #fbff11, 0 0 35px #1142e2;
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #1149ff, 0 0 40px #39ff11, 0 0 20px #11c7ff, 0 0 20px #11cbff, 0 0 35px #1142e2;
     }
 }
 
-@keyframes layerupanim {
-    from {
-        height: 50%;
-    }
-
-    to {
-        height: 100%;
-    }
-}
+/* Header background color effect */
 
 @keyframes layercorneranim {
     from {
-        height: 60%;
+        height: 30%;
     }
 
     to {
         height: 100%;
     }
 }
+/* GRID DETAILS */
+
+#grid {
+    display: grid;
+    grid-template: 80px 300px 120px / 70% auto;
+    grid-row: auto;
+    grid-column: auto;
+    gap: 10px;
+    margin: 50px;
+}
+
+#grid div:nth-child(1) {
+    grid-column: 1 /span 2;
+    background-color: rgba(0, 0, 0, 0.57);
+}
+
+#grid div:nth-child(2) {
+    background-color: rgba(0, 0, 0, 0.588);
+}
+
+#grid div:nth-child(3) {
+    background-color: rgba(0, 0, 0, 0.691);
+}
+
+#grid div:nth-child(4) {
+    grid-column: 1 / span 2;
+    background-color: rgba(0, 0, 0, 0.729);
+}
+
+/* SPLIT TEXT HEADER CODE */
+
+
+:root {
+    --text-color: hsl(0, 0%, 0%);
+}
+
+#split-head {
+    margin-bottom: 1px;
+    margin-top: 1px;
+    padding: 5px;
+    display: grid;
+    place-content: center;
+    background-color: var(--background-color);
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(1.5rem, 1rem + 7vw, 15rem);
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+.top-wrapper> div {
+    grid-area: 1/1/-1/-1;
+}
+
+.top {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 48%, 0% 58%);
+}
+
+.bottom {
+    clip-path: polygon(0% 63%, 100% 52%, 100% 100%, 0% 100%);
+    color: transparent;
+    background: -webkit-linear-gradient(177deg, rgb(0, 0, 0) 53%, var(--text-color) 65%);
+    background: linear-gradient(177deg, rgb(0, 0, 0) 53%, var(--text-color) 65%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    transform: translateX(-0.02em);
+}
+

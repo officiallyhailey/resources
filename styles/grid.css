@@ -1,5 +1,10 @@
 /* header background */
 
+@viewport {
+    width: device-width ;
+    zoom: 1.0 ;
+}
+
 body {
 margin: 0;    
 }
@@ -33,26 +38,21 @@ margin: 0;
 }
 
 .top , .bottom {
-    animation: neon1 3.5s ease-in-out infinite alternate;
-}
-
-.head-section {
-    animation: neon1 1.5s ease-in-out infinite alternate;    
+    animation: neon1 1.5s ease-in-out infinite alternate;
 }
 
 #layer-0 {
     background: rgba(92, 71, 255, 0);
     background: -moz-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 25%, rgb(38, 3, 38) 100%);
     background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(92, 71, 255, 0)), color-stop(25%, rgba(0, 0, 0, 1)), color-stop(100%, rgb(80, 71, 255)));
-    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 1)) 0%, rgba(0, 0, 0, 1) 25%, rgb(71, 89, 255) 100%);
-    background: -o-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1)) 25%, rgba(255, 71, 255, 1) 100%);
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 1)) 0%, rgba(0, 0, 0, 1) 25%, rgb(71, 89, 255) 100%;
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1)) 25%, rgba(255, 71, 255, 1) 100%;
     background: -ms-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 25%, rgba(255, 71, 255, 1) 100%);
     background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 25%, rgba(255, 71, 255, 1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5c47ff', endColorstr='#ff47ff', GradientType=0);
     height: 100%;
     width: 100%;
-    opacity: 0
-    position:fixed;
+    opacity: 1;
     z-index: -5;
 }
 
@@ -130,12 +130,12 @@ margin: 0;
 }
 
 
-# lines {
+#lines {
     background-size: 40px 40px;
     background-image: repeating-linear-gradient(0deg, #000000, #878888 2px, transparent 1px, transparent 40px), repeating-linear-gradient(-90deg, #f8efef, #3725daeb 2px, transparent 2px, transparent 40px);
     height:100%;
     width: 100%;
-    opacity: 1;
+    opacity: 0.2;
     position:absolute;
     top: 0;
     left: 0;
@@ -144,13 +144,13 @@ margin: 0;
 
 /* Header text background color effect */
 
-@ keyframes neon1 {
+@keyframes neon1 {
     from {
-        text-shadow: 0 0 10px #0471ff, 0 0 20px #ffffff, 0 0 30px #fff, 0 0 40px #ffe1fe, 0 0 70px #6cf5aa, 0 0 80px #9135e8, 0 0 20px #f30bbd, 0 0 200px #c0ff11;
+        text-shadow: 0 0 10px #04feed, 0 0 10px rgb(0, 255, 0), 0 0 10px rgb(0, 0, 0);
     }
 
     to {
-        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #1149ff, 0 0 40px #39ff11, 0 0 20px #11c7ff, 0 0 20px #11cbff, 0 0 35px #1142e2;
+        text-shadow: 0 0 10px #c65dff, 0 0 10px orange, 0 0 10px black;
     }
 }
 
@@ -214,6 +214,7 @@ grid-template-areas:
 #grid div:nth-child(1) {
 grid-area: A;
 background-color: rgba(255, 255, 255, 0.456);
+@media screen and (max-width:320px)
 }
 
 #forest-img {
@@ -221,27 +222,33 @@ height: 300px;
 width: 300px;
 margin: 4px;
 opacity: 0.5;
+@media screen and (max-width:320px)
 }
 
 #grid div:nth-child(2) {
     grid-area: B;
     border: black 3px solid;
+    @media screen and (max-width:320px)
 }
 #grid div:nth-child(3) {
     grid-area: C;
     border: black 3px solid;
+    @media screen and (max-width:320px)
 }
 #grid div:nth-child(4) {
     grid-area: D;
     border: black 3px solid;
+    @media screen and (max-width:320px)
 }
 #grid div:nth-child(5) {
     grid-area: E;
     border: black 3px solid;
+    @media screen and (max-width:320px)
 }
 #grid div:nth-child(6) {
     grid-area: F;
     border: black 3px solid;
+    @media screen and (max-width:320px)
 }
 
 /* SPLIT TEXT HEADER CODE */

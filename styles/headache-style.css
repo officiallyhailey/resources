@@ -1,24 +1,16 @@
-body {
-    background: radial-gradient(ellipse at center, rgb(0, 0, 0) 96%,
-            rgba(129, 164, 229, 0.445) 0%,
-            rgba(61, 241, 139, 0.581) 60%),
-        url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/31787/stars.jpg);
-    background-size:contain;
-    z-index: -5;
-    color: rgba(0, 0, 0, 0.785);
-    overflow: hidden;
-    margin: 0;
-}
 
-.nav {
-    background-color: rgba(0, 0, 0, 0.351);
-    font-size: 2.5vh;
+#page-links {
+    background-color: rgba(255, 255, 255, 0.793);
+    font-size: 2vh;
     text-align: center;
-    margin: 0% 24% 0% 25%;
     font-family: monospace;
     text-transform: lowercase;
+    scrollbar-base-color: #1149ff;
+    padding: 0;
+    margin: 0;
     }
 
+   
     .head-wrapper {
         animation: neon1 1.5s ease-in-out infinite alternate;
     }
@@ -27,14 +19,16 @@ body {
     animation: neon1 3.5s ease-in-out infinite alternate;
 }
 
-.head-wrapper {
+#split-head {
     margin: 0;
+    padding: 0;
     position:auto;
-    width: 100%;
+    width: auto;
     text-align: center;
-    font-size: 10vh;
+    font-size: 8vh;
     font-family: "Montserrat", sans-serif;
     text-transform: uppercase;
+    color: rgb(91, 89, 89);
 }
 
 #layer-0 {
@@ -48,7 +42,7 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5c47ff', endColorstr='#ff47ff', GradientType=0);
     height: 100%;
     width: 100%;
-    opacity: 0.6;
+    opacity: 0
     position:fixed;
     z-index: -5;
 }
@@ -127,7 +121,7 @@ body {
 }
 
 
-# lines {
+#lines {
     background-size: 40px 40px;
     background-image: repeating-linear-gradient(0deg, #000000, #878888 2px, transparent 1px, transparent 40px), repeating-linear-gradient(-90deg, #f8efef, #3725daeb 2px, transparent 2px, transparent 40px);
     height:100%;
@@ -142,11 +136,11 @@ body {
 
 @keyframes neon1 {
     from {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #e413da, 0 0 70px #ff11ff, 0 0 80px #e311ff, 0 0 100px #dbff11, 0 0 150px #c0ff11;
+        text-shadow: 0 0 10px #f2ff04, 0 0 20px #ffffff, 0 0 30px #fff, 0 0 40px #ffe1fe, 0 0 70px #f5f06c, 0 0 80px #9135e8, 0 0 20px #f30bbd, 0 0 200px #c0ff11;
     }
 
     to {
-        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #c0ff11, 0 0 35px #11c4ff, 0 0 40px #11ff84, 0 0 50px #2911ff, 0 0 75px #11e231;
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #1149ff, 0 0 40px #39ff11, 0 0 20px #11c7ff, 0 0 20px #fbff11, 0 0 35px #1142e2;
     }
 }
 

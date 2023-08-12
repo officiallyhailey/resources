@@ -4,6 +4,7 @@ html {
 }
 
 body {
+    margin: 0;
     font-family: "Montserrat", sans-serif;
     color: darkslategray;
 }
@@ -33,7 +34,7 @@ head {
     letter-spacing: 10px;
 }
 
-.top-wrapper> div {
+.top-wrapper1> div {
     grid-area: 1/1/-1/-1;
 }
 
@@ -58,11 +59,11 @@ head {
     background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80"),
         #111111;
     color: #eee;
-    height: auto;
+    height: 15vh;
     min-width: 360px;
-    margin: 10px 17%;
-    border-radius: 10px;;
+    width: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
     perspective: 1000px;
     perspective-origin: 50% 50%;
@@ -75,12 +76,13 @@ head {
     }
 }
 
-#box {
-    margin-top: 10px;
+#box, #content {
+    margin: 10px;
+    padding: 1px;
     height: auto;
     width: auto;
     justify-content: center;
-    background-color: rgba(255, 255, 255, 0.225);
+    background-color: rgba(0, 0, 0, 0.936);
 }
 
 #heading-text {
@@ -91,30 +93,193 @@ head {
     text-align: left;
     font-size: 2.5vh;
     letter-spacing: 2px;
+    color: red;
+}
+
+#intro {
 }
 
 p {
     display:flex;
     flex-wrap:wrap;
     padding: 0px 3rem;
-    text-transform: uppercase;
     text-align: left;
     font-size: 2.5vh;
     letter-spacing: 2px;
-
+    color: white;
 }
 
-#code {
+#code1 {
 color: limegreen;    
 background-color: black;
 }
 
-#code1 {
-    color: limegreen;    
+#code {
+    color: limegreen; 
+    text-align: left;
+    height: auto;
+    width: auto;   
+    font-family: 'Courier New', Courier, monospace;
     }
 
 #links {
-    color: red;   
+
+    color: yellow; 
     background-color: black;
+    font-family: 'Courier New', Courier, monospace;
+    
     }
 
+/* links / css link animation 
+
+@import url(https://unpkg.com/open-props/open-props.min.css);
+  @import url(https://unpkg.com/open-props/normalize.min.css);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-items: left;
+  min-height: 100vh;
+  background: var(--black-12);
+}
+
+ul {
+  padding: 0;
+  display: inline-grid;
+  grid-auto-flow: column;
+  list-style-type: none;
+  grid-template-columns: auto repeat(4, calc((var(--active, 0) * 160px) + 0px));
+  transition: grid-template-columns 0.35s var(--ease-elastic-1);
+}
+
+main {
+  width: auto;
+}
+
+li {
+  display: grid;
+  justify-content: end;
+  z-index: calc(var(--count) - var(--index));
+}
+
+nav {
+  position: relative;
+}
+
+nav > button {
+  position: absolute;
+  left: 0;
+
+  z-index: var(--count);
+}
+
+a {
+  background: hsla(0, 0%, 100%, 0.595);
+  display: inline-block;
+  padding: var(--size-1) var(--size-4);
+  border-radius: var(--radius-2);
+  margin: 0;
+  color: var(--black-0);
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-0);
+  backdrop-filter: blur(40px);
+  transition: color 0.2s, background 0.2s;  
+}
+
+a:visited {
+  color: var(--black-0);
+}
+
+.span1 {
+  display: grid;
+  align-items: center;
+  grid-auto-flow: column;
+  grid-template-columns: 30px 1fr;
+  gap: 3em;
+
+}
+
+li:is(
+  :nth-of-type(2),
+  :nth-of-type(3),
+  :nth-of-type(4)
+) span1 {
+  opacity: var(--active, 0);
+
+}
+
+li:is(
+  :nth-of-type(2),
+  :nth-of-type(3),
+  :nth-of-type(4)
+) a:is(:hover, :focus) {
+  background: var(--black-0);
+  color: var(--black-12);
+
+}
+
+a:focus-visible {
+  outline-color: transparent;
+}
+
+ul:is(:focus-within, :hover) {
+  --active: 1;
+}
+
+#extra {
+}
+
+
+// HTML CODE FOR LINKS
+
+ <span class="span1" id="extra"> <main>  
+                                        <nav style="--count: 4;">
+                                          <ul>
+                                            <li style="--index: 1;">
+                                              <a rel="noreferrer noopener">
+                                                <span class="span1"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" />
+                                      </svg>
+                                      RESOURCES</span>
+                                              </a>
+                                            </li>
+                                            <li style="--index: 2;">
+                                              <a href="https://www.w3schools.com/js/default.asp" target="_blank" rel="noreferrer noopener">
+                                                <span class="span1">
+                                                  &nbsp <title>W3SCHOOL</title><path /></s>
+                                                  W3SCHOOL
+                                                </span>
+                                              </a>
+                                            </li>
+                                            <li style="--index: 3;">
+                                              <a href=" https://zzzcode.ai/code-explain" target="_blank" rel="noreferrer noopener">
+                                                <span class="span1">
+                                                  &nbsp <title>Code-Explain AI</title><path/></svg>
+                                                 CODE.AI
+                                                </span>
+                                              </a>
+                                            </li>
+                                            <li style="--index: 4;">
+                                              <a href=" https://discuss.codecademy.com/t/what-is-the-difference-between-printing-3-4-and-3-4/489337" target="_blank" rel="noreferrer noopener">
+                                                <span class="span1">
+                                                    &nbsp <title>CODEACADEMY</title><path/></svg>
+                                                 CODEACADEMY
+                                                </span>
+                                              </a>
+                                            </li>
+                                            <li style="--index: 3;">
+                                              <a href=" https://codebeautify.org/text-to-html-converter" target="_blank" rel="noreferrer noopener">
+                                                <span class="span1">
+                                                  &nbsp <title>CODE BEAUTIFY</title><path/></svg>
+                                              &nbsp &nbsp CODE BEAUTIFY
+                                                </span>
+                                              </a>
+                                            </li>
+                                          </ul>
+                                        </nav>
+                                      </main>
+                                      </span>
+*/

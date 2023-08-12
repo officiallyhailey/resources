@@ -38,6 +38,10 @@ head {
     grid-area: 1/1/-1/-1;
 }
 
+.heading-wrapper1> div {
+  grid-area: 1/1/-1/-1;
+}
+
 .top {
     clip-path: polygon(0% 0%, 100% 0%, 100% 48%, 0% 58%);
 }
@@ -77,42 +81,43 @@ head {
 }
 
 #box, #content {
-    margin: 10px;
-    padding: 1px;
+    margin: 2rem;
+    padding: 10px 0px;
     height: auto;
     width: auto;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.936);
 }
 
+
+/* MINIMAL HEADING CODE  (NOT LIVE)
 #heading-text {
     display:flex;
     flex-wrap:wrap;
-    padding: 0px 3rem;
+    padding: 0px 2rem;
     text-transform: uppercase;
     text-align: left;
-    font-size: 2.5vh;
-    letter-spacing: 2px;
+    font-size: 3.5vh;
+    letter-spacing: 9px;
     color: red;
 }
 
-#intro {
-}
+*/
+
+/* MAIN TEXT CODE */
 
 p {
     display:flex;
     flex-wrap:wrap;
-    padding: 0px 3rem;
+    padding: 0px 2rem;
     text-align: left;
     font-size: 2.5vh;
     letter-spacing: 2px;
     color: white;
 }
 
-#code1 {
-color: limegreen;    
-background-color: black;
-}
+
+/* CODING TEXT  CODE */
 
 #code {
     color: limegreen; 
@@ -122,6 +127,8 @@ background-color: black;
     font-family: 'Courier New', Courier, monospace;
     }
 
+/* MINIMAL RESOURCE LINKS CODE 
+
 #links {
 
     color: yellow; 
@@ -130,156 +137,169 @@ background-color: black;
     
     }
 
-/* links / css link animation 
+    */
 
-@import url(https://unpkg.com/open-props/open-props.min.css);
-  @import url(https://unpkg.com/open-props/normalize.min.css);
+
+    /* SPLIT HEAD CONTENT  HEADER  GOES WITH .HEADING-WRAPPER1 */
+
+    #heading-wrap {
+      margin-bottom: 1px;
+      margin-top: 1px;
+      padding: 0px 2rem;
+      display: grid;
+      place-content: left;
+      background-color: var(--background-color);
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.2rem, 1rem + 3vw, 10rem);
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--text-color);
+      letter-spacing: 10px;
+      color: rgb(0, 255, 119);
+  }
+
+
+  /* BUTTON CODE FOR RESOURCE LINKS (LIVE) */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
 
 * {
-  box-sizing: border-box;
-}
-
-body {
-  display: grid;
-  place-items: left;
-  min-height: 100vh;
-  background: var(--black-12);
-}
-
-ul {
-  padding: 0;
-  display: inline-grid;
-  grid-auto-flow: column;
-  list-style-type: none;
-  grid-template-columns: auto repeat(4, calc((var(--active, 0) * 160px) + 0px));
-  transition: grid-template-columns 0.35s var(--ease-elastic-1);
-}
-
-main {
-  width: auto;
-}
-
-li {
-  display: grid;
-  justify-content: end;
-  z-index: calc(var(--count) - var(--index));
-}
-
-nav {
-  position: relative;
-}
-
-nav > button {
-  position: absolute;
-  left: 0;
-
-  z-index: var(--count);
-}
-
-a {
-  background: hsla(0, 0%, 100%, 0.595);
-  display: inline-block;
-  padding: var(--size-1) var(--size-4);
-  border-radius: var(--radius-2);
   margin: 0;
-  color: var(--black-0);
-  font-size: var(--font-size-1);
-  font-weight: var(--font-weight-0);
-  backdrop-filter: blur(40px);
-  transition: color 0.2s, background 0.2s;  
+  padding: 0;
+  box-sizing: border-box;
+  font-family:'Courier New', Courier, monospace;
 }
 
-a:visited {
-  color: var(--black-0);
-}
-
-.span1 {
-  display: grid;
+.container {
+  margin: 30px auto;
+  width: auto;
+  min-height: 2vh;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  grid-auto-flow: column;
-  grid-template-columns: 30px 1fr;
-  gap: 3em;
-
+  flex-wrap: wrap;
+  gap: 10%;
 }
 
-li:is(
-  :nth-of-type(2),
-  :nth-of-type(3),
-  :nth-of-type(4)
-) span1 {
-  opacity: var(--active, 0);
-
+.button {
+  position: relative;
+  padding: 16px 10px;
+  font-size: 1.5rem;
+  color: var(--color);
+  border: 2px solid rgba(255, 255, 255, 0.122);
+  border-radius: 4px;
+  text-shadow: 0 0 15px var(--color);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  transition: 0.3s;
+  z-index: 1;
 }
 
-li:is(
-  :nth-of-type(2),
-  :nth-of-type(3),
-  :nth-of-type(4)
-) a:is(:hover, :focus) {
-  background: var(--black-0);
-  color: var(--black-12);
-
+.button:hover {
+  color: #fff;
+  border: 2px solid rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0px var(--color);
 }
 
-a:focus-visible {
-  outline-color: transparent;
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color);
+  z-index: -1;
+  transform: scale(0);
+  transition: 0.3s;
 }
 
-ul:is(:focus-within, :hover) {
-  --active: 1;
+.button:hover::before {
+  transform: scale(1);
+  transition-delay: 0.5s;
+  box-shadow: 0 0 10px var(--color),
+    0 0 30px var(--color),
+    0 0 60px var(--color);
 }
 
-#extra {
+.button span {
+  position: absolute;
+  background: var(--color);
+  pointer-events: none;
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--color),
+    0 0 20px var(--color),
+    0 0 30px var(--color),
+    0 0 50px var(--color),
+    0 0 100px var(--color);
+  transition: 0.5s ease-in-out;
+  transition-delay: 0.25s;
 }
 
+.button:hover span {
+  opacity: 0;
+  transition-delay: 0s;
+}
 
-// HTML CODE FOR LINKS
+.button span:nth-child(1),
+.button span:nth-child(3) {
+  width: 40px;
+  height: 4px;
+}
 
- <span class="span1" id="extra"> <main>  
-                                        <nav style="--count: 4;">
-                                          <ul>
-                                            <li style="--index: 1;">
-                                              <a rel="noreferrer noopener">
-                                                <span class="span1"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" />
-                                      </svg>
-                                      RESOURCES</span>
-                                              </a>
-                                            </li>
-                                            <li style="--index: 2;">
-                                              <a href="https://www.w3schools.com/js/default.asp" target="_blank" rel="noreferrer noopener">
-                                                <span class="span1">
-                                                  &nbsp <title>W3SCHOOL</title><path /></s>
-                                                  W3SCHOOL
-                                                </span>
-                                              </a>
-                                            </li>
-                                            <li style="--index: 3;">
-                                              <a href=" https://zzzcode.ai/code-explain" target="_blank" rel="noreferrer noopener">
-                                                <span class="span1">
-                                                  &nbsp <title>Code-Explain AI</title><path/></svg>
-                                                 CODE.AI
-                                                </span>
-                                              </a>
-                                            </li>
-                                            <li style="--index: 4;">
-                                              <a href=" https://discuss.codecademy.com/t/what-is-the-difference-between-printing-3-4-and-3-4/489337" target="_blank" rel="noreferrer noopener">
-                                                <span class="span1">
-                                                    &nbsp <title>CODEACADEMY</title><path/></svg>
-                                                 CODEACADEMY
-                                                </span>
-                                              </a>
-                                            </li>
-                                            <li style="--index: 3;">
-                                              <a href=" https://codebeautify.org/text-to-html-converter" target="_blank" rel="noreferrer noopener">
-                                                <span class="span1">
-                                                  &nbsp <title>CODE BEAUTIFY</title><path/></svg>
-                                              &nbsp &nbsp CODE BEAUTIFY
-                                                </span>
-                                              </a>
-                                            </li>
-                                          </ul>
-                                        </nav>
-                                      </main>
-                                      </span>
-*/
+.button:hover span:nth-child(1),
+.button:hover span:nth-child(3) {
+  transform: translateX(0);
+}
+
+.button span:nth-child(2),
+.button span:nth-child(4) {
+  width: 4px;
+  height: 40px;
+}
+
+.button:hover span:nth-child(1),
+.button:hover span:nth-child(3) {
+  transform: translateY(0);
+}
+
+.button span:nth-child(1) {
+  top: calc(50% - 2px);
+  left: -50px;
+  transform-origin: left;
+}
+
+.button:hover span:nth-child(1) {
+  left: 50%;
+}
+
+.button span:nth-child(3) {
+  top: calc(50% - 2px);
+  right: -50px;
+  transform-origin: right;
+}
+
+.button:hover span:nth-child(3) {
+  right: 50%;
+}
+
+.button span:nth-child(2) {
+  left: calc(50% - 2px);
+  top: -50px;
+  transform-origin: top;
+}
+
+.button:hover span:nth-child(2) {
+  top: 50%;
+}
+
+.button span:nth-child(4) {
+  left: calc(50% - 2px);
+  bottom: -50px;
+  transform-origin: bottom;
+}
+
+.button:hover span:nth-child(4 ) {
+  bottom: 50%;
+}

@@ -50,7 +50,7 @@ perspective-origin: 50% 50%;
 
 @media screen and (max-width: 480px) {
 
-  .sidebar {
+  .sidebar .profile .wrapper {
   display: none;  
   }
   }

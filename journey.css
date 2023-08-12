@@ -9,6 +9,90 @@ body {
     color: darkslategray;
 }
 
+/* MENU / SIDE BAR */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+*{
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.wrapper .sidebar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 15%;
+  height: 100%;
+  padding: 20px 0;
+  transition: all 0.5s ease;
+}
+
+.sidebar {
+animation: scroll 200s linear infinite;
+background: url("./gallery/neon-tropical-monstera-leaf-banner.jpg"),
+#111111;
+color: #eeeeee;
+height: 1vh;
+min-width: 18%;
+width: auto;
+display: flex;
+opacity: 0.45;
+justify-content: center;
+align-items: center;
+perspective: 1000px;
+perspective-origin: 50% 50%;
+}
+
+@media screen and (max-width: 480px) {
+
+  .sidebar {
+  display: none;  
+  }
+  }
+  
+
+  .wrapper .sidebar .profile{
+    margin-bottom: 30rem;
+    text-align: center;
+    width: auto;
+    height: auto;
+}
+
+.wrapper .sidebar .profile img{
+    display: block;
+    width: auto;
+    height: 100px;
+    border-radius: 10%;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.wrapper .sidebar .profile h3{
+  display:flex;
+  flex-wrap:wrap;
+position: absolute;
+  text-align: center;
+  font-size: 2.5vh;
+  letter-spacing: 2px;
+  color: white;
+    
+}
+
+.wrapper .sidebar .profile p{
+    color: rgb(206, 240, 253);
+    font-size: 14px;
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+
+
 head {
     margin: 0%;
 }
@@ -81,12 +165,14 @@ head {
 }
 
 #box, #content {
-    margin: 2rem;
+    margin-left: 19%;
+    margin-right: 1%;
     padding: 10px 0px;
     height: auto;
     width: auto;
+    min-width: 360px;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.936);
+    background-color: rgba(0, 0, 0, 0.52);
 }
 
 
@@ -109,7 +195,7 @@ head {
 p {
     display:flex;
     flex-wrap:wrap;
-    padding: 0px 2rem;
+    padding: 0.8rem 2rem;
     text-align: left;
     font-size: 2.5vh;
     letter-spacing: 2px;
@@ -127,7 +213,7 @@ p {
     font-family: 'Courier New', Courier, monospace;
     }
 
-/* MINIMAL RESOURCE LINKS CODE 
+
 
 #links {
 
@@ -137,7 +223,6 @@ p {
     
     }
 
-    */
 
 
     /* SPLIT HEAD CONTENT  HEADER  GOES WITH .HEADING-WRAPPER1 */
@@ -171,7 +256,7 @@ p {
 }
 
 .container {
-  margin: 30px auto;
+  margin-left: 20%;
   width: auto;
   min-height: 2vh;
   display: flex;
@@ -182,8 +267,9 @@ p {
 }
 
 .button {
+  margin: 10px;;
   position: relative;
-  padding: 16px 10px;
+  padding: 20px 10px;
   font-size: 1.5rem;
   color: var(--color);
   border: 2px solid rgba(255, 255, 255, 0.122);

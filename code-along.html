@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The Journey</title>
+        <script src="" journey.js" defer></script>
+        <link rel="stylesheet" href="./journey.css" />
+<style>
+body {
+background-image: url("./gallery/Withered-Wood-Textures/Wood-Texture1.jpg")       
+}  
+</style>
+<body> 
+        <section id="main">
+                <div id="header">
+                        <h1 class="top-wrapper top-wrapper1" id="split-head">
+                                <div class="top">The Journey</div>
+                                <div class="bottom" aria-hidden="true">The Journey</div>
+                        </h1>
+                </div>
+
+                <div id="content">
+                        <p>
+                                Thought I'd document the steps it takes to get certain class exercises done and what
+                                help I used along the way. Coding perfectly imperfect is the best way to learn and grow.
+                                DM me on slack if you have corrections you see could be made or questions on the code
+                                you see. We can do this!
+                        </p>
+                </div>
+
+
+
+                <div id="content">
+                        <p> This first log is for the js-working-with-numbers assignment. Below are the resources I frequented the most but 
+                            <a id="links" href="https://stackoverflow.com/" target="_blank">STACK OVERFLOW</a> is by far my top pick. Coders come and post codes that werent working/ questions/
+                                etc and other coders gave advice and explained how to code something like a
+                                function, for example, correctly. I find heaing other people explain the same
+                                concept in many different ways helps me grasp it more. But here are the others I
+                                went to a lot as well!
+
+                                <br />
+                                <br />
+                          
+                                <a id="links" href="                                        https://www.w3schools.com/js/default.asp
+                                " target="_blank">W3SCHOOLS</a>
+                          &nbsp;   &nbsp;
+                                <a id="links"  href="
+                                https://zzzcode.ai/code-explain" target="_blank">ZZZCODE.AI</a>
+                                &nbsp;   &nbsp;
+                                <a  id="links" href="
+                                https://discuss.codecademy.com/t/what-is-the-difference-between-printing-3-4-and-3-4/489337" target="_blank">CODE ACADEMY</a>
+                                &nbsp;   &nbsp;
+                                <a  id="links" href="https://codebeautify.org/text-to-html-converter" target="_blank">CODE BEAUTIFY</a>
+                                &nbsp;
+
+                                     
+                             
+                        </p>
+                </div>
+
+                <div id="content">
+                        <h1>
+                               <span id="heading-text">Exercise 6! </span>
+                   
+                          
+                        </h1>
+                        <p>
+                                <span id="code">
+                                        function toAdd1(numbers) {
+                                        <br />
+                                        let add = (xp + yp);
+                                        <br />
+                                        return add;
+                                        <br />
+                                        }
+                                        <br />
+                                        <br />
+                                        function toSub1(numbers) {
+                                        <br />
+                                        let sub = (xp - yp);
+                                        <br />
+                                        return sub;
+                                        <br />
+                                        }
+                                        <br />
+                                        <br />
+                                        function toHundred1(numbers) {
+                                        <br />
+                                        let hundred = ((xp - yp) + 100);
+                                        <br />
+                                        return hundred;
+                                        <br />
+                                        }
+                                        <br />
+                                        <br />
+                                        function toDivide1(numbers) {
+                                        <br />
+                                        let divide = (((xp - yp) + 100) / 2);
+                                        <br />
+                                        return divide;}
+                                        <br />
+                                </span>
+                           
+                                <br />
+                                I didn't get much chance to use array methods here but this worked. I
+                                would be interested in using array methods in order to cut down on some
+                                typing and have a method/shortcuts that  helps make a consistent template to
+                                follow. Makes for less thinking and more inserting variables into
+                                "relatively" pre-assigned locations
+                                <br />
+                                <br />
+                                <span id="code">
+                                        let numbers = prompt('Please submit two numbers (example: 31
+                                        15)').split(' ');
+                                        <br />
+                                        <br />
+                                       output is an array with seperated variables to call on individually
+                                        in the next few commands
+                                        <br />
+                                        <br />
+                                     let exercise6 = numbers.map(Number);
+                                </span>
+                                <br />
+                                <br />
+                                // CRUCIAL: this converts the input from the prompt into numeric values so we
+                                can do the mathmatical equations seen in the above functions - I got none of the
+                                commands to work seen above and below until I did this
+                                <br />
+                                <br />
+                                <span id="code">
+                                        let xp = exercise6[0];
+                                        <br />
+                                        let yp = exercise6[1];
+                            
+                                        <br />
+                                </span>
+                            <br />
+                                // this specifically assigns the two seperate variables to a smaller variable to
+                                make typing the functions seen above shorter / quicker
+                                <br />
+                                <br />
+
+                                <span id="code">
+                                        console.log(`The values added together equal ${toAdd1(numbers)} and
+                                        subtracted apart equals ${toSub1(numbers)}. Adding 100 to the subtracted
+                                        values equals ${toHundred1(numbers)} and then further dividing that
+                                        subtracted number by 2 equals ${toDivide1(numbers)}.`);
+                                        <br />
+                                        <br />
+                                         </span>
+                                        // I choose the
+                                        input values (8 6) to get: The values added together equal 14 and
+                                        subtracted apart equals 2. Adding 100 to the subtracted values equals
+                                        102 and then further dividing that subtracted number by 2 equals 51.
+                                        <br />
+                                        <br />
+                                        // this log makes a summary sentence that answers all the specific
+                                        prompts given for exercise 6 - a nice lil wrap up
+                                </span>
+                                <br />
+                        </p>
+                </div>
+
+                <div id="content">
+                               <h1 id="heading-text">The journey of expercise 6 </h1>
+                        
+                               <p>
+                                 <span id="hello>">
+                                        THIS IS ALL THE CRAP I PLAYED AROUND WITH TO FIGURE OUT WHAT DID WHAT AND WHAT
+                                        RUINED EVERYTHING SUDDENLY RIP MY WORKING COMMANDS SOMETIMES
+                                </span>
+                                <br />
+                                <br />
+                                <span id="code">
+                                        add 1
+                                        <br />
+                                        function toAdd1(exercise6) {
+                                        <br />
+                                        let add = (numbers[0] + numbers[1]);
+                                        <br />
+                                        return add;
+                                        <br />
+                                        }
+                                        <br />
+                                        <br />
+                                        // sub 1
+                                        <br />
+                                        function toSub1(exercise6) {
+                                        <br />
+                                        let sub = (numbers[0] - numbers[1]);
+                                        <br />
+                                        return sub;
+                                        <br />
+                                        }
+                                        <br />
+                                        <br />
+                                        // add 2
+                                        <br />
+                                        function toAdd2(exercise6) {
+                                        <br />
+                                        let add = numbers.join("+");
+                                        <br />
+                                        }
+                                        <br />
+                                        <br />
+                                        // sub 2
+                                        <br />
+                                        function toSub2(exercise6) {
+                                        <br />
+                                        return numbers[0] -= numbers[1];
+                                        <br />
+                                        }
+                                        <br />
+                                        <br />
+                                        // sub 3
+                                        <br />
+                                        function toSub3(exercise6) {
+                                        <br />
+                                        add = numbers.sort(function (a, b) { return b - a }).join("-");
+                                        <br />
+                                        }
+                                        <br />
+                                        // 100 1
+                                        <br />
+                                        function toHundred1(exercise6) {
+                                        <br />
+                                        return subtracted += 100;
+                                        <br />
+                                        }
+                                        <br />
+                                        <br />
+                                        // 100 2
+                                        <br />
+                                        function toHundred2(exercise6) {
+                                        <br />
+                                        let hundred = numbers.push("100").join("+");
+                                        <br />
+                                        }
+                                        <br />
+                                        <br />
+                                        divide 1
+                                        <br />
+                                        function toDivide1(exercise6) {
+                                        <br />
+                                        return (hundred / 20);
+                                        <br />
+                                        }
+                                        <br />
+                                        <br />
+                                        divide 2
+                                        <br />
+                                        function toDivide2(exercise6) {
+                                        <br />
+                                        return hundred /= 2;
+                                        <br />
+                                        }
+                                        <br />
+                                        <br />
+                                        let exercise6 = prompt("Please submit two numbers (example: 31 15)");
+                                        <br />
+                                        let numbers = exercise6.split(" ");
+                                        <br />
+                                        console.log(numbers);
+                                        <br />
+                                        console.log(`The values (${numbers[0]}, ${numbers[1]}) added equal
+                                        ${toAdd1(exercise6)} and subtracted equal ${toSub1(exercise6)}. Adding 100 to
+                                        the subtracted values equals ${toHundred1(exercise6)} and then further divided
+                                        by 2 equals ${toDivide1(exercise6)}.`);
+                                        <br />
+                                </span>
+                                <span id="hello">
+                                        <br />
+                                        There were a lot more that i deleted but in the future i wont _ just so we can
+                                        journey the real journey it takes to get something wrong to get it right..
+                                </span>
+                        </p>
+                </div>
+        </section>
+</body>
+
+
+</section>
+</body>
+
+</html>

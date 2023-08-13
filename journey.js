@@ -183,3 +183,8 @@ console.log(`The values (${numbers[0]}, ${numbers[1]}) added equal ${toAdd1(exer
 */ 
 
 "there were a lot more that i deleted but in the future i wont _ just so we can journey the real journey it takes to get something wrong to get it right"
+
+
+
+
+

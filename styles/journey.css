@@ -9,7 +9,7 @@ body {
   color: rgb(255, 255, 255);
 }
 
-/* MENU / SIDE BAR */
+
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
@@ -27,7 +27,7 @@ body {
 
 .sidebar {
   animation: scroll 100s linear infinite;
-  background: url("./gallery/neon-tropical-monstera-leaf-banner.jpg");
+  background: url("gallery/neon-tropical-monstera-leaf-banner.jpg");
   transition: all 0.5s ease;
   margin: 0;
   height: 100%;

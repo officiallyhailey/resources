@@ -78,8 +78,6 @@ head {
     transform: translateX(-0.03em);
 }
 
-@import url("https://fonts.googleapis.com/css?family=Lobster&display=swap") repeat scroll 0 0 rgba(0, 0, 0, 0);
-
 .top-wrapper {
     animation: scroll 100s linear infinite;
     background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80"),

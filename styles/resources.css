@@ -7,16 +7,55 @@ body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
   color: rgb(255, 255, 255);
+  animation: scroll 100s linear infinite;
 }
 
+.nav-wrapper {
+  display: flex;
+  justify-content: center;
+width: 100%;
+padding-top: 10px;
+letter-spacing: 0.5vw;
 
+}
+
+#page-links {
+  font-family:'Courier New', Courier, monospace;
+  text-transform: uppercase;
+  text-align: center;
+
+}
+
+#homepage {
+  padding: 5px 20px 5px 20px;
+  color: white;
+  background-color: hsla(0, 0%, 0%, 0.5);
+
+  ;
+}
+
+#aboutme {
+  padding: 5px 10px 5px 10px;
+  background-color: hsla(0, 0%, 0%, 0.5);
+  color: white;
+ 
+}
+
+#grid {
+  padding: 5px 30px 5px 30px;
+  color: white;
+  background-color: hsla(0, 0%, 0%, 0.5);
+
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 * {
   list-style: none;
   text-decoration: none;
-  margin-right: 2.5vw;
+  padding: 0%;
+  margin: 0;
+
 }
 
 .wrapper .sidebar {
@@ -26,17 +65,16 @@ body {
 }
 
 .sidebar {
-  animation: scroll 100s linear infinite;
-  background: url("gallery/neon-tropical-monstera-leaf-banner.jpg");
   transition: all 0.5s ease;
   margin: 0;
   height: 100%;
-  width: 100vw;
+ 
 }
 
 
 .wrapper .profile {
 text-align: center;
+padding: 10px;
 }
 
 .wrapper .sidebar .profile h3 {
@@ -57,7 +95,7 @@ text-align: center;
   text-align: center;
   height: 10vh;
   letter-spacing: 1vw;
- 
+
 
 }
 

@@ -142,9 +142,9 @@ transform: rotate(-20deg);
    letter-spacing: 4px;
 }
 .expand-cards h1 {
-    display: flex;
+  display: flex;
     position: absolute;
- left: 10vw;
+    left: 15vw;
     font-family: 'Montserrat' , sans-serif;
     text-transform: uppercase;
     font-size: 2vh;
@@ -200,7 +200,7 @@ transform: rotate(-20deg);
 }
 
 .panel.active {
-    flex: 5;
+    flex: 10;
 }
 
 .panel.active h3 {
@@ -209,8 +209,8 @@ transform: rotate(-20deg);
 }
 
 @media (max-width: 480px) {
-    .container {
-        width: 100vw;
+.panel {
+    width: 100%;
     }
 
     .panel:nth-of-type(4),

@@ -15,6 +15,7 @@ body {
     color: white;
     background-color: hsla(0, 0%, 0%, 0.5);
     border-radius: 20px;
+    text-decoration: none;
 
 }
 
@@ -23,13 +24,15 @@ body {
     background-color: hsla(0, 0%, 0%, 0.5);
     color: white;
     border-radius: 20px;
+    text-decoration: none;
 }
 
-#homepage {
+#aboutme {
     padding: 5px 10px 5px 10px;
-    color: rgb(0, 34, 255);
+    color: rgb(255, 255, 255);
     background-color: hsla(0, 0%, 0%, 0.5);
     border-radius: 20px;
+    text-decoration: none;
 }
 
 .top,

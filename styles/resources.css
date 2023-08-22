@@ -7,7 +7,8 @@ body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
   color: rgb(255, 255, 255);
-  animation: scroll 100s linear infinite;
+  animation: scroll 250s linear infinite;
+  background-size: 60%;
 }
 
 .nav-wrapper {
@@ -27,7 +28,7 @@ background-color: #000000;
 
 }
 
-#homepage {
+#portfolio {
   padding: 5px 20px 5px 20px;
   color: white;
   background-color: hsla(0, 0%, 0%, 0.5);

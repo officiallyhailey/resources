@@ -25,6 +25,7 @@ head {
     color: white;
     background-color: hsla(0, 0%, 0%, 0.5);
     border-radius: 20px;
+    text-decoration: none;
     ;
 }
 
@@ -33,13 +34,15 @@ head {
     background-color: hsla(0, 0%, 0%, 0.5);
     color: white;
     border-radius: 20px;
+    text-decoration: none;
 }
 
 #grid {
     padding: 5px 10px 5px 10px;
-    color: red;
+    color: rgb(255, 255, 255);
     background-color: hsla(0, 0%, 0%, 0.5);
     border-radius: 20px;
+    text-decoration: none;
 }
 
 :root {

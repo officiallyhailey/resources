@@ -1,64 +1,124 @@
 * {
     box-sizing: border-box;
+   
 }
 
 body {
     animation: scroll 50s linear infinite;
+    overflow-x: hidden;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-size: 60%;
+
+}
+
+
+.container {
   
+    transform-origin: top left;
+    transition: transform 0.5s linear;
+    width: 100vw;
+    min-height: 100vh;
+    padding: 50px;
+    animation: scroll 100s linear infinite;
+    background-size: 70%;
 }
-#page-links {
-    display: flex;
-    font-family: 'Muli', sans-serif;
+
+.container.show-nav {
+transform: rotate(-20deg);
+}
+
+.container.show-nav .circle {
+    transform: rotate(-70deg);
+  }
+  
+  
+.circle-container {
+    position: fixed;
+    top: -100px;
+    left: -100px;
+}
+
+.circle {
+    background-color: #d5e800a0;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    position: relative;
+    transition: transform 0.5s linear;
+  }
+  
+
+  .circle button {
+    cursor: pointer;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    height: 70px;
+    background: transparent;
+    border: 0;
+    font-size: 20px;
+    color: #fff;
+  }
+  
+  .circle button:focus {
+    outline: none;
+  }
+  
+  .circle button#open {
+    left: 65%;
+  }
+  
+  .circle button#close {
+    top: 70%;
+    transform: rotate(90deg);
+    transform-origin: top left;
+  }
+  
+  .container.show-nav + nav li {
+    transform: translateX(0);
+    transition-delay: 0.3s;
+  }
+  
+  nav {
+    position: fixed;
+    bottom: 5vh;
+    left: 0;
+    z-index: 100;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding-left: 2vw;
+  }
+  
+  nav ul li {
+  
     text-transform: uppercase;
-    text-align: center;
-    font-size: 15px;
-    gap: 3vw;
-}
-
-#resources {
-    padding: 5px 20px 5px 20px;
-    color: black;
-    background-color: hsla(0, 0%, 100%, 0.6);
-    border-radius: 20px;
+    color: #fff;
+    margin: 30px 0;
+    transform: translateX(-160%);
+    transition: transform 0.4s ease-in;
+    font-size: 2.5vh;
+  }
+  
+  
+  nav a{
+    color: #fafafa;
     text-decoration: none;
+    transition: all 0.5s;
+  }
+  
+  nav a:hover {
+    color: #d06400;
+    font-weight: bold;
+  }
+  
+
+
+#resource-link {
+    color:aqua;
 }
-
-#homepage {
-    padding: 5px 10px 5px 10px;
-    background-color: hsla(0, 0%, 100%, 0.6);
-    color: white;
-    border-radius: 20px;
-    text-decoration: none;
-}
-
-#grid {
-    padding: 5px 30px 5px 30px;
-    color: black;
-    background-color: hsla(0, 0%, 100%, 0.6);
-    border-radius: 20px;
-    letter-spacing: 0.2vw;
-    text-decoration: none;
-}
-
-.nav-wrapper {
-   /* animation: scroll 100s linear infinite;
-    background: url("https://marketplace.canva.com/EAFTQEWI-Ko/1/0/1600w/canva-black-sky-galaxy-stars-desktop-wallpaper-iWMZ0xN6KXs.jpg"),
-        #111111;
-    color: #eee;
-    background-position: center;
-    background-size: 100%; */
-    border-radius: 10px;
-    height: 50px;
-    min-width: 360px;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    perspective: 1000px;
-    perspective-origin: 50% 50%;
-    margin-left: 4vw;
-} 
-
-
 
 @keyframes scroll {
     100% {
@@ -66,22 +126,34 @@ body {
     }
 }
 
+
 /* Expanding Cards */
 
 @import url('https://fonts.googleapis.com/css2?family=Muli&display=swap');
-
 
 .expand-intro h1 {
     display: flex;
     font-family: 'Montserrat' , sans-serif;
     text-transform: uppercase;
-    font-size: 30px;
+    font-size: 4vh;
+    margin: 10px 0px 0px 0px; 
+   background-color: rgba(255, 255, 255, 0.432);
+   padding: 5px 10px;
+   letter-spacing: 4px;
+}
+.expand-cards h1 {
+    display: flex;
+    position: absolute;
+ left: 10vw;
+    font-family: 'Montserrat' , sans-serif;
+    text-transform: uppercase;
+    font-size: 2vh;
    writing-mode: vertical-rl;
    transform: rotate(180deg);
    margin: 0;
    background-color: rgba(255, 255, 255, 0.432);
-   padding: 15px 0px;
-   letter-spacing: 5px;
+   padding: 10px 0px;
+   letter-spacing: 4px;
    border-radius: 25px;
 }
 
@@ -93,18 +165,18 @@ body {
     margin: 0;
     height: 100%;
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.625);
+    background-color: rgba(0, 0, 0, 0.727);
 }
 
-.container {
+.container2 {
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
+    width: 75%;
     height: 100%;
 }
 
 .panel {
-    background-size: auto 100%;
+    background-size: auto 80%;
     background-position: center;
     background-repeat: no-repeat;
     height: 80vh;
@@ -112,7 +184,7 @@ body {
     color: #fff;
     cursor: pointer;
     flex: 0.5;
-    margin: 10px;
+    margin: 15px;
     position: relative;
     transition: flex 0.5s ease-in;
 }
@@ -120,8 +192,8 @@ body {
 
 .panel h3 {
     position: absolute;
-    bottom: 5px;
-    left: 10px;
+    bottom: 2px;
+    left: 15px;
     opacity: 0;
     text-transform: uppercase;
     font-size: 4vh;

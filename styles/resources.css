@@ -77,11 +77,13 @@ padding: 10px;
 }
 
 .profile p {
-  font-size: small;
-  color: blue;
-  background-color: black;
-  display: flexbox;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2vh;
+  background-color: rgba(0, 0, 0, 0.43);
+  display: inline-flex;
   flex-wrap: wrap;
+  padding: 5px;
+
 }
 
 .wrapper .sidebar .profile h3 {
@@ -91,6 +93,7 @@ padding: 10px;
   letter-spacing: 1vw;
   background-color: rgba(0, 0, 0, 0.489);
   padding: 5px;
+
 }
 
 .wrapper .sidebar ul li a {

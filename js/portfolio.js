@@ -7,6 +7,16 @@ panel.addEventListener('click', () => {
 })
 })
 
+
+panels.forEach ((panel) => {
+panel.addEventListener('dblclick', () => {
+    removeActiveClasses()
+    panel.classList.remove('active')
+    panel.classList.add('panel')
+})
+})
+    
+
 function removeActiveClasses() {
     panels.forEach( panel => {
         panel.classList.remove('active')

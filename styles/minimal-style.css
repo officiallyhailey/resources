@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-  
   }
   
   body {
@@ -14,6 +13,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-width: 2000px;
+    
   }
 
   .top-bar {
@@ -25,99 +26,129 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    max-width: 2000px;
   
   }
   
   /* drop down menu */
   
   .container {
-  
+  display: flex;
+  flex-direction: row;
     transform-origin: top left;
     transition: transform 0.5s linear;
     width: 100vw;
-    height: 300px;
-    padding: 50px;
+    height: 200px;
   background-color: rgb(0, 0, 0);
-    background-size: 70%;
+  max-width: 2000px;
+  
+  }
+
+  .container#top-pic {
+    position: relative;
+    background-position: center;
+
+    background-size:contain;
+    max-width: 2000px;
+ 
+  
   }
   
   .container.show-nav {
-    transform: rotate(-45deg);
+    transform: rotate(-90deg);
+    max-width: 2000px;
   }
   
   .container.show-nav .circle {
     transform: rotate(-70deg);
+    max-width: 2000px;
   }
   
   
   .circle-container {
-    position: fixed;
-    top: -140px;
+    position: absolute;
+    top: -25px;
     left: -140px;
+    max-width: 2000px;
   }
   
   .circle {
-    background-color: #d5e800a0;
-    height: 200px;
-    width: 200px;
+
+    height: 250px;
+    width: 250px;
     border-radius: 50%;
-    position: relative;
+    position: absolute;
     transition: transform 0.5s linear;
+    max-width: 2000px;
   }
   
   
   .circle button {
     cursor: pointer;
     position: absolute;
-    top: 55%;
-    left: 45%;
-    height: 60px;
+    top: 70%;
+    left: 10%;
+    height: 40px;
     background: transparent;
     border: 0;
     font-size: 20px;
-    color: #fff;
+    color: #000000;
+    max-width: 2000px;
+    background-color: rgb(5, 255, 147);
   }
   
   .circle button:focus {
     outline: none;
+   
+  }
+  .circle button:hover {
+    background-color: white;
+    color: rgb(5, 255, 147);
+    transition: all 0.1s;
   }
   
   .circle button#open {
-    left: 72%;
+    left: 67%;
     top: 62%;
+    color: daff05;
+ 
   }
   
   .circle button#close {
-    top: 79%;
-    transform: rotate(120deg);
+    top: 70%;
+    left: 25%;
+    transform: rotate(205deg);
     transform-origin: top left;
+    background-color: rgba(255, 255, 255, 0);
+    color:rgb(143, 255, 5)
+   
   }
   
   .container.show-nav+nav li {
     transform: translateX(0);
     transition-delay: 0.3s;
+  
   }
   
   nav {
     position: fixed;
-    bottom: 5vh;
-    left: 0;
     z-index: 100;
+    max-width: 2000px;
   }
   
   nav ul {
     list-style-type: none;
-    padding-left: 4vw;
+   
   }
   
   nav ul li {
-  
     text-transform: uppercase;
     color: #ffffff;
-    margin: 5px 0;
-    transform: translateX(-160%);
+    margin: 15px 0px;
+    transform: translateX(-130%);
     transition: transform 0.4s ease-in;
-    font-size: 2.5vh;
+    font-size: 25px;
+   
   }
   
   
@@ -125,6 +156,7 @@
     color: #000000;
     text-decoration: none;
     transition: all 0.5s;
+  
   }
   
   nav a:hover {
@@ -152,7 +184,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    max-width: 1000px;
+    max-width: 2000px;
 justify-content: center;
     gap: 30px;
     margin: 20px;
@@ -208,6 +240,7 @@ justify-content: center;
    border-radius: 50%;
    background-repeat: no-repeat;
    background-color: rgb(233, 206, 53);
+   background-position: center;
   }
   
   .back2:after {
@@ -243,18 +276,24 @@ justify-content: center;
     width: 250;
     height: 250;
     border-radius: 50%;
+    background-position: center;
+
+    text-transform: uppercase;
   }
 
 .front2#css {
   background-size: 70%;
+  background-color: black;
 }
 
 .front2#js {
   background-size: 120%;
+  background-color: black;
 }
 
 .front2#html {
   background-size: 70%;
+  background-color: black;
 }
   
 .front2#hailey-g {
@@ -270,15 +309,32 @@ justify-content: center;
 }
 
 p#self-intro {
-  color: black;
   text-transform: uppercase;
   
 }
 
 .front2#about {
-  background-color: antiquewhite;
+  background-color: black;
 
 }
+
+.back2#tools {
+  background-size: 85%;
+  background-color: rgb(211, 235, 255);
+}
+
+.front2#toolsfront {
+  background-color: black;
+}
+
+.front2#peoplefront {
+  background-color: black;
+}
+
+.back2#people {
+  background-size: 85%;
+}
+
   .inner2 {
     -webkit-transform: translateY(-50%) translateZ(60px) scale(0.94);
     transform: translateY(-50%) translateZ(60px) scale(0.94);

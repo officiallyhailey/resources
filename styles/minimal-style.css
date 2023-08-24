@@ -90,11 +90,12 @@
     left: 10%;
     height: 40px;
     background: transparent;
-    border: 0;
+    border: 3px solid white;
     font-size: 20px;
     color: #000000;
     max-width: 2000px;
-    background-color: rgb(5, 255, 147);
+    background-color: rgb(5, 255, 184);
+    border-radius: 100px;
   }
   
   .circle button:focus {
@@ -183,10 +184,11 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%;
+    width: 100vw;
     max-width: 2000px;
-justify-content: center;
-    gap: 30px;
+    background-position: center;
+    justify-content: center;
+    gap: 20px;
     margin: 20px;
   }
   

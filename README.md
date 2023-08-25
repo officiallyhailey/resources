@@ -4,6 +4,8 @@
 # 💫 About Me:
 🔭 I’m currently working on my portfolio<br><br>🌱 I’m currently learning JS, CSS, HTML and soon more!<br><br>👯 I’m looking to collaborate on [anything]((lets get a link here))<br><br>🤝 I’m looking for help with more resources to continue learning new languages!<br><br>💬 Ask me about my cats, love them 100%<br><br>📫 How to reach me hailey@anniecannons.com
 
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=officiallyhaiely&label=Profile%20views&color=0e75b6&style=flat" alt="officiallyhaiely" /> </p>
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=officiallyhaiely&label=Profile%20views&color=0e75b6&style=flat" alt="officiallyhailey" /> </p>
 
 ## 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/www.linkedin.com/in/hailey-g) [![Codepen](https://img.shields.io/badge/Codepen-000000?style=for-the-badge&logo=codepen&logoColor=white)](https://codepen.io/https://codepen.io/officiallyhailey) 

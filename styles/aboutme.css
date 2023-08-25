@@ -11,6 +11,14 @@ body {
   color: darkslategray;
 }
 
+#gitabout {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+
+}
+
 head {
   margin: 0;
 }

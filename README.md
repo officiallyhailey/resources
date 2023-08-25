@@ -4,11 +4,12 @@
 # 💫 About Me:
 🔭 I’m currently working on my portfolio<br><br>🌱 I’m currently learning JS, CSS, HTML and soon more!<br><br>👯 I’m looking to collaborate on [anything]((lets get a link here))<br><br>🤝 I’m looking for help with more resources to continue learning new languages!<br><br>💬 Ask me about my cats, love them 100%<br><br>📫 How to reach me hailey@anniecannons.com
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=officiallyhaiely&label=Profile%20views&color=0e75b6&style=flat" alt="officiallyhaiely" /> </p>
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=officiallyhaiely&label=Profile%20views&color=0e75b6&style=flat" alt="officiallyhailey" /> </p>
 
 ## 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/www.linkedin.com/in/hailey-g) [![Codepen](https://img.shields.io/badge/Codepen-000000?style=for-the-badge&logo=codepen&logoColor=white)](https://codepen.io/https://codepen.io/officiallyhailey) 
+
+## 
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=officiallyhaiely&label=Profile%20views&color=0e75b6&style=flat" alt="officiallyhaiely" /> </p>
 
 # 💻 Tech Stack:
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white) ![Google Cloud](https://img.shields.io/badge/Google%20Cloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white) 	![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white) ![Canva](https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white) ![Adobe Lightroom](https://img.shields.io/badge/Adobe%20Lightroom-31A8FF.svg?style=for-the-badge&logo=Adobe%20Lightroom&logoColor=white)

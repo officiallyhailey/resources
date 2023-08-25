@@ -1,3 +1,6 @@
+### ✍️ Random Dev Quote
+![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
+
 # 💫 About Me:
 🔭 I’m currently working on my portfolio<br><br>🌱 I’m currently learning JS, CSS, HTML and soon more!<br><br>👯 I’m looking to collaborate on [anything]((lets get a link here))<br><br>🤝 I’m looking for help with more resources to continue learning new languages!<br><br>💬 Ask me about my cats, love them 100%<br><br>📫 How to reach me hailey@anniecannons.com
 
@@ -15,8 +18,6 @@
 ## 🏆 GitHub Trophies
 ![](https://github-profile-trophy.vercel.app/?username=officiallyhailey&theme=radical&no-frame=false&no-bg=false&margin-w=4)
 
-### ✍️ Random Dev Quote
-![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
 
 ### 🔝 Top Contributed Repo
 ![](https://github-contributor-stats.vercel.app/api?username=officiallyhailey&limit=5&theme=dark&combine_all_yearly_contributions=true)

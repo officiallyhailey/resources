@@ -1,11 +1,11 @@
 <h1 align="center">Hi 👋, I'm Hails!</h1>
 <h3 align="center">A passionate frontend developer from CT!</h3>
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=officiallyhaiely&label=Profile%20views&color=0e75b6&style=flat" alt="officiallyhaiely" /> </p>
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=officiallyhaiely&label=Profile%20views&color=0e75b6&style=flat" alt="officiallyhailey" /> </p>
 
-<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=officiallyhaiely" alt="officiallyhaiely" /></a> </p>
+<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=officiallyhailey" alt="officiallyhailey" /></a> </p>
 
-- 🔭 I’m currently working on [my portfolio](https://officiallyhailey.github.io/my-portfolio/minimal.html)
+- 🔭 I’m currently working on [my portfolio](https://officiallyhailey.github.io/officiallyhailey/minimal.html)
 
 - 🌱 I’m currently learning **JS, CSS, HTML and soon more!**
 
@@ -13,11 +13,9 @@
 
 - 🤝 I’m looking for help with **more resources to continue learning new languages!**
 
-- 👨‍💻 All of my projects are available at [https://github.com/officiallyhailey](https://github.com/officiallyhailey)
-
 - 💬 Ask me about **my cats, love them 100%**
 
-- 📫 How to reach me **haileydgrace@gmail.com**
+- 📫 How to reach me **hailey@anniecannons.com**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">

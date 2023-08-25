@@ -14,6 +14,8 @@ body {
   justify-content: center;
   align-items: center;
   max-width: 2000px;
+  background: linear-gradient(75deg, rgba(0, 0, 0, 0.946) 15%,rgba(77, 77, 77, 0.481) 100%);
+  
 }
 
 .top-bar {
@@ -81,7 +83,7 @@ body {
 
 
 .circle button {
-  cursor: pointer;
+  cursor: cell;
   position: absolute;
   top: 75%;
   left: 10%;
@@ -160,17 +162,19 @@ nav ul li {
 
 
 nav a {
-  color: #000000;
+  color: white;
   text-decoration: none;
   transition: all 0.5s;
 
 }
 
 nav a:hover {
-  color: #ffffff;
+  color: black;
   font-weight: bold;
   transition: all 0.2s;
-  text-shadow: 0 0 5px rgb(0, 0, 0), 0 0 15px rgb(0, 0, 0);
+  text-shadow: 0 0 5px white, 0 0 10px rgb(255, 255, 255);
+  cursor:cell;
+  cursor:vertical-text;
 }
 
 
@@ -184,6 +188,8 @@ nav a:hover {
     background-position: 0px -400%;
   }
 }
+
+
 
 /*info bubbles */
 
@@ -227,7 +233,7 @@ nav a:hover {
 
 .front2,
 .back2 {
-  box-shadow: 0 4px 8px 0 rgb(0, 0, 0);
+  box-shadow: 0 4px 8px 0 rgb(255, 255, 255);
   background-position: center;
   -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
   transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
@@ -248,7 +254,7 @@ nav a:hover {
 .back2 {
   border-radius: 50%;
   background-repeat: no-repeat;
-  background-color: rgb(233, 206, 53);
+  background-color: rgba(0, 0, 0, 0.43);
   background-position: center;
 }
 
@@ -300,6 +306,26 @@ nav a:hover {
   background-color: black;
 }
 
+
+h4 {
+  animation: flicker  2s linear infinite;
+  font-size: 35px;
+  color: black;
+
+}
+
+
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 0.99;
+    text-shadow: -1px -1px 0 rgba(255, 255, 255, .4), 1px -1px 0 rgba(255, 255, 255, .4), -1px 1px 0 rgba(255, 255, 255, .4), 1px 1px 0 rgba(255, 255, 255, .4), 0 -2px 8px, 0 0 2px, 0 0 5px #fff200, 0 0 15px rgb(255, 249, 68), 0 0 2px #ffc400, 0 2px 3px #000;
+ }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.4;
+    text-shadow: none;
+ }
+}
+
 .front2#html {
   background-size: 70%;
   background-color: black;
@@ -329,7 +355,7 @@ p#self-intro {
 
 .back2#tools {
   background-size: 85%;
-  background-color: rgb(211, 235, 255);
+  background-color: rgb(0, 0, 0);
 }
 
 .front2#toolsfront {
@@ -341,6 +367,7 @@ p#self-intro {
 }
 
 .back2#people {
+  background-color: black;
   background-size: 85%;
 }
 

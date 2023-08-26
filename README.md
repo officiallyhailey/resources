@@ -3,6 +3,10 @@
 ### ✍️ Random Dev Quote
 ![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
 
+<br clear="both">
+
+<img src="https://raw.githubusercontent.com/officiallyhailey/officiallyhailey/output/snake.svg" alt="Snake animation" />
+
 ###
 
 <p align="left">Hi 👋! My name is Hails and I'm from CT!<br><br>🔭 I’m currently working on my portfolio<br><br>🌱 I’m currently learning JS, CSS, HTML and soon more!<br><br>👯 I’m looking to collaborate on [anything]((lets get a link here))<br><br>🤝 I’m looking for help with more resources to continue learning new languages!<br><br>💬 Ask me about my cats, love them 100%</p>
@@ -10,13 +14,13 @@
 ###
 
 <div align="left">
-  <img src="https://readME-counter.glitch.me/officiallyhailey/count.svg?"  />
+  <img src="https://profile-counter.glitch.me/officiallyhailey/count.svg?"  />
 </div>
 
 ###
 
 <div align="left">
-  <img src="https://github-profile-stats.vercel.app/api/top-langs?username=officiallyhailey&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=5&theme=dracula&hide_border=false&order=2" height="150" alt="languages graph"  />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs?username=officiallyhailey&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=5&theme=dracula&hide_border=false&order=2" height="150" alt="languages graph"  />
   <img src="https://streak-stats.demolab.com?user=officiallyhailey&locale=en&mode=daily&theme=dracula&hide_border=false&border_radius=5&order=3" height="150" alt="streak graph"  />
 </div>
 

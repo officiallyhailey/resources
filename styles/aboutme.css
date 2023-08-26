@@ -5,7 +5,7 @@
   
  body { 
    overflow-x: hidden; 
-   margin: 0; 
+   margin: 10px; 
    font-family: 'Montserrat', sans-serif; 
    display: flex; 
    flex-direction: column; 
@@ -17,7 +17,7 @@
 #gitabout {
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
+  justify-content: center;
   align-items: center;
 
 }

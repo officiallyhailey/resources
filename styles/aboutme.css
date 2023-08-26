@@ -1,15 +1,18 @@
-
-/*aboutme*/
-html {
-  margin: 0;
-  background-color: black;
-}
-
-body {
-  margin: 0;
-  font-family: "Montserrat", sans-serif;
-  color: darkslategray;
-}
+* { 
+   box-sizing: border-box; 
+  
+ } 
+  
+ body { 
+   overflow-x: hidden; 
+   margin: 0; 
+   font-family: 'Montserrat', sans-serif; 
+   display: flex; 
+   flex-direction: column; 
+   justify-content: center; 
+   align-items: center; 
+  
+ }
 
 #gitabout {
   display: flex;

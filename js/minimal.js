@@ -17,7 +17,7 @@ panel.addEventListener('dblclick', () => {
     panel.classList.add('panel')
 })
 })
-    
+
 
 function removeActiveClasses() {
     panels.forEach( panel => {
@@ -38,4 +38,5 @@ close.addEventListener('click', () => container.classList.remove('show-nav'))
 //header text code
 
 //stats code 
+
 

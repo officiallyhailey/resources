@@ -10,7 +10,7 @@
 ###
 
 <div align="left">
-  <img src="https://profile-counter.glitch.me/officiallyhailey/count.svg?"  />
+  <img src="https://readME-counter.glitch.me/officiallyhailey/count.svg?"  />
 </div>
 
 ###

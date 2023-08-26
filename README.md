@@ -5,8 +5,6 @@
 
 <br clear="both">
 
-<img src="https://raw.githubusercontent.com/officiallyhailey/officiallyhailey/output/snake.svg" alt="Snake animation" />
-
 ###
 
 <p align="left">Hi 👋! My name is Hails and I'm from CT!<br><br>🔭 I’m currently working on my portfolio<br><br>🌱 I’m currently learning JS, CSS, HTML and soon more!<br><br>👯 I’m looking to collaborate on [anything]((lets get a link here))<br><br>🤝 I’m looking for help with more resources to continue learning new languages!<br><br>💬 Ask me about my cats, love them 100%</p>

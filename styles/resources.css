@@ -1,6 +1,8 @@
-html {
+* {
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
   margin: 0;
-  background-color: rgb(0, 0, 0);
 }
 
 body {
@@ -8,46 +10,39 @@ body {
   font-family: "Montserrat", sans-serif;
   color: rgb(255, 255, 255);
   animation: scroll 250s linear infinite;
-  background-size: 60%;
+  background-size: 70%;
   width: 100%
 }
 
 .nav-wrapper {
   display: flex;
   justify-content: center;
-width: 100%;
-margin: 10px 0px;
-letter-spacing: 6px;
-background-color: #000000d3;
+  width: 100%;
+  margin: 10px 0px;
+  background-color: #000000d3;
 }
 
 #page-links {
-  font-family:'Courier New', Courier, monospace;
+  font-family: 'Courier New', Courier, monospace;
   text-transform: uppercase;
   text-align: center;
 
 }
 
-.nav-wrapper .a-title #aboutme {
+.nav-wrapper .a-title .aboutme {
   padding: 5px 10px 5px 10px;
   background-color: hsla(0, 0%, 0%, 0.5);
   color: rgb(255, 0, 0);
+  letter-spacing: 6px;
 }
 
-.nav-wrapper .a-title #aboutme:hoover,
-.nav-wrapper .a-title #aboutme.active {
-background-color: purple;
-color: white;
-font-family: 'Montserrat', sans-serif;
+.nav-wrapper .a-title .aboutme:hoover,
+.nav-wrapper .a-title .boutme.active {
+  background-color: purple;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
 }
 
-
-* {
-  list-style: none;
-  text-decoration: none;
-  padding: 0;
-  margin: 0;
-}
 
 .wrapper .sidebar {
   transition: all 0.5s ease;
@@ -63,8 +58,8 @@ font-family: 'Montserrat', sans-serif;
 
 
 .wrapper .profile {
-text-align: center;
-padding: 10px;
+  text-align: center;
+  padding: 10px;
 }
 
 .profile p {
@@ -117,16 +112,16 @@ padding: 10px;
 
 .wrapper .sidebar ul li a:hover .description,
 .wrapper .sidebar ul li a:active .description {
-display: contents;
-font-size: 15px;
-font-family: 'Montserrat' sans-serif;
+  display: contents;
+  font-size: 15px;
+  font-family: 'Montserrat' sans-serif;
 
 }
 
 .wrapper .sidebar ul li a:hover .item,
 .wrapper .sidebar ul li a:active .item {
-font-size: 18px;
-font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .item {
@@ -146,6 +141,6 @@ head {
 
 @keyframes scroll {
   100% {
-      background-position: 0px -400%;
+    background-position: 0px -400%;
   }
 }

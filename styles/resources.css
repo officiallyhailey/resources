@@ -37,15 +37,16 @@ body {
   justify-content: center;
   padding: 5px 10px 5px 10px;
   background-color: hsla(0, 0%, 0%, 0.5);
-  color: rgb(255, 255, 255);
+  color: rgb(255, 206, 8);
   letter-spacing: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.467);
 }
 
 .nav-wrapper .nav-link a:hover,
 .nav-wrapper .nav-link a.active {
-  background-color: rgba(2, 255, 40, 0.286);
-  color: white;
+  color: yellow;
   font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 0 3px white, 0 0 10px white;
 }
 
 
@@ -84,6 +85,9 @@ body {
   letter-spacing: 5px;
   background-color: rgba(0, 0, 0, 0.489);
   padding: 5px;
+  animation: flicker  2s linear infinite;
+  font-size: 35px;
+  color: black;
 
 }
 
@@ -105,8 +109,8 @@ body {
 .wrapper .sidebar ul li a.active {
   color: #000000;
   font-weight: bolder;
-  background: rgba(170, 108, 236, 0.818);
-  border-right: 2px solid rgb(172, 6, 198);
+  background: rgba(69, 122, 255, 0.866);
+  border-right: 2px solid rgb(88, 124, 255);
   color: black
 }
 
@@ -114,21 +118,26 @@ body {
 .wrapper .sidebar ul li a:hover .description,
 .wrapper .sidebar ul li a:active .description {
   display: contents;
-  font-size: 18px;
-  font-family: 'Montserrat' sans-serif;
+  display: flex;
+  text-align: left;
+  justify-content: left;
+
 }
 
 .wrapper .sidebar ul li a:hover .item,
 .wrapper .sidebar ul li a:active .item {
-  font-size: 18px;
+  font-size: 15px;
   font-family: 'Montserrat', sans-serif;
+  padding: 10px;
+  text-shadow: 0 0 5px rgb(255, 255, 26), 0 0 9px yellow;
 }
 
 .item {
   text-transform: uppercase;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 22px;
+  font-family: 'Courier New', Courier, monospace bold;
+  font-size: 25px;
   letter-spacing: 6px;
+  text-shadow: 0 0 1px rgb(255, 255, 26), 0 0 5px yellow;
 }
 
 a {
@@ -139,4 +148,15 @@ a {
   100% {
     background-position: 0px -400%;
   }
+}
+
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 0.99;
+    text-shadow: -1px -1px 0 rgba(255, 255, 255, .4), 1px -1px 0 rgba(255, 255, 255, .4), -1px 1px 0 rgba(255, 255, 255, .4), 1px 1px 0 rgba(255, 255, 255, .4), 0 -2px 8px, 0 0 2px, 0 0 5px #fff200, 0 0 15px rgb(255, 249, 68), 0 0 2px #ffc400, 0 2px 3px #000;
+ }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.4;
+    text-shadow: none;
+ }
 }

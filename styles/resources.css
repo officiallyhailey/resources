@@ -28,11 +28,17 @@ background-color: #000000d3;
 
 }
 
-#aboutme {
+.nav-wrapper .a-title #aboutme {
   padding: 5px 10px 5px 10px;
   background-color: hsla(0, 0%, 0%, 0.5);
-  color: white;
- 
+  color: rgb(255, 0, 0);
+}
+
+.nav-wrapper .a-title #aboutme:hoover,
+.nav-wrapper .a-title #aboutme.active {
+background-color: purple;
+color: white;
+font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -53,7 +59,6 @@ background-color: #000000d3;
   transition: all 0.5s ease;
   margin: 0;
   height: 100%;
- 
 }
 
 

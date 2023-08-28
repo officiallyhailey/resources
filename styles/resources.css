@@ -9,16 +9,16 @@ body {
   color: rgb(255, 255, 255);
   animation: scroll 250s linear infinite;
   background-size: 60%;
+  width: 100%
 }
 
 .nav-wrapper {
   display: flex;
   justify-content: center;
 width: 100%;
-padding: 20px;
-letter-spacing: 0.5vw;
+margin: 10px 0px;
+letter-spacing: 6px;
 background-color: #000000d3;
-
 }
 
 #page-links {
@@ -28,14 +28,6 @@ background-color: #000000d3;
 
 }
 
-#portfolio {
-  padding: 5px 20px 5px 20px;
-  color: white;
-  background-color: hsla(0, 0%, 0%, 0.5);
-
-  ;
-}
-
 #aboutme {
   padding: 5px 10px 5px 10px;
   background-color: hsla(0, 0%, 0%, 0.5);
@@ -43,19 +35,12 @@ background-color: #000000d3;
  
 }
 
-#grid {
-  padding: 5px 30px 5px 30px;
-  color: white;
-  background-color: hsla(0, 0%, 0%, 0.5);
-
-}
 
 * {
   list-style: none;
   text-decoration: none;
-  padding: 0%;
+  padding: 0;
   margin: 0;
-
 }
 
 .wrapper .sidebar {
@@ -79,45 +64,45 @@ padding: 10px;
 
 .profile p {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 2vh;
-  background-color: rgba(0, 0, 0, 0.43);
-  display: inline-flex;
-  flex-wrap: wrap;
+  font-size: 15px;
+  background-color: rgba(0, 0, 0, 0.579);
+  display: flex;
   padding: 5px;
-
+  justify-content: center;
 }
 
 .wrapper .sidebar .profile h3 {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   text-transform: uppercase;
   font-size: 25px;
-  letter-spacing: 1vw;
+  letter-spacing: 5px;
   background-color: rgba(0, 0, 0, 0.489);
   padding: 5px;
 
 }
 
 .wrapper .sidebar ul li a {
-  display: grid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-bottom: 1px solid #ffffff66;
   color: rgb(241, 237, 237);
-  font-size: 22px;
-  font-family: 'Courier New', Courier, monospace;
   text-align: center;
-  height: 10vh;
-  letter-spacing: 1vw;
+  height: 100px;
+}
 
-
+.wrapper .sidebar ul li a .description {
+  display: none;
 }
 
 .wrapper .sidebar ul li a:hover,
 .wrapper .sidebar ul li a.active {
   color: #000000;
-
   font-weight: bolder;
-
   background: rgba(170, 108, 236, 0.759);
   border-right: 2px solid rgb(172, 6, 198);
+  color: black
 }
 
 .wrapper .sidebar ul li a:hover .icon,
@@ -125,13 +110,25 @@ padding: 10px;
   color: #0c7db1;
 }
 
-.wrapper .sidebar ul li a:hover:before,
-.wrapper .sidebar ul li a.active:before {
-  color: black;
+.wrapper .sidebar ul li a:hover .description,
+.wrapper .sidebar ul li a:active .description {
+display: contents;
+font-size: 15px;
+font-family: 'Montserrat' sans-serif;
+
+}
+
+.wrapper .sidebar ul li a:hover .item,
+.wrapper .sidebar ul li a:active .item {
+font-size: 18px;
+font-family: 'Montserrat', sans-serif;
 }
 
 .item {
   text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 22px;
+  letter-spacing: 1vw;
 }
 
 a {

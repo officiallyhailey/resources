@@ -11,7 +11,7 @@ body {
   color: rgb(255, 255, 255);
   animation: scroll 250s linear infinite;
   background-size: 70%;
-  width: 100%
+  width: 100%;
 }
 
 .nav-wrapper {
@@ -37,9 +37,11 @@ body {
   justify-content: center;
   padding: 5px 10px 5px 10px;
   background-color: hsla(0, 0%, 0%, 0.5);
-  color: rgb(255, 206, 8);
+  color: rgb(234, 255, 8);
   letter-spacing: 6px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.467);
+  border-radius: 50px;
+  text-shadow: 0 0 2px white, 0 0 5px white;
 }
 
 .nav-wrapper .nav-link a:hover,
@@ -71,14 +73,17 @@ body {
 .profile p {
   font-family: 'Courier New', Courier, monospace;
   font-size: 15px;
-  background-color: rgba(0, 0, 0, 0.579);
+  background-color: rgba(0, 0, 0, 0.775);
   display: flex;
   padding: 5px;
   justify-content: center;
+  border-radius: 50px;
+  border-bottom: 4px rgba(255, 255, 255, 0.168) solid;
 }
 
 .wrapper .sidebar .profile h3 {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   text-transform: uppercase;
   font-size: 25px;
@@ -88,61 +93,97 @@ body {
   animation: flicker  2s linear infinite;
   font-size: 35px;
   color: black;
-
 }
 
-.wrapper .sidebar ul li a {
+
+.resources  ul li a {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid #ffffff66;
-  color: rgb(241, 237, 237);
-  text-align: center;
-  height: 100px;
-}
-
-.wrapper .sidebar ul li a .description {
-  display: none;
-}
-
-.wrapper .sidebar ul li a:hover,
-.wrapper .sidebar ul li a.active {
-  color: #000000;
+  border-bottom: 3px solid #ffffff3d;
+  color: rgb(0, 0, 0);
+  font-family: 'Courier New', Courier, monospace;
   font-weight: bolder;
-  background: rgba(69, 122, 255, 0.866);
+  text-align: center;
+  height: 175px;
+  margin-bottom: 5px;
+  border-radius: 50px;
+  transition: 3s;
+ 
+}
+
+.resources ul li a .description {
+  opacity: 0;
+  line-height: 0px;
+ 
+
+}
+
+.resources ul li a:hover,
+.resources ul li a.active {
+  color: #000000;
+  background: rgb(0, 0, 0);
   border-right: 2px solid rgb(88, 124, 255);
-  color: black
+  color: white;
+  border-radius: 50px;
+  box-shadow: 0 0 5px white, 0 0 9px white, 0 0 15px white, 0 0 20px white;
+  transition: 0.5s;
+  margin: 15px;
+  min-height: 175px;
+  height:auto;
 }
 
 
-.wrapper .sidebar ul li a:hover .description,
-.wrapper .sidebar ul li a:active .description {
-  display: contents;
-  display: flex;
-  text-align: left;
-  justify-content: left;
-
-}
-
-.wrapper .sidebar ul li a:hover .item,
-.wrapper .sidebar ul li a:active .item {
-  font-size: 15px;
-  font-family: 'Montserrat', sans-serif;
+.resources ul li a:hover .description,
+.resources ul li a:active .description {
+  opacity: 100;
+  
+  position: relative;
+  text-align: center;
   padding: 10px;
-  text-shadow: 0 0 5px rgb(255, 255, 26), 0 0 9px yellow;
+  line-height: 22px;
+  font-size: 16px;
+  transition: 0.5s;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+.resources ul li a:hover .item,
+.resources ul li a:active .item {
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+  text-shadow: 0 0 2px rgb(255, 255, 26), 0 0 5px yellow;
+  color: black;
+  opacity: 50%;
+  padding: 10px 0px 0px 25px;
+  transition: 1s;
+  text-align: center;
 }
 
 .item {
   text-transform: uppercase;
   font-family: 'Courier New', Courier, monospace bold;
-  font-size: 25px;
+  font-size: 30px;
   letter-spacing: 6px;
-  text-shadow: 0 0 1px rgb(255, 255, 26), 0 0 5px yellow;
+  text-shadow: 0 0 1px rgb(255, 255, 26), 0 0 5px yellow, 0 0 10px white;
+ transition: 1s;
 }
 
 a {
   background-color: rgba(0, 0, 0, 0.546);
 }
+
+
+
+
+
+
+
+
+
+
 
 @keyframes scroll {
   100% {

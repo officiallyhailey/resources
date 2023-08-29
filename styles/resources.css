@@ -110,14 +110,27 @@ body {
   margin-bottom: 5px;
   border-radius: 50px;
   transition: 3s;
- 
 }
+
+.item {
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace bold;
+  font-size: 30px;
+  letter-spacing: 6px;
+  text-shadow: 0 0 1px rgb(255, 255, 26), 0 0 5px yellow, 0 0 10px white;
+ transition: 1s;
+}
+
+a {
+  background-color: rgba(0, 0, 0, 0.546);
+}
+
+
+@media (min-width: 500px) {
 
 .resources ul li a .description {
   opacity: 0;
   line-height: 0px;
- 
-
 }
 
 .resources ul li a:hover,
@@ -138,7 +151,6 @@ body {
 .resources ul li a:hover .description,
 .resources ul li a:active .description {
   opacity: 100;
-  
   position: relative;
   text-align: center;
   padding: 10px;
@@ -161,24 +173,14 @@ body {
   transition: 1s;
   text-align: center;
 }
-
-.item {
-  text-transform: uppercase;
-  font-family: 'Courier New', Courier, monospace bold;
-  font-size: 30px;
-  letter-spacing: 6px;
-  text-shadow: 0 0 1px rgb(255, 255, 26), 0 0 5px yellow, 0 0 10px white;
- transition: 1s;
 }
 
-a {
-  background-color: rgba(0, 0, 0, 0.546);
+@media (max-width: 490px) {
+  
+  .description {
+   display: none;
+  }
 }
-
-
-
-
-
 
 
 

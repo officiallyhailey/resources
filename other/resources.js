@@ -1,6 +1,12 @@
 const resourceTemplate = document.createElement('template');
 resourceTemplate.innerHTML = `
 
+function displayText() {
+  var text = document.getElementById("textField");
+  text.style.display = "block";
+}
+
+
 <style>
 .wrapper .sidebar ul li a{
   display: block;

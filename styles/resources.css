@@ -54,13 +54,13 @@ position:absolute;
 
 
 .wrapper .sidebar {
-  transition: all 0.5s ease;
+  transition: ease-in-out 0.5s ease;
   padding: 10px;
   height: 100%;
 }
 
 .sidebar {
-  transition: all 0.5s ease;
+  transition: ease-in-out 0.5s ease;
   margin: 0;
   height: 100%;
 }
@@ -76,13 +76,14 @@ position:absolute;
   flex-wrap: wrap;
   font-family: 'Courier New', Courier, monospace;
   font-size: 15px;
-  background-color: rgba(0, 0, 0, 0.775);
+  background-color: rgba(0, 0, 0, 0.485);
   padding: 5px;
   justify-content: center;
   border-radius: 50px;
   border-bottom: 4px rgba(255, 255, 255, 0.168) solid;
-  margin-bottom: 5px;
+  margin: 0px 30px;
 }
+
 
 .wrapper .sidebar .profile h3 {
   display: flex;
@@ -110,7 +111,8 @@ position:absolute;
   text-align: center;
   height: 200px;
   border-radius: 50px;
-  transition: 2.5s;
+  transition:  ease-in-out .5s;
+  margin: 20px;
 }
 
 .item {
@@ -119,7 +121,7 @@ position:absolute;
   font-size: 30px;
   letter-spacing: 6px;
   text-shadow: 0 0 1px rgb(255, 255, 26), 0 0 5px yellow, 0 0 10px white;
- transition: 1s;
+ transition:   1s;
 }
 
 a {
@@ -142,7 +144,7 @@ a {
   color: rgba(255, 255, 255, 0.827);
   border-radius: 50px;
   box-shadow: 0 0 5px white, 0 0 9px white, 0 0 15px white, 0 0 20px white, 0 0 30px white;
-  transition: 0.5s;
+  transition: ease-in-out  0.5s;
   min-height: 200px;
   margin: 25px;
 }
@@ -157,6 +159,7 @@ a {
   line-height: 22px;
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
+  transition: 0.5s;
 }
 
 
@@ -169,7 +172,7 @@ a {
   color: black;
   opacity: 50%;
   padding: 10px 0px 0px 25px;
-  transition: 2s;
+  transition:   21;
   text-align: center;
 }
 }

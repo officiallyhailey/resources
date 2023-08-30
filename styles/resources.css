@@ -188,29 +188,6 @@ a {
     display: none;
   }
 
-  .item {
-    display: flex;
-    justify-content: center;
-    font-size: 5vw;
-  }
-
-
-.resources {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin: 10px 0px;
-}
-
-.wrapper .sidebar .profile h3 {
-  font-size: 6vw;
-}
-
-.wrapper .sidebar .profile p {
-  font-size: 3vw;
-  margin: 0 10px;
-}
-
 }
 
 

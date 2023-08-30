@@ -1,5 +1,5 @@
 body {
-    background radial-gradient(ellipse at center, rgba(127, 0, 173, 0.6) 0%,
+    background: radial-gradient(ellipse at center, rgba(127, 0, 173, 0.6) 0%,
             rgba(0, 0, 0, 0.8) 60%,
             rgba(0, 0, 0, 1) 90%),
         url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/31787/stars.jpg);
@@ -11,7 +11,7 @@ body {
     font-size: 1em;
 }
 .nav {
-background-color black;
+background-color: black;
 font-size: 1.2em;
 text-align: center;
 padding-top: 10%;
@@ -179,7 +179,7 @@ padding-top: 10%;
     }
 }
 
-@ keyframes layerupanim {
+@keyframes layerupanim {
     from {
         height: 140px;
     }

@@ -6,7 +6,7 @@
 }
 
 body {
-position:absolute;
+  position: absolute;
   margin: 0;
   font-family: "Montserrat", sans-serif;
   color: rgb(255, 255, 255);
@@ -36,13 +36,13 @@ position:absolute;
   display: flex;
   justify-content: center;
   padding: 5px 10px 5px 10px;
- 
+
   color: rgb(234, 255, 8);
   letter-spacing: 6px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.467);
   border-radius: 50px;
   text-shadow: 0 0 2px white, 0 0 5px white;
-    background-color: #000000d3;
+  background-color: #000000d3;
 }
 
 .nav-wrapper .nav-link a:hover,
@@ -90,16 +90,15 @@ position:absolute;
   flex-wrap: wrap;
   justify-content: center;
   text-transform: uppercase;
-  font-size: 30px;
   letter-spacing: 5px;
   padding: 5px;
-  animation: flicker  2s linear infinite;
+  animation: flicker 3s linear infinite;
   font-size: 35px;
   color: black;
 }
 
 
-.resources  ul li a {
+.resources ul li a {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -112,7 +111,7 @@ position:absolute;
   height: 200px;
   border-radius: 50px;
   transition: 0.5s;
-  margin: 20px;
+  margin: 20px 60px;
 }
 
 .item {
@@ -121,7 +120,8 @@ position:absolute;
   font-size: 30px;
   letter-spacing: 6px;
   text-shadow: 0 0 1px rgb(255, 255, 26), 0 0 5px yellow, 0 0 10px white;
- transition:   1s;
+  transition: 1s;
+  animation: flicker  4s linear infinite;
 }
 
 a {
@@ -129,58 +129,64 @@ a {
 }
 
 
-@media (min-width: 500px) {
+@media (min-width: 491px) {
 
-.resources ul li a .description {
-  opacity: 0;
-  line-height: 0px;
+  .resources ul li a .description {
+    opacity: 0;
+    line-height: 0px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px 0px 0px 25px;
+    transition: 1s;
+    text-align: center;
+  }
+
+  .resources ul li a:hover,
+  .resources ul li a.active {
+    background: rgb(0, 0, 0);
+    border-right: 2px solid rgb(88, 124, 255);
+    color: rgba(255, 255, 255, 0.827);
+    border-radius: 50px;
+    box-shadow: 0 0 5px white, 0 0 9px white, 0 0 15px white, 0 0 20px white, 0 0 30px white;
+    transition: 0.5s;
+    min-height: 200px;
+    margin: 25px;
+  }
+
+
+  .resources ul li a:hover .description,
+  .resources ul li a:active .description {
+    opacity: 100;
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    line-height: 22px;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+
+  .resources ul li a:hover .item,
+  .resources ul li a:active .item {
+    font-size: 0px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    text-shadow: 0 0 2px rgb(255, 255, 26), 0 0 5px yellow;
+    color: black;
+    opacity: 50%;
+    padding: 10px 0px 0px 25px;
+    transition: 1s;
+    text-align: center;
+  }
 }
 
-.resources ul li a:hover,
-.resources ul li a.active {
-  color: #000000;
-  background: rgb(0, 0, 0);
-  border-right: 2px solid rgb(88, 124, 255);
-  color: rgba(255, 255, 255, 0.827);
-  border-radius: 50px;
-  box-shadow: 0 0 5px white, 0 0 9px white, 0 0 15px white, 0 0 20px white, 0 0 30px white;
-  transition: 0.5s;
-  min-height: 200px;
-  margin: 25px;
-}
 
-
-.resources ul li a:hover .description,
-.resources ul li a:active .description {
-  opacity: 100;
-  position: relative;
-  text-align: center;
-  padding: 10px;
-  line-height: 22px;
-  font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
-}
-
-
-.resources ul li a:hover .item,
-.resources ul li a:active .item {
-  font-size: 0px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bolder;
-  text-shadow: 0 0 2px rgb(255, 255, 26), 0 0 5px yellow;
-  color: black;
-  opacity: 50%;
-  padding: 10px 0px 0px 25px;
-  transition: 1s;
-  text-align: center;
-}
-}
 
 @media (max-width: 490px) {
-  
+
   .description {
-   display: none;
+    display: none;
   }
+
 }
 
 
@@ -195,12 +201,26 @@ a {
 }
 
 @keyframes flicker {
-  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+
+  0%,
+  19.999%,
+  22%,
+  62.999%,
+  64%,
+  64.999%,
+  70%,
+  100% {
     opacity: 0.99;
     text-shadow: -1px -1px 0 rgba(255, 255, 255, .4), 1px -1px 0 rgba(255, 255, 255, .4), -1px 1px 0 rgba(255, 255, 255, .4), 1px 1px 0 rgba(255, 255, 255, .4), 0 -2px 8px, 0 0 2px, 0 0 5px #fff200, 0 0 15px rgb(255, 249, 68), 0 0 2px #ffc400, 0 2px 3px #000;
- }
-  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+  }
+
+  20%,
+  21.999%,
+  63%,
+  63.999%,
+  65%,
+  69.999% {
     opacity: 0.4;
     text-shadow: none;
- }
+  }
 }

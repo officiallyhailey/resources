@@ -36,7 +36,6 @@ body {
   display: flex;
   justify-content: center;
   padding: 5px 10px 5px 10px;
-
   color: rgb(234, 255, 8);
   letter-spacing: 6px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.467);
@@ -73,7 +72,6 @@ body {
 
 .profile p {
   display: flex;
-  flex-wrap: wrap;
   font-family: 'Courier New', Courier, monospace;
   font-size: 15px;
   background-color: rgba(0, 0, 0, 0.485);
@@ -81,13 +79,14 @@ body {
   justify-content: center;
   border-radius: 50px;
   border-bottom: 4px rgba(255, 255, 255, 0.168) solid;
-  margin: 0px 30px;
+  margin: 0px 80px;
+  border-top: rgba(255, 255, 255, 0.43) 1px solid;
 }
 
 
 .wrapper .sidebar .profile h3 {
   display: flex;
-  flex-wrap: wrap;
+
   justify-content: center;
   text-transform: uppercase;
   letter-spacing: 5px;
@@ -100,10 +99,10 @@ body {
 
 .resources ul li a {
   display: flex;
-  flex-wrap: wrap;
+flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
-  border-bottom: 3px solid #ffffff3d;
+  border-bottom: 5px solid #ffffff72;
   color: rgb(0, 0, 0);
   font-family: 'Courier New', Courier, monospace;
   font-weight: bolder;
@@ -112,6 +111,7 @@ body {
   border-radius: 50px;
   transition: 0.5s;
   margin: 20px 60px;
+  border-top: rgba(255, 255, 255, 0.43) 1px solid;
 }
 
 .item {
@@ -136,7 +136,7 @@ a {
     line-height: 0px;
     font-family: 'Montserrat', sans-serif;
     padding: 10px 0px 0px 25px;
-    transition: 1s;
+    transition: 0.5s;
     text-align: center;
   }
 
@@ -160,8 +160,9 @@ a {
     text-align: center;
     padding: 10px;
     line-height: 22px;
-    font-size: 16px;
+    font-size: 15px;
     font-family: 'Montserrat', sans-serif;
+    transition: 0.5s;
   }
 
 
@@ -174,7 +175,7 @@ a {
     color: black;
     opacity: 50%;
     padding: 10px 0px 0px 25px;
-    transition: 1s;
+    transition: 0.5s;
     text-align: center;
   }
 }
@@ -186,6 +187,29 @@ a {
   .description {
     display: none;
   }
+
+  .item {
+    display: flex;
+    justify-content: center;
+    font-size: 5vw;
+  }
+
+
+.resources {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0px;
+}
+
+.wrapper .sidebar .profile h3 {
+  font-size: 6vw;
+}
+
+.wrapper .sidebar .profile p {
+  font-size: 3vw;
+  margin: 0 10px;
+}
 
 }
 

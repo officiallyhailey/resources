@@ -188,6 +188,14 @@ a {
     display: none;
   }
 
+  .resources ul li a {
+
+    margin: 20px;
+  }
+
+  .profile p {
+    margin: 20px;
+  }
 }
 
 

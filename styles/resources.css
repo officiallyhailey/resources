@@ -188,14 +188,29 @@ a {
     display: none;
   }
 
-  .resources ul li a {
-
-    margin: 20px;
+  .item {
+    display: flex;
+    justify-content: center;
+    font-size: 5vw;
   }
 
-  .profile p {
-    margin: 20px;
-  }
+
+.resources ul li a {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 20px;
+}
+
+.wrapper .sidebar .profile h3 {
+  font-size: 6vw;
+}
+
+.wrapper .sidebar .profile p {
+  font-size: 3vw;
+  margin: 20px;
+}
+
 }
 
 

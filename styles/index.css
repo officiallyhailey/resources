@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  animation: scroll 50s linear infinite;
+  animation: scroll 250s linear infinite;
   overflow-x: hidden;
   margin: 0;
   font-family: 'Montserrat', sans-serif;
@@ -14,7 +14,7 @@ body {
   justify-content: center;
   align-items: center;
   max-width: 2000px;
-  background: linear-gradient(75deg, rgba(0, 0, 0, 0.946) 15%,rgba(77, 77, 77, 0.481) 100%);
+ 
   
 }
 

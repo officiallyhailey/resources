@@ -155,14 +155,14 @@ a {
 
   .resources ul li a:hover .description,
   .resources ul li a:active .description {
-    opacity: 100;
+    opacity: 100%;
     position: relative;
     text-align: center;
     padding: 10px;
     line-height: 22px;
     font-size: 15px;
     font-family: 'Montserrat', sans-serif;
-    transition: 0.5s;
+   
   }
 
 
@@ -177,12 +177,18 @@ a {
     padding: 10px 0px 0px 25px;
     transition: 0.5s;
     text-align: center;
+ 
   }
 }
 
 
 
 @media (max-width: 490px) {
+
+body {
+  background-size: 60%;
+
+}
 
   .description {
     display: none;

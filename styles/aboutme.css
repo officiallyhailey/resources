@@ -7,6 +7,8 @@ body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   background-color: #E7EAF1;
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -130,24 +132,21 @@ main {
   width: auto;
   height: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-
+  justify-content:center;
+  align-items: center;
 }
 
 .boxes {
-  height: 250px;
-  width: 250px;
+  height: auto;
+  width: auto;
   background-color: #E7EAF1;
-  justify-content: space-evenly;
-  margin: 25px;
+  margin: 25px 0px;
   box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1);
   border-radius: 15px;
   border: 3px #E7EAF1 solid;
   overflow: auto;
-  padding: 10px;
-  line-height: 35px;
   font-size: 20px;
   font-family: 'Montserrat', sans-serif;
   display: flex;
@@ -156,42 +155,23 @@ main {
 }
 
 
-.container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 700px;
-  height: 500px;
-}
-
 /*ABOUT ME BOX*/
 
-#me {
-  text-align: center;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  font-size: 25px;
-  height: 200px;
-  padding-right: 10px;
-  margin-right: 5px;
-  border-right: 4px solid black;
-}
-
-#box1 {
-  text-transform: uppercase;
-  width: 350px;
-}
 
 
-#box2 {
-  width: 400px;
-}
 
 
 /*BUTTON BOX*/
 
-body,
+:root {
+	--hue: 0;
+	--sat: 0%;
+	--bg: hsl(var(--hue),var(--sat),90%);
+	--fg: hsl(var(--hue),var(--sat),10%);
+	--trans-dur: 0.3s;
+	font-size: calc(16px + (24 - 16) * (100vw - 320px) / (2560 - 320));
+}
+
 button {
   color: var(--fg);
   font: 1em/1.5 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
@@ -211,7 +191,7 @@ button {
 }
 
 .keyboard {
-  background-color: hsl(var(--hue), var(--sat), 80%);
+  background-color: hsl(var(--hue), var(--sat), 100%);
   background-image: linear-gradient(90deg, hsla(var(--hue), var(--sat), 10%, 0.4), hsla(var(--hue), var(--sat), 10%, 0));
   border-radius: 0.75em;
   box-shadow:

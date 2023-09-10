@@ -5,13 +5,13 @@
         font-family: 'Montserrat', sans-serif;
     }
   
-    #box2 { 
+    #box2, #box5 { 
         padding-left: 15px;
         text-transform: uppercase;
         line-height: 35px; 
     }
 
-    #box2 img {
+    #box2 #box5, img {
         margin-left: 15px;
         height: 200px;
         width: 200px;
@@ -109,7 +109,7 @@
         font-size: 13px;
     }
 
-    #box2 {
+    #box2, #box5 {
         font-size: 16px;
         padding-left: 10px;
     }

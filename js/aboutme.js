@@ -1,28 +1,30 @@
 
+// Nav bar opening and closing elements
 
-function showBox2() {
-// Get the button element
+const navButtons = document.querySelectorAll(".navButton");
 
+navButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        const targetElementId = button.getAttribute("data-target");
+        const targetElement = document.getElementById(targetElementId);
 
-// Get the box2 element
-let box2 = document.getElementById('box2');
-// Add an event listener to the button for the click event
+        if (targetElement.classList.contains("hidden")) {
+            // Open the target element and close any other elements
+            closeAllElements();
+            targetElement.classList.remove("hidden");
+        } else {
+            // Close the target element
+            targetElement.classList.add("hidden");
+        }
+    });
+});
 
-    // Show the box2 element by removing the 'hidden' class
- 
-    if (box2.classList.contains('hidden')){
-        box2.classList.remove('hidden')}
-        else {box2.classList.add('hidden')}
-    }
-  
-
-
-
-
-      
-
-
-
-
-
+function closeAllElements() {
+    const elements = document.querySelectorAll(".navButton");
+    elements.forEach(function (element) {
+        const targetId = element.getAttribute("data-target");
+        const targetElement = document.getElementById(targetId);
+        targetElement.classList.add("hidden");
+    });
+}
 

@@ -9,14 +9,14 @@
         <title>HG Portfolio</title>
         <link rel="stylesheet" href="styles/aboutme.css" />
         <link rel="stylesheet" href="styles/aboutmemedia.css">
-        <script src="js/aboutme.js"></script>
+        <script src="js/aboutme.js" defer></script>
 
     </head>
 
     <main>
         <div class="nav" >
             <div class="keyboard">
-                <button class="keyboard__key navButton" data-target="box2" type="button">
+                <button class="keyboard__key navButton" data-target="nav1" type="button">
                     <span class="keyboard__key-lines">
                         <svg class="keyboard__cmd keyboard__key-line--tr" viewBox="0 0 16 16" width="16px" height="16px"
                             aria-hidden="true">
@@ -26,17 +26,17 @@
                         <small class="keyboard__key-line keyboard__key-line--small keyboard__key-line--br">cmd</small>
                     </span>
                 </button>
-                <button class="keyboard__key navButton"  data-target="box2" type="button">
+                <button class="keyboard__key navButton"  data-target="nav2" type="button">
                     <span class="keyboard__key-lines">
                         <span class="keyboard__key-line">-</span>
                     </span>
                 </button>
-                <button class="keyboard__key navButton" data-target="box5" type="button">
+                <button class="keyboard__key navButton" data-target="nav3" type="button">
                     <span class="keyboard__key-lines">
                         <span class="keyboard__key-line">-</span>
                     </span>
                 </button>
-                <button class="keyboard__key navButton" data-target="box7" type="button" >
+                <button class="keyboard__key navButton" data-target="nav4" type="button" >
                     <span class="keyboard__key-lines buttons">
                         <span class="keyboard__key-line">-</span>
                     </span>
@@ -45,20 +45,43 @@
         </div>
 </main>
 <main>
-        <div class="boxes hidden" id="box2">
+        <div class="boxes hidden navB" id="nav1">
+            <div>
+                <img src="gallery/clipsmall/1.png" alt="profile picture of me, Hailey, smiling"></div>
+                <div>
+                    <ul>
+                    <li>
+                        <a id="resources" href="https://codepen.io/your-work/" target="_blank">Codepen
+
+                        </a>
+                        </li>
+                    <li>
+                        <a id="github" href="https://github.com/officiallyhailey" target="_blank">Github
+
+                        </a>
+                    </li>
+                    <li>
+                        <a id='linkedin' href="https://www.linkedin.com/in/hailey-g/" target="_blank">Linkedin
+                    </a>
+                </li>
+                </ul>
+            </div>
+            <div>
+                <img src="gallery/clipsmall/2.png"> </div> 
+            
+        </div>
+        <div class="boxes hidden navB" id="nav2">
+            <div>
+                
+            </div>
+        </div>
+        <div class="boxes hidden navB" id="nav3">
             <div>HR<br /> ADMIN<br />Front End Developer<br />Ally<br />Friend
             </div>
             <div><img src="gallery/E5CA79D3-E389-4370-95B1-9C516623114C_1_105_c.jpeg" alt="profile picture of me, Hailey, smiling"></div>
         </div>
-        <div class="boxes hidden" id="box5">
-            <div>HR<br /> ADMIN<br />Front End Developer<br />Ally<br />Friend
-            </div>
-            <div><img src="gallery/E5CA79D3-E389-4370-95B1-9C516623114C_1_105_c.jpeg" alt="profile picture of me, Hailey, smiling"></div>
-        </div>
-        <div class="boxes hidden" id="box7">
-            <div>HR<br /> ADMIN<br />Front End Developer<br />Ally<br />Friend
-            </div>
-            <div><img src="gallery/E5CA79D3-E389-4370-95B1-9C516623114C_1_105_c.jpeg" alt="profile picture of me, Hailey, smiling"></div>
+        <div class="boxes hidden navB" id="nav4">
+           
         </div>
 
         <!--MAIN CONTENT-->

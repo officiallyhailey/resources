@@ -11,11 +11,6 @@ body {
   flex-direction: column;
 }
 
-
-head {
-  margin: 0;
-}
-
 /*NAV BAR*/
 
 #page-links {
@@ -54,70 +49,6 @@ head {
   --text-color: #E7EAF1;
 }
 
-#split-head {
-  margin-bottom: 1px;
-  margin-top: 1px;
-  padding: 5px;
-  display: grid;
-  place-content: center;
-  background-color: var(--background-color);
-  font-family: "Montserrat", sans-serif;
-  font-size: clamp(1.5rem, 1rem + 5vw, 15rem);
-  font-weight: 500;
-  text-transform: uppercase;
-  color: var(--text-color);
-}
-
-.top-wrapper>div {
-  grid-area: 1/1/-1/-1;
-}
-
-.top {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 48%, 0% 58%);
-}
-
-.bottom {
-  clip-path: polygon(0% 63%, 100% 55%, 100% 100%, 0% 100%);
-  color: transparent;
-  background: -webkit-linear-gradient(177deg, black 53%, var(--text-color) 65%);
-  background: linear-gradient(177deg, #E7EAF1 53%, var(--text-color) 65%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  transform: translateX(-0.03em);
-}
-
-.top-wrapper {
-  animation: scroll 100s linear infinite;
-  background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80"),
-    #111111;
-  color: #E7EAF1;
-  height: 15vh;
-  min-width: 360px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  perspective: 1000px;
-  perspective-origin: 50% 50%;
-}
-
-/*NAV BOX*/
-
-.nav-wrapper {
-  animation: scroll 100s linear infinite;
-  background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80"),
-    #111111;
-  color: #E7EAF1;
-  height: 5vh;
-  min-width: 360px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  perspective: 1000px;
-  perspective-origin: 50% 50%;
-  margin-top: 5px;
-}
 
 @keyframes scroll {
   100% {
@@ -128,7 +59,6 @@ head {
 /*BOXES*/
 
 main {
-  margin-top: 8px;
   width: auto;
   height: auto;
   display: flex;
@@ -140,9 +70,9 @@ main {
 
 .boxes {
   height: auto;
-  width: auto;
+  width: 450px;
   background-color: #E7EAF1;
-  margin: 25px 0px;
+  margin: 25px;
   box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1);
   border-radius: 15px;
   border: 3px #E7EAF1 solid;
@@ -150,7 +80,6 @@ main {
   font-size: 20px;
   font-family: 'Montserrat', sans-serif;
   display: flex;
-  flex-direction: row;
   align-items: center;
 }
 
@@ -161,15 +90,15 @@ main {
 
 
 
-/*BUTTON BOX*/
+/*KEYBOARD BOX*/
 
-:root {
-	--hue: 0;
+.keyboard {
+  --hue: 0;
 	--sat: 0%;
 	--bg: hsl(var(--hue),var(--sat),90%);
 	--fg: hsl(var(--hue),var(--sat),10%);
 	--trans-dur: 0.3s;
-	font-size: calc(16px + (24 - 16) * (100vw - 320px) / (2560 - 320));
+	font-size: 14px;
 }
 
 button {
@@ -188,6 +117,7 @@ button {
 .keyboard,
 .keyboard__key-lines {
   display: flex;
+
 }
 
 .keyboard {
@@ -198,11 +128,12 @@ button {
     -0.5em -0.5em 0.75em hsla(0, 0%, 0%, 0.6),
     0 0 0 1px hsl(var(--hue), var(--sat), 67%) inset;
   align-items: center;
-  margin: auto;
-  padding: 0.375em;
   position: relative;
-  width: 18.5em;
+ width: 450px;
   height: 6.5em;
+  justify-content: center;
+  margin-top: 60px;
+  margin-bottom: 25px;
 }
 
 .keyboard:before,
@@ -265,18 +196,6 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
-.keyboard__key--meta {
-  width: 5.5em;
-}
-
-.keyboard__key:active,
-.keyboard__key.active {
-  box-shadow:
-    0 0 0.2em hsla(0, 0%, 0%, 0.2),
-    0 0 0 0.1em hsla(0, 0%, 0%, 0.4),
-    0 -0.05em 0 hsla(0, 0%, 0%, 0.6) inset,
-    -0.05em -0.15em 0.05em hsla(0, 0%, 100%, 0.8) inset;
-}
 
 .keyboard__key-line {
   font-size: 2em;
@@ -305,27 +224,9 @@ button {
   transition: transform 0.15s;
 }
 
-.keyboard__key:active .keyboard__key-lines,
-.keyboard__key.active .keyboard__key-lines {
-  transform: translateY(-1px);
-}
 
-.keyboard__key:before {
-  box-shadow: 0 0 0 0.5em hsla(223, 90%, 50%, 0);
-  border-radius: 0.5em;
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transition: box-shadow var(--trans-dur);
-}
 
-.keyboard__key:focus-visible:before {
-  box-shadow: 0 0 0 0.5em hsla(223, 90%, 50%, 0.5);
-}
+
 
 /* Dark theme */
 @media (prefers-color-scheme: dark) {

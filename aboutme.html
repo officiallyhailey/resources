@@ -9,155 +9,202 @@
         <title>HG Portfolio</title>
         <link rel="stylesheet" href="styles/aboutme.css" />
         <link rel="stylesheet" href="styles/aboutmemedia.css">
-        <scripts src="js/aboutme.js"></scripts>
+        <script src="js/aboutme.js"></script>
+
     </head>
 
-    <section id="head-box">
-        
-        <div id="top-head-wrap-text">
-            <h1 class="top-wrapper" id="split-head">
-                <div class="top">About Me</div>
-                <div class="bottom" aria-hidden="true">About Me</div>
-            </h1>
-            <article class="nav-wrapper">
-                <div class="a-title" id="page-links">
-                    <a id="minimal" href="resources.html">Resources</a>
-                    <a id="portfolio" href="index.html"> Portfolio</a>
-                    <a id="grid" href="grid.html">Grid View</a>
-                </div>
-            </article>
-        </section>
+  
 
 
-                <main>
-                    <div class="boxes" id="box1">
-                        <div class="keyboard">
-                            <button class="keyboard__key keyboard__key--meta" type="button" data-key="cmd">
-                                <span class="keyboard__key-lines">
-                                    <svg class="keyboard__cmd keyboard__key-line--tr" viewBox="0 0 16 16" width="16px" height="16px" aria-hidden="true">
-                                        <path fill="none" stroke="currentcolor" stroke-width="2" d="M5.7,10.3v2.3c0,1.3-1,2.3-2.3,2.3S1,14,1,12.7s1-2.3,2.3-2.3H5.7z M5.7,10.3h4.7 M5.7,10.3V5.7M10.3,10.3v2.3c0,1.3,1,2.3,2.3,2.3s2.3-1,2.3-2.3s-1-2.3-2.3-2.3H10.3z M10.3,10.3V5.7 M10.3,5.7H5.7 M10.3,5.7V3.3c0-1.3,1-2.3,2.3-2.3S15,2,15,3.3s-1,2.3-2.3,2.3H10.3z M5.7,5.7V3.3C5.7,2,4.6,1,3.3,1S1,2,1,3.3s1,2.3,2.3,2.3H5.7z" />
-                                    </svg>
-                                    <small class="keyboard__key-line keyboard__key-line--small keyboard__key-line--br">Hailey Grace</small>
-                                </span>
-                            </button>
-                            <button class="keyboard__key" type="button" data-key="c">
-                                <span class="keyboard__key-lines">
-                                    <span class="keyboard__key-line">H</span>
-                                </span>
-                            </button>
-                            <button class="keyboard__key" type="button" data-key="v">
-                                <span class="keyboard__key-lines">
-                                    <span class="keyboard__key-line">G</span>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
+    <main>
+        <div class="nav" >
+            <div class="keyboard">
+                <button class="keyboard__key keyboard__key--meta" type="button" id="clear" onclick="hideBox2()" >
+                    <span class="keyboard__key-lines">
+                        <svg class="keyboard__cmd keyboard__key-line--tr" viewBox="0 0 16 16" width="16px" height="16px"
+                            aria-hidden="true">
+                            <path fill="none" stroke="currentcolor" stroke-width="2"
+                                d="M5.7,10.3v2.3c0,1.3-1,2.3-2.3,2.3S1,14,1,12.7s1-2.3,2.3-2.3H5.7z M5.7,10.3h4.7 M5.7,10.3V5.7M10.3,10.3v2.3c0,1.3,1,2.3,2.3,2.3s2.3-1,2.3-2.3s-1-2.3-2.3-2.3H10.3z M10.3,10.3V5.7 M10.3,5.7H5.7 M10.3,5.7V3.3c0-1.3,1-2.3,2.3-2.3S15,2,15,3.3s-1,2.3-2.3,2.3H10.3z M5.7,5.7V3.3C5.7,2,4.6,1,3.3,1S1,2,1,3.3s1,2.3,2.3,2.3H5.7z" />
+                        </svg>
+                        <small class="keyboard__key-line keyboard__key-line--small keyboard__key-line--br">hide</small>
+                    </span>
+                </button>
+                <button onclick="showBox2()"  class="keyboard__key" id="button1" type="button">
+                    <span class="keyboard__key-lines">
+                        <span class="keyboard__key-line">-</span>
+                    </span>
+                </button>
+                <button class="keyboard__key" type="button">
+                    <span class="keyboard__key-lines">
+                        <span class="keyboard__key-line">-</span>
+                    </span>
+                </button>
+                <button class="keyboard__key" type="button">
+                    <span class="keyboard__key-lines">
+                        <span class="keyboard__key-line">-</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+</main>
+<main>
+        <div class="boxes hidden" id="box2">
+            <div>HR<br /> ADMIN<br />Front End Developer<br />Ally<br />Friend
+            </div>
+            <div><img src="gallery/E5CA79D3-E389-4370-95B1-9C516623114C_1_105_c.jpeg" alt="profile picture of me, Hailey, smiling"></div>
+        </div>
 
-                    <div class="boxes" id="box2"><div><span id="me">ABOUT ME</span></div><div>HR<br /> ADMIN<br />Front End Developer<br />Ally<br />Friend</div></div>
-                   
-                    <div id="boxR">
-                    <span class="resources">Resources</span> 
-                </div>
-                    <div class="boxes" id="box3">   
-                        <ul>
-                        <li>
-                                <a href="https://dev.to/" target="_blank">
+        <div id="boxR">
+            <span class="title">Resources</span>
+        </div>
 
-                                        <span class="item">Dev Community</span><br /><br />
-                                </a>
-                                <span class="description">Dev Community offers a space for programmers and developers to publish articles, share coding projects, and engage in discussions on a wide range of technical topics. They also have a podcast collection! </span>
-                        </li>
-                        <li>
-                                <a href="https://www.shecodes.io/athena" target="_blank">
+        <div class="boxes list" id="box3">
+            <ul>
+                <li>
+                    <a href="https://dev.to/" target="_blank">
 
-                                        <span class="item">SheCodes</span><br /><br />
-                                </a>
-                                <span class="description">This site offers Athena, an AI assistant that can answer questions, explain codes, test your skills and has a community form (for humans). If you login - it keeps a record of your questions to refer back to! </span> 
-                        </li>
-                        <li>
-                                <a href="https://foolishdeveloper.com/" target="_blank">
+                        <span class="item">Dev Community</span><br /><br />
+                    </a>
+                    <span class="description">Dev Community offers a space for programmers and developers to publish
+                        articles, share coding projects, and engage in discussions on a wide range of technical topics.
+                        They also have a podcast collection! </span>
+                </li>
+                <li>
+                    <a href="https://www.shecodes.io/athena" target="_blank">
 
-                                        <span class="item">Foolish Developer</span><br /><br />
-                                </a>
-                                <span class="description">This site has more than 1500 quality front end and back end tutorials! Get guides, projects, articles, and more!  </span>
-                        </li>
-                        <li>
-                                <a href="https://www.tutorialspoint.com/index.htm" target="_blank">
+                        <span class="item">SheCodes</span><br /><br />
+                    </a>
+                    <span class="description">This site offers Athena, an AI assistant that can answer questions,
+                        explain codes, test your skills and has a community form (for humans). If you login - it keeps a
+                        record of your questions to refer back to! </span>
+                </li>
+                <li>
+                    <a href="https://foolishdeveloper.com/" target="_blank">
 
-                                        <span class="item">Tutorials Point</span><br /><br />
-                                </a>
-                                <span class="description">"Tutorials Point is an online platform that provides a vast collection of tutorials and resources for learning programming languages, software development, and various IT-related subjects. It offers comprehensive guides and tutorials, making it a valuable resource for individuals looking to acquire or enhance their technical skills."</span>
-                        </li>
-                        <li>
-                                <a href="https://zzzcode.ai/code-explain" target="_blank">
+                        <span class="item">Foolish Developer</span><br /><br />
+                    </a>
+                    <span class="description">This site has more than 1500 quality front end and back end tutorials! Get
+                        guides, projects, articles, and more! </span>
+                </li>
+                <li>
+                    <a href="https://www.tutorialspoint.com/index.htm" target="_blank">
 
-                                        <span class="item">CODE AI</span><br /><br />
-                                </a>
-                                <span class="description">This site breaks down the code entered, line by line, in multiple explanation styles. Very useful to learn coding vocabulary to prepare for future interviews and the field in general. It also converts, detects bugs, documents, reviews code and more! </span>
-                        </li>
-                        <li>
-                                <a href="https://codepen.io/pen/n" target="_blank">
+                        <span class="item">Tutorials Point</span><br /><br />
+                    </a>
+                    <span class="description">"Tutorials Point is an online platform that provides a vast collection of
+                        tutorials and resources for learning programming languages, software development, and various
+                        IT-related subjects. It offers comprehensive guides and tutorials, making it a valuable resource
+                        for individuals looking to acquire or enhance their technical skills."</span>
+                </li>
+                <li>
+                    <a href="https://zzzcode.ai/code-explain" target="_blank">
 
-                                        <span class="item">CODEPEN</span><br /><br />
-                            </a>
-                            <span class="description">"👋 CodePen is a social development environment. At its heart, it allows you to write code in the browser, and see the results of it as you build." You can create your own, browse a library from other users and be inspired in the best ways. </span>
-                        </li>
-                        <li>
-                                <a href="https://gist.github.com/" target="_blank">
+                        <span class="item">CODE AI</span><br /><br />
+                    </a>
+                    <span class="description">This site breaks down the code entered, line by line, in multiple
+                        explanation styles. Very useful to learn coding vocabulary to prepare for future interviews and
+                        the field in general. It also converts, detects bugs, documents, reviews code and more! </span>
+                </li>
+                <li>
+                    <a href="https://codepen.io/pen/n" target="_blank">
 
-                                        <span class="item">GitHub Gist</span><br /><br />
-                                </a>
-                                <span class="description">"Gists let you share code snippets, entire files, or even applications. You can also use gists to save and share console output when running, debugging, or testing your code. Each gist is a repository that can be cloned or forked by other people."</span>
-                        </li>
-                        <li>
-                                <a href="https://kittygiraudel.github.io/selectors-explained/">
+                        <span class="item">CODEPEN</span><br /><br />
+                    </a>
+                    <span class="description">"👋 CodePen is a social development environment. At its heart, it allows
+                        you to write code in the browser, and see the results of it as you build." You can create your
+                        own, browse a library from other users and be inspired in the best ways. </span>
+                </li>
+                <li>
+                    <a href="https://gist.github.com/" target="_blank">
 
-                                        <span class="item">Selector Explained</span><br /><br />
-                                </a>
-                                <span class="description">"The website provides a comprehensive guide and visual explanations for understanding and utilizing CSS selectors for web development."</span>
-                        </li>
-                        <li>
-                                <a href="https://blog.logrocket.com/" target="_blank">
+                        <span class="item">GitHub Gist</span><br /><br />
+                    </a>
+                    <span class="description">"Gists let you share code snippets, entire files, or even applications.
+                        You can also use gists to save and share console output when running, debugging, or testing your
+                        code. Each gist is a repository that can be cloned or forked by other people."</span>
+                </li>
+                <li>
+                    <a href="https://kittygiraudel.github.io/selectors-explained/">
 
-                                        <span class="item">LogRocket Blog</span><br /><br />
-                                </a>
-                                <span class="description">"The LogRocket Blog is a web development-focused publication offering in-depth articles and tutorials on various programming topics. It covers practical insights, debugging techniques, and best practices, catering to developers seeking to enhance their understanding and proficiency in creating high-quality web applications."</span>
-                        </li>
+                        <span class="item">Selector Explained</span><br /><br />
+                    </a>
+                    <span class="description">"The website provides a comprehensive guide and visual explanations for
+                        understanding and utilizing CSS selectors for web development."</span>
+                </li>
+                <li>
+                    <a href="https://blog.logrocket.com/" target="_blank">
 
-                        <li>
-                                <a href="https://developer.mozilla.org/en-US/" target="_blank">
+                        <span class="item">LogRocket Blog</span><br /><br />
+                    </a>
+                    <span class="description">"The LogRocket Blog is a web development-focused publication offering
+                        in-depth articles and tutorials on various programming topics. It covers practical insights,
+                        debugging techniques, and best practices, catering to developers seeking to enhance their
+                        understanding and proficiency in creating high-quality web applications."</span>
+                </li>
 
-                                        <span class="item">MDN</span><br /><br />
-                                </a>
-                                <span class="description">"MDN Web Docs (Mozilla Developer Network) is a comprehensive online resource providing documentation and guides for web developers. It offers detailed information on web technologies, standards, and coding practices, making it a go-to reference for building and maintaining modern websites and applications."</span>
-                        </li>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/" target="_blank">
 
-                        <li>
-                                <a href="https://stackoverflow.com/" target="_blank">
+                        <span class="item">MDN</span><br /><br />
+                    </a>
+                    <span class="description">"MDN Web Docs (Mozilla Developer Network) is a comprehensive online
+                        resource providing documentation and guides for web developers. It offers detailed information
+                        on web technologies, standards, and coding practices, making it a go-to reference for building
+                        and maintaining modern websites and applications."</span>
+                </li>
 
-                                        <span class="item">Stack Overflow</span>
-                                     </a><br /><br />
-                                     <span class="description">"Stack Overflow is an online community-driven platform where programmers and developers can ask and answer technical questions related to programming and software development. It serves as a valuable resource for troubleshooting, sharing knowledge, and seeking solutions to various coding and development challenges."</span>
-                        </li>
-                        <li>
-                                <a href="https://edabit.com/" target="_blank">
+                <li>
+                    <a href="https://stackoverflow.com/" target="_blank">
 
-                                        <span class="item">Edabit</span><br /><br />
-                                </a>
-                                <span class="description"> This site offers practice questions
-                                    challenges for various coding languages. It has
-                                    resources attached to each questions, solutions to
-                                    review possible solutions, comments from other coders
-                                    and ... its fun!</span>
-                        </li>
+                        <span class="item">Stack Overflow</span>
+                    </a><br /><br />
+                    <span class="description">"Stack Overflow is an online community-driven platform where programmers
+                        and developers can ask and answer technical questions related to programming and software
+                        development. It serves as a valuable resource for troubleshooting, sharing knowledge, and
+                        seeking solutions to various coding and development challenges."</span>
+                </li>
+                <li>
+                    <a href="https://edabit.com/" target="_blank">
+
+                        <span class="item">Edabit</span><br /><br />
+                    </a>
+                    <span class="description"> This site offers practice questions
+                        challenges for various coding languages. It has
+                        resources attached to each questions, solutions to
+                        review possible solutions, comments from other coders
+                        and ... its fun!</span>
+                </li>
+            </ul>
+        </div>
+       
+        <div id="boxT">
+        <span class="title">Online<br /> Terminals</span>
+        </div>
+
+        <div class="boxes" id="box4">
+            <ul>
+                <li>
+                    <a href="https://dev.to/" target="_blank">
+
+                        <span class="item">Dev Community</span><br /><br />
+                    </a>
+                    <span class="description">Dev Community offers a space for programmers and developers to publish
+                        articles, share coding projects, and engage in discussions on a wide range of technical topics.
+                        They also have a podcast collection! </span>
+                </li>
                 </ul>
-        </div></div>
-                    <div class="boxes"></div>
-                    <div class="boxes"></div>
-                    <div class="boxes"></div>
-                </main>
-          
- 
+        </div>
+
+        <div class="boxes">
+
+        </div>
+
+        <div class="boxes">
+
+        </div>
+    </main>
+
+
 
 
 </body>

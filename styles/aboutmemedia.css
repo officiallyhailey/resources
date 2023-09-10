@@ -1,45 +1,44 @@
+* {
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
 
-    * {  
-        list-style: none;
-        text-decoration: none;
-        font-family: 'Montserrat', sans-serif;
-    }
-  
-    .navB { 
-        box-shadow: 0px -10px 60px rgb(53, 102, 248);
-        margin-top: 0;
-        padding-left: 5px;
-        text-transform: uppercase;
-        line-height: 35px; 
-    }
+.navB {
+    box-shadow: 0px -10px 60px rgb(53, 102, 248);
+    margin-top: 0;
+    padding-left: 5px;
+    text-transform: uppercase;
+    line-height: 35px;
+}
 
-    .navB img {
-        height: 200px;
-        width: 200px;
-        border-radius: 100px;
-    }
-    
-    #nav1 img{
-        height: 150px;
-        width: 150px;
-        border-radius: 150px;
-    }
+.navB img {
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+}
 
-    #nav1 {
-        height: 250px;
-        padding-top: 10px;
-        margin-top: 0px;
-        padding-top: 0;
-        text-align: center;
-    }
+#nav1 img {
+    height: 150px;
+    width: 150px;
+    border-radius: 150px;
+}
 
-  #nav3 {
+#nav1 {
+    height: 250px;
+    padding-top: 10px;
+    margin-top: 0px;
+    padding-top: 0;
+    text-align: center;
+}
+
+#nav3 {
     padding: 0px 10px;
     text-shadow: 0 0 2px black, 0 0 5px black;
     color: white;
     font-weight: bolder;
     font-size: 18px;
-  }
+}
 
 
 #nav3 img {
@@ -50,39 +49,40 @@
     box-shadow: 0 0 5px blue, 0 0 10px black;
 }
 
-    .hidden {
-        display: none;
-    }
+.hidden {
+    display: none;
+}
 
-    .list {
-        height: 600px;  
-        line-height: 30px; 
-        flex-wrap: wrap;
-    }
+.list {
+    height: 600px;
+    line-height: 30px;
+    flex-wrap: wrap;
+}
 
-    #nav2 {
-        flex-direction: row;
-    }
+#nav2 {
+    flex-direction: row;
+}
 
 
-    #nav1 ul li a {
-        color: black;
-        box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1);
-        border-radius: 15px;
-        padding: 10px;
-        font-size: 16px;
-    }
 
-    ul{
-        display: flex;
-        flex-direction: column;
-        padding: 0;
-        margin: 5px 0px;
-    }
+#nav1 ul li a {
+    color: black;
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1);
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 16px;
+}
 
-    ul li {
-        margin: 15px 15px;
-    }
+ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 5px 0px;
+}
+
+ul li {
+    margin: 15px 15px;
+}
 
 #boxR .title {
     margin-top: 25px;
@@ -114,6 +114,14 @@
     padding: 5px;
 }
 
+.content {
+    border: none;
+    background: none;
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 @keyframes shine {
     from {
         background-position: center 0;
@@ -125,42 +133,43 @@
 }
 
 
-    .item {
-        color: black;
-        box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1);
-        border-radius: 15px;
-        padding: 10px;
-        font-size: 16px;
-    }
+.item {
+    color: black;
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1);
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 16px;
+}
 
-    .description {
-        font-size: 16px;
-    }
+.description {
+    font-size: 16px;
+}
 
 
-    
 
- @media (max-width: 600px)
- {
+
+@media (max-width: 600px) {
 
     .keyboard {
         width: 300px;
         margin-bottom: 5px;
-     
+
     }
-    
+
     .boxes {
         width: 300px;
-       
+
     }
 
     .title {
-        font-size: 45px;
+        font-size: 30px;
         width: 300px;
+        display: flex;
+        flex-wrap: wrap;
     }
 
-   #boxR  .title {
+    #boxR .title {
         margin-top: 20px;
     }
 
- }
+}

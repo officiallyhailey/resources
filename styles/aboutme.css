@@ -69,7 +69,7 @@ main {
 }
 
 .boxes {
-  height: auto;
+  min-height: 400px auto;
   width: 450px;
   background-color: #E7EAF1;
   margin: 25px;

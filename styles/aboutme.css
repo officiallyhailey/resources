@@ -39,7 +39,7 @@ main {
 }
 
 .boxes {
-  width: 500px;
+  width: 600px;
   background-color: #E7EAF1;
   margin-bottom: 25px;
   box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1);
@@ -160,6 +160,7 @@ main {
   -moz-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
 }
 
 

@@ -70,6 +70,14 @@ ul li {
     margin: 20px 0px;
 }
 
+
+ul li a {
+    display: flex;
+flex-wrap: wrap;
+
+}
+
+
 #boxR .title {
     margin-top: 25px;
 }
@@ -126,8 +134,10 @@ ul li {
     color: black;
     box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1), 0 0 15px rgb(88, 169, 255);
     border-radius: 15px;
+    margin: 0px 20px;
     padding: 10px;
     font-size: 14px;
+    line-height: normal;
 }
 
 

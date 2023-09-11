@@ -32,9 +32,6 @@
     text-align: center;
 }
 
-#nav3 img {
-    margin-left: 20px;
-}
 
 .hidden {
     display: none;
@@ -163,13 +160,6 @@ ul li {
 
     #boxR .title {
         margin-top: 20px;
-    }
-
- #nav3 {
-        height: 250px;
-        width: 300px;
-    
-
     }
 
 }

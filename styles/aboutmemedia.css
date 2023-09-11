@@ -55,16 +55,15 @@
 
 
 .list {
-    height: 600px;
+    max-height: 300px;
     line-height: 30px;
     flex-wrap: wrap;
-    
+
 }
 
-#nav2 {
+#nav1 {
     flex-direction: row;
 }
-
 
 
 #nav1 ul li a {
@@ -79,11 +78,11 @@ ul {
     display: flex;
     flex-direction: column;
     padding: 0;
-    margin: 5px 0px;
+    margin: 10px;
 }
 
 ul li {
-    margin: 15px 15px;
+    margin: 10px;
 }
 
 #boxR .title {
@@ -94,10 +93,10 @@ ul li {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 500px;
+    width: 600px;
     margin-bottom: 20px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 60px;
+    font-size: 30px;
     text-transform: uppercase;
     font-weight: bolder;
     position: relative;
@@ -120,10 +119,12 @@ ul li {
 .mainContent {
     border: none;
     background: none;
-    margin-top: 0px;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
+    margin-top: 0px;
 }
+
 
 @keyframes shine {
     from {
@@ -141,12 +142,10 @@ ul li {
     box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1);
     border-radius: 15px;
     padding: 10px;
-    font-size: 16px;
+    font-size: 14px;
 }
 
-.description {
-    font-size: 16px;
-}
+
 
 
 
@@ -162,11 +161,16 @@ ul li {
 
     .boxes {
         width: 300px;
+        max-height: 350px;
+        flex-wrap: wrap;
+    }
 
+    .navB.boxes {
+        flex-wrap: nowrap;
     }
 
     .title {
-        font-size: 30px;
+        font-size: 25px;
         width: 300px;
     }
 

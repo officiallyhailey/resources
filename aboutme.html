@@ -13,10 +13,10 @@
 
     </head>
 
-    <main>
+    <main class="navigation">
         <div class="nav">
             <div class="keyboard">
-                <button class="keyboard__key navButton" data-target="nav1" type="button">
+                <button class="keyboard__key buttons" data-target="nav1" type="button">
                     <span class="keyboard__key-lines">
                         <svg class="keyboard__cmd keyboard__key-line--tr" viewBox="0 0 16 16" width="16px" height="16px"
                             aria-hidden="true">
@@ -26,17 +26,17 @@
                         <small class="keyboard__key-line keyboard__key-line--small keyboard__key-line--br">cmd</small>
                     </span>
                 </button>
-                <button class="keyboard__key navButton" data-target="nav2" type="button">
+                <button class="keyboard__key buttons" data-target="nav2" type="button">
                     <span class="keyboard__key-lines">
                         <span class="keyboard__key-line">-</span>
                     </span>
                 </button>
-                <button class="keyboard__key navButton" data-target="nav3" type="button">
+                <button class="keyboard__key buttons" data-target="nav3" type="button">
                     <span class="keyboard__key-lines">
                         <span class="keyboard__key-line">-</span>
                     </span>
                 </button>
-                <button class="keyboard__key navButton" data-target="nav4" type="button">
+                <button class="keyboard__key buttons" data-target="nav4" type="button">
                     <span class="keyboard__key-lines buttons">
                         <span class="keyboard__key-line">-</span>
                     </span>
@@ -44,6 +44,7 @@
             </div>
         </div>
     </main>
+    
     <main>
         <div class="boxes hidden navB" id="nav1">
             <div>
@@ -89,10 +90,9 @@
 
         <!--MAIN CONTENT-->
 
-
-
-
-        <button class="content" id="boxR" data-target="box1">
+</main>
+<main class="content">
+        <button class="mainContent" id="boxR" data-target="box1">
             <span class="title">ai and humans unite</span>
         </button>
 
@@ -162,7 +162,7 @@
 
 
 
-        <button class="content"  data-target="box2">
+        <button class="mainContent" data-target="box2">
             <span class="title">Resource Guides</span>
         </button>
 
@@ -172,12 +172,69 @@
                 <li>
                     <a href="https://developer.mozilla.org/en-US/" target="_blank">
 
-                        <span class="item">MDN</span><br /><br />
+                        <span class="item">MDN Mozilla</span><br /><br />
                     </a>
-                    <span class="description">"MDN Web Docs (Mozilla Developer Network) is a comprehensive online
-                        resource providing documentation and guides for web developers. It offers detailed information
-                        on web technologies, standards, and coding practices, making it a go-to reference for building
-                        and maintaining modern websites and applications."</span>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://www.w3schools.com/" target="_blank">
+
+                        <span class="item">W3Schools</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+
+
+        <button class="mainContent" data-target="box3">
+            <span class="title">Practice</span>
+        </button>
+
+        <div class="boxes hidden" id="box3">
+
+            <ul>
+            
+                <li>
+                    <a href="https://edabit.com/" target="_blank">
+                
+                        <span class="item">Edabit Practice</span><br /><br />
+                    </a>
+                    <span class="description">
+                    </span>
+                </li>
+                <li>
+                    <a href="https://www.hackerearth.com/practice/" target="_blank">
+
+                        <span class="item">Hacker Earth Practice</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+          
+                <li>
+                    <a href="https://practice.geeksforgeeks.org/explore?page=1&sortBy=submissions" target="_blank">
+
+                        <span class="item">GeeksforGeeks Problem Solving</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://practice.geeksforgeeks.org/" target="_blank">
+
+                        <span class="item">GeekforGeeks Practice</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://www.w3docs.com/quiz/" target="_blank">
+
+                        <span class="item">W3Doc Quizzes</span><br /><br />
+                    </a>
+                    <span class="description"></span>
                 </li>
             </ul>
         </div>
@@ -185,121 +242,215 @@
 
 
 
-        <button class="content"  data-target="box3">
-            <span class="title">Practice</span>
-        </button>
-
-        <div class="boxes hidden" id="box3">
-
-            <ul>
-        <li>
-            <a href="" target="_blank">
-
-                <span class="item"></span><br /><br />
-            </a>
-            <span class="description"></span>
-        </li>
-        </ul>
-        </div>
-
-
-
-
-          <button class="content"  data-target="box4">
+        <button class="mainContent" data-target="box4">
             <span class="title">lil fun</span>
         </button>
 
         <div class="boxes hidden" id="box4">
-            
-            <ul>
-        <li>
-            <a href="" target="_blank">
 
-                <span class="item"></span><br /><br />
-            </a>
-            <span class="description"></span>
-        </li>
-        </ul>
+            <ul>
+                <li>
+                    <a href="https://css-diner.netlify.app/" target="_blank">
+
+                        <span class="item">CSS Diner</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="http://www.flexboxdefense.com/" target="_blank">
+
+                        <span class="item">Flexbox Defense</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://flexboxfroggy.com/" target="_blank">
+
+                        <span class="item">Flexbox-Froggy </span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://www.codingame.com/start/" target="_blank">
+
+                        <span class="CodingGame"></span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+            </ul>
         </div>
 
 
 
 
-        <button class="content"  data-target="box5">
-            <span class="title">Inspiration/Tutorials</span>
-        </button>
-
-        <div class="boxes hidden" id="box4">
-            
-            <ul>
-        <li>
-            <a href="" target="_blank">
-
-                <span class="item"></span><br /><br />
-            </a>
-            <span class="description"></span>
-        </li>
-        </ul>
-        </div>
-
-
-
-
-        <button class="content"  data-target="box6">
-            <span class="title">Tools/ Web Terminals</span>
+        <button class="mainContent" data-target="box5">
+            <span class="title">Inspiration / Tutorials</span>
         </button>
 
         <div class="boxes hidden" id="box5">
-            
-            <ul>
-        <li>
-            <a href="" target="_blank">
 
-                <span class="item"></span><br /><br />
-            </a>
-            <span class="description"></span>
-        </li>
-        </ul>
+            <ul>
+                <li>
+                    <a href="https://foolishdeveloper.com/" target="_blank">
+                
+                        <span class="item">Foolish Developer</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+            </ul>
         </div>
 
 
 
 
-        <button class="content"  data-target="box7">
-            <span class="title">Learning Library</span>
+        <button class="mainContent" data-target="box6">
+            <span class="title">Tools/ Web Terminals</span>
         </button>
 
         <div class="boxes hidden" id="box6">
-            
-            <ul>
-        <li>
-            <a href="" target="_blank">
 
-                <span class="item"></span><br /><br />
-            </a>
-            <span class="description"></span>
-        </li>
-        </ul>
+            <ul>
+                <li>
+                    <a href="https://codepen.io/pen/n" target="_blank">
+                
+                        <span class="item">Codepen Terminal/Content Ideas</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://www.tutorialspoint.com/articles/index.php" target="_blank">
+
+                        <span class="item">Tutorials Point Tools</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://www.tutorialspoint.com/codingground.htm " target="_blank">
+
+                        <span class="item">Tutorials Point Terminal</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/play" target="_blank">
+
+                        <span class="item">MDN Terminal</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://www.markdownguide.org/tools/" target="_blank">
+
+                        <span class="item">Markdown Tool Library</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://dillinger.io/" target="_blank">
+
+                        <span class="item">Markdown Terminal</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://www.w3docs.com/" target="_blank">
+
+                        <span class="item">W3Docs Full Library</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+
+
+
+            </ul>
         </div>
 
 
 
 
-        <button class="content"  data-target="box8">
-            <span class="title">Read-Up</span>
+        <button class="mainContent" data-target="box7">
+            <span class="title">Learning Library</span>
         </button>
 
         <div class="boxes hidden" id="box7">
-            
-            <ul>
-        <li>
-            <a href="" target="_blank">
 
-                <span class="item"></span><br /><br />
-            </a>
-            <span class="description"></span>
-        </li>
-        </ul>
+            <ul>
+                <li>
+                   <p> I've only added sites that are free to use though most of them offer subscription services or certifications but you can access a lot of the site for no charge.</p> 
+                    <a href="https://www.tutorialspoint.com/articles/index.php" target="_blank">
+
+                        <span class="item">Tutorials Point Courses</span><br /><br />
+                        
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://practice.geeksforgeeks.org/courses" target="_blank">
+
+                        <span class="item">GeeksforGeeks Courses</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://www.codechef.com" target="_blank">
+
+                        <span class="item">CodeChef Courses</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://teamtreehouse.com/library" target="_blank">
+
+                        <span class="item">Team TreeHouse Library</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://www.codecademy.com/catalog" target="_blank">
+
+                        <span class="item">Code Academy Library</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+               
+            </ul>
+           
+            </ul>
+        </div>
+
+
+
+
+        <button class="mainContent" data-target="box8">
+            <span class="title">Read Up</span>
+        </button>
+
+        <div class="boxes hidden" id="box8">
+
+            <ul>
+                <li>
+                    <a href="https://blog.logrocket.com/" target="_blank">
+                
+                        <span class="item">LogRocket Blog</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://www.tutorialspoint.com/articles/index.php" target="_blank">
+
+                        <span class="item">Tutorials Point Articles</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/blog/" target="_blank">
+
+                        <span class="item">MDN Blog</span><br /><br />
+                    </a>
+                    <span class="description"></span>
+                </li>
+               
+            </ul>
         </div>
     </main>
 

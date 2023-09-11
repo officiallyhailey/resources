@@ -53,10 +53,12 @@
     display: none;
 }
 
+
 .list {
     height: 600px;
     line-height: 30px;
     flex-wrap: wrap;
+    
 }
 
 #nav2 {
@@ -92,8 +94,8 @@ ul li {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 450px;
-    margin: 0;
+    width: 500px;
+    margin-bottom: 20px;
     font-family: 'Montserrat', sans-serif;
     font-size: 60px;
     text-transform: uppercase;
@@ -112,12 +114,13 @@ ul li {
     box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1);
     border-radius: 15px;
     padding: 5px;
+    cursor: pointer;
 }
 
-.content {
+.mainContent {
     border: none;
     background: none;
-    margin-bottom: 25px;
+    margin-top: 0px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -150,6 +153,7 @@ ul li {
 
 @media (max-width: 600px) {
 
+
     .keyboard {
         width: 300px;
         margin-bottom: 5px;
@@ -164,8 +168,6 @@ ul li {
     .title {
         font-size: 30px;
         width: 300px;
-        display: flex;
-        flex-wrap: wrap;
     }
 
     #boxR .title {

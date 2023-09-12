@@ -16,10 +16,8 @@ body {
 }
 
 .nav-wrapper {
-  display: flex;
-  justify-content: center;
   width: 100%;
-  margin: 10px 0px;
+  margin: 20px 0px;
 }
 
 .nav-link {
@@ -29,12 +27,10 @@ body {
   text-transform: uppercase;
   text-align: center;
   width: 100%;
-
 }
 
 .nav-wrapper .nav-link a {
   display: flex;
-  justify-content: center;
   padding: 5px 10px 5px 10px;
   color: rgb(234, 255, 8);
   letter-spacing: 6px;
@@ -42,7 +38,10 @@ body {
   border-radius: 50px;
   text-shadow: 0 0 2px white, 0 0 5px white;
   background-color: #000000d3;
-  margin-left: 20px;
+}
+
+.nav-wrapper a {
+  margin: 10px 10px 0px 0px;
 }
 
 .nav-wrapper .nav-link a:hover,

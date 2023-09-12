@@ -42,6 +42,7 @@ body {
   border-radius: 50px;
   text-shadow: 0 0 2px white, 0 0 5px white;
   background-color: #000000d3;
+  margin-left: 20px;
 }
 
 .nav-wrapper .nav-link a:hover,

@@ -35,9 +35,9 @@ function closeAllElements() {
 
 //
 
-let mainContent = document.querySelectorAll(".mainContent");
+let mainButton = document.querySelectorAll(".mainButtons");
 
-mainContent.forEach(function (button) {
+mainButton.forEach(function (button) {
     button.addEventListener("click", function () {
         let targetElementId = button.getAttribute("data-target");
         let targetElement = document.getElementById(targetElementId);
@@ -54,7 +54,7 @@ mainContent.forEach(function (button) {
 });
 
 function closeAllElements() {
-    let elements = document.querySelectorAll(".mainContent");
+    let elements = document.querySelectorAll(".mainButton");
     elements.forEach(function (element) {
         let targetId = element.getAttribute("data-target");
         let targetElement = document.getElementById(targetId);

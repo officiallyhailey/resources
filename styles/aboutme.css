@@ -34,7 +34,7 @@ main {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content:center;
+ 
   align-items: center;
 }
 
@@ -49,6 +49,10 @@ main {
   font-family: 'Montserrat', sans-serif;
   display: flex;
   align-items: center;
+}
+
+.content {
+  min-height: 1000px;
 }
 
 

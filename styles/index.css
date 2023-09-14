@@ -208,20 +208,7 @@ nav a:hover {
   margin: 20px;
 }
 
-.col2 {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-direction: row;
-  -ms-flex-direction: row;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: space-evenly;
-  align-items: center;
 
-}
 
 .col2 {
   cursor: pointer;

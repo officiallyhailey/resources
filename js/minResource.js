@@ -1,12 +1,10 @@
-
 // Nav bar opening and closing elements
-
 
 //main content
 
-let buttons = document.querySelectorAll(".buttons");
+let buttonClick = document.querySelectorAll(".buttons");
 
-buttons.forEach(function (button) {
+buttonClick.forEach(function (button) {
     button.addEventListener("click", function () {
         let targetElementId = button.getAttribute("data-target");
         let targetElement = document.getElementById(targetElementId);
@@ -32,12 +30,11 @@ function closeAllElements() {
 }
 
 
-
 //
 
-let mainButton = document.querySelectorAll(".mainButtons");
+let mainContent = document.querySelectorAll(".mainButtons");
 
-mainButton.forEach(function (button) {
+mainContent.forEach(function (button) {
     button.addEventListener("click", function () {
         let targetElementId = button.getAttribute("data-target");
         let targetElement = document.getElementById(targetElementId);

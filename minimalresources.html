@@ -7,16 +7,17 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Minimal Resource List</title>
+
         <link rel="stylesheet" href="styles/minimalmedia.css" />
-        <link rel="stylesheet" href="styles/minimalresources.css" />
-        <script src="js/minimalresources.js" defer></script>
+        <link rel="stylesheet" href="styles/minimalresources.css">
+        <script src="js/minResource.js" defer></script>
+
 
     </head>
-
     <main class="navigation">
         <div class="nav">
             <div class="keyboard">
-                <button class="keyboard__key buttons" data-target="nav1" >
+                <button class="keyboard__key buttons" data-target="nav1">
                     <span class="keyboard__key-lines">
                         <svg class="keyboard__cmd keyboard__key-line--tr" viewBox="0 0 16 16" width="16px" height="16px"
                             aria-hidden="true">
@@ -26,7 +27,7 @@
                         <small class="keyboard__key-line keyboard__key-line--small keyboard__key-line--br">cmd</small>
                     </span>
                 </button>
-                <button class="keyboard__key buttons" data-target="nav2" >
+                <button class="keyboard__key buttons">
                     <span class="keyboard__key-lines">
                         <span class="keyboard__key-line">-</span>
                     </span>
@@ -43,489 +44,491 @@
                 </button>
             </div>
         </div>
-    
-
-    <main id="navBox">
 
 
-        <div class="boxes hidden navB" id="nav1">
-            <div>
-                <img src="gallery/hg.png">
+        <main id="navBox">
+
+
+            <div class="boxes hidden navB" id="nav1">
+                <div>
+                    <img src="gallery/hg.png">
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <a id="resources" href="https://codepen.io/your-work/" target="_blank">Codepen
+
+                            </a>
+                        </li>
+                        <li>
+                            <a id="github" href="https://github.com/officiallyhailey" target="_blank">Github
+
+                            </a>
+                        </li>
+                        <li>
+                            <a id='linkedin' href="https://www.linkedin.com/in/hailey-g/" target="_blank">Linkedin
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
-            <div>
+
+
+
+        </main>
+
+        <!--MAIN CONTENT-->
+
+
+        <main class="content">
+
+
+
+            <button class="mainButtons" id="boxR" data-target="box1">
+                <span class="title">AI and humans unite</span>
+            </button>
+
+            <div class="boxes list hidden" id="box1">
                 <ul>
+                    <span class="description desIntro">Intro: <br />This is a great place to look up direct answers from
+                        community forms or AI
+                        bots. </span>
                     <li>
-                        <a id="resources" href="https://codepen.io/your-work/" target="_blank">Codepen
 
+                        <a href="https://dev.to/" target="_blank">
+
+                            <span class="item">Dev: Community form and more</span>
                         </a>
                     </li>
-                    <li>
-                        <a id="github" href="https://github.com/officiallyhailey" target="_blank">Github
 
+
+                    <li>
+                        <a href="https://www.shecodes.io/athena" target="_blank">
+
+                            <span class="item">⭐SheCodes: Athena AI Support⭐</span>
                         </a>
                     </li>
+                    <span class="description">☝️Trust me, make an account and it logs all your questions to review later
+                        like chatGPT</span>
+
+
                     <li>
-                        <a id='linkedin' href="https://www.linkedin.com/in/hailey-g/" target="_blank">Linkedin
+                        <a href="https://zzzcode.ai/code-explain" target="_blank">
+
+                            <span class="item">⭐CODE AI: Code explainer, line by line⭐</span>
+                        </a>
+                    </li>
+
+
+
+                    <li>
+                        <a href="https://gist.github.com/" target="_blank">
+
+                            <span class="item">GitHub Gist: Community for questions</span>
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="https://kittygiraudel.github.io/selectors-explained/">
+
+                            <span class="item">Selector Explained: CSS selectors explained</span>
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="https://stackoverflow.com/" target="_blank">
+
+                            <span class="item">⭐Stack Overflow: Community form⭐</span>
                         </a>
                     </li>
                 </ul>
             </div>
-   
-        </div>
 
-        
 
-    </main>
+            <button class="mainButtons" data-target="box3">
+                <span class="title">Practice</span>
+            </button>
 
-<!--MAIN CONTENT-->
+            <div class=" boxes list hidden" id="box3">
 
+                <ul>
 
-    <main class="content">
+                    <li>
+                        <a href="https://edabit.com/" target="_blank">
 
- 
+                            <span class="item">⭐Edabit: Practice⭐</span>
+                        </a>
+                    </li>
 
-        <button class="mainButtons" id="boxR" data-target="box1">
-            <span class="title">AI and humans unite</span>
-        </button>
 
-        <div class="boxes list hidden" id="box1">
-            <ul>
-                <span class="description desIntro">Intro: <br />This is a great place to look up direct answers from community forms or AI
-                    bots. </span>
-                <li>
+                    <li>
+                        <a href="https://www.hackerearth.com/practice/" target="_blank">
 
-                    <a href="https://dev.to/" target="_blank">
+                            <span class="item">Hacker Earth: Practice</span>
+                        </a>
+                    </li>
 
-                        <span class="item">Dev: Community form and more</span>
-                    </a>
-                </li>
-            
 
-                <li>
-                    <a href="https://www.shecodes.io/athena" target="_blank">
+                    <li>
+                        <a href="https://practice.geeksforgeeks.org/explore?page=1&sortBy=submissions" target="_blank">
 
-                        <span class="item">⭐SheCodes: Athena AI Support⭐</span>
-                    </a>
-                </li>
-                <span class="description">☝️Trust me, make an account and it logs all your questions to review later like chatGPT</span>
-    
+                            <span class="item">GeeksforGeeks: Problem Solving</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="https://zzzcode.ai/code-explain" target="_blank">
 
-                        <span class="item">⭐CODE AI: Code explainer, line by line⭐</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="https://www.w3docs.com/quiz/" target="_blank">
 
+                            <span class="item">⭐W3Doc: Quizzes⭐</span>
+                        </a>
+                    </li>
 
 
-                <li>
-                    <a href="https://gist.github.com/" target="_blank">
+                    <li>
+                        <a href="https://www.w3schools.com/exercises/index.php" target="_blank">
 
-                        <span class="item">GitHub Gist: Community for questions</span>
-                    </a>
-                </li>
-            
+                            <span class="item">W3Schools: Exercises</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="https://kittygiraudel.github.io/selectors-explained/">
 
-                        <span class="item">Selector Explained: CSS selectors explained</span>
-                    </a>
-                </li>
-                
+                    <li>
+                        <a href="https://codepen.io/challenges" target="_blank">
 
-                <li>
-                    <a href="https://stackoverflow.com/" target="_blank">
+                            <span class="item">Codepen: CSS Challenges</span>
+                        </a>
+                    </li>
 
-                        <span class="item">⭐Stack Overflow: Community form⭐</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+                </ul>
+            </div>
 
 
-        <button class="mainButtons" data-target="box3">
-            <span class="title">Practice</span>
-        </button>
+            <button class="mainButtons" data-target="box4">
+                <span class="title">lil fun</span>
+            </button>
 
-        <div class=" boxes list hidden" id="box3">
+            <div class=" boxes list hidden" id="box4">
 
-            <ul>
+                <ul>
+                    <li>
+                        <a href="https://css-diner.netlify.app/" target="_blank">
 
-                <li>
-                    <a href="https://edabit.com/" target="_blank">
+                            <span class="item">CSS Diner</span>
+                        </a>
+                    </li>
 
-                        <span class="item">⭐Edabit: Practice⭐</span>
-                    </a>
-                </li>
 
+                    <li>
+                        <a href="http://www.flexboxdefense.com/" target="_blank">
 
-                <li>
-                    <a href="https://www.hackerearth.com/practice/" target="_blank">
+                            <span class="item">Flexbox Defense</span>
+                        </a>
+                    </li>
 
-                        <span class="item">Hacker Earth: Practice</span>
-                    </a>
-                </li>
 
+                    <li>
+                        <a href="https://flexboxfroggy.com/" target="_blank">
 
-                <li>
-                    <a href="https://practice.geeksforgeeks.org/explore?page=1&sortBy=submissions" target="_blank">
+                            <span class="item">Flexbox-Froggy </span>
+                        </a>
+                    </li>
 
-                        <span class="item">GeeksforGeeks: Problem Solving</span>
-                    </a>
-                </li>
 
+                    <li>
+                        <a href="https://www.codingame.com/start/" target="_blank">
 
-                <li>
-                    <a href="https://www.w3docs.com/quiz/" target="_blank">
+                            <span class="item">⭐Coding Game - its like a video game! </span>
+                        </a>
+                    </li>
 
-                        <span class="item">⭐W3Doc: Quizzes⭐</span>
-                    </a>
-                </li>
 
+                    <li>
+                        <a href="https://www.w3schools.com/codegame/index.html" target="_blank">
 
-                <li>
-                    <a href="https://www.w3schools.com/exercises/index.php" target="_blank">
+                            <span class="W3Schools Coding Game"></span>
+                        </a>
+                    </li>
 
-                        <span class="item">W3Schools: Exercises</span>
-                    </a>
-                </li>
+                </ul>
+            </div>
 
 
-                <li>
-                    <a href="https://codepen.io/challenges" target="_blank">
+            <button class="mainButtons" data-target="box5">
+                <span class="title">Inspiration / Tutorials</span>
+            </button>
 
-                        <span class="item">Codepen: CSS Challenges</span>
-                    </a>
-                </li>
+            <div class=" boxes list hidden" id="box5">
 
-            </ul>
-        </div>
+                <ul>
+                    <li>
+                        <a href="https://foolishdeveloper.com/" target="_blank">
+                            <span class="item">⭐Foolish Developer: Front and Backend Tutorials</span>
+                        </a>
+                    </li>
 
 
-        <button class="mainButtons" data-target="box4">
-            <span class="title">lil fun</span>
-        </button>
+                    <li>
+                        <a href="https://spaces.w3schools.com/createspace" target="_blank">
 
-        <div class=" boxes list hidden" id="box4">
+                            <span class="item">W3Schools: Website Developer</span>
+                        </a>
+                    </li>
 
-            <ul>
-                <li>
-                    <a href="https://css-diner.netlify.app/" target="_blank">
 
-                        <span class="item">CSS Diner</span>  
-                    </a>
-                </li>
+                    <li>
+                        <a href="https://www.joshwcomeau.com/goodies/" target="_blank">
 
+                            <span class="item">⭐Josh Comeau: Front End Tools/Generators⭐</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="http://www.flexboxdefense.com/" target="_blank">
 
-                        <span class="item">Flexbox Defense</span>  
-                    </a>
-                </li>
+                    <li>
+                        <a href="https://css-tricks.com/" target="_blank">
 
+                            <span class="item">CSS Tricks: CSS Specific Articles</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="https://flexboxfroggy.com/" target="_blank">
 
-                        <span class="item">Flexbox-Froggy </span>  
-                    </a>
-                </li>
+                    <li>
+                        <a href="https://codepen.io/trending" target="_blank">
 
+                            <span class="item">⭐Codepen: Front End Trends⭐</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="https://www.codingame.com/start/" target="_blank">
 
-                        <span class="item">⭐Coding Game - its like a video game! </span>  
-                    </a>
-                </li>
+                    <li>
+                        <a href=" https://freefrontend.com/css-animated-backgrounds/" target="_blank">
 
+                            <span class="item">Frontend: CSS Background Animations</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="https://www.w3schools.com/codegame/index.html" target="_blank">
+                </ul>
+            </div>
 
-                        <span class="W3Schools Coding Game"></span>  
-                    </a>
-                </li>
 
-            </ul>
-        </div>
+            <button class="mainButtons" data-target="box6">
+                <span class="title">Tools/ Web Terminals</span>
+            </button>
 
+            <div class=" boxes list hidden" id="box6">
 
-        <button class="mainButtons" data-target="box5">
-            <span class="title">Inspiration / Tutorials</span>
-        </button>
+                <ul>
+                    <li>
+                        <a href="https://codepen.io/pen/" target="_blank">
 
-        <div class=" boxes list hidden" id="box5">
+                            <span class="item">⭐Codepen: Terminal⭐</span>
+                        </a>
+                    </li>
 
-            <ul>
-                <li>
-                    <a href="https://foolishdeveloper.com/" target="_blank">
-                        <span class="item">⭐Foolish Developer: Front and Backend Tutorials</span>
-                    </a>
-                </li>
-                
 
-                <li>
-                    <a href="https://spaces.w3schools.com/createspace" target="_blank">
+                    <li>
+                        <a href="https://www.tutorialspoint.com/articles/index.php" target="_blank">
 
-                        <span class="item">W3Schools: Website Developer</span>  
-                    </a>
-                </li>
+                            <span class="item">Tutorials Point: Tools</span>
+                        </a>
+                    </li>
 
 
-                <li>
-                    <a href="https://www.joshwcomeau.com/goodies/" target="_blank">
+                    <li>
+                        <a href="https://www.tutorialspoint.com/codingground.htm " target="_blank">
 
-                        <span class="item">⭐Josh Comeau: Front End Tools/Generators⭐</span>  
-                    </a>
-                </li>
+                            <span class="item">Tutorials Point: Terminal</span>
+                        </a>
+                    </li>
 
 
-                <li>
-                    <a href="https://css-tricks.com/" target="_blank">
+                    <li>
+                        <a href="https://www.joshwcomeau.com/operator-lookup/" target="_blank">
 
-                        <span class="item">CSS Tricks: CSS Specific Articles</span>  
-                    </a>
-                </li>
+                            <span class="item">Josh Comeau: Operator Search</span>
+                        </a>
+                    </li>
 
 
-                <li>
-                    <a href="https://codepen.io/trending" target="_blank">
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/play" target="_blank">
 
-                        <span class="item">⭐Codepen: Front End Trends⭐</span>  
-                    </a>
-                </li>
+                            <span class="item">MDN: Terminal</span>
+                        </a>
+                    </li>
 
 
-                <li>
-                    <a href=" https://freefrontend.com/css-animated-backgrounds/" target="_blank">
+                    <li>
+                        <a href="https://www.markdownguide.org/tools/" target="_blank">
 
-                        <span class="item">Frontend: CSS Background Animations</span>  
-                    </a>
-                </li>
+                            <span class="item">Markdown: Markdown Tool Library</span>
+                        </a>
+                    </li>
 
-            </ul>
-        </div>
 
+                    <li>
+                        <a href="https://dillinger.io/" target="_blank">
 
-        <button class="mainButtons" data-target="box6">
-            <span class="title">Tools/ Web Terminals</span>
-        </button>
+                            <span class="item">Markdown: Markdown Terminal</span>
+                        </a>
+                    </li>
 
-        <div class=" boxes list hidden" id="box6">
 
-            <ul>
-                <li>
-                    <a href="https://codepen.io/pen/" target="_blank">
+                    <li>
+                        <a href="https://www.w3docs.com/" target="_blank">
 
-                        <span class="item">⭐Codepen: Terminal⭐</span>  
-                    </a>
-                </li>
+                            <span class="item">⭐W3Docs: Full Site Library</span>
+                        </a>
+                    </li>
 
 
-                <li>
-                    <a href="https://www.tutorialspoint.com/articles/index.php" target="_blank">
+                    <li>
+                        <a href="https://www.w3schools.com/tryit/tryit.asp?filename=tryhtml_hello" target="_blank">
 
-                        <span class="item">Tutorials Point: Tools</span>  
-                    </a>
-                </li>
+                            <span class="item">W3School: Terminal</span>
+                        </a>
+                    </li>
 
 
-                <li>
-                    <a href="https://www.tutorialspoint.com/codingground.htm " target="_blank">
+                    <li>
+                        <a href="https://docs.replit.com/" target="_blank">
 
-                        <span class="item">Tutorials Point: Terminal</span>  
-                    </a>
-                </li>
+                            <span class="item">Replit: Tool Library</span>
+                        </a>
+                    </li>
 
+                </ul>
+            </div>
 
-                <li>
-                    <a href="https://www.joshwcomeau.com/operator-lookup/" target="_blank">
 
-                        <span class="item">Josh Comeau: Operator Search</span>  
-                    </a>
-                </li>
+            <button class="mainButtons" data-target="box7">
+                <span class="title">Learning Library</span>
+            </button>
 
+            <div class=" boxes list hidden" id="box7">
 
-                <li>
-                    <a href="https://developer.mozilla.org/en-US/play" target="_blank">
+                <ul>
+                    <li>
+                        <a href="https://www.tutorialspoint.com/articles/index.php" target="_blank">
+                            <span class="item">Tutorials Point: Courses</span>
+                        </a>
+                    </li>
 
-                        <span class="item">MDN: Terminal</span>  
-                    </a>
-                </li>
 
+                    <li>
+                        <a href="https://practice.geeksforgeeks.org/courses" target="_blank">
+                            <span class="item">⭐GeeksforGeeks: Courses</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="https://www.markdownguide.org/tools/" target="_blank">
 
-                        <span class="item">Markdown: Markdown Tool Library</span>  
-                    </a>
-                </li>
+                    <li>
+                        <a href="https://www.codechef.com" target="_blank">
+                            <span class="item">CodeChef: Courses</span>
+                        </a>
+                    </li>
 
 
-                <li>
-                    <a href="https://dillinger.io/" target="_blank">
+                    <li>
+                        <a href="https://teamtreehouse.com/library" target="_blank">
+                            <span class="item">Team TreeHouse: Course Library</span>
+                        </a>
+                    </li>
 
-                        <span class="item">Markdown: Markdown Terminal</span>  
-                    </a>
-                </li>
 
+                    <li>
+                        <a href="https://www.codecademy.com/catalog" target="_blank">
+                            <span class="item">Code Academy: Course Library</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="https://www.w3docs.com/" target="_blank">
 
-                        <span class="item">⭐W3Docs: Full Site Library</span>  
-                    </a>
-                </li>
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/" target="_blank">
+                            <span class="item">⭐MDN Mozilla: Guides</span>
+                        </a>
+                    </li>
 
 
-                <li>
-                    <a href="https://www.w3schools.com/tryit/tryit.asp?filename=tryhtml_hello" target="_blank">
+                    <li>
+                        <a href="https://www.w3schools.com/js/default.asp" target="_blank">
+                            <span class="item">W3Schools: Tutorials </span>
+                        </a>
+                    </li>
 
-                        <span class="item">W3School: Terminal</span>  
-                    </a>
-                </li>
 
+                    <li>
+                        <a href="https://code.org/curriculum/docs/k-5/glossary" target="_blank">
+                            <span class="item">⭐Code: Language Glossary⭐</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="https://docs.replit.com/" target="_blank">
 
-                        <span class="item">Replit: Tool Library</span>  
-                    </a>
-                </li>
+                    <li>
+                        <a href="https://www.quackit.com/" target="_blank">
+                            <span class="item">Quackit: HTML & CSS reference guide</span>
+                        </a>
+                    </li>
 
-            </ul>
-        </div>
 
+                    <li>
+                        <a href="https://refactoring.guru/refactoring" target="_blank">
+                            <span class="item">Refactoring: Clean up your code! </span>
+                        </a>
+                    </li>
 
-        <button class="mainButtons" data-target="box7">
-            <span class="title">Learning Library</span>
-        </button>
+                </ul>
 
-        <div class=" boxes list hidden" id="box7">
+                </ul>
+            </div>
 
-            <ul>
-                <li>
-                    <a href="https://www.tutorialspoint.com/articles/index.php" target="_blank">
-                        <span class="item">Tutorials Point: Courses</span>  
-                    </a>
-                </li>
 
+            <button class="mainButtons" data-target="box8">
+                <span class="title">Read Up</span>
+            </button>
 
-                <li>
-                    <a href="https://practice.geeksforgeeks.org/courses" target="_blank">
-                        <span class="item">⭐GeeksforGeeks: Courses</span>  
-                    </a>
-                </li>
+            <div class=" boxes list hidden" id="box8">
 
+                <ul>
+                    <li>
+                        <a href="https://blog.logrocket.com/" target="_blank">
+                            <span class="item">⭐LogRocket Blog</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="https://www.codechef.com" target="_blank">
-                        <span class="item">CodeChef: Courses</span>  
-                    </a>
-                </li>
 
+                    <li>
+                        <a href="https://www.tutorialspoint.com/articles/index.php" target="_blank">
+                            <span class="item">Tutorials Point Articles</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="https://teamtreehouse.com/library" target="_blank">
-                        <span class="item">Team TreeHouse: Course Library</span>  
-                    </a>
-                </li>
 
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/blog/" target="_blank">
+                            <span class="item">MDN Blog</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="https://www.codecademy.com/catalog" target="_blank">
-                        <span class="item">Code Academy: Course Library</span>  
-                    </a>
-                </li>
 
+                    <li>
+                        <a href="https://www.joshwcomeau.com/" target="_blank">
+                            <span class="item">Josh Comeau Posts</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="https://developer.mozilla.org/en-US/" target="_blank">
-                        <span class="item">⭐MDN Mozilla: Guides</span>  
-                    </a>
-                </li>
+                    <li>
+                        <a href="https://martinfowler.com/books/refactoring.html" target="_blank">
+                            <span class="item">Refactoring: book by Martin Fowler, with Kent Beck</span>
+                        </a>
+                    </li>
 
-
-                <li>
-                    <a href="https://www.w3schools.com/js/default.asp" target="_blank">
-                        <span class="item">W3Schools: Tutorials </span>  
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="https://code.org/curriculum/docs/k-5/glossary" target="_blank">
-                        <span class="item">⭐Code: Language Glossary⭐</span>
-                    </a>
-                </li>
-
-
-                <li>
-                <a href="https://www.quackit.com/" target="_blank">
-                    <span class="item">Quackit: HTML & CSS reference guide</span>
-                </a>
-            </li>
-
-
-            <li>
-                <a href="https://refactoring.guru/refactoring" target="_blank">
-                    <span class="item">Refactoring: Clean up your code! </span>
-                </a>
-            </li>
-
-            </ul>
-
-            </ul>
-        </div>
-
-
-        <button class="mainButtons" data-target="box8">
-            <span class="title">Read Up</span>
-        </button>
-
-        <div class=" boxes list hidden" id="box8">
-
-            <ul>
-                <li>
-                    <a href="https://blog.logrocket.com/" target="_blank">
-                        <span class="item">⭐LogRocket Blog</span>  
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="https://www.tutorialspoint.com/articles/index.php" target="_blank">
-                        <span class="item">Tutorials Point Articles</span>  
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="https://developer.mozilla.org/en-US/blog/" target="_blank">
-                        <span class="item">MDN Blog</span>  
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="https://www.joshwcomeau.com/" target="_blank">
-                        <span class="item">Josh Comeau Posts</span>  
-                    </a>
-                </li>
-
-                <li>
-                    <a href="https://martinfowler.com/books/refactoring.html" target="_blank">
-                        <span class="item">Refactoring: book by Martin Fowler, with Kent Beck</span>  
-                    </a>
-                </li>
-             
-            </ul>
-        </div>
-    </main>
+                </ul>
+            </div>
+        </main>
 
 
 </body>

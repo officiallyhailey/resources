@@ -95,7 +95,6 @@ main {
 .keyboard,
 .keyboard__key-lines {
   display: flex;
-
 }
 
 .keyboard {

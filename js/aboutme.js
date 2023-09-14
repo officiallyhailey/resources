@@ -4,9 +4,9 @@
 
 //main content
 
-let buttonClick = document.querySelectorAll(".buttons");
+let buttons = document.querySelectorAll(".buttons");
 
-buttonClick.forEach(function (button) {
+buttons.forEach(function (button) {
     button.addEventListener("click", function () {
         let targetElementId = button.getAttribute("data-target");
         let targetElement = document.getElementById(targetElementId);
@@ -54,7 +54,7 @@ mainButton.forEach(function (button) {
 });
 
 function closeAllElements() {
-    let elements = document.querySelectorAll(".mainButton");
+    let elements = document.querySelectorAll(".mainButtons");
     elements.forEach(function (element) {
         let targetId = element.getAttribute("data-target");
         let targetElement = document.getElementById(targetId);

@@ -159,6 +159,7 @@ ul .description{
     padding: 10px;
     margin: 5px 5px 20px 5px;
     font-size: 14px;
+    width: 250px;
 }
 
 .description.desIntro {

@@ -10,7 +10,7 @@
 }
 
 .list {
-    max-height: 300px;
+    max-height: 400px;
     line-height: 30px;
     flex-wrap: wrap;
 }

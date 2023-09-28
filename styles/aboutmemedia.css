@@ -5,12 +5,24 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+.hidden {
+    display: none;
+}
+
+.list {
+    max-height: 300px;
+    line-height: 30px;
+    flex-wrap: wrap;
+}
+
+
 .navB {
     box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1), 0 0 20px rgb(88, 169, 255);
     margin-top: 0;
     padding-left: 5px;
     text-transform: uppercase;
     line-height: 35px;
+    background-color: #e7eaf1bd
 }
 
 .navB img {
@@ -31,28 +43,12 @@
     margin-top: 0px;
     padding-top: 0;
     text-align: center;
-}
-
-
-.hidden {
-    display: none;
-}
-
-
-.list {
-    max-height: 300px;
-    line-height: 30px;
-    flex-wrap: wrap;
-
-}
-
-#nav1 {
     flex-direction: row;
     width: 300px;
 }
 
 
-#nav1 ul li a {
+#nav1  a {
     color: black;
     box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1);
     border-radius: 15px;
@@ -60,27 +56,45 @@
     font-size: 16px;
 }
 
+
 ul {
+  
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    padding: 0;
+    padding: 10px;
     margin: 0px 5px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
 }
 
-ul li {
-    margin: 10px 10px;
+ul li a .item {
+    color: rgba(0, 0, 0, 0.861);
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1), 0 0 10px rgb(88, 169, 255);
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 16px;
+    line-height: normal;
+ 
 }
-
 
 li a .item {
-    display: flex;
+display: flex;
 flex-wrap: wrap;
-width: 250px;
+width: 450px;
+justify-content: center;
+align-items: center;
 }
 
+.item:hover {
+    box-shadow: 0 0 5px white, 0 0 10px white, 0 0 12px rgb(255, 255, 133);
+}
 
-#boxR .title {
+#topTitle  {
     margin-top: 25px;
+    
 }
 
 .title {
@@ -107,16 +121,27 @@ width: 250px;
     box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1);
     border-radius: 15px;
     padding: 5px;
-    cursor: pointer;
+    cursor:crosshair;
 }
+
+
+
+
+.title:hover {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgba(25, 223, 213, 0.739);
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgb(255, 255, 255), 0 0 5px rgb(21, 232, 255);
+transform: scale(1.01);
+
+}
+
 
 .mainButtons {
     border: none;
-    background: none;
+    background-color: #e7eaf100;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-  
 }
 
 .goBack a{
@@ -139,33 +164,26 @@ font-size: small;
 }
 
 
-.item {
+.description { 
     color: black;
-    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1), 0 0 15px rgb(88, 169, 255);
-    border-radius: 15px;
-    padding: 10px;
-    font-size: 14px;
-    line-height: normal;
-}
-
-
-
-ul .description{ 
-    margin: 0px;
-    color: black;
-    box-shadow: 0 0 5px black, 0 0 10px black, 0 0 15px rgb(88, 169, 255);
+    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1), 0 0 20px rgb(52, 126, 255);
     line-height: 20px;
     border-radius: 15px;
     padding: 10px;
-    margin: 5px 5px 20px 5px;
-    font-size: 14px;
+    margin-bottom: 5px;
+    font-size: 16px;
     width: 250px;
+    font-family: monospace;
+    text-transform: uppercase;
+    cursor:default;
+    width: 450px;
 }
 
 .description.desIntro {
 line-height: 20px;
 margin-top: 10px;
 margin-bottom: 5px;
+
 }
 
 @media (max-width: 600px) {
@@ -181,6 +199,7 @@ margin-bottom: 5px;
         width: 300px;
         max-height: 350px;
         flex-wrap: wrap;
+        margin-top: 10px;
     }
 
     .navB.boxes {
@@ -190,6 +209,15 @@ margin-bottom: 5px;
     .title {
         font-size: 25px;
         width: 300px;
+    }
+
+
+    li a .item {
+        width: 250px;
+    }
+
+    .description {
+        width: 250px;
     }
 
     #boxR .title {

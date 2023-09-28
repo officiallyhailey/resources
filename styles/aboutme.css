@@ -87,6 +87,7 @@ main {
   font-family: 'Montserrat', sans-serif;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .content {

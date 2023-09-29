@@ -1,17 +1,20 @@
 * {
   box-sizing: border-box;
+  
+  
 }
 
 body {
   overflow-x: hidden;
   font-family: "Montserrat", sans-serif;
   margin: 0;
-  /* background-image: url("https://i.pinimg.com/564x/fc/3c/96/fc3c96d8d20eb155648cb06330a8006c.jpg");
-  background-size: 90%;
-  animation: shine 25s linear infinite; */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.603),
+  rgba(249, 249, 249, 0)), url("https://i.pinimg.com/736x/4f/3e/d6/4f3ed6ce172f1d4248805e9a25204d62.jpg");
+  background-size: cover;
+  background-repeat: repeat-y;
   display: flex;
   flex-direction: column;
-  background-color: #e7eaf1;;
+  cursor: crosshair;
 }
 
 :root {
@@ -33,13 +36,15 @@ main {
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
+
 }
 
 .boxes {
-  width: 600px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 70vw;
   border-radius: 25px;
-  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1); 
-  overflow: auto;
   font-size: 15px;
   font-family: "Montserrat", sans-serif;
   display: flex;
@@ -47,9 +52,15 @@ main {
   justify-content: center;
   margin-bottom: 30px;
   margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0);
+  border-left: 10px double whitesmoke;
+  border-right: 10px double whitesmoke;
+  transition: ease-out 1s;
+  
 }
 
 .content {
+ 
   min-height: 1000px;
 }
 

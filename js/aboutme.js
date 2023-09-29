@@ -1,12 +1,21 @@
 // Nav bar opening and closing elements
 
 //main content
+let handleScroll = [];
+handleScroll = document.querySelectorAll(".boxes");
+
+window.addEventListener('scroll', function() {
+    
+for(let i = 0; i < handleScroll.length; i++) {
+    handleScroll[i].classList.add("on-scrollbar")
+}
+});
 
 let buttonClick = document.querySelectorAll(".buttons");
 
 buttonClick.forEach(function (button) {
     button.addEventListener("click", function () {
-        let targetElementId = button.getAttribute("data-target");
+        let targetElementId= button.getAttribute("data-target");
         let targetElement = document.getElementById(targetElementId);
 
         if (targetElement.classList.contains("hidden")) {

@@ -1,35 +1,56 @@
-
 * {
     list-style: none;
     text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
+transition: ease 1s;
 }
 
 .hidden {
-    display: none;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    border: none;
+    transition: ease-in-out 1s;
 }
 
 .list {
-    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 500px;
     line-height: 30px;
     flex-wrap: wrap;
 }
 
 
-.navB {
-    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1), 0 0 20px rgb(88, 169, 255);
-    margin-top: 0;
-    padding-left: 5px;
-    text-transform: uppercase;
-    line-height: 35px;
-    background-color: #e7eaf1bd
+.on-scrollbar {
+    scrollbar-width: thin;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE 10+ */
 }
 
-.navB img {
-    height: 200px;
-    width: 200px;
-    border-radius: 100px;
+.on-scrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: none !important;
+    background-color: transparent !important;
 }
+
+.on-scrollbar::-webkit-scrollbar {
+    width: 6px !important;
+    background-color: transparent;
+}
+
+.on-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #ffffff4d;
+
+}
+
+button span svg path {
+    cursor: pointer;
+}
+
+
 
 #nav1 img {
     height: 150px;
@@ -38,27 +59,34 @@
 }
 
 #nav1 {
+    text-transform: uppercase;
     height: 250px;
     padding-top: 10px;
-    margin-top: 0px;
+    margin-top: 10px;
     padding-top: 0;
     text-align: center;
     flex-direction: row;
-    width: 300px;
+    width: 400px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.404);
+    transition: ease-in-out 1s;
 }
 
+#nav1 li:hover, #nav1 li a:hover {
+    transform: scale(1.05);
+    border-color: black;
+}
 
-#nav1  a {
+#nav1 a {
+    border-left: 10px double whitesmoke;
     color: black;
-    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.404);
     border-radius: 15px;
     padding: 10px;
-    font-size: 16px;
+    font-size: 20px;
 }
 
-
 ul {
-  
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -71,158 +99,273 @@ ul {
 }
 
 ul li a .item {
-    color: rgba(0, 0, 0, 0.861);
-    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1), 0 0 10px rgb(88, 169, 255);
-    border-radius: 15px;
+    color: rgba(0, 0, 0, 0.655);
     padding: 10px;
-    font-size: 16px;
+    font-size: 18px;
     line-height: normal;
- 
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.404), inset 0 0 20px rgb(255, 255, 255);
+    transition: ease-in-out 0.4s;
+    border-radius: 15px;
+
 }
 
 li a .item {
-display: flex;
-flex-wrap: wrap;
-width: 450px;
-justify-content: center;
-align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+}
+
+button,
+a,
+.item {
+    cursor: pointer;
 }
 
 .item:hover {
-    box-shadow: 0 0 5px white, 0 0 10px white, 0 0 12px rgb(255, 255, 133);
+    transform: scale(1.01);
+    border-left: 20px double ;
+    border-right: 20px double ;
+    transition: ease-in-out 0.4s;
+    box-shadow: 0 0 10px rgba(255, 252, 252, 0.752);
+    -webkit-text-stroke: 2px solid rgba(0, 0, 0, 0.589);
 }
 
-#topTitle  {
+
+.answers .title,
+#box1,
+#box1 ul li .item {
+    border-color: aquamarine;
+}
+
+.answers .title:hover,
+#box1 ul li .item:hover {
+    text-shadow: 0 0 1px aquamarine;
+    border-color: aquamarine;
+    color: aquamarine;
+}
+
+.practice .title,
+#box3,
+#box3 ul li .item {
+    border-color: chartreuse;
+}
+
+.practice .title:hover,
+#box3 ul li .item:hover {
+    text-shadow: 0 0 1px chartreuse;
+    border-color: chartreuse;
+    color: chartreuse;
+
+}
+
+
+.fun .title,
+#box4,
+#box4 ul li .item {
+    border-color: coral;
+}
+
+.fun .title:hover,
+#box4 ul li .item:hover {
+    text-shadow: 0 0 1px coral;
+    border-color: coral;
+    color: coral;
+
+}
+
+
+.tutorials .title,
+#box5,
+#box5 ul li .item {
+    border-color: yellow;
+}
+
+.tutorials .title:hover,
+#box5 ul li .item:hover {
+    text-shadow: 0 0 1px yellow;
+    border-color: yellow;
+    color: yellow;
+
+}
+
+.tools .title,
+#box6,
+#box6 ul li .item {
+    border-color: rgb(165, 186, 255);
+}
+
+.tools .title:hover,
+#box6 ul li .item:hover {
+    text-shadow: 0 0 1px rgb(165, 186, 255);
+    border-color: rgb(165, 186, 255);
+    color: rgb(165, 186, 255);
+}
+
+
+.references .title,
+#box7,
+#box7 ul li .item {
+    border-color: rgb(255, 208, 249);
+}
+
+
+.references .title:hover,
+#box7 ul li .item:hover {
+    text-shadow: 0 0 1px rgb(255, 208, 249);
+    border-color: rgb(255, 208, 249);
+    color: rgb(255, 208, 249);
+}
+
+
+.read .title,
+#box8,
+#box8 ul li .item {
+    border-color: rgb(255, 200, 127);
+}
+
+
+.read .title:hover,
+#box8 ul li .item:hover {
+    text-shadow: 0 0 1px rgb(255, 200, 127);
+    border-color: rgb(255, 200, 127);
+    color: rgb(255, 200, 127);
+}
+
+
+
+#topTitle .title {
     margin-top: 25px;
-    
+    box-shadow: 0 -40px 30px rgba(69, 69, 69, 0.149);
 }
 
 .title {
+    height: 70px;
+    position: relative;
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 600px;
-    margin-bottom: 20px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 35px;
+    width: 60vw;
+    max-width: 800px;
+    margin-bottom: 50px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 45px;
     text-transform: uppercase;
     font-weight: bolder;
-    position: relative;
-    top: auto;
     text-align: center;
-    color: white;
-    background: url('https://as2.ftcdn.net/v2/jpg/03/15/11/81/1000_F_315118105_ld6nWZl5CXLyv5rIEHuPNtVjXFcJCfXn.jpg');
-    background-size: auto 200%;
+    border-radius: 100px;
+    background: linear-gradient(rgba(9, 9, 9, 0),  
+    rgba(0, 0, 0, 0.777));
+    -webkit-text-fill-color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 8s linear infinite;
-    color: black;
-    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1);
-    border-radius: 15px;
-    padding: 5px;
-    cursor:crosshair;
+    box-shadow:  0 -40px 30px rgba(224, 224, 224, 0.731), 0 -40px 30px rgba(0, 0, 0, 0.7);
+    transition: ease-in-out 2s;
 }
-
-
-
 
 .title:hover {
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: rgba(25, 223, 213, 0.739);
-    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgb(255, 255, 255), 0 0 5px rgb(21, 232, 255);
-transform: scale(1.01);
-
+    border-left: 20px double ;
+    border-right: 20px double ;
+    background: transparent;
+    transition: ease-out 2s;
+    box-shadow: 0 0 10px rgba(255, 252, 252, 0.752);
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+    border-radius: 50px;
+    -webkit-text-stroke: 2px rgba(0, 0, 0, 0.517);
+  
 }
 
+main.content {
+    cursor: crosshair;
+}
 
 .mainButtons {
     border: none;
-    background-color: #e7eaf100;
+    background-color: transparent;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 }
 
-.goBack a{
-color: currentColor;
-height: 40px;
-width: 40px;
-font-size: small;
+.goBack a {
+    color: currentColor;
+    height: 40px;
+    width: 40px;
+    font-size: small;
 }
 
+.description {
+    width: 50vw;
+    color: whitesmoke;
+    line-height: 30px;
 
-
-@keyframes shine {
-    from {
-        background-position: center 0;
-    }
-
-    to {
-        background-position: center 200%;
-    }
-}
-
-
-.description { 
-    color: black;
-    box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0), -5px -5px 0px 0px rgba(255, 255, 255, 0), 6px 6px 10px 2px rgba(0, 0, 0, 0.1), -5px -5px 10px 2px rgba(255, 255, 255), 3px 3px 5px 2px rgba(0, 0, 0, 0.1), inset -5px -5px 10px 2px rgba(255, 255, 255, 1), 0 0 20px rgb(52, 126, 255);
-    line-height: 20px;
-    border-radius: 15px;
     padding: 10px;
     margin-bottom: 5px;
     font-size: 16px;
-    width: 250px;
-    font-family: monospace;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    cursor:default;
-    width: 450px;
+
 }
 
 .description.desIntro {
-line-height: 20px;
-margin-top: 10px;
-margin-bottom: 5px;
+    line-height: 30px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+
+    letter-spacing: 2px;
 
 }
 
 @media (max-width: 600px) {
-
-
     .keyboard {
         width: 300px;
         margin-bottom: 5px;
-
     }
 
     .boxes {
-        width: 300px;
-        max-height: 350px;
+        max-height: 500px;
         flex-wrap: wrap;
         margin-top: 10px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        width: 90vw;
+
     }
 
-    .navB.boxes {
-        flex-wrap: nowrap;
+    #nav1.boxes {
+
+        width: 90vw;
     }
 
     .title {
-        font-size: 25px;
-        width: 300px;
+        font-size: 30px;
+        width: 80vw;
+        background-size: contain;
+        -webkit-text-stroke: 0.5px black;
+        background-repeat: repeat;
+
     }
 
-
     li a .item {
-        width: 250px;
+        width: 80vw;
     }
 
     .description {
-        width: 250px;
+        width: 70vw;
     }
 
-    #boxR .title {
-        margin-top: 20px;
+    #boxR,
+    .title {
+        width: 90vw;
     }
 
-
+    span.item {
+        color: whitesmoke;
+        font-size: small;
+        text-shadow: none;
+    }
 }

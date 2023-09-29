@@ -100,8 +100,9 @@ ul {
 
 ul li a .item {
     color: rgba(0, 0, 0, 0.655);
+    font-weight: bolder;
     padding: 10px;
-    font-size: 18px;
+    font-size: 20px;
     line-height: normal;
     letter-spacing: 1px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.404), inset 0 0 20px rgb(255, 255, 255);
@@ -130,35 +131,36 @@ a,
     border-left: 20px double ;
     border-right: 20px double ;
     transition: ease-in-out 0.4s;
-    box-shadow: 0 0 10px rgba(255, 252, 252, 0.752);
-    -webkit-text-stroke: 2px solid rgba(0, 0, 0, 0.589);
+    box-shadow: 0 0 10px rgba(255, 252, 252, 0.752), inset 0 0 40px rgba(0, 0, 0, 0);
+    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.86);
+    font-size: 22px;
 }
 
 
 .answers .title,
 #box1,
 #box1 ul li .item {
-    border-color: aquamarine;
+    border-color:rgb(69, 151, 124);
 }
 
 .answers .title:hover,
 #box1 ul li .item:hover {
-    text-shadow: 0 0 1px aquamarine;
-    border-color: aquamarine;
-    color: aquamarine;
+    text-shadow: 0 0 1px rgb(69, 151, 124);
+    border-color: rgb(69, 151, 124);
+    color: rgb(69, 151, 124);
 }
 
 .practice .title,
 #box3,
 #box3 ul li .item {
-    border-color: chartreuse;
+    border-color: rgb(108, 170, 46);
 }
 
 .practice .title:hover,
 #box3 ul li .item:hover {
-    text-shadow: 0 0 1px chartreuse;
-    border-color: chartreuse;
-    color: chartreuse;
+    text-shadow: 0 0 1px rgb(130, 196, 63);
+    border-color: rgb(118, 178, 59);
+    color: rgb(117, 178, 57);
 
 }
 

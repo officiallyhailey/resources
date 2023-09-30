@@ -58,6 +58,8 @@ button span svg path {
     align-items: center;
     margin-top: 15px;
     cursor: crosshair;
+    border: none;
+    background-color: transparent;
 }
 
 .headpic  img{

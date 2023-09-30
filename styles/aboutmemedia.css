@@ -2,7 +2,7 @@
     list-style: none;
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
-transition: ease 1s;
+
 }
 
 .hidden {
@@ -12,7 +12,7 @@ transition: ease 1s;
     width: 0;
     overflow: hidden;
     border: none;
-    transition: ease-in-out 1s;
+    transition: ease-in-out 2s;
 }
 
 .list {
@@ -73,7 +73,7 @@ button span svg path {
 }
 
 #nav1 li:hover, #nav1 li a:hover {
-    transform: scale(1.05);
+
     border-color: black;
 }
 
@@ -127,7 +127,7 @@ a,
 }
 
 .item:hover {
-    transform: scale(1.01);
+   
     border-left: 20px double ;
     border-right: 20px double ;
     transition: ease-in-out 0.4s;
@@ -240,7 +240,7 @@ a,
 
 
 #topTitle .title {
-    margin-top: 25px;
+ 
     box-shadow: 0 -40px 30px rgba(69, 69, 69, 0.149);
 }
 

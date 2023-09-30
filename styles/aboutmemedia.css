@@ -52,7 +52,7 @@ button span svg path {
 
 
 
-#nav1 img {
+/* #nav1 img {
     height: 150px;
     width: 150px;
     border-radius: 150px;
@@ -84,7 +84,7 @@ button span svg path {
     border-radius: 15px;
     padding: 10px;
     font-size: 20px;
-}
+} */
 
 ul {
     display: flex;
@@ -127,27 +127,27 @@ a,
 }
 
 .item:hover {
-   
+  
     border-left: 20px double ;
     border-right: 20px double ;
     transition: ease-in-out 0.4s;
     box-shadow: 0 0 10px rgba(255, 252, 252, 0.752), inset 0 0 40px rgba(0, 0, 0, 0);
     -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.86);
-    font-size: 22px;
+
 }
 
 
 .answers .title,
-#box1,
+
 #box1 ul li .item {
     border-color:rgb(69, 151, 124);
 }
 
 .answers .title:hover,
 #box1 ul li .item:hover {
-    text-shadow: 0 0 1px rgb(69, 151, 124);
+ 
     border-color: rgb(69, 151, 124);
-    color: rgb(69, 151, 124);
+   
 }
 
 .practice .title,
@@ -211,7 +211,8 @@ a,
 .references .title,
 #box7,
 #box7 ul li .item {
-    border-color: rgb(255, 208, 249);
+    text-shadow: 0 0 1px  rgba(225, 225, 225, 0.979);
+color: white;
 }
 
 
@@ -224,9 +225,9 @@ a,
 
 
 .read .title,
-#box8,
 #box8 ul li .item {
-    border-color: rgb(255, 200, 127);
+    text-shadow: 0 0 1px  rgba(225, 225, 225, 0.979);
+    color: white;
 }
 
 
@@ -237,10 +238,23 @@ a,
     color: rgb(255, 200, 127);
 }
 
+.about .title,
+#box2 ul li .item {
+    text-shadow: 0 0 1px  rgba(225, 225, 225, 0.979);
+    color: white;
+}
+
+
+.about .title:hover,
+#box2 ul li .item:hover {
+    text-shadow: 0 0 1px rgb(164, 156, 208);
+    border-color: rgb(164, 156, 208);
+    color: rgb(255, 255, 255);
+}
 
 
 #topTitle .title {
- 
+ margin-top: 25px;
     box-shadow: 0 -40px 30px rgba(69, 69, 69, 0.149);
 }
 

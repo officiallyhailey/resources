@@ -53,8 +53,7 @@ main {
   margin-bottom: 30px;
   margin-top: 10px;
   background-color: rgba(255, 255, 255, 0);
-  border-left: 10px double whitesmoke;
-  border-right: 10px double whitesmoke;
+
   transition: ease-out 1s;
   
 }

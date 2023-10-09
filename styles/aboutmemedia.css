@@ -167,8 +167,8 @@ a,
 
 }
 
-/* 
-.answers .title,
+
+/* .answers .title,
 
 #box1 ul li .item {
     border-color:rgb(69, 151, 124);
@@ -236,23 +236,18 @@ a,
     text-shadow: 0 0 1px rgb(165, 186, 255);
     border-color: rgb(165, 186, 255);
     color: rgb(165, 186, 255);
-}
+} */
 
 
 .references .title,
 #box7,
 #box7 ul li .item {
-    text-shadow: 0 0 1px  rgba(225, 225, 225, 0.979);
+  
 color: white;
 }
 
 
-.references .title:hover,
-#box7 ul li .item:hover {
-    text-shadow: 0 0 1px rgb(255, 208, 249);
-    border-color: rgb(255, 208, 249);
-    color: rgb(255, 208, 249);
-}
+
 
 
 .read .title,
@@ -262,26 +257,12 @@ color: white;
 }
 
 
-.read .title:hover,
-#box8 ul li .item:hover {
-    text-shadow: 0 0 1px rgb(255, 200, 127);
-    border-color: rgb(255, 200, 127);
-    color: rgb(255, 200, 127);
-}
-
 .about .title,
 #box2 ul li .item {
     text-shadow: 0 0 1px  rgba(225, 225, 225, 0.979);
     color: white;
 }
 
-
-.about .title:hover,
-#box2 ul li .item:hover {
-    text-shadow: 0 0 1px rgb(164, 156, 208);
-    border-color: rgb(164, 156, 208);
-    color: rgb(255, 255, 255);
-} */
 
 
 #topTitle .title {
@@ -315,11 +296,10 @@ color: white;
 }
 
 .title:hover {
-    border-left: 20px double ;
-    border-right: 20px double ;
+   
     background: transparent;
-    transition: ease-out 2s;
-    box-shadow: 0 0 10px rgba(255, 252, 252, 0.752);
+    transition: ease-out 1s;
+
     -webkit-text-fill-color: rgba(255, 255, 255, 0);
     border-radius: 50px;
     -webkit-text-stroke: 2px rgba(0, 0, 0, 0.517);

@@ -163,7 +163,7 @@ main {
 .content .advice {
     display: flex;
     flex-direction: column;
-   text-align: end;
+   text-align: start;
     justify-content: end;
     align-items: start;
     background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');

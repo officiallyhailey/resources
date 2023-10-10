@@ -1,130 +1,567 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
-        crossorigin="anonymous" />
-    <script src="js/index.js" defer></script>
-    <link rel="stylesheet" href="styles/index.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource List</title>
+    <link rel="stylesheet" href="ResourceSite.css">
+    <script src="ResourceSite.js" defer></script>
 </head>
+<body>
 
-<body style=" background-image: url(gallery/code.png)">
-<main>
-    <div>
-        <div class="top-bar" >
-            <div class="container"  style="background-image: url(gallery/cliplong/5.png);" id="top-pic">
-                <div class="circle-container">
-                    <div class="circle">
-                        <button id="close">
-                            <i class="fas fa-times"></i>
-                        </button>
-                        <button id="open">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <nav>
-                    <ul>
-                        <li><a id="resources" href="resources.html" target="_blank">Resources</a></li>
-                      
-                        <li><a id='linkedin' href="https://www.linkedin.com/in/hailey-g/" target="_blank">Linkedin</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-
-
-    <!-- Info bubbles -->
-
-    <div class="container2">
-        <div class="col2" ontouchstart="this.classList.toggle('hover');">
-            <div class="percentages">
-                <div class="front2"id="hailey-g"
-                style="background-image: url(gallery/E5CA79D3-E389-4370-95B1-9C516623114C_1_105_c.jpeg)">
-                    <div class="inner2">
-
-                    </div>
-                </div>
-                <div class="back2"  id="profilepic" style="background-image: url(gallery/cliplong/1.png)">
-                    <div class="inner2">
-                
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col2" ontouchstart="this.classList.toggle('hover');">
-            <div class="percentages">
-                <div class="front2" id="css">
-                    <div class="inner2">
-                        <p id="self-intro">Full Stack Developer student @ AnnieCannons </p>
-                    </div>
-                </div>
-                <div class="back2" id="info"  style="background-image: url(gallery/clipsmall/3.png)">
-                    <div class="inner2">
-                        <h4></h4>
-                    </div>
-                </div>
-            </div>
-        </div> 
-            
-        <div class="col2" ontouchstart="this.classList.toggle('hover');">
-            <div class="percentages">
-                <div class="front2" id="toolsfront">
-                    <div class="inner2">
-                        <p>So far I've learned the internet has a lot of <a id="resource-link" href="resources.html">resources</a>...</p>
-                    </div>
-                </div>
-                <div class="back2" id="tools" style="background-image: url(gallery/internet.png)">
-                    <div class="inner2" >
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col2" ontouchstart="this.classList.toggle('hover');">
-            <div class="percentages">
-                <div class="front2" id="peoplefront">
-                    <div class="inner2">
-                        <p>but people are our greatest asset!</p>
-                    </div>
-                </div>
-                <div class="back2" id="people" style="background-image: url(gallery/together.png)">
-                    <div class="inner2" >
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="pre-header">
+    <p class="todays-date"></p>
     </div>
 
-    <!-- PANEL CODE 
-        <div class="container2">
-            <div class="panel active"
-                style="background-image: url(https://logos-world.net/wp-content/uploads/2023/02/JavaScript-Emblem.png)">
-                <h3>JS</h3>
-            </div>
-            <div class="panel"
-                style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/800px-CSS3_logo.svg.png)">
-                <h3>CSS</h3>
-            </div>
-            <div class="panel" style="background-image: url(https://img.freepik.com/free-icon/html5_318-903450.jpg)">
-                <h3>HTML</h3>
-            </div>
-            <div class="panel" style="background-image: url(gallery/internet.png)">
-                <h3>the internet has a lot of <a id="resource-link" href="resources.html">resources</a>...</h3>
-            </div>
-            <div class="panel" style="background-image: url(gallery/together2.png)">
-                <h3>but people are our greatest asset!</h3>
-            </div>
-</div>
+    <div class="header">
+        <p>living nervously</p>
+    <h1 class="main-title">[Resources]</h1>
+    <p>coding audaciously</p>
+    </div>
+
+
+    <main class="content">
+
+
+        <div class=" boxes hidden list " id="box1">
+
+            <h3 class="mainh3s answers" id="topTitle" data-target="box1">
+                <span class="title">Answers</span>
+            </h3>
+            <ul>
+
+                <!-- <span class="description desIntro">Intro: <br />This is a great place to look up direct answers from fellow humans 🧐 or fellow bots 👾  </span> -->
+
+
+                <li>
+                    <a href="https://dev.to/" target="_blank">
+
+                        <span class="item">Dev: Community form</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.shecodes.io/athena" target="_blank">
+
+                        <span class="item"> SheCodes: Athena AI Support </span>
+                    </a>
+                </li>
+                <!-- <span class="description">☝️Trust me, make an account and it logs all your questions to review later like chatGPT</span> -->
+
+
+                <li>
+                    <a href="https://zzzcode.ai/code-explain" target="_blank">
+
+                        <span class="item"> CODE AI: Code explainer, line by line </span>
+                    </a>
+                </li>
+
+
+
+                <li>
+                    <a href="https://gist.github.com/" target="_blank">
+
+                        <span class="item">GitHub Gist: Community form</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://kittygiraudel.github.io/selectors-explained/">
+
+                        <span class="item">Selector Explained: CSS selectors explained</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://stackoverflow.com/" target="_blank">
+
+                        <span class="item"> Stack Overflow: Community form </span>
+                    </a>
+                </li>
+            </ul>
         </div>
-    -->
 
-</main>
 
+      <div class="picture boxes">
+        <img src="https://i.pinimg.com/564x/51/b0/68/51b06892883177ef0d384405a1863c87.jpg" alt="">
+      </div>
+
+        <div class="  boxes hidden list  " id="box3">
+
+            <h3 class="mainh3s practice" data-target="box3">
+                <span class="title">Practice</span>
+            </h3>
+
+            <ul>
+
+                <li>
+                    <a href="https://edabit.com/" target="_blank">
+
+                        <span class="item"> Edabit </span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.hackerearth.com/practice/" target="_blank">
+
+                        <span class="item">Hacker Earth</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://practice.geeksforgeeks.org/explore?page=1&sortBy=submissions" target="_blank">
+
+                        <span class="item">GeeksforGeeks: Problem Solving</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.w3docs.com/quiz/" target="_blank">
+
+                        <span class="item"> W3Doc: Quizzes </span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.w3schools.com/exercises/index.php" target="_blank">
+
+                        <span class="item">W3Schools: Exercises</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://codepen.io/challenges" target="_blank">
+
+                        <span class="item">Codepen: CSS Challenges</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="picture boxes">
+            <img src="https://i.pinimg.com/564x/3a/db/5b/3adb5b684b3030920bf87fd36650a3ef.jpg" alt="">
+          </div>
+          
+    
+        <div class="  boxes hidden list  " id="box4">
+
+            <h3 class="mainh3s fun" data-target="box4">
+                <span class="title">Lil fun</span>
+            </h3>
+    
+
+            <ul>
+                <li>
+                    <a href="https://css-diner.netlify.app/" target="_blank">
+
+                        <span class="item">CSS Diner</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="http://www.flexboxdefense.com/" target="_blank">
+
+                        <span class="item">Flexbox Defense</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://flexboxfroggy.com/" target="_blank">
+
+                        <span class="item">Flexbox-Froggy </span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.codingame.com/start/" target="_blank">
+
+                        <span class="item"> Coding Game</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.w3schools.com/codegame/index.html" target="_blank">
+
+                        <span class="item">W3Schools Coding Game</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <div class="picture boxes">
+            <img src="https://i.pinimg.com/564x/5c/88/44/5c88447c0e406940dd9915b3bc37c3b3.jpg" alt="">
+          </div>
+
+        <div class="  boxes hidden list  " id="box5">
+
+            <h3 class="mainh3s tutorials" data-target="box5">
+                <span class="title">Tutorials</span>
+            </h3>
+
+            <ul>
+                <li>
+                    <a href="https://foolishdeveloper.com/" target="_blank">
+                        <span class="item"> Foolish Developer: Front and Backend Tutorials</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://spaces.w3schools.com/createspace" target="_blank">
+
+                        <span class="item">W3Schools: Website Developer</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.joshwcomeau.com/goodies/" target="_blank">
+
+                        <span class="item"> Josh Comeau: Front End Tools/Generators </span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://css-tricks.com/" target="_blank">
+
+                        <span class="item">CSS Tricks: CSS Specific Articles</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://codepen.io/trending" target="_blank">
+
+                        <span class="item"> Codepen: Front End Trends </span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href=" https://freefrontend.com/css-animated-backgrounds/" target="_blank">
+
+                        <span class="item">Frontend: CSS Background Animations</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://blog.avada.io/css" target="_blank">
+
+                        <span class="item"> Avada: Design Ideas Library </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+
+
+        <div class="picture boxes">
+            <img src="https://i.pinimg.com/564x/0e/cb/e4/0ecbe49d7531ada7d9a311063a771d5c.jpg" alt="">
+          </div>
+
+
+        <div class="  boxes hidden list  " id="box6">
+
+            <h3 class="mainh3s tools" data-target="box6">
+                <span class="title">Free Tools</span>
+            </h3>
+
+            <ul>
+                <li>
+                    <a href="https://codepen.io/pen/" target="_blank">
+
+                        <span class="item"> Codepen: Terminal </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://jsfiddle.net/" target="_blank">
+
+                        <span class="item"> JS Fiddle: Terminal </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.tutorialspoint.com/articles/index.php" target="_blank">
+
+                        <span class="item">Tutorials Point: Tools</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.tutorialspoint.com/codingground.htm" target="_blank">
+
+                        <span class="item">Tutorials Point: Terminal Library</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.boardinfinity.com/playground/coding" target="_blank">
+
+                        <span class="item">Board Infinity: Terminal</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.joshwcomeau.com/operator-lookup/" target="_blank">
+
+                        <span class="item">Josh Comeau: Operator Search</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/play" target="_blank">
+
+                        <span class="item">MDN: Terminal</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://fontawesome.com/icons" target="_blank">
+
+                        <span class="item">Font Awesome Icons</span>
+                    </a>
+                </li>
+
+                
+                <li>
+                    <a href="https://www.markdownguide.org/tools/" target="_blank">
+
+                        <span class="item">Markdown: Markdown Tool Library</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://dillinger.io/" target="_blank">
+
+                        <span class="item">Markdown: Markdown Terminal</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.w3docs.com/" target="_blank">
+
+                        <span class="item"> W3Docs: Full Site Library</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.w3schools.com/tryit/tryit.asp?filename=tryhtml_hello" target="_blank">
+
+                        <span class="item">W3School: Terminal</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://docs.replit.com/" target="_blank">
+
+                        <span class="item">Replit: Tool Library</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <div class="picture boxes">
+            <img src="https://i.pinimg.com/564x/c6/5c/54/c65c54d8d92230c5f50c7124c5e198ad.jpg" alt="">
+          </div>
+
+        <div class="boxes hidden list" id="box7">
+
+            <h3 class="mainh3s references" data-target="box7">
+                <span class="title">References</span>
+            </h3>
+
+            <ul>
+                <li>
+                    <a href="https://www.tutorialspoint.com/articles/index.php" target="_blank">
+                        <span class="item">Tutorials Point: Courses</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://practice.geeksforgeeks.org/courses" target="_blank">
+                        <span class="item"> GeeksforGeeks: Courses</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.boardinfinity.com/programs/free-courses" target="_blank">
+                        <span class="item">Board Infinity: Free Courses</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.codechef.com" target="_blank">
+                        <span class="item">CodeChef: Courses</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://teamtreehouse.com/library" target="_blank">
+                        <span class="item">Team TreeHouse: Course Library</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.codecademy.com/catalog" target="_blank">
+                        <span class="item">Code Academy: Course Library</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/" target="_blank">
+                        <span class="item"> MDN Mozilla: Guides</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.w3schools.com/js/default.asp" target="_blank">
+                        <span class="item">W3Schools: Tutorials </span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://code.org/curriculum/docs/k-5/glossary" target="_blank">
+                        <span class="item"> Code: Language Glossary </span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.quackit.com/" target="_blank">
+                        <span class="item">Quackit: HTML & CSS reference guide</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://refactoring.guru/refactoring" target="_blank">
+                        <span class="item">Refactoring: Clean up your code! </span>
+                    </a>
+                </li>
+
+            </ul>
+
+            </ul>
+        </div>
+
+        <div class="picture boxes">
+            <img src="https://i.pinimg.com/564x/fe/39/99/fe399930e9fb838ce65f81bae1b067ee.jpg" alt="">
+          </div>
+    
+
+        <div class="boxes hidden list" id="box8">
+
+            <h3 class="mainh3s read" data-target="box8">
+                <span class="title">Read Up</span>
+            </h3>
+
+            <ul>
+                <li>
+                    <a href="https://blog.logrocket.com/" target="_blank">
+                        <span class="item"> LogRocket Blog</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.tutorialspoint.com/articles/index.php" target="_blank">
+                        <span class="item">Tutorials Point Articles</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/blog/" target="_blank">
+                        <span class="item">MDN Blog</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="https://www.joshwcomeau.com/" target="_blank">
+                        <span class="item">Josh Comeau Posts</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://martinfowler.com/books/refactoring.html" target="_blank">
+                        <span class="item">Refactoring: book by Martin Fowler, with Kent Beck</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="picture boxes">
+            <img src="https://i.pinimg.com/564x/e1/28/ec/e128ec6d0c2a3a5e8c1d8ca07d6472d9.jpg" alt="">
+          </div>
+
+     
+        <div class=" boxes hidden list " id="box2">
+
+            <h3 class="mainh3s about" data-target="box2">
+                <span class="title">About Me</span>
+            </h3>
+                    <ul>
+
+                        <div>
+                            <!-- <img src="/gallery/hg.png"> -->
+                        </div>
+
+
+                        <li>
+                            <a id="resources" href="https://codepen.io/your-work/" target="_blank"> <span class="item">Codepen</span>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a id="github" href="https://github.com/officiallyhailey" target="_blank" > <snap class="item">Github</snap>
+                            </a>
+                        </li>
+                        <li>
+                            <a id='linkedin' href="https://www.linkedin.com/in/hailey-g/" target="_blank"> <span class="item">Linkedin</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+    </main>
 </body>
-
 </html>

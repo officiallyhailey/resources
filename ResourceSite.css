@@ -19,6 +19,7 @@ body {
     flex-direction: column;
     background-color: #000000;
     box-shadow: inset 0 0 45px #ffffff;
+    padding-bottom: 20px;
 }
 
 
@@ -38,7 +39,7 @@ body {
     letter-spacing: 3px;
     font-size: 20px;
     color: #e7eaf1;
-    box-shadow: inset 0 0 25px #ffffff;
+
 }
 
 
@@ -211,8 +212,6 @@ main {
     text-transform: uppercase;
     align-items: center;
     justify-content: center;
-   
-    box-shadow: inset 0 0 5px #ffffff;
 }
 
 .title {

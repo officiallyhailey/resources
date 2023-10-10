@@ -101,6 +101,7 @@ main {
     color: #ececec;
     font-family: "Anton", monospace;
     writing-mode: vertical-lr;
+    margin-right: 10px;
 }
 
 .boxes .item {

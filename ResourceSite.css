@@ -107,7 +107,8 @@ main {
     
     text-transform: uppercase;
     font-size: 20px;
-    letter-spacing: 3px;
+    font-weight: lighter;
+    letter-spacing: 6px;
     color: #ececec;
     font-family: "Anton", monospace;
     writing-mode: vertical-lr;

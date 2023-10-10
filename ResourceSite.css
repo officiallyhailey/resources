@@ -20,6 +20,10 @@ body {
     background-color: #000000;
 }
 
+#quote, #author {
+    color: white;
+}
+
 .date {
     display: flex;
     justify-content: center;
@@ -77,14 +81,14 @@ main {
     justify-content: center;
 }
 
-.picture img {
+.boxes img {
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 100%;
 }
 
-.picture p {
+.picture .time {
     background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');
     background-size: 100%;
     height: 100%;
@@ -92,6 +96,29 @@ main {
     color: rgba(255, 255, 255, 0.813);
     font-size: 40px;
     font-family: "Anton", monospace;
+}
+
+#quote {
+    display: flex;
+    flex-direction: column;
+}
+
+.quotes #quote {
+    display: flex;
+    align-items: end;
+    background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');
+    height: 100%;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.879);
+    font-size: 40px;
+    font-family: "Anton", monospace;
+}
+
+.quotes #author {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: end;
 }
 
 .boxes {

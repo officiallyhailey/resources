@@ -155,9 +155,9 @@ main {
 
 .advice .small {
     display: flex;
-   text-align: end;
-    justify-content: end;
-    align-items: end;
+   text-align: right;
+    justify-content: left;
+    align-items: start;
 }
 
 .content .advice {
@@ -165,18 +165,17 @@ main {
     flex-direction: column;
    text-align: end;
     justify-content: end;
-    align-items: end;
+    align-items: start;
     background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');
     text-transform: uppercase;
-   
     width: 100%;
 }
 
 .advice button {
     background-color: transparent;
     border: none;
-    text-align: right;
-    justify-content: right;
+    text-align: left;
+    justify-content: left;
     color: #ffffffe5;
     font-family: "Anton", monospace;
     font-size: 30px;

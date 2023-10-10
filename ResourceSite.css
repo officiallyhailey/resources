@@ -1,11 +1,13 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Bebas+Neue&family=Rubik+Mono+One&display=swap");
+
+
 * {
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
     cursor: crosshair;
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Bebas+Neue&family=Rubik+Mono+One&display=swap");
 
 body {
     margin: 0;
@@ -18,7 +20,7 @@ body {
     background-color: #000000;
 }
 
-.pre-header {
+.date {
     display: flex;
     justify-content: center;
     padding: 0px 20px;
@@ -40,12 +42,13 @@ body {
     text-transform: uppercase;
     font-weight: bolder;
     letter-spacing: 3px;
-    font-size: 30px;
+    font-size: 25px;
     color: #e7eaf1;
 }
 
 
 .pre-main {
+    margin-top: 10px;
     display: flex;
     width: 100vw;
     justify-content: space-evenly;
@@ -53,7 +56,7 @@ body {
     color:#c4c4c4;
     height: 20px;
     padding: 2px;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .pre-main p {
@@ -91,17 +94,17 @@ main {
 }
 
 .title {
-    padding-left: 5px;
+    
     text-transform: uppercase;
     font-size: 30px;
     letter-spacing: 3px;
     color: #ececec;
-    font-family: "Rubik Mono One", monospace;
+    font-family: "Anton", monospace;
     writing-mode: vertical-lr;
 }
 
 .boxes .item {
-    font-size: 16px;
+    font-size: 18px;
     color: #e7eaf1c7;
     cursor: pointer;
 
@@ -134,12 +137,15 @@ ul li a {
 
 @media (max-width: 500px) {
     .header {
-        font-size: 23px;
+        font-size: 16px;
     }
 
-
+.pre-main {
+    font-size: 10px;
+    margin: 5px;
+}
     .boxes .title {
-        margin-right: 10px;
+        margin-right: 20px;
     }
     .boxes ul  {
         padding-left: 20px;

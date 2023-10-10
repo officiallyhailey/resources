@@ -96,7 +96,7 @@ main {
     flex-direction: column;
     background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');
     background-size: 100%;
-    justify-content: start;
+    justify-content: end;
     align-items: start;
 
 }
@@ -104,7 +104,7 @@ main {
 .picture .time, .picture .todays-date {
     margin: 0;
     display: flex;
-    color: rgba(255, 255, 255, 0.813);
+    color: rgba(255, 255, 255, 0.882);
     font-size: 40px;
     font-family: "Anton", monospace;
 }
@@ -130,6 +130,7 @@ main {
 
 .quotes #author {
     color: #e7eaf1c7;
+    font-family: "Anton", monospace;
 }
 
 

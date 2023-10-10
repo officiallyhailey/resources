@@ -61,7 +61,7 @@ body {
     padding: 0px 5px;
 }
 
-.header .pre-main .nervous {
+.nervous {
     display: inline-block;
     transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -131,6 +131,38 @@ main {
     color: #e7eaf1c7;
 }
 
+.content .activity {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    justify-content: start;
+    align-items: start;
+    background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');
+    box-shadow: none;
+    text-transform: uppercase;
+}
+
+.activity button {
+    background-color: transparent;
+    border: none;
+    color: #ffffffe5;
+    text-align: left;
+    font-family: "Anton", monospace;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.activity button:hover {
+    color: rgb(113, 113, 113);
+}
+
+.activity p {
+    color:#ebebebd2;
+    font-family: "Rubik Mono One", monospace;
+    width: 100px;
+}
+
+
 
 .boxes {
     display: flex;
@@ -139,7 +171,8 @@ main {
     text-transform: uppercase;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 0 15px #ffffff;
+   
+    box-shadow: inset 0 0 5px #ffffff;
 }
 
 .title {

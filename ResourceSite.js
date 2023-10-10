@@ -47,3 +47,19 @@ let getNewQuote = async () =>
     author.innerHTML="~ "+auth;
 }
 getNewQuote();
+
+
+async function getRandomActivity() {
+    try {
+        let response = await fetch('http://www.boredapi.com/api/activity/');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        let data = await response.json();
+        document.getElementById('activityText').textContent = data.activity;
+    } catch (error) {
+        console.error('Error fetching random activity:', error);
+    }
+}
+
+document.getElementById('getActivityButton').addEventListener('click', getRandomActivity);

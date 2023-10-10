@@ -61,7 +61,7 @@ body {
     padding: 0px 5px;
 }
 
-.nervous {
+.upsidedown {
     display: inline-block;
     transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -162,7 +162,9 @@ main {
     width: 100px;
 }
 
-
+.small {
+    font-size: 15px;
+}
 
 .boxes {
     display: flex;
@@ -240,5 +242,6 @@ ul li a {
     main {
         grid-template-columns: 80vw;
     }
+
 
 }

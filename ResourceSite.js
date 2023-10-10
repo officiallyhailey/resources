@@ -65,3 +65,21 @@ async function getRandomActivity() {
 document.getElementById('getActivityButton').addEventListener('click', getRandomActivity);
 
 getRandomActivity()
+
+async function getRandomAdvice() {
+    try {
+        let response = await fetch('https://api.adviceslip.com/advice');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        let data = await response.json();
+        document.getElementById('adviceText').textContent = data.slip.advice;
+    } catch (error) {
+        console.error('Error fetching random advice:', error);
+    }
+}
+
+
+document.getElementById('getAdviceButton').addEventListener('click', getRandomAdvice);
+
+getRandomAdvice();

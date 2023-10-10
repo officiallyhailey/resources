@@ -111,7 +111,7 @@ main {
 .content .quotes {
     display: flex;
     flex-direction: column;
-    text-align: right;
+    text-align: end;
     align-items: end;
     background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');
     box-shadow: none;
@@ -142,7 +142,8 @@ main {
     text-transform: uppercase;
 }
 
-.activity button {
+.activity button, 
+.advice button {
     background-color: transparent;
     border: none;
     color: #ffffffe5;
@@ -152,7 +153,8 @@ main {
     text-transform: uppercase;
 }
 
-.activity button:hover {
+.activity button:hover, 
+.advice button:hover {
     color: rgb(113, 113, 113);
 }
 
@@ -165,6 +167,42 @@ main {
 .small {
     font-size: 15px;
 }
+
+.advice .small {
+    display: flex;
+    flex-direction: column;
+   text-align: right;
+    justify-content: end;
+    align-items: end;
+}
+
+.content .advice {
+    display: flex;
+    flex-direction: column;
+   text-align: right;
+    justify-content: end;
+    align-items: end;
+    background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');
+    box-shadow: none;
+    text-transform: uppercase;
+    padding-right: 20px;
+}
+
+.advice button {
+    background-color: transparent;
+    border: none;
+    color: #ffffffe5;
+    font-family: "Anton", monospace;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.advice p {
+    color:#ebebebd2;
+    font-family: "Rubik Mono One", monospace;
+}
+
+
 
 .boxes {
     display: flex;

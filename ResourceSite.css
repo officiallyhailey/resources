@@ -132,7 +132,13 @@ ul li a {
         font-size: 23px;
     }
 
+
+    .boxes .title {
+        margin-right: 10px;
+    }
     .boxes ul  {
         padding-left: 20px;
     }
+
+
 }

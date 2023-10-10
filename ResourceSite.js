@@ -63,3 +63,5 @@ async function getRandomActivity() {
 }
 
 document.getElementById('getActivityButton').addEventListener('click', getRandomActivity);
+
+getRandomActivity()

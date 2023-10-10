@@ -1,0 +1,134 @@
+* {
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    cursor: crosshair;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Bebas+Neue&family=Rubik+Mono+One&display=swap");
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100vw;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: #000000;
+}
+
+.pre-header {
+    display: flex;
+    justify-content: center;
+    padding: 0px 20px;
+    color: #e7eaf1;
+    font-family: "Rubik Mono One", monospace;
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    border-top: 2px solid#e7eaf1;
+    border-bottom: 2px solid #e7eaf1;
+    padding: 10px;
+    width: 100vw;
+    justify-content: space-evenly;
+    margin-bottom: 5px;
+    font-family: "Rubik Mono One", monospace;
+    text-transform: uppercase;
+    font-weight: bolder;
+    letter-spacing: 3px;
+    font-size: 30px;
+    color: #e7eaf1;
+}
+
+.header p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid #e7eaf1;
+    border-right: 1px solid #e7eaf1;
+    color:#c4c4c4;
+    height: 20px;
+    padding: 2px;
+    font-size: 20px;
+}
+
+.main-title {
+    padding: 10px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 350px);
+    grid-column-gap: 6px;
+    grid-row-gap: 10px;
+    grid-auto-flow: dense;
+    justify-content: center;
+}
+
+.boxes img {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.boxes {
+    display: flex;
+    flex-direction: row;
+    background-color:#ffffff12;
+    text-transform: uppercase;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    padding-left: 5px;
+    text-transform: uppercase;
+    font-size: 30px;
+    letter-spacing: 3px;
+    color: #ececec;
+    font-family: "Rubik Mono One", monospace;
+    writing-mode: vertical-lr;
+}
+
+.boxes .item {
+    font-size: 16px;
+    color: #e7eaf1c7;
+    cursor: pointer;
+
+}
+
+.boxes .item:hover {
+    color: #747474;
+}
+
+.boxes .item:active {
+    color: white;
+}
+
+.boxes ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.boxes ul li {
+    display: flex;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+ul li a {
+    margin: 10px 0px 10px 0px;
+
+}
+
+@media (max-width: 500px) {
+    .header {
+        font-size: 23px;
+    }
+}

@@ -131,4 +131,8 @@ ul li a {
     .header {
         font-size: 23px;
     }
+
+    .boxes ul  {
+        padding-left: 20px;
+    }
 }

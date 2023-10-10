@@ -44,16 +44,21 @@ body {
     color: #e7eaf1;
 }
 
-.header p {
+
+.pre-main {
     display: flex;
-    justify-content: center;
+    width: 100vw;
+    justify-content: space-evenly;
     align-items: center;
-    border-left: 1px solid #e7eaf1;
-    border-right: 1px solid #e7eaf1;
     color:#c4c4c4;
     height: 20px;
     padding: 2px;
     font-size: 20px;
+}
+
+.pre-main p {
+    border-left: 1px solid #e7eaf1;
+    border-right: 1px solid #e7eaf1;
 }
 
 .main-title {

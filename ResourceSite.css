@@ -18,7 +18,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #000000;
-    box-shadow: inset 0 0 45px #ffffff;
+    box-shadow: inset 0 0 25px #ffffff;
     padding-bottom: 20px;
 }
 
@@ -98,7 +98,7 @@ main {
     background-size: 100%;
     justify-content: start;
     align-items: start;
-    box-shadow: none;
+
 }
 
 .picture .time, .picture .todays-date {
@@ -115,7 +115,7 @@ main {
     text-align: end;
     align-items: end;
     background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');
-    box-shadow: none;
+
 }
 
 .quotes #quote {
@@ -132,18 +132,7 @@ main {
     color: #e7eaf1c7;
 }
 
-.content .activity {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    justify-content: start;
-    align-items: start;
-    background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');
-    box-shadow: none;
-    text-transform: uppercase;
-}
 
-.activity button, 
 .advice button {
     background-color: transparent;
     border: none;
@@ -154,16 +143,11 @@ main {
     text-transform: uppercase;
 }
 
-.activity button:hover, 
+
 .advice button:hover {
     color: rgb(113, 113, 113);
 }
 
-.activity p {
-    color:#ebebebd2;
-    font-family: "Rubik Mono One", monospace;
-    width: 100px;
-}
 
 .small {
     font-size: 15px;
@@ -171,8 +155,7 @@ main {
 
 .advice .small {
     display: flex;
-    flex-direction: column;
-   text-align: right;
+   text-align: end;
     justify-content: end;
     align-items: end;
 }
@@ -180,18 +163,20 @@ main {
 .content .advice {
     display: flex;
     flex-direction: column;
-   text-align: right;
+   text-align: end;
     justify-content: end;
     align-items: end;
     background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');
-    box-shadow: none;
     text-transform: uppercase;
-    padding-right: 20px;
+   
+    width: 100%;
 }
 
 .advice button {
     background-color: transparent;
     border: none;
+    text-align: right;
+    justify-content: right;
     color: #ffffffe5;
     font-family: "Anton", monospace;
     font-size: 30px;
@@ -199,10 +184,9 @@ main {
 }
 
 .advice p {
-    color:#ebebebd2;
+    color:#ebebebe5;
     font-family: "Rubik Mono One", monospace;
 }
-
 
 
 .boxes {
@@ -212,6 +196,7 @@ main {
     text-transform: uppercase;
     align-items: center;
     justify-content: center;
+    box-shadow:  0 0 1px #ffffff;
 }
 
 .title {

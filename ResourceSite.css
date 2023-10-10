@@ -42,7 +42,7 @@ body {
     text-transform: uppercase;
     font-weight: bolder;
     letter-spacing: 3px;
-    font-size: 25px;
+    font-size: 20px;
     color: #e7eaf1;
 }
 
@@ -56,7 +56,7 @@ body {
     color:#c4c4c4;
     height: 20px;
     padding: 2px;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .pre-main p {
@@ -106,7 +106,7 @@ main {
 .title {
     
     text-transform: uppercase;
-    font-size: 30px;
+    font-size: 20px;
     letter-spacing: 3px;
     color: #ececec;
     font-family: "Anton", monospace;

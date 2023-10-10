@@ -179,13 +179,18 @@ main {
     justify-content: left;
     color: #ffffffe5;
     font-family: "Anton", monospace;
-    font-size: 30px;
+    font-size: 35px;
     text-transform: uppercase;
 }
 
 .advice p {
     color:#ebebebe5;
     font-family: "Rubik Mono One", monospace;
+    font-size: 20px;
+}
+
+.fa-solid, .fa-regular {
+    color:rgba(244, 190, 118, 0.827)
 }
 
 

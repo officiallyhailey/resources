@@ -9,6 +9,10 @@
     cursor: crosshair;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -71,10 +75,6 @@ body {
 }
 
 
-.main-title {
-    
-}
-
 main {
     display: grid;
     grid-template-columns: repeat(auto-fill, 350px);
@@ -94,8 +94,9 @@ main {
 .content .today {
     display: flex;
     flex-direction: column;
-    background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');
+    background-image: url('https://i.pinimg.com/564x/22/61/ef/2261ef6f5365370e117c1f3fce4ac957.jpg');
     background-size: 100%;
+    background-position: -30%;
     justify-content: end;
     align-items: start;
 
@@ -104,9 +105,11 @@ main {
 .picture .time, .picture .todays-date {
     margin: 0;
     display: flex;
-    color: rgba(255, 255, 255, 0.882);
+    color: rgba(0, 0, 0, 0.872);
     font-size: 40px;
     font-family: "Anton", monospace;
+    -webkit-text-stroke: 1px white;
+    text-shadow: 0 0 50px white;
 }
 
 .content .quotes {
@@ -114,7 +117,7 @@ main {
     flex-direction: column;
     text-align: end;
     align-items: end;
-    background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');
+    background-image: url('https://i.pinimg.com/564x/14/b1/2e/14b12e5f4aef3130884ce05b0a1d4fce.jpg');
 
 }
 
@@ -167,7 +170,7 @@ main {
    text-align: start;
     justify-content: end;
     align-items: start;
-    background-image: url('https://i.pinimg.com/564x/03/17/b8/0317b818036c4e418a690648f5360e1e.jpg');
+    background-image: url('https://i.pinimg.com/564x/e8/76/36/e87636b8e330d84490fe8aded6347402.jpg');
     text-transform: uppercase;
     width: 100%;
 }

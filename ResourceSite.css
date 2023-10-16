@@ -102,14 +102,14 @@ main {
 
 }
 
-.picture .time, .picture .todays-date {
+.content .time, .content .todays-date {
     margin: 0;
     display: flex;
-    color: rgba(0, 0, 0, 0.872);
+    color: rgba(255, 255, 255, 0.872);
     font-size: 40px;
     font-family: "Anton", monospace;
-    -webkit-text-stroke: 1px white;
-    text-shadow: 0 0 50px white;
+    text-shadow: 0 0 50px rgb(0, 0, 0);
+    padding: 5px;
 }
 
 .content .quotes {
@@ -118,6 +118,7 @@ main {
     text-align: end;
     align-items: end;
     background-image: url('https://i.pinimg.com/564x/14/b1/2e/14b12e5f4aef3130884ce05b0a1d4fce.jpg');
+    padding: 5px;
 
 }
 
@@ -126,7 +127,7 @@ main {
     align-items: end;
     height: 100%;
     width: 100%;
-    color: rgba(255, 255, 255, 0.879);
+    color: rgba(255, 255, 255, 0.884);
     font-size: 35px;
     font-family: "Anton", monospace;
 }
@@ -136,25 +137,12 @@ main {
     font-family: "Anton", monospace;
 }
 
-
-.advice button {
-    background-color: transparent;
-    border: none;
-    color: #ffffffe5;
-    text-align: left;
-    font-family: "Anton", monospace;
-    font-size: 30px;
-    text-transform: uppercase;
-}
-
-
-.advice button:hover {
-    color: rgb(113, 113, 113);
-}
-
-
 .small {
     font-size: 15px;
+}
+
+.small:hover {
+    color: rgb(113, 113, 113);
 }
 
 .advice .small {
@@ -172,7 +160,7 @@ main {
     align-items: start;
     background-image: url('https://i.pinimg.com/564x/e8/76/36/e87636b8e330d84490fe8aded6347402.jpg');
     text-transform: uppercase;
-    width: 100%;
+    padding: 5px;
 }
 
 .advice button {
@@ -187,20 +175,60 @@ main {
 }
 
 .advice p {
-    color:#ebebebe5;
-    font-family: "Rubik Mono One", monospace;
-    font-size: 20px;
+    color:#ffffff;
+    font-family: "Anton", monospace;
+    font-size: 16px;
+    border-left: 1px solid rgb(255, 255, 255);
+    padding-left: 5px;
+    text-shadow: 0 0 20px black;
 }
 
 .fa-solid, .fa-regular {
     color:rgba(244, 190, 118, 0.827)
 }
 
+.activity .small {
+    display: flex;
+   text-align: right;
+    justify-content: left;
+    align-items: start;
+}
+
+
+.content .activity {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    justify-content: end;
+    align-items: start;
+    background-image: url('https://i.pinimg.com/564x/64/2f/45/642f451f47e3f80f14553ec0dca22fca.jpg');
+    text-transform: uppercase;
+    padding: 10px;
+}
+
+.activity button {
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    justify-content: left;
+    color: #ffffffe5;
+    font-family: "Anton", monospace;
+    font-size: 35px;
+    text-transform: uppercase;
+}
+
+
+#activityText {
+    color:#ebebeb;
+    font-family: "Anton", monospace;
+    font-size: 16px;
+    border-left: 1px solid white;
+    padding-left: 5px;
+    text-shadow: 0 0 20px black;
+}
 
 .boxes {
     display: flex;
-    flex-direction: row;
-    background-color:#ffffff12;
     text-transform: uppercase;
     align-items: center;
     justify-content: center;

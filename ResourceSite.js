@@ -25,16 +25,14 @@ let getNewQuote = async () =>
     // fetch the data from api
     let response=await fetch(url);
     console.log(typeof response);
-    //convert response to json and store it in quotes array
+   
     let allQuotes = await response.json();
 
-    // Generates a random number between 0 and the length of the quotes array
     let indx = Math.floor(Math.random()*allQuotes.length);
 
-    //Store the quote present at the randomly generated index
+    
     let quote=allQuotes[indx].text;
 
-    //Store the author of the respective quote
     let auth=allQuotes[indx].author;
 
     if(auth==null)
@@ -42,7 +40,6 @@ let getNewQuote = async () =>
         author = "Anonymous";
     }
 
-    //function to dynamically display the quote and the author
     text.innerHTML=quote;
     author.innerHTML="~ "+auth;
 }
@@ -50,20 +47,22 @@ getNewQuote();
 
 
 
-// async function getRandomActivity() {
-//     try {
-//         let response = await fetch('http://www.boredapi.com/api/activity/');
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok');
-//         }
-//         let data = await response.json();
-//         document.getElementById('activityText').textContent = data.activity;
-//     } catch (error) {
-//         console.error('Error fetching random activity:', error);
-//     }
-// }
+//live website doesn't work - only in live server mode does it display results 
 
-// getRandomActivity()
+async function getRandomActivity() {
+    try {
+        let response = await fetch('http://www.boredapi.com/api/activity/');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        let data = await response.json();
+        document.getElementById('activityText').textContent = data.activity;
+    } catch (error) {
+        console.error('Error fetching random activity:', error);
+    }
+}
+
+getRandomActivity()
 
 
 
@@ -83,7 +82,29 @@ async function getRandomAdvice() {
     }
 }
 
-
 document.getElementById('getAdviceButton').addEventListener('click', getRandomAdvice);
 
 getRandomAdvice();
+
+
+
+//these jokes are risky but some are funny 
+
+
+// async function getRandomJoke() {
+//     try {
+//         let response = await fetch('https://v2.jokeapi.dev/joke/Any');
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok');
+//         }
+//         let data = await response.json();
+//         document.getElementById('jokeText').textContent = data.setup + ' ' + data.delivery;
+//     } catch (error) {
+//         console.error('Error fetching random joke:', error);
+//     }
+// }
+
+// document.getElementById('getJokeButton').addEventListener('click', getRandomJoke);
+
+// getRandomJoke();
+

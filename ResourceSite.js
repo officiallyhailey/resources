@@ -118,7 +118,6 @@ let activityIdeas = [
     "Go on a camping trip",
     "Attend a local theater production",
     "Take a pottery class",
-    "Go on a wine tasting",
     "Try a new type of exercise",
     "Join a book club",
     "Go to a local art gallery",
@@ -140,7 +139,7 @@ let activityIdeas = [
     "Go on a local brewery tour",
     "Try a new type of cultural activity",
     "Join a local film society",
-    "Go to a local",
+    "Go to a local coffee shop",
 ];
 
 function getRandomItem(array) {

@@ -201,7 +201,7 @@ main {
     flex-direction: column;
     object-fit: cover;
     justify-content: end;
-    align-items: start;
+    align-items: end;
     background-image: url('https://i.pinimg.com/564x/64/2f/45/642f451f47e3f80f14553ec0dca22fca.jpg');
     text-transform: uppercase;
     padding: 10px;

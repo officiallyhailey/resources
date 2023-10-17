@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Bebas+Neue&family=Rubik+Mono+One&display=swap");
 
-
 * {
     text-decoration: none;
     list-style: none;
@@ -16,22 +15,19 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    width: 100vw;
+    width: 100%;
     overflow-x: hidden;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     background-color: #000000;
-    box-shadow: inset 0 0 25px #ffffff;
-    padding-bottom: 20px;
+    box-shadow: inset 0 0 15px #ffffff;
 }
-
 
 .header {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
     border-top: 2px solid#e7eaf1;
-    border-bottom: 2px solid #e7eaf1;
     padding: 10px;
     width: 100vw;
     justify-content: space-evenly;
@@ -42,9 +38,8 @@ body {
     letter-spacing: 3px;
     font-size: 20px;
     color: #e7eaf1;
-
+    box-shadow: inset 0 0 10px aliceblue;
 }
-
 
 .pre-main {
     margin-top: 10px;
@@ -73,14 +68,96 @@ body {
     -o-transform: scaleX(-1);
 }
 
+.sidebar {
+    display: flex;
+    height: 100%;
+    color: aliceblue;
+    width: 100%;
+    padding: 5px 10px 15px 0px;
+}
 
-main {
+.sidebar-intro {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: "Bebas Neue", monospace;
+    letter-spacing: 1px;
+    line-height: 25px;
+    padding-right: 10px;
+    text-align: justify;
+}
+
+.fa-computer {
+    padding-top: 10px;
+    font-size:25px;
+}
+
+.read-more {
+    font-size: 14px;
+    transition-duration: 0.1s;
+    text-align: center;
+    width: 80px;
+    border-radius: 50%;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.read-more:hover {
+    color: white;
+    text-shadow: 0 0 15px orange;
+}
+
+.read-more:active {
+    color: orange;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+}
+
+label,
+input,
+textarea,
+button {
+    margin: 5px 0;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 25px;
+    width: 100%;
+    background-color: transparent;
+    color: aliceblue;
+    resize: vertical;
+    font-family: "Anton", monospace;
+}
+
+.submit-button {
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #ffb66eca;
+}
+
+.intro-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    width: 100vw;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 400px);
-    grid-column-gap: 6px;
+    grid-template-columns: repeat(auto-fill, 450px);
+    grid-column-gap: 10px;
     grid-row-gap: 10px;
     grid-auto-flow: dense;
-    justify-content: center;
+    justify-content: space-evenly;
+    padding: 5px;
 }
 
 .boxes img {
@@ -88,17 +165,18 @@ main {
     flex-direction: column;
     height: 100%;
     width: 100%;
+    background-size: 100%;
+    object-fit: cover;
 }
 
 .content .today {
     display: flex;
     flex-direction: column;
-    background-image: url('https://i.pinimg.com/564x/22/61/ef/2261ef6f5365370e117c1f3fce4ac957.jpg');
+    background-image: url("https://i.pinimg.com/564x/22/61/ef/2261ef6f5365370e117c1f3fce4ac957.jpg");
     background-size: 100%;
-    background-position: -30%;
+    object-fit: cover;
     justify-content: end;
     align-items: start;
-
 }
 
 .content .time,
@@ -117,9 +195,10 @@ main {
     flex-direction: column;
     text-align: end;
     align-items: end;
-    background-image: url('https://i.pinimg.com/564x/14/b1/2e/14b12e5f4aef3130884ce05b0a1d4fce.jpg');
+    background-image: url("https://i.pinimg.com/564x/14/b1/2e/14b12e5f4aef3130884ce05b0a1d4fce.jpg");
     padding: 5px;
-
+    background-size: 100%;
+    object-fit: cover;
 }
 
 .quotes #quote {
@@ -158,9 +237,11 @@ main {
     text-align: start;
     justify-content: end;
     align-items: start;
-    background-image: url('https://i.pinimg.com/564x/e8/76/36/e87636b8e330d84490fe8aded6347402.jpg');
+    background-image: url("https://i.pinimg.com/564x/e8/76/36/e87636b8e330d84490fe8aded6347402.jpg");
     text-transform: uppercase;
     padding: 5px;
+    background-size: 100%;
+    object-fit: cover;
 }
 
 .advice button {
@@ -185,7 +266,7 @@ main {
 
 .fa-solid,
 .fa-regular {
-    color: rgba(244, 190, 118, 0.827)
+    color: rgba(244, 190, 118, 0.827);
 }
 
 .activity .small {
@@ -195,14 +276,13 @@ main {
     align-items: start;
 }
 
-
 .content .activity {
     display: flex;
     flex-direction: column;
     object-fit: cover;
     justify-content: end;
-    align-items: end;
-    background-image: url('https://i.pinimg.com/564x/64/2f/45/642f451f47e3f80f14553ec0dca22fca.jpg');
+    align-items: start;
+    background-image: url("https://i.pinimg.com/564x/64/2f/45/642f451f47e3f80f14553ec0dca22fca.jpg");
     text-transform: uppercase;
     padding: 10px;
 }
@@ -218,7 +298,6 @@ main {
     text-transform: uppercase;
 }
 
-
 #activityText {
     color: #ebebeb;
     font-family: "Anton", monospace;
@@ -228,12 +307,16 @@ main {
     text-shadow: 0 0 20px black;
 }
 
+#break {
+color: orange;
+}
+
 .boxes {
     display: flex;
     text-transform: uppercase;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 1px #ffffff;
+    box-shadow:  0 0 20px 0 #ffffff;
 }
 
 .title {
@@ -274,11 +357,9 @@ main {
 
 ul li a {
     margin: 10px 0px 10px 0px;
-
 }
 
 @media (max-width: 700px) {
-
     body {
         box-shadow: inset 0 0 25px #ffffff;
     }
@@ -300,9 +381,8 @@ ul li a {
         padding-left: 20px;
     }
 
-    main {
-        grid-template-columns: 80vw;
+    .content {
+        grid-template-columns: 98vw;
+        justify-content: center;
     }
-
-
 }

@@ -152,6 +152,35 @@ function getRandomActivity() {
 }
 
 getRandomActivity();
-document
-    .getElementById("getactivityButton")
-    .addEventListener("click", getRandomActivity);
+// document
+//     .getElementById("getactivityButton")
+//     .addEventListener("click", getRandomActivity);
+
+
+
+
+    //expand intro text in sidebar box 
+
+    let readMoreButton = document.querySelector('.read-more');
+    let lineClampElement = document.querySelector('.sidebar-intro');
+function toggleReadMore() {
+  
+
+    if (readMoreButton.innerHTML === 'read more') {
+        lineClampElement.style.webkitLineClamp = 'unset';
+        readMoreButton.innerHTML = 'read less';
+        readMoreButton.classList.add('fa-arrow-up')
+        readMoreButton.classList.remove('fa-arrow-down')
+    } else {
+        lineClampElement.style.webkitLineClamp = '2';
+        readMoreButton.innerHTML = 'read more';
+        readMoreButton.classList.remove('fa-arrow-up')
+        readMoreButton.classList.add('fa-arrow-down')
+    };
+}
+
+readMoreButton.addEventListener('click', toggleReadMore);
+
+
+
+

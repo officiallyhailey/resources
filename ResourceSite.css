@@ -156,7 +156,7 @@ button {
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     grid-auto-flow: dense;
-    justify-content: center;
+    justify-content: space-evenly;
     padding: 5px;
 }
 

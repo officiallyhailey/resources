@@ -60,6 +60,13 @@ body {
     padding: 0px 5px;
 }
 
+.intro-container .main-title {
+    margin-bottom: 15px;
+    font-family: "Rubik Mono One", monospace;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
 .upsidedown {
     display: inline-block;
     transform: scaleX(-1);
@@ -73,7 +80,7 @@ body {
     height: 100%;
     color: aliceblue;
     width: 100%;
-    padding: 5px 10px 15px 0px;
+    padding: 5px 10px 15px 15px;
 }
 
 .sidebar-intro {

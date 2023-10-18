@@ -183,16 +183,48 @@ readMoreButton.addEventListener('click', toggleReadMore);
 
 
 
-function sendEmail() {
-Email.send({
-    Host : "smtp.elasticemail.com",
-    Username : "hailey@anniecannons.com",
-    Password : "C17123024F640014395B681827CC1D095A2D",
-    To : 'hailey@anniecannons.com',
-    From : document.getElementById('email').value,
-    Subject : "Personal Website Response",
-    Body : document.getElementById('message').value 
-}).then(
-message => alert(message)
-);
-};
+// function sendEmail() {
+// Email.send({
+//     Host : "smtp.elasticemail.com",
+//     Username : "hailey@anniecannons.com",
+//     Password : "C17123024F640014395B681827CC1D095A2D",
+//     To : 'hailey@anniecannons.com',
+//     From : document.getElementById('email').value,
+//     Subject : "Personal Website Response",
+//     Body : document.getElementById('message').value 
+// }).then(
+// message => alert(message)
+// );
+// };
+
+
+window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+  /* customize formbutton below*/     
+  formbutton("create", {
+    action: "https://formspree.io/f/mknlklpe",
+    title: "Issue with a link?",
+    fields: [
+      { 
+        type: "email", 
+        label: "Email:", 
+        name: "email",
+        required: true,
+        placeholder: "your@email.com"
+      },
+      {
+        type: "textarea",
+        label: "Link:",
+        name: "message",
+        placeholder: "paste the link here so I can fix that ASAP",
+      },
+      { type: "submit" }      
+    ],
+    styles: {
+      title: {
+        backgroundColor: "gray"
+      },
+      button: {
+        backgroundColor: "gray"
+      }
+    }
+  });

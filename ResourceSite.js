@@ -14,7 +14,7 @@ const text = document.getElementById("quote");
 const author = document.getElementById("author");
 
 
-//quote  
+//quote  generator
 
 let getNewQuote = async () => {
     //api for quotes
@@ -152,9 +152,9 @@ function getRandomActivity() {
 }
 
 getRandomActivity();
-// document
-//     .getElementById("getactivityButton")
-//     .addEventListener("click", getRandomActivity);
+document
+    .getElementById("getactivityButton")
+    .addEventListener("click", getRandomActivity);
 
 
 

@@ -150,13 +150,13 @@ button {
 }
 
 .content {
-    width: 100vw;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, 450px);
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     grid-auto-flow: dense;
-    justify-content: space-evenly;
+    justify-content: center;
     padding: 5px;
 }
 

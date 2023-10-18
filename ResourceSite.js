@@ -183,4 +183,16 @@ readMoreButton.addEventListener('click', toggleReadMore);
 
 
 
-
+function sendEmail() {
+Email.send({
+    Host : "smtp.elasticemail.com",
+    Username : "hailey@anniecannons.com",
+    Password : "C17123024F640014395B681827CC1D095A2D",
+    To : 'hailey@anniecannons.com',
+    From : document.getElementById('email').value,
+    Subject : "Personal Website Response",
+    Body : document.getElementById('message').value 
+}).then(
+message => alert(message)
+);
+};

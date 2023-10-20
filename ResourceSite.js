@@ -197,12 +197,13 @@ readMoreButton.addEventListener('click', toggleReadMore);
 // );
 // };
 
-
+// pop up form submission for link errors using Formspree.io 
 window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
   /* customize formbutton below*/     
   formbutton("create", {
     action: "https://formspree.io/f/mknlklpe",
     title: "Issue with a link?",
+    description: "Paste the link here so I can fix that ASAP",
     fields: [
       { 
         type: "email", 
@@ -213,9 +214,9 @@ window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).
       },
       {
         type: "textarea",
-        label: "Link:",
+        label: "Message:",
         name: "message",
-        placeholder: "paste the link here so I can fix that ASAP",
+        placeholder: "link...",
       },
       { type: "submit" }      
     ],

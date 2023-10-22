@@ -28,6 +28,8 @@
 // - utc_offset
 // - week_number
 
+// const currentTime = () => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })
+
   fetch("https://worldtimeapi.org/api/ip")
     .then(response => {
       if (response.ok) {
@@ -288,7 +290,7 @@ window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).
       padding: "10px",
       fontFamily: "Bebas Neue, sans-serif",
       borderRadius: "25px",
-      color: "aliceblue"
+      color: "aliceblue",
      },
      modal: {
       backgroundColor: "transparent",
@@ -300,3 +302,7 @@ window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).
      },
     }
   });
+
+  // https://codepen.io/formspree/details/oNjZyQv
+
+  // https://www.joshwcomeau.com/css/custom-css-reset/

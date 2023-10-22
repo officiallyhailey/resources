@@ -19,15 +19,23 @@ body {
     overflow-x: hidden;
     display: flex;
     flex-wrap: wrap;
-    background-color: #000000;
+    background-color: #0f0f0f;
     box-shadow: inset 0 0 15px #ffffff;
+}
+
+.color {
+    color: rgba(255, 166, 0, 0.84);
+    text-shadow: 0 0 30px black;
+    /* background: -webkit-linear-gradient(45deg, orange, aliceblue, orange,aliceblue);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent; */
 }
 
 .header {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-    border-top: 2px solid#e7eaf1;
     padding: 10px;
     width: 100vw;
     justify-content: space-evenly;
@@ -106,21 +114,25 @@ body {
     transition-duration: 0.1s;
     text-align: center;
     width: 80px;
-    border-radius: 50%;
+    border-radius: 50px;
+    padding: 5px;
     margin: 0;
-    padding-bottom: 10px;
+    
 }
 
 .read-more:hover {
     color: white;
-    text-shadow: 0 0 15px orange;
+    text-shadow: 0 0 15px rgb(122, 122, 122);
+    cursor: pointer;
 }
 
 .read-more:active {
-    color: orange;
+   
+    -webkit-text-stroke: 0.3px orange;
+    
 }
 
-form {
+/* form {
     display: flex;
     flex-direction: column;
     width: 95%;
@@ -149,7 +161,8 @@ button {
 
 .submit-button:hover {
     background-color: #ffb66eca;
-}
+    
+} */
 
 .intro-container {
     display: flex;
@@ -229,6 +242,7 @@ button {
 
 .small:hover {
     color: rgb(113, 113, 113);
+    cursor: pointer;
 }
 
 .advice .small {
@@ -271,10 +285,7 @@ button {
     text-shadow: 0 0 20px black;
 }
 
-.fa-solid,
-.fa-regular {
-    color: rgba(244, 190, 118, 0.827);
-}
+
 
 .activity .small {
     display: flex;
@@ -314,16 +325,12 @@ button {
     text-shadow: 0 0 20px black;
 }
 
-#break {
-color: orange;
-}
-
 .boxes {
     display: flex;
     text-transform: uppercase;
     align-items: center;
     justify-content: center;
-    box-shadow:  0 0 20px 0 #ffffff;
+    box-shadow:  inset 0 0 5px #ffffff, 0 0 50px 0 rgb(88, 88, 88);
 }
 
 .title {
@@ -344,6 +351,7 @@ color: orange;
 
 .boxes .item:hover {
     color: #747474;
+    cursor: pointer;
 }
 
 .boxes .item:active {
@@ -368,16 +376,21 @@ ul li a {
 
 @media (max-width: 700px) {
     body {
-        box-shadow: inset 0 0 25px #ffffff;
+        box-shadow: inset 0 0 10px #ffffff;
     }
 
     .header {
         font-size: 15px;
+        box-shadow: inset 0 0 5px #ffffff;
     }
 
     .pre-main {
         font-size: 10px;
         margin: 5px;
+    }
+
+    .boxes {
+        /* box-shadow:  inset 0 0 5px #ffffff; */
     }
 
     .boxes .title {
@@ -389,7 +402,22 @@ ul li a {
     }
 
     .content {
-        grid-template-columns: 98vw;
+        grid-template-columns: 100%;
         justify-content: center;
     }
+
+    .today {
+        padding: 5px;
+    }
+}
+
+
+
+@media (max-width: 300px) {
+    .header, .main-title {
+        font-size: 22px;
+        padding: 0;
+    }
+
+  
 }

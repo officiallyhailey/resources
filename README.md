@@ -11,10 +11,6 @@
 
 ###
 
-<div align="left">
-  <img src="https://profile-counter.glitch.me/officiallyhailey/count.svg?"  />
-</div>
-
 ###
 
 <div align="left">

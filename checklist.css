@@ -1,0 +1,158 @@
+.todoList {
+  background-image: url(https://i.pinimg.com/564x/06/69/38/066938f633a1394737d55392df4196e4.jpg);
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 5px;
+
+}
+
+.cover {
+  display: flex;
+  flex-direction: column;
+}
+
+.cover .coverTitle {
+  font-family: "Nunito", sans-serif;
+  text-transform: uppercase;
+  font-size: 2rem;
+  color: rgba(15, 15, 15, 0.9);
+  font-weight: 700;
+  margin: 0;
+  padding: 5px;
+}
+
+.cover p {
+  color: rgba(15, 15, 15, 0.9);
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 5px;
+}
+
+.toDocontent {
+  padding: 10px 10px;
+}
+
+.toDocontent form {
+  display: flex;
+  gap: 25px;
+
+}
+
+.toDocontent form>* {
+  background: transparent;
+  border: none;
+  height: 35px;;
+}
+
+.toDocontent input[type="text"] {
+  width: 70%;
+  text-align: left;
+  font-size: 12px;
+  color: rgba(15, 15, 15, 0.9);
+  cursor: text;
+  border-bottom: 1px solid black;
+  resize: vertical;
+}
+
+.toDocontent input-buttons a {
+  text-decoration: none;
+}
+
+.toDocontent input-buttons i {
+  font-size: 20px;
+}
+
+.toDocontent i {
+  cursor: pointer;
+}
+
+.toDocontent i:hover {
+  transform: scale(1.2);
+}
+
+.toDocontent i:active {
+  transform: none;
+}
+
+.toDocontent ul {
+  padding: 0;
+  letter-spacing: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 200px;
+  resize: vertical;
+
+}
+
+.toDocontent ul::-webkit-scrollbar {
+  background-color: rgba(250, 250, 250, 0.3);
+  cursor: pointer;
+}
+
+.toDocontent ul::-webkit-scrollbar-thumb {
+  background-color: rgba(26, 26, 26, 0.529);
+  border-radius: 50px;
+  width: 2px;
+  cursor: pointer;
+}
+
+.align {
+  padding: 0;
+}
+
+.toDocontent li {
+  user-select: none;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.toDocontent li i {
+  color: rgba(15, 15, 15, 0.9);
+  font-size: 15px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+
+.toDocontent .link {
+  color: rgba(15, 15, 15, 0.9);
+  font-size: 16px;
+  position: relative;
+  display: inline-block;
+  padding: 5px 5px 5px 5px;
+}
+
+/* .toDocontent label:hover {
+  color: #bebebe;
+  background-color: #3e3e3e;
+} */
+
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: right;
+  align-items: end;
+  padding: 5px;
+  margin: 0;
+}
+
+.copy #clipboard {
+  width: fit-content;
+  background-color: transparent;
+  color: rgba(15, 15, 15, 0.9);
+  border-radius: 25px;
+  padding: 5px;
+  font-family: "Bebas Neue", sans-serif;
+  margin: 0;
+}
+
+.copy #clipboard:hover {
+  color: rgba(15, 15, 15, 0.9);
+  background-color: #3e3e3e;
+  cursor: pointer;
+}

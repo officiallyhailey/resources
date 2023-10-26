@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Coders Resource</title>
 
     <link rel="stylesheet" href="ResourceSite.css">
@@ -14,9 +14,15 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
 
-        <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+    <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+
+    <link rel="stylesheet" href="checklist.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+
+
 
 </head>
 
@@ -25,11 +31,12 @@
 
     <div class="header">
         <div class="pre-main">
-            <p>living ne<span class="upsidedown">r</span>vously</p>
+            <p>living nervou<span class="upsidedown">s</span>ly</p>
         </div>
-        <h1 class="main-title"><span class="color">[</span>Resou<span class="upsidedown">r</span>ces<span class="color">]</span></h1>
+        <h1 class="main-title"><span class="color">[</span>Resou<span class="upsidedown">r</span>ces<span
+                class="color">]</span></h1>
         <div class="pre-main">
-            <p>co<span class="upsidedown">d</span>ing audacious<span class="upsidedown">l</span>y</p>
+            <p>coding audacious<span class="upsidedown">l</span>y</p>
         </div>
     </div>
 
@@ -42,20 +49,21 @@
             <div class="sidebar-content">
                 <div class="intro-container">
                     <h1 class="main-title">Welcome</h1>
-                   <span class="color"> [ <i class="fa-solid color fa-computer"></i> ] </span>
+                    <span class="color"> [ <i class="fa-solid color fa-computer"></i> ] </span>
                     <p class="sidebar-intro">
                         New to coding? <br>
                         Not sure where to start? <br>
                         I was in the same <i class="fa-solid color fa-sailboat"></i> boat just four months ago.
-                        With support from the vast online coding community and AI as a learning tool, I've come so far and you can too. 
-                        To help practice what I'm learning, I decided to make a site that showcases 
-                        my abilities in front and back end development through a coders resource library comprised of entirely free services.  
+                        With support from the vast online coding community and AI as a learning tool, I've come so far
+                        and you can too.
+                        To showcases my abilities in both front and back end development, I decided to make a resource library comprised of the free services I learned from.
                         <br>
                         Learning to code does not need to drain your wallet but
-                        fair warning, it will drain your mind. Remember to take a <a href="#activity" class="color" id="break">break</a>,
+                        fair warning, it will drain your mind. Remember to take a <a href="#activity" class="color"
+                            id="break">break</a>,
                         drink some water and get some sunlight in between your commits.
                         <br> <br>
-                        I hope you find something useful here and if there's a resource you think should be here, thats not, let me know!
+                        I hope you find something useful here and if have suggestions or feedback, click the <i class="fa-regular fa-paper-plane color" id="showFormbutton"></i></span> on the bottom of the page!
                         <br><br>
                     </p>
 
@@ -155,6 +163,53 @@
                 </li>
             </ul>
         </div>
+
+
+        <div class="boxes list">
+            <!-- <div>
+        <h3 class="h3">
+            <span class="title">Links to Remember</span>
+        </h3>
+    </div> -->
+
+            <div class="todoList">
+                <div class="cover">
+                    <p class="coverTitle">Links to Remember</p>
+                    <p>drag | drop | add + | copy <i class="fa-regular fa-clipboard color"></i></p>
+                </div>
+
+                <div class="toDocontent">
+                    <form class="add">
+                        <input type="text" name="add" placeholder="Add item or note to self...">
+                        <div class="input-buttons">
+                            <a href="#0" class="add-todo">
+                                <i class="fas fa-plus add color plus-icon"></i>
+                            </a>
+                        </div>
+                    </form>
+                    <ul class="todos align">
+                        <li>
+                            <label for="todo_1" class="link">
+                                https://www.shecodes.io/athena
+                            </label>
+                            <i class="far fa-trash-alt color delete"></i>
+                        </li>
+
+                        <li>
+                            <label for="todo_2" class="link">
+                                https://edabit.com/
+                            </label>
+                            <i class="far fa-trash-alt color delete"></i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="copy">
+                    <button id="clipboard"><i class="fa-regular fa-clipboard color"></i> Copy List</button>
+                </div>
+            </div>
+
+        </div>
+
 
         <div class="boxes list">
             <div>
@@ -334,7 +389,8 @@
                 <li>
                     <a href="https://blog.avada.io/css" target="_blank">
 
-                        <span class="item"><i class="fa-solid color fa-pen-ruler"></i> Avada: Design Ideas Library </span>
+                        <span class="item"><i class="fa-solid color fa-pen-ruler"></i> Avada: Design Ideas Library
+                        </span>
                     </a>
                 </li>
 
@@ -393,7 +449,8 @@
                 <li>
                     <a href="https://www.boardinfinity.com/playground/coding" target="_blank">
 
-                        <span class="item"><i class="fa-solid color fa-table-columns"></i> Board Infinity: Terminal</span>
+                        <span class="item"><i class="fa-solid color fa-table-columns"></i> Board Infinity:
+                            Terminal</span>
                     </a>
                 </li>
 
@@ -417,7 +474,8 @@
                 <li>
                     <a href="https://fontawesome.com/icons" target="_blank">
 
-                        <span class="item"><i class="fa-solid color fa-screwdriver-wrench"></i> Font Awesome Icons</span>
+                        <span class="item"><i class="fa-solid color fa-screwdriver-wrench"></i> Font Awesome
+                            Icons</span>
                     </a>
                 </li>
 
@@ -483,7 +541,8 @@
             <ul>
                 <li>
                     <a href="https://www.tutorialspoint.com/articles/index.php" target="_blank">
-                        <span class="item"><i class="fa-solid color fa-lines-leaning"></i> Tutorials Point: Courses</span>
+                        <span class="item"><i class="fa-solid color fa-lines-leaning"></i> Tutorials Point:
+                            Courses</span>
                     </a>
                 </li>
 
@@ -542,7 +601,8 @@
 
                 <li>
                     <a href="https://code.org/curriculum/docs/k-5/glossary" target="_blank">
-                        <span class="item"><i class="fa-solid color fa-lines-leaning"></i> Code: Language Glossary </span>
+                        <span class="item"><i class="fa-solid color fa-lines-leaning"></i> Code: Language Glossary
+                        </span>
                     </a>
                 </li>
 
@@ -681,5 +741,6 @@
 
 
 </body>
+
 
 </html>

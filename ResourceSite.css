@@ -177,16 +177,6 @@ button {
     padding: 5px;
 }
 
-.boxes img {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    background-size: 100%;
-    object-fit: cover;
-    border-radius: 25px;
-}
-
 .content .today {
     display: flex;
     flex-direction: column;
@@ -251,6 +241,54 @@ button {
     justify-content: left;
     align-items: start;
 }
+
+.content .picture {
+    min-height: 250px;
+}
+
+.content .reference {
+background-image: url('https://i.pinimg.com/564x/c6/5c/54/c65c54d8d92230c5f50c7124c5e198ad.jpg');
+background-size: 100%;
+object-fit: cover;
+height: 100%;
+width: 100%;
+}
+
+.content .read {
+background-image: url('https://i.pinimg.com/564x/1d/fd/92/1dfd9220acc3475da8280890e6f8b12b.jpg');
+background-size: 100%;
+object-fit: cover;
+height: 100%;
+width: 100%;
+}
+
+.content .aboutme {
+    background-image: url('https://i.pinimg.com/564x/1f/a1/aa/1fa1aa34551e8e89b8c5be6a85988066.jpg');
+    background-size: 100%;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    }
+
+    .content .cyber {
+        background-image: url('https://i.pinimg.com/564x/23/06/89/23068927635fde753914673fc9168393.jpg');
+        background-size: 100%;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        background-position-y: 10%;
+        }
+
+        .content .focus {
+            background-image: url('https://i.pinimg.com/564x/6b/ae/d4/6baed4c0d06eb93c172435dd2e79f5d3.jpg');
+            background-size: 100%;
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+            background-position: 50%;
+            }
+
+
 
 .content .advice {
     display: flex;
@@ -394,10 +432,10 @@ ul li a {
         box-shadow: inset 0 0 5px #ffffff;
     }
 
-    .pre-main {
+    /* .pre-main {
         font-size: 10px;
         margin: 5px;
-    }
+    } */
 
     .boxes {
         /* box-shadow:  inset 0 0 5px #ffffff; */

@@ -103,7 +103,7 @@ body {
 
 .fa-computer {
     padding-top: 10px;
-    font-size:25px;
+    font-size: 25px;
 }
 
 .read-more {
@@ -114,7 +114,7 @@ body {
     border-radius: 50px;
     padding: 5px;
     margin: 0;
-    
+
 }
 
 .read-more:hover {
@@ -124,9 +124,9 @@ body {
 }
 
 .read-more:active {
-   
+
     -webkit-text-stroke: 0.3px orange;
-    
+
 }
 
 /* form {
@@ -218,7 +218,7 @@ button {
     color: rgba(255, 255, 255, 0.884);
     font-size: 35px;
     font-family: "Anton", monospace;
-  
+
 }
 
 .quotes #author {
@@ -247,19 +247,19 @@ button {
 }
 
 .content .reference {
-background-image: url('https://i.pinimg.com/564x/c6/5c/54/c65c54d8d92230c5f50c7124c5e198ad.jpg');
-background-size: 100%;
-object-fit: cover;
-height: 100%;
-width: 100%;
+    background-image: url('https://i.pinimg.com/564x/c6/5c/54/c65c54d8d92230c5f50c7124c5e198ad.jpg');
+    background-size: 100%;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
 }
 
 .content .read {
-background-image: url('https://i.pinimg.com/564x/1d/fd/92/1dfd9220acc3475da8280890e6f8b12b.jpg');
-background-size: 100%;
-object-fit: cover;
-height: 100%;
-width: 100%;
+    background-image: url('https://i.pinimg.com/564x/1d/fd/92/1dfd9220acc3475da8280890e6f8b12b.jpg');
+    background-size: 100%;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
 }
 
 .content .aboutme {
@@ -268,25 +268,25 @@ width: 100%;
     object-fit: cover;
     height: 100%;
     width: 100%;
-    }
+}
 
-    .content .cyber {
-        background-image: url('https://i.pinimg.com/564x/23/06/89/23068927635fde753914673fc9168393.jpg');
-        background-size: 100%;
-        object-fit: cover;
-        height: 100%;
-        width: 100%;
-        background-position-y: 10%;
-        }
+.content .cyber {
+    background-image: url('https://i.pinimg.com/564x/23/06/89/23068927635fde753914673fc9168393.jpg');
+    background-size: 100%;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    background-position-y: 10%;
+}
 
-        .content .focus {
-            background-image: url('https://i.pinimg.com/564x/6b/ae/d4/6baed4c0d06eb93c172435dd2e79f5d3.jpg');
-            background-size: 100%;
-            object-fit: cover;
-            height: 100%;
-            width: 100%;
-            background-position: 50%;
-            }
+.content .focus {
+    background-image: url('https://i.pinimg.com/564x/6b/ae/d4/6baed4c0d06eb93c172435dd2e79f5d3.jpg');
+    background-size: 100%;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    background-position: 50%;
+}
 
 
 
@@ -367,7 +367,7 @@ width: 100%;
 
 
 #showFormbutton:hover {
-cursor: pointer;
+    cursor: pointer;
 }
 
 
@@ -376,7 +376,7 @@ cursor: pointer;
     text-transform: uppercase;
     align-items: center;
     justify-content: center;
-    box-shadow:  inset 0 0 5px #ffffff, 0 0 50px 0 rgb(88, 88, 88);
+    box-shadow: inset 0 0 5px #ffffff, 0 0 50px 0 rgb(88, 88, 88);
     border-radius: 25px;
     /* outline: 1px solid rgba(240, 248, 255, 0.434); */
 }
@@ -462,10 +462,12 @@ ul li a {
 
 
 @media (max-width: 300px) {
-    .header, .main-title {
+
+    .header,
+    .main-title {
         font-size: 22px;
         padding: 0;
     }
 
-  
+
 }

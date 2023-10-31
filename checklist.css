@@ -44,7 +44,8 @@
 .toDocontent form>* {
   background: transparent;
   border: none;
-  height: 35px;;
+  height: 35px;
+  ;
 }
 
 .toDocontent input[type="text"] {

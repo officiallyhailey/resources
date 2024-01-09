@@ -19,6 +19,7 @@ body {
     overflow-x: hidden;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     background-color: #000000;
     box-shadow: inset 0 0 15px #ffffff;
 }
@@ -45,10 +46,17 @@ body {
     letter-spacing: 3px;
     font-size: 20px;
     color: #e7eaf1;
+    margin-bottom: 10px;
     /* box-shadow: inset 0 0 10px aliceblue; */
-    margin-top: 15px;
-    margin-bottom: 15px;
+    padding-top: 25px;
+
 }
+
+.header .main-title {
+    margin: 0;
+    padding: 0;
+}
+
 
 .pre-main {
     display: flex;
@@ -57,23 +65,59 @@ body {
     align-items: center;
     color: #c4c4c4;
     height: 0px;
-    font-size: 10px;
-    margin: 0;
+    font-size: 14px;
+    margin: 0px;
+    padding: 25px;}
+
+
+
+
+.profile-box {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    width: 80vw;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
     padding: 0;
+    gap: 15px;
+    box-shadow: inset 0 0 15px #ffffff;
+    border-radius: 25px;
 }
 
-.header .main-title {
-    margin: 5px;
-    padding: 0;
+.profile-intro {
+    width: 60%;
 }
-
-.intro-container .main-title {
+.profile-title {
     margin-bottom: 15px;
     font-family: "Rubik Mono One", monospace;
     text-transform: uppercase;
     font-weight: bolder;
+    color:rgb(255, 255, 255);
+    text-align: left;
+}
+.profile-text {
+    font-family: "montserrat", monospace;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 25px;
+    text-align: left;
+    color:rgb(255, 255, 255);
+    font-size: 12px;
+}
+.profile-pic {
+    border-radius: 200px;
+    height: 300px;
+    width: 300px;
+    margin-bottom: 30px;
+    padding: 0;
 }
 
+#break:hover {
+    color: aliceblue;
+    cursor: pointer;
+}
 .upsidedown {
     display: inline-block;
     transform: scaleX(-1);
@@ -82,15 +126,22 @@ body {
     -o-transform: scaleX(-1);
 }
 
-.sidebar {
+/* .intro-container .main-title {
+    margin-bottom: 15px;
+    font-family: "Rubik Mono One", monospace;
+    text-transform: uppercase;
+    font-weight: bolder;
+} */
+
+/* .sidebar {
     display: flex;
     height: 100%;
     color: aliceblue;
     width: 100%;
     padding: 5px 10px 15px 15px;
-}
+} */
 
-.sidebar-intro {
+/* .sidebar-intro {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -101,14 +152,14 @@ body {
     line-height: 25px;
     padding-right: 10px;
     text-align: justify;
-}
+} */
 
 .fa-computer {
     padding-top: 10px;
     font-size: 25px;
 }
 
-.read-more {
+/* .read-more {
     font-size: 14px;
     transition-duration: 0.1s;
     text-align: center;
@@ -129,7 +180,7 @@ body {
 
     -webkit-text-stroke: 0.3px orange;
 
-}
+} */
 
 /* form {
     display: flex;
@@ -163,17 +214,17 @@ button {
     
 } */
 
-.intro-container {
+/* .intro-container {
     display: flex;
     flex-direction: column;
-}
+} */
 
 .content {
-    width: 100%;
+    width: 90%;
     display: grid;
     grid-template-columns: repeat(auto-fill, 450px);
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
     grid-auto-flow: dense;
     justify-content: center;
     padding: 5px;
@@ -431,7 +482,18 @@ ul li a {
 
     .header {
         font-size: 15px;
-       
+    }
+
+    .profile-box {
+        gap: 0;
+    }
+
+    .profile-text {
+        width: 80%;
+    }
+
+    .todoList {
+        display: none;
     }
 
     /* .pre-main {

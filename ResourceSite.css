@@ -476,6 +476,12 @@ ul li a {
     margin: 10px 0px 10px 0px;
 }
 
+@media (max-width: 1027px) {
+    .content {
+        grid-template-columns: 90%;
+    }
+}
+
 @media (max-width: 1000px) {
     .profile-intro {
         width: 100%;

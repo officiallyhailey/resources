@@ -76,7 +76,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     height: auto;
-    width: 80vw;
+    width: 90vw;
     justify-content: center;
     align-items: center;
     margin: 20px;
@@ -87,7 +87,8 @@ body {
 }
 
 .profile-intro {
-    width: 60%;
+    padding: 0px 20px;
+   width: 65%;
 }
 .profile-title {
     margin-bottom: 15px;
@@ -488,8 +489,8 @@ ul li a {
         gap: 0;
     }
 
-    .profile-text {
-        width: 80%;
+    .profile-intro {
+        width: 100%;
     }
 
     .todoList {

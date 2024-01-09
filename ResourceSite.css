@@ -48,7 +48,7 @@ body {
     color: #e7eaf1;
     margin-bottom: 10px;
     /* box-shadow: inset 0 0 10px aliceblue; */
-    padding-top: 25px;
+  
 
 }
 
@@ -88,7 +88,7 @@ body {
 
 .profile-intro {
     padding: 0px 20px;
-   width: 65%;
+    width: 65%;
 }
 .profile-title {
     margin-bottom: 15px;

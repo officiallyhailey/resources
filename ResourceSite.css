@@ -541,6 +541,13 @@ ul li a {
         box-shadow: inset 0 0 10px #ffffff;
     }
 
+    .profile-text {
+        width: 100%;
+    }
+
+    .profile-title {
+        font-size: 25px;
+    }
     .content-header {
         font-size: 15px;
     }

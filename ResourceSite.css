@@ -41,7 +41,7 @@ header {
 }
 
 .color {
-    color: rgba(150, 215, 60, 0.952);
+    color: rgba(105, 148, 44, 0.952);
     text-shadow: 0 0 30px rgb(0, 0, 0);
     /* background: -webkit-linear-gradient(45deg, rgb(47, 255, 0), aliceblue, rgb(94, 255, 0),aliceblue);
     -webkit-background-clip: text;

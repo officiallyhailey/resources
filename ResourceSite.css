@@ -159,10 +159,10 @@ to {background-position: -100px 0px;background-size:2750px;}
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     margin: 0;
     padding: 15px;
     gap: 15px;
-    width: 200px;
 }
 
 .links a {

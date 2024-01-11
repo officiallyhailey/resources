@@ -330,7 +330,7 @@ let submitForm = document.querySelector(".add");
 let addButton = document.querySelector(".add-todo");
 let todoList = document.querySelector(".todos");
 let list = document.querySelectorAll(".todos li");
-
+let logo = document.querySelector('.logo-header')
 let lang = navigator.language;
 
 
@@ -381,10 +381,10 @@ clipboard.addEventListener("click", function copyBreakdown() {
 
 //fading on scroll
 
-let personal_intro = document.querySelector('.profile-box');
+let personal_intro = document.querySelector('.profile-intro');
 let arrow = document.querySelector('.down');
 let profile_image = document.querySelector('.profile')
-let profile_header  = document.querySelector('.header');
+let profile_header  = document.querySelector('.content-header');
 function fadeOutOnScroll(element) {
   if (!element) {
     return;
@@ -410,6 +410,7 @@ function scrollHandler() {
   fadeOutOnScroll(arrow);
   fadeOutOnScroll(profile_header);
   fadeOutOnScroll(profile_image);
+  fadeOutOnScroll(logo);
 }
 
 window.addEventListener('scroll', scrollHandler);

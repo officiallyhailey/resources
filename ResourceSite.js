@@ -279,6 +279,7 @@ formbutton("create", {
       backgroundColor: "#000000",
       backgroundImage: "url('gallery/contact-background.png')",
       backgroundSize: "cover"
+      
     },
     label: {
       fontFamily: "Bebas Neue, sans-serif",
@@ -295,7 +296,7 @@ formbutton("create", {
     },
     modal: {
       backgroundColor: "rgba(0, 0, 0, 1)",
-      border: "1px solid aliceblue"
+      border: "1px solid aliceblue",
     },
     closeButton: {
       fill: "#ff4500",

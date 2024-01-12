@@ -41,7 +41,7 @@ header {
 }
 
 .color {
-    color: rgba(105, 148, 44, 0.952);
+    color: rgb(236, 101, 23);
     text-shadow: 0 0 30px rgb(0, 0, 0);
     /* background: -webkit-linear-gradient(45deg, rgb(47, 255, 0), aliceblue, rgb(94, 255, 0),aliceblue);
     -webkit-background-clip: text;
@@ -73,13 +73,13 @@ header {
 }
 
 @-webkit-keyframes slidein {
-from {background-position: top; background-size:1000px; }
-to {background-position: -100px 0px;background-size:2750px;}
+from {background-position: top; background-size:1500px; }
+to {background-position: -100px 0px;background-size:2000px;}
 }
 
 @keyframes slidein {
-from {background-position: top;background-size:1000px; }
-to {background-position: -100px 0px;background-size:2750px;}
+from {background-position: top;background-size:1500px; }
+to {background-position: -100px 0px;background-size:2000px;}
 
 }
 .logo {
@@ -87,6 +87,7 @@ to {background-position: -100px 0px;background-size:2750px;}
     width: 220px;
     margin: 0;
     border-radius: 200px;
+    box-shadow: inset 0 0 400px black;
 }
 .profile-intro {
     display: flex;
@@ -151,7 +152,7 @@ to {background-position: -100px 0px;background-size:2750px;}
     width: 300px;
     margin-bottom: 20px;
     padding-right: 2px;
-    border-bottom: 4px solid rgba(150, 215, 60, 0.952);
+    border-bottom: 4px solid rgb(236, 101, 23);
 }
 .links {
     font-family: "Rubik Mono One", monospace;
@@ -569,6 +570,7 @@ ul li a {
 
     .today {
         padding: 5px;
+        width:
     }
 }
 

@@ -277,7 +277,8 @@ formbutton("create", {
     },
     shim: {
       backgroundColor: "#000000",
-      backgroundImage: "url('')"
+      backgroundImage: "url('gallery/contact-background.png')",
+      backgroundSize: "cover"
     },
     label: {
       fontFamily: "Bebas Neue, sans-serif",
@@ -297,8 +298,8 @@ formbutton("create", {
       border: "1px solid aliceblue"
     },
     closeButton: {
-      fill: "orange",
-      color: "orange"
+      fill: "#ff4500",
+      color: "#ff4500"
     },
   }
 });

@@ -1,6 +1,0 @@
-/node_modules
-
-# testing
-.eslintcache
-
-secrets.json

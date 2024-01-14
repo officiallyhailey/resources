@@ -336,6 +336,7 @@ let logo = document.querySelector('.logo-header')
 let lang = navigator.language;
 
 
+//links to remember code
 
 let listLenght = list.lenght;
 
@@ -369,6 +370,7 @@ function deleteTodos(e) {
 }
 
 todoList.addEventListener("click", deleteTodos);
+
 
 //copy to clipboard
 

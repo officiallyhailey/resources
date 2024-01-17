@@ -458,11 +458,11 @@ window.addEventListener('scroll', scrollHandler);
 
 //show resource section
 
-let resources = document.querySelector('.content');
+let maincontent = document.querySelector('.maincontent');
 function toggleResources() {
 
-  if (resources.classList.contains('hidden')) {
-    resources.classList.remove('hidden');
+  if (maincontent.classList.contains('hidden')) {
+    maincontent.classList.remove('hidden');
     }
       }
 

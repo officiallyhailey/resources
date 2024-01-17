@@ -320,8 +320,6 @@ let button = document.getElementById("showFormbutton").addEventListener('click',
 
 
 
-
-
 // https://codepen.io/formspree/details/oNjZyQv
 
 // https://www.joshwcomeau.com/css/custom-css-reset/
@@ -389,6 +387,27 @@ let personal_intro = document.querySelector('.profile-intro');
 let arrow = document.querySelector('.down');
 let profile_image = document.querySelector('.profile')
 let profile_header  = document.querySelector('.content-header');
+let todaybox = document.querySelector('.today');
+let answerbox = document.querySelector('.answerbox');
+let todobox = document.querySelector('.todobox');
+let practicebox = document.querySelector('.practicebox');
+let quotebox = document.querySelector('quotes');
+let funbox = document.querySelector('.funbox');
+let advicebox = document.querySelector('.advice');
+let ideasbox = document.querySelector('.ideasbox');
+let activitybox = document.querySelector('.activity');
+let terminalbox = document.querySelector('.terminalbox');
+let referencepicture = document.querySelector('.reference');
+let resourcebox =  document.querySelector('.resourcebox');
+let readpicture = document.querySelector('.read');
+let readbox = document.querySelector('.readbox');
+let aboutpicture = document.querySelector('.aboutme');
+let aboutmebox = document.querySelector('.aboutmebox');
+let cyberpicture = document.querySelector('.cyber');
+let cyberbox = document.querySelector('.cyberbox')
+let focuspicture = document.querySelector('.focus');
+
+
 function fadeOutOnScroll(element) {
   if (!element) {
     return;
@@ -415,6 +434,38 @@ function scrollHandler() {
   fadeOutOnScroll(profile_header);
   fadeOutOnScroll(profile_image);
   fadeOutOnScroll(logo);
+  fadeOutOnScroll(todaybox);
+  fadeOutOnScroll(practicebox);
+  fadeOutOnScroll(todobox);
+  fadeOutOnScroll(quotebox);
+  fadeOutOnScroll(funbox);
+  fadeOutOnScroll(advicebox);
+  fadeOutOnScroll(ideasbox);
+  fadeOutOnScroll(activitybox);
+  fadeOutOnScroll(terminalbox);
+  fadeOutOnScroll(referencepicture);
+  fadeOutOnScroll(resourcebox);
+  fadeOutOnScroll(readpicture);
+  fadeOutOnScroll(readbox);
+  fadeOutOnScroll(aboutpicture);
+  fadeOutOnScroll(aboutmebox);
+  fadeOutOnScroll(cyberpicture);
+  fadeOutOnScroll(cyberbox);
+  fadeOutOnScroll(focuspicture);
 }
 
 window.addEventListener('scroll', scrollHandler);
+
+//show resource section
+
+let resources = document.querySelector('.content');
+function toggleResources() {
+
+  if (resources.classList.contains('hidden')) {
+    resources.classList.remove('hidden');
+    }
+      }
+
+      arrow.onclick = function () {
+        toggleResources();
+        };

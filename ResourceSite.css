@@ -166,6 +166,10 @@ to {background-position: -100px 0px;background-size:2000px;}
     gap: 15px;
 }
 
+.links a:hover {
+    cursor: pointer;
+}
+
 .links a {
     color: aliceblue;
 }
@@ -273,6 +277,9 @@ to {background-position: -100px 0px;background-size:2000px;}
     padding: 5px;
 }
 
+.hidden {
+    display: none;
+}
 .content .today {
     display: flex;
     flex-direction: column;
@@ -521,7 +528,10 @@ ul li a {
 
 @media (max-width: 1050px) {
     .content {
-        grid-template-columns: 90%;
+        grid-template-columns: 85%;
+    }
+    .profile {
+        margin-bottom: 15px;
     }
 
 }
@@ -539,6 +549,8 @@ ul li a {
     body {
         box-shadow: inset 0 0 10px #ffffff;
     }
+
+
 
     .profile-text {
         width: 100%;
@@ -564,13 +576,13 @@ ul li a {
     }
 
     .content {
-        grid-template-columns: 100%;
+        grid-template-columns: 90%;
         justify-content: center;
     }
 
     .today {
         padding: 5px;
-        width:
+        
     }
 }
 

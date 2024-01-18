@@ -305,7 +305,7 @@ main {
     display: flex;
     flex-direction: column;
     background-image: url("https://i.pinimg.com/564x/22/61/ef/2261ef6f5365370e117c1f3fce4ac957.jpg");
-    background-size: 100%;
+    background-position: 50%;
     object-fit: cover;
     justify-content: end;
     align-items: start;
@@ -366,13 +366,14 @@ main {
     text-shadow: 0 0 10px black;
 }
 
-.content .picture {
-    min-height: 250px;
+.content .extra {
+    min-height: 300px;
 }
 
 .content .reference {
-    background-image: url("https://i.pinimg.com/564x/c6/5c/54/c65c54d8d92230c5f50c7124c5e198ad.jpg");
+    background-image: url("https://i.pinimg.com/564x/38/cd/8f/38cd8f030711c3d9acbd20f43401564d.jpg");
     background-size: 100%;
+    background-position: 50%;
     object-fit: cover;
     height: 100%;
     width: 100%;
@@ -381,7 +382,8 @@ main {
 .content .read {
     background-image: url("https://i.pinimg.com/564x/1d/fd/92/1dfd9220acc3475da8280890e6f8b12b.jpg");
     background-size: 100%;
-    object-fit: cover;
+    background-position: 50%;
+    object-fit: contain;
     height: 100%;
     width: 100%;
 }
@@ -421,9 +423,10 @@ main {
     background-image: url("https://i.pinimg.com/564x/e8/76/36/e87636b8e330d84490fe8aded6347402.jpg");
     text-transform: uppercase;
     padding: 10px;
-    background-size: 100%;
     object-fit: cover;
     letter-spacing: 1px;
+    background-position: 50%;
+    background-size: 100%;
 }
 
 .advice button {
@@ -460,6 +463,7 @@ main {
     justify-content: end;
     align-items: start;
     background-image: url("https://i.pinimg.com/564x/64/2f/45/642f451f47e3f80f14553ec0dca22fca.jpg");
+    background-size: 100%;
     text-transform: uppercase;
     padding: 10px;
     letter-spacing: 1px;
@@ -594,6 +598,7 @@ ul li a {
     .today {
         padding: 5px;
     }
+
 }
 
 @media (max-width: 300px) {

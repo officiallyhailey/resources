@@ -280,7 +280,7 @@ formbutton("create", {
       backgroundColor: "#000000",
       backgroundImage: "url('gallery/contact-background.png')",
       backgroundSize: "cover"
-      
+
     },
     label: {
       fontFamily: "Bebas Neue, sans-serif",
@@ -388,7 +388,7 @@ clipboard.addEventListener("click", function copyBreakdown() {
 let personal_intro = document.querySelector('.profile-intro');
 let arrow = document.querySelector('.down');
 let profile_image = document.querySelector('.profile')
-let profile_header  = document.querySelector('.content-header');
+let profile_header = document.querySelector('.content-header');
 let todaybox = document.querySelector('.today');
 let answerbox = document.querySelector('.answerbox');
 let todobox = document.querySelector('.todobox');
@@ -400,7 +400,7 @@ let ideasbox = document.querySelector('.ideasbox');
 let activitybox = document.querySelector('.activity');
 let terminalbox = document.querySelector('.terminalbox');
 let referencepicture = document.querySelector('.reference');
-let resourcebox =  document.querySelector('.resourcebox');
+let resourcebox = document.querySelector('.resourcebox');
 let readpicture = document.querySelector('.read');
 let readbox = document.querySelector('.readbox');
 let aboutpicture = document.querySelector('.aboutme');
@@ -414,17 +414,17 @@ function fadeOutOnScroll(element) {
   if (!element) {
     return;
   }
-  
+
   var distanceToTop = window.pageYOffset + element.getBoundingClientRect().top;
   var elementHeight = element.offsetHeight;
   var scrollTop = document.documentElement.scrollTop;
-  
+
   var opacity = 1;
-  
+
   if (scrollTop > distanceToTop) {
     opacity = 1 - (scrollTop - distanceToTop) / elementHeight;
   }
-  
+
   if (opacity >= 0) {
     element.style.opacity = opacity;
   }
@@ -461,13 +461,24 @@ window.addEventListener('scroll', scrollHandler);
 //show resource section
 
 let maincontent = document.querySelector('.maincontent');
+let hidecontent = document.querySelector('.up');
 function toggleResources() {
 
   if (maincontent.classList.contains('hidden')) {
     maincontent.classList.remove('hidden');
-    }
-      }
+  }
+}
 
-      arrow.onclick = function () {
-        toggleResources();
-        };
+arrow.onclick = function () {
+  toggleResources();
+};
+
+hidecontent.onclick = function () {
+  if (maincontent.classList.contains('hidden')) {
+    maincontent.classList.remove('hidden');
+  }
+  else {
+    maincontent.classList.add('hidden');
+  };
+}
+

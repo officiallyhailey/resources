@@ -216,7 +216,7 @@ document
 
 
 
-// pop up form submission for link errors using Formspree.io 
+// pop up form submission for messages using  Formspree.io 
 window.formbutton = window.formbutton || function () { (formbutton.q = formbutton.q || []).push(arguments) };
 /* customize formbutton below*/
 formbutton("create", {
@@ -274,6 +274,7 @@ formbutton("create", {
       fill: "transparent",
       boxShadow: "0px 0px 10px aliceblue",
       cursor: "pointer",
+      className: "form-button-hover",
     },
     shim: {
       backgroundColor: "#000000",
@@ -317,6 +318,7 @@ let showFormbutton = function () {
 };
 
 let button = document.getElementById("showFormbutton").addEventListener('click', showFormbutton, false);
+
 
 
 

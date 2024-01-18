@@ -266,6 +266,13 @@ to {background-position: -100px 0px;background-size:2000px;}
     font-size: 14px;
     margin: 0px;
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .content {
     width: 90%;
     display: grid;
@@ -576,7 +583,7 @@ ul li a {
     }
 
     .content {
-        grid-template-columns: 90%;
+        grid-template-columns: 100%;
         justify-content: center;
     }
 

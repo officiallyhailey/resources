@@ -211,6 +211,9 @@ header {
     animation: upDown infinite;
 }
 
+.down.up {
+    margin-top: 20px;
+}
 .down:hover {
     background-color: #747474;
 }

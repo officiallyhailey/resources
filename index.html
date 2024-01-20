@@ -7,8 +7,13 @@
 
     <title>Coders Resource</title>
 
-    <link rel="stylesheet" href="ResourceSite.css">
-    <script src="ResourceSite.js" defer></script>
+    <link rel="stylesheet" href="editing/ResourceSite.css">
+    <link rel="stylesheet" href="editing/checklist.css">
+    <link rel="stylesheet" href="editing/section2.css">
+    <link rel="stylesheet" href="editing/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <script src="/js/ResourceSite.js" defer></script>
+    <script src="/js/section2.js" defer></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -18,20 +23,17 @@
 
     <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
 
-    <link rel="stylesheet" href="checklist.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-
-
-
 </head>
 
 <body>
 
-    
+    <div class="scroll-watcher"></div>
 
     <div class="logo-header" style="background: url('gallery/header.png')">
-        <img src="gallery/logo.png" alt="" class="logo">
+        <!-- <video autoplay muted loop class="logo">
+            <source src="gallery/logo.mp4" type="video/mp4">
+          </video> -->
+          <img src="gallery/logo.png" class="logo" alt="">
     </div>
 
     <header>
@@ -45,6 +47,7 @@
                     With support from the vast online coding community and AI as a learning tool, I've come far
                     and so can you!
                     I've created this resource page to showcase my abilities in both frontend and backend development.
+                    Click the floating arrow to check it out!
                     <br><br>
                     A word of advice as you journey into becoming a developer...remember to take <a href="#activity"
                         class="color" id="break">breaks</a>,
@@ -106,7 +109,7 @@
         </div>
 
         <!-- Project 1 
-    adding another section between intro and resource section/ not sure what yet-->
+        adding another section between intro and resource section/ not sure what yet-->
 
 
 
@@ -727,8 +730,8 @@
                 <ul>
 
                     <div> -->
-                        <!-- <img src="/gallery/hg.png"> -->
-                    <!-- </div>
+            <!-- <img src="/gallery/hg.png"> -->
+            <!-- </div>
 
 
                     <li>
@@ -781,6 +784,7 @@
         </div> -->
 
         </div>
+
         <div class="down up animation animation--infinite animation--up-down">
             <a class="arrow-wrap" href="#welcome">
                 <span class="arrow"><i class="fa-solid fa-chevron-up"></i></span></a>
@@ -788,7 +792,141 @@
         </div>
 
 
+
+
+        <!-- <div class="header2"  style=" background: url('gallery/bluetiles.png');">
+            <div class="section-divide">
+                <h3 class="projects">OTHER PROJECTS</h3>
+            </div>
+          </div>
+
+          <div class="phoneframe">
+        <section class="budgetproject">
+
+            <div id="fields">
+
+                <div id="intro" class="messages">
+                    <div id=container>
+                        Monthly
+                        <div id=flip>
+                            <div>
+                                <div>💰needs💰</div>
+                            </div>
+                            <div>
+                                <div>💰savings💰</div>
+                            </div>
+                            <div>
+                                <div>💰wants💰</div>
+                            </div>
+                        </div>
+                        Budget!
+                    </div>
+                </div>
+
+                <div class="inputs">
+
+                    <button id="start">Begin</button>
+                    <input type="text" placeholder="Name" id="name" class="hidden1">
+                    <input type="text" placeholder="Monthly Salary" id="salary" class="hidden1">
+                    <button id="begin" class="hidden1">Submit</button>
+
+
+
+                    <p id="welcome" class="hidden1"></p>
+                    <p id="monthly" class="hidden1">Please fill in your monthly expenses💰</p>
+                    <input type="text" id="food" placeholder="food" class="hidden1">
+                    <p class="food"></p>
+                    <input type="text" id="housing" placeholder="housing" class="hidden1">
+                    <p class="housing"></p>
+                    <input type="text" id="bills" placeholder="bills/loans" class="hidden1">
+                    <p class="bills"></p>
+                    <input type="text" id="healthcare" placeholder="healthcare" class="hidden1">
+                    <p class="healthcare"></p>
+                    <input type="text" id="transportation" placeholder="transportation" class="hidden1">
+                    <p class="transportation"></p>
+                    <input type="text" id="essentials" placeholder="essentials" class="hidden1">
+                    <p class="essentials"></p>
+                    <button class="hidden1" id="submitNeed">Submit</button>
+
+
+                    <p id="warning" class="hidden1"></p>
+                    <p id="warning2" class="hidden1"></p>
+
+
+                    <p class="conclusion hidden1" id="conclusion"></p>
+                    <input type="text" class="hidden1" placeholder="emergency fund" id="emergencyInput">
+                    <p class="emergencyValue"></p>
+                    <button id="emergency" class="hidden1">Submit</button>
+                </div>
+            </div>
+
+
+
+
+            <div class="budgetTable hidden3">
+                <div id="table1" class="hidden1">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th id="person" colspan="2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Monthly Income</td>
+                                <td id="income"></td>
+                            </tr>
+                            <tr>
+                                <td>Monthly Expenses</td>
+                                <td id="monthlyExpenses"></td>
+                            </tr>
+                            <tr>
+                                <td>Remaining Needs Fund</td>
+                                <td id="needs"></td>
+                            </tr>
+                            <tr>
+                                <td>Remaining Wants Fund</td>
+                                <td id="wants"></td>
+                            </tr>
+                            <tr>
+                                <td>Remaining Savings Fund</td>
+                                <td id="savings"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+                <div id="table3" class="hidden1">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="2">Emergency Funds</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Invested</td>
+                                <td id="funds"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="reset">
+                    <button id="startOver" class="hidden1">Start Over</button>
+                    <button id="breakdownList" class="copy hidden1">Breakdown</button>
+                    <button id="clipboard2" class="clipboard2 hidden1">Copy Info</button>
+                </div>
+                <p id="breakdown" class="hidden1"></p>
+
+            </div>
+
+        </section> -->
+    </div>
     </main>
+
 </body>
 
 

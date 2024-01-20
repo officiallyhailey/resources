@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "watch:scss": "node-sass -w editing/style.scss editing/style.css"
+  },
+  "dependencies": {
+    "node": "^21.2.0",
+    "node-sass": "^9.0.0"
+  }
+}

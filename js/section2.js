@@ -28,6 +28,9 @@ buttonStart.classList.add("hidden1")
 let intro = document.getElementById("intro")
 intro.classList.add("hidden1")
 
+// let intro_container = document.getElementById("fields")
+// intro_container.classList.add("hidden1")
+
 // Activate needs button 
 
 buttonBegin.addEventListener("click", function myBudget() {

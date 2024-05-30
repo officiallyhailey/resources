@@ -1,3 +1,5 @@
+
+
 //todays date 
 
 let today = new Date();
@@ -319,13 +321,9 @@ let showFormbutton = function () {
 
 let button = document.getElementById("showFormbutton").addEventListener('click', showFormbutton, false);
 
-
-
-
 // https://codepen.io/formspree/details/oNjZyQv
 
 // https://www.joshwcomeau.com/css/custom-css-reset/
-
 
 
 let submitForm = document.querySelector(".add");
@@ -458,11 +456,23 @@ function scrollHandler() {
 }
 
 window.addEventListener('scroll', scrollHandler);
+
+
 //show resource section
 
 let maincontent = document.querySelector('.maincontent');
 let hidecontent = document.querySelector('.up');
+let showcontent = document.querySelector('.down');
+
+
+
 function toggleResources() {
+
+
+    if (hidecontent.classList.contains('hidden')) {
+      hidecontent.classList.remove('hidden');
+    }
+  
 
   if (maincontent.classList.contains('hidden')) {
     maincontent.classList.remove('hidden');
@@ -473,12 +483,16 @@ arrow.onclick = function () {
   toggleResources();
 };
 
+
 hidecontent.onclick = function () {
   if (maincontent.classList.contains('hidden')) {
     maincontent.classList.remove('hidden');
   }
   else {
     maincontent.classList.add('hidden');
+    hidecontent.classList.add('hidden')
   };
 }
+
+
 

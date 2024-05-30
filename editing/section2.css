@@ -2,13 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 400px;
+    height: 150px;
     width: 100vw;
     margin-top: 10px;
     justify-content: center;
     box-shadow: inset 0 0 20px #ffffff;
     object-fit: cover;
-    transform: skewY(-5deg);
+    /* transform: skewY(-5deg); */
     -webkit-animation: slidein 80s;
     animation: slidein 80s;
     -webkit-animation-fill-mode: forwards;
@@ -129,13 +129,13 @@
     background-color: black;
     color: white;
     font-size: 14px;
-    padding: 5px;
+    padding: 10px;
     text-transform: uppercase;
     border: 1px solid #e7eaf1c0;
     cursor: pointer;
     border-radius: 50px;
     margin: 10px;
-    width: 150px;
+    width: auto;
     text-align: center;
   }
   

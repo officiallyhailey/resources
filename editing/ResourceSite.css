@@ -24,7 +24,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    background-color: #000000;
+    background-color: #191919;
 
     padding-bottom: 15px;
 }
@@ -413,6 +413,11 @@ main {
     width: 100%;
 }
 
+.aboutimg {
+    height: 8rem;
+    width: 8rem;
+}
+
 .content .cyber {
     background-image: url("https://i.pinimg.com/564x/23/06/89/23068927635fde753914673fc9168393.jpg");
     background-size: 100%;
@@ -515,9 +520,10 @@ main {
     text-transform: uppercase;
     align-items: center;
     justify-content: center;
+      backdrop-filter: blur(50px) saturate(200%);
+  -webkit-backdrop-filter: blur(50px) saturate(200%);
     box-shadow:
-        inset 0 0 5px #ffffff,
-        0 0 50px 0 rgb(88, 88, 88);
+    0 8px 40px rgba(0, 0, 0, 0.45), 1px 1px 20px rgba(255, 255, 255, 0.6) inset;
     border-radius: 25px;
     /* outline: 1px solid rgba(240, 248, 255, 0.434); */
 }

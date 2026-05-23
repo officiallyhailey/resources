@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // GitHub Pages SPA fix: store the full URL in sessionStorage, then
+      // redirect to the root so index.html loads, which restores the route.
+      sessionStorage.setItem('spa-redirect', location.href);
+    </script>
+    <meta http-equiv="refresh" content="0;URL='/'" />
+  </head>
+</html>

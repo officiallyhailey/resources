@@ -1,5 +1,8 @@
 {
   "scripts": {
+    "dev": "npm run dev --prefix resources",
+    "build": "npm run build --prefix resources",
+    "deploy": "npm run deploy --prefix resources",
     "watch:scss": "node-sass -w editing/style.scss editing/style.css"
   },
   "dependencies": {

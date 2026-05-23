@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build output
+resources/dist/
+
+# Vite cache
+resources/.vite/
+
+# macOS
+.DS_Store
+
+# Local env files
+.env
+.env.local
+.env.*.local
+
+# Editor
+.vscode/settings.json

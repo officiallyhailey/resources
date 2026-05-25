@@ -8,7 +8,8 @@ export function useNavigateTo() {
     } else if (id === 'portfolio') {
       transitionTo('/resources');
     } else {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const block = window.innerWidth <= 600 ? 'start' : 'center';
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block });
     }
   };
 }

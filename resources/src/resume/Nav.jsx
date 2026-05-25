@@ -19,8 +19,7 @@ export default function Nav({ theme, onToggleTheme }) {
     const align = () => {
       const heroName = document.querySelector('.hero-name');
       if (heroName && navRef.current) {
-        const top = heroName.getBoundingClientRect().top + window.scrollY;
-        navRef.current.style.top = `${top}px`;
+        navRef.current.style.top = `${heroName.getBoundingClientRect().top}px`;
         navRef.current.style.transform = 'none';
       }
     };

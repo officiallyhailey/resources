@@ -207,7 +207,8 @@ main {
 .side-nav {
   position: fixed;
   left: max(20px, calc(50vw - 510px - 2rem));
-  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -388,7 +389,7 @@ main {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 24px;
+  margin-bottom: 0px;
 }
 
 .hero-name {
@@ -396,7 +397,7 @@ main {
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.03em;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   color: var(--text);
 }
 
@@ -813,6 +814,13 @@ main {
   .mn-overlay { display: block; }
 }
 
+/* Short desktop/laptop screens — swap side nav for hamburger */
+@media (max-height: 950px) and (min-width: 601px) {
+  .side-nav { display: none; }
+  .mn-btn     { display: flex; }
+  .mn-overlay { display: block; }
+}
+
 /* ─── Responsive ───────────────────────────────────────────────────── */
 
 @media (max-width: 860px) {
@@ -831,68 +839,40 @@ main {
 }
 
 @media (max-width: 600px) {
-  html { scroll-snap-type: y mandatory; }
-
   .side-nav        { display: none; }
   .theme-btn-fixed { top: 14px; right: 14px; }
 
   main { padding: 0; }
 
-  /* Standalone banner hidden — its image lives inside the hero on mobile */
-  .res-logo-header { display: none !important; }
-
-  /* Hero is one full screen: banner strip (40svh) + content (60svh) */
+  /* Hero sits below the logo banner — height = viewport minus banner */
   .hero {
-    height: 100svh;
+    height: calc(100svh - 300px);
     max-width: 100%;
-    scroll-snap-align: start;
     overflow: hidden;
   }
 
-  .hero-banner-strip {
-    display: block;
-    width: 100%;
-    height: 40svh;
-    flex-shrink: 0;
-    background-color: #151515;
-    background-size: cover;
-    background-position: center top;
-    animation: resSlideIn 100s linear infinite alternate both;
-  }
+  /* Logo header above handles the image — strip not needed on mobile */
+  .hero-banner-strip { display: none; }
 
   .hero-body {
-    height: 60svh;
-    padding: 12px 18px;
-    gap: 16px;
+    flex: 1;
+    min-height: 0;
+    padding: 28px 22px;
+    gap: 24px;
     align-items: center;
   }
 
   .hero-content { padding: 0; }
 
   .hero-logo-section {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     flex-shrink: 0;
   }
 
-  /* Each section = exactly one full screen, snapping cleanly */
   .section-wrap {
-    height: 100svh;
     max-width: 100%;
     padding: 32px 18px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-    scroll-snap-align: start;
-  }
-
-  /* Experience may have more content than fits — allow internal scroll */
-  #experience {
-    overflow-y: auto;
-    overscroll-behavior-y: contain;
-    justify-content: flex-start;
-    padding-top: 40px;
   }
 
   .about-sidebar     { flex-direction: column; }
@@ -970,13 +950,10 @@ main {
 
 @media (max-width: 600px) {
   .res-logo-header {
-    display: none;
+    height: 300px;
+    background-size: 900px;
+    padding: 10px;
   }
 
-  .res-logo { height: 120px; width: 120px; }
-
-  .hero {
-    height: 100%;
-    padding-top: 0px;
-  }
+  .res-logo { height: 90px; width: 90px; }
 }

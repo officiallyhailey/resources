@@ -541,6 +541,7 @@
 }
 
 @media (max-width: 620px) {
+  .res-header { padding: 16px 24px; }
   .res-profile-intro, .res-section { padding: 0 20px; }
   .res-grid {
     grid-template-columns: minmax(0, 400px);

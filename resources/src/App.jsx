@@ -6,7 +6,11 @@ import { TransitionProvider } from './shared/PageTransition';
 import LogoBanner from './shared/LogoBanner';
 
 export default function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem('theme') ?? 'dark';
+    document.documentElement.classList.toggle('dark', saved === 'dark');
+    return saved;
+  });
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');

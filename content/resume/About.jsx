@@ -36,7 +36,11 @@ export default function About() {
             <p className="mini-label">Education</p>
             <div className="edu-item">
               <span className="edu-year">2023</span>
-              <span>Full Stack Development Certification</span>
+              <span>Programming Certification</span>
+            </div>
+              <div className="edu-item">
+              <span className="edu-year">2023</span>
+              <span>HR Certification</span>
             </div>
             <div className="edu-item">
               <span className="edu-year">2026</span>

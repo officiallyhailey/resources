@@ -7,11 +7,11 @@
   --text-muted: #666666;
   --glass-bg: #e7eaf1;
   --glass-shadow: 0px 5px 10px rgba(0, 0, 0, 0.408), 0 1px 10px rgba(255, 255, 255, 1) inset, 0px 1px 2px #19191963;
-  --accent: #ff8c00;
+  --accent: #ff7700;
   --accent-subtle: rgba(107, 88, 63, 0.1);
   --nav-bg: #e7eaf1;
   --tag-bg: rgba(107, 87, 63, 0.08);
-  --tag-text: #e58e03;
+  --tag-text: #ff7700;
   --transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --ease: all 0.1s ease;
   --radius: 18px;
@@ -27,7 +27,6 @@ html.dark {
   --accent-subtle: rgba(184, 155, 122, 0.1);
   --nav-bg: #191919;
   --tag-bg: rgba(184, 150, 122, 0.1);
-  --tag-text: #e58e03;
 }
 
 /* ─── Reset ────────────────────────────────────────────────────────── */

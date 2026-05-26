@@ -1,5 +1,5 @@
-import logoImg from '../resources/assets/gallery/logo.png';
-import headerBg from '../resources/assets/gallery/header.png';
+import logoImg from '../assets/gallery/logo.png';
+import headerBg from '../assets/gallery/header.png';
 
 export default function LogoBanner() {
   return (

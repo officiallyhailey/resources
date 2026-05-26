@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import ResumePage from './resume';
-import ResourcesPage from './resources';
-import { TransitionProvider } from './shared/PageTransition';
-import LogoBanner from './shared/LogoBanner';
+import ResumePage from './content/resume';
+import ResourcesPage from './content/resources';
+import { TransitionProvider } from './content/shared/PageTransition';
+import LogoBanner from './content/shared/LogoBanner';
 
 export default function App() {
   const [theme, setTheme] = useState(() => {

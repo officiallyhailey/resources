@@ -14,7 +14,7 @@ export default function About() {
             Operations-focused leader with 4+ years of experience in team management,
             procurement, and business development. Proven at building scalable systems,
             optimizing and automating workflows, and translating operational data into
-            clear, actionable insights.
+            clear, actionable insights. Covered everything from supply chain logistics to customer experience for 2025's Top 100 Coffee Shops in the world!
           </p>
           <p>
             Known for creating structure, improving efficiency, and supporting leadership
@@ -22,12 +22,12 @@ export default function About() {
             output actually useful to look at.
           </p>
           <a
-            href="https://anavahdesigns.com"
+            href="https://silkcitycoffee.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="portfolio-link"
           >
-            View Design Portfolio →
+            Top 100 Coffee Shop's Website →
           </a>
         </GlassCard>
 

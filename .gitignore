@@ -2,10 +2,10 @@
 node_modules/
 
 # Build output
-resources/dist/
+dist/
 
 # Vite cache
-resources/.vite/
+.vite/
 
 # macOS
 .DS_Store
@@ -14,6 +14,3 @@ resources/.vite/
 .env
 .env.local
 .env.*.local
-
-# Editor
-.vscode/settings.json

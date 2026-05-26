@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import Background from './Background';
 import Nav from './Nav';
 import MobileNav from './MobileNav';
 import Hero from './Hero';
@@ -31,7 +30,6 @@ export default function ResumePage({ theme, onToggleTheme }) {
     <>
       <div className="scroll-progress" aria-hidden="true" />
       <div className="vignette" aria-hidden="true" />
-      <Background />
       <Nav theme={theme} onToggleTheme={onToggleTheme} />
       <MobileNav />
       <main>

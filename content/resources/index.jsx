@@ -3,8 +3,8 @@ import { usePageTransition } from '../shared/PageTransition';
 import { RESOURCE_BOXES, ACTIVITY_IDEAS, QUOTES } from './data';
 import ResourceBox from './ResourceBox';
 import LinkList from './LinkList';
-import profileImg from './assets/gallery/profile-pic.png';
-import './resources.css';
+import profileImg from '../assets/gallery/profile-pic.png';
+import '../../editing/resources.css';
 
 // This is the main resources page at /resources, which shows the clock, a random quote, a random piece of advice, and a random activity idea, as well as links to the category pages.
 export default function Resources({ theme, onToggleTheme }) {

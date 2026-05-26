@@ -1,12 +1,22 @@
 {
+  "name": "hailey-gerhard-resume",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "dev": "npm run dev --prefix resources",
-    "build": "npm run build --prefix resources",
-    "deploy": "npm run deploy --prefix resources",
-    "watch:scss": "node-sass -w editing/style.scss editing/style.css"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "predeploy": "vite build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "node": "^21.2.0",
-    "node-sass": "^9.0.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.15.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "gh-pages": "^6.3.0",
+    "vite": "^6.3.5"
   }
 }

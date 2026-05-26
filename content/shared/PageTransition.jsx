@@ -1,6 +1,6 @@
 import { createContext, useContext, useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logoVideo from '../resources/assets/gallery/logo.mp4';
+import logoVideo from '../assets/gallery/logo.mp4';
 
 const TRAVEL = 380;
 const HOLD   = 400;

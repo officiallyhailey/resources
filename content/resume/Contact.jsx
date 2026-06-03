@@ -16,8 +16,8 @@ const items = [
   {
     icon: '✦',
     label: 'Portfolio',
-    value: 'anavahdesigns.com',
-    href: 'https://anavahdesigns.com',
+    value: 'Resources Page',
+    href: 'https://anavahdesigns.com/resources',
   },
 ];
 

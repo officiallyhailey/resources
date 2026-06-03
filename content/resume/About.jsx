@@ -44,7 +44,7 @@ export default function About() {
             </div>
             <div className="edu-item">
               <span className="edu-year">2026</span>
-              <span>Back End Certification</span>
+              <span>Back End Certification - In Progress</span>
             </div>
           </GlassCard>
 
@@ -61,7 +61,7 @@ export default function About() {
                 GitHub →
               </a>
               <a
-                href="https://anavahdesigns.com"
+                href="https://anavahdesigns.com/resources"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="portfolio-link"

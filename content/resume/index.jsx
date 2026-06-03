@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import Nav from './Nav';
-import MobileNav from './MobileNav';
 import Hero from './Hero';
 import About from './About';
 import Experience from './Experience';
 import Skills from './Skills';
 import Contact from './Contact';
+import ContactPopup from './ContactPopup';
 
 function useScrollReveal() {
   useEffect(() => {
@@ -24,14 +23,12 @@ function useScrollReveal() {
   }, []);
 }
 
-export default function ResumePage({ theme, onToggleTheme }) {
+export default function ResumePage() {
   useScrollReveal();
   return (
     <>
       <div className="scroll-progress" aria-hidden="true" />
       <div className="vignette" aria-hidden="true" />
-      <Nav theme={theme} onToggleTheme={onToggleTheme} />
-      <MobileNav />
       <main>
         <Hero />
         <About />
@@ -39,6 +36,7 @@ export default function ResumePage({ theme, onToggleTheme }) {
         <Skills />
         <Contact />
       </main>
+      <ContactPopup />
     </>
   );
 }

@@ -44,7 +44,7 @@ export default function About() {
             </div>
             <div className="edu-item">
               <span className="edu-year">2026</span>
-              <span>Back End Certification - In Progress</span>
+              <span>Back End Certification <br/> In Progress</span>
             </div>
           </GlassCard>
 

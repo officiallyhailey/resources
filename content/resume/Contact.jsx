@@ -26,7 +26,7 @@ export default function Contact() {
     <div className="section-wrap" id="contact">
       <div className="reveal">
         <p className="section-label">Contact</p>
-        <h2 className="section-title">Let's work together</h2>
+        <h2 className="section-title">What Can I Do For You?</h2>
       </div>
 
       <div className="contact-links">

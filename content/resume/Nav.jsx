@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { useNavigateTo } from '../shared/navigateTo';
 
 const links = [
@@ -12,21 +12,7 @@ const links = [
 
 export default function Nav({ theme, onToggleTheme }) {
   const timers = useRef({});
-  const navRef = useRef(null);
   const navigateTo = useNavigateTo();
-
-  useEffect(() => {
-    const align = () => {
-      const heroName = document.querySelector('.hero-name');
-      if (heroName && navRef.current) {
-        navRef.current.style.top = `${heroName.getBoundingClientRect().top}px`;
-        navRef.current.style.transform = 'none';
-      }
-    };
-    requestAnimationFrame(align);
-    window.addEventListener('resize', align);
-    return () => window.removeEventListener('resize', align);
-  }, []);
 
   function handleMouseEnter(id) {
     timers.current[id] = setTimeout(() => navigateTo(id), 300);
@@ -37,8 +23,8 @@ export default function Nav({ theme, onToggleTheme }) {
   }
 
   return (
-    <>
-      <nav className="side-nav" ref={navRef}>
+    <nav className="side-nav">
+      <div className="side-nav-links">
         {links.map(({ label, id }, i) => (
           <div key={label} className="side-nav-item">
             {i > 0 && <div className="side-nav-line" />}
@@ -47,19 +33,19 @@ export default function Nav({ theme, onToggleTheme }) {
               onMouseEnter={() => handleMouseEnter(id)}
               onMouseLeave={() => handleMouseLeave(id)}
             >
-              {id !== 'home' && <span className="side-nav-dot" />}
+              {i > 0 && <span className="side-nav-dot" />}
               <span className="side-nav-label">{label}</span>
             </span>
           </div>
         ))}
-      </nav>
+      </div>
       <button
-        className="theme-btn theme-btn-fixed"
+        className="theme-btn"
         onClick={onToggleTheme}
         aria-label="Toggle light/dark mode"
       >
         {theme === 'dark' ? '☀' : '◑'}
       </button>
-    </>
+    </nav>
   );
 }

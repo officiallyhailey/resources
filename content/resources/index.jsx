@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { usePageTransition } from '../shared/PageTransition';
 import { RESOURCE_BOXES, ACTIVITY_IDEAS, QUOTES } from './data';
 import ResourceBox from './ResourceBox';
 import LinkList from './LinkList';
@@ -8,14 +7,12 @@ import '../../editing/resources.css';
 
 // This is the main resources page at /resources, which shows the clock, a random quote, a random piece of advice, and a random activity idea, as well as links to the category pages.
 export default function Resources({ theme, onToggleTheme }) {
-  const { transitionTo } = usePageTransition();
   const [time, setTime] = useState('');
   const [date, setDate] = useState('');
   const [quote, setQuote] = useState(() => QUOTES[Math.floor(Math.random() * QUOTES.length)]);
   const [advice, setAdvice] = useState('');
   const [activity, setActivity] = useState('');
   const contentRef = useRef(null);
-  const backTimer = useRef(null);
 
   // Live clock
   useEffect(() => {
@@ -51,17 +48,6 @@ export default function Resources({ theme, onToggleTheme }) {
   return (
     <div className="res-page">
       <div className="res-progress" />
-
-      <div className="res-nav-bar">
-        <button
-          className="res-back"
-          onMouseEnter={() => { backTimer.current = setTimeout(() => transitionTo('/'), 300); }}
-          onMouseLeave={() => clearTimeout(backTimer.current)}
-        >← Resume</button>
-        <button className="res-theme-btn" onClick={onToggleTheme} aria-label="Toggle theme">
-          {theme === 'dark' ? '☀' : '◑'}
-        </button>
-      </div>
 
       {/* Intro / profile */}
       <header className="res-header">

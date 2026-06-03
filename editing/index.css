@@ -921,11 +921,12 @@ main {
   border: none;
   cursor: pointer;
   z-index: 500;
-  font-size: 1.25rem;
+  font-size: 2.5rem;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 6px;
   box-shadow: 0 4px 24px rgba(255, 119, 0, 0.45);
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
 }

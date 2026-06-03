@@ -23,7 +23,7 @@ export default function ContactPopup() {
         onClick={() => setOpen(o => !o)}
         aria-label={open ? 'Close contact form' : 'Open contact form'}
       >
-        ✉
+        <i className="fa-solid fa-envelope" />
       </button>
 
       <div

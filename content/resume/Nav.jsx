@@ -2,12 +2,12 @@ import { useRef } from 'react';
 import { useNavigateTo } from '../shared/navigateTo';
 
 const links = [
-  { label: 'Home',       id: 'home'       },
-  { label: 'About',      id: 'about'      },
+  { label: 'Home', id: 'home' },
+  { label: 'About', id: 'about' },
   { label: 'Experience', id: 'experience' },
-  { label: 'Skills',     id: 'skills'     },
-  { label: 'Contact',    id: 'contact'    },
-  { label: 'Portfolio',  id: 'portfolio'  },
+  { label: 'Skills', id: 'skills' },
+  { label: 'Contact', id: 'contact' },
+  { label: 'Portfolio', id: 'portfolio' },
 ];
 
 export default function Nav({ theme, onToggleTheme }) {
@@ -23,18 +23,18 @@ export default function Nav({ theme, onToggleTheme }) {
   }
 
   return (
-    <nav className="side-nav">
-      <div className="side-nav-links">
+    <nav className="top-nav">
+      <div className="top-nav-links">
         {links.map(({ label, id }, i) => (
-          <div key={label} className="side-nav-item">
-            {i > 0 && <div className="side-nav-line" />}
+          <div key={label} className="top-nav-item">
+            {i > 0 && <div className="top-nav-line" />}
             <span
-              className="side-nav-link"
+              className="top-nav-link"
               onMouseEnter={() => handleMouseEnter(id)}
               onMouseLeave={() => handleMouseLeave(id)}
             >
-              {i > 0 && <span className="side-nav-dot" />}
-              <span className="side-nav-label">{label}</span>
+              {i > 0 && <span className="top-nav-dot" />}
+              <span className="top-nav-label">{label}</span>
             </span>
           </div>
         ))}

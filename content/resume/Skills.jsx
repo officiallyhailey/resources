@@ -24,16 +24,15 @@ const tech = [
   'Shopify',
   'Square',
   'Automations',
+  'AI Agents',
+  'Claude',
+  'Zapier'
 ];
 
 export default function Skills() {
   return (
     <div className="section-wrap" id="skills">
-      <div className="reveal">
-        <p className="section-label">Skills</p>
-        <h2 className="section-title">What I bring</h2>
-      </div>
-
+    
       <div className="skills-grid">
         <GlassCard className="skills-group reveal reveal-delay-1">
           <h3 className="skills-group-title">Admin & Operations</h3>

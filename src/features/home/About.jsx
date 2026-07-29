@@ -1,7 +1,7 @@
 import { ABOUT } from '@/content/about';
 
 // The lead is split into words here rather than in CSS so each can carry its
-// own transition delay — the reveal reads as a sentence assembling, not a block
+// own transition delay - the reveal reads as a sentence assembling, not a block
 // fading. `white-space: pre` on .word preserves the trailing space.
 const REVEAL_MS = 700;
 
@@ -16,7 +16,7 @@ export default function About() {
       <div className="wrap">
         <div className="about">
           <div>
-            <p className="idx rv">03 — About</p>
+            <p className="idx rv">03 - About</p>
             <h2 className="sectitle rv" style={{ marginBottom: '2rem' }}>
               The full <span className="o">picture</span>
             </h2>

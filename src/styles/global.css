@@ -122,7 +122,7 @@ main {
   z-index: 9999;
   pointer-events: none;
   opacity: 0;
-  /* No transition by default — snap phase must be instant */
+  /* No transition by default - snap phase must be instant */
 }
 
 /* Enable transitions for all animated phases */
@@ -794,7 +794,7 @@ main {
 
   main { padding: 0; }
 
-  /* Standalone banner hidden — its image lives inside the hero on mobile */
+  /* Standalone banner hidden - its image lives inside the hero on mobile */
   .res-logo-header { display: none !important; }
 
   /* Hero is one full screen: banner strip (40svh) + content (60svh) */
@@ -843,7 +843,7 @@ main {
     scroll-snap-align: start;
   }
 
-  /* Experience may have more content than fits — allow internal scroll */
+  /* Experience may have more content than fits - allow internal scroll */
   #experience {
     overflow-y: auto;
     overscroll-behavior-y: contain;

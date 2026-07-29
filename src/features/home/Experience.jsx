@@ -19,7 +19,7 @@ export function Skills() {
   return (
     <section id="skills">
       <div className="wrap">
-        <p className="idx rv">04 — Toolkit</p>
+        <p className="idx rv">04 - Toolkit</p>
         <h2 className="sectitle rv" style={{ marginBottom: '.6rem' }}>
           Current tech stacks <span className="o">&amp; what&apos;s next</span>
         </h2>
@@ -58,7 +58,7 @@ export function Experience() {
   const [fill, setFill] = useState(0);
 
   // The rule fills as the timeline scrolls past. Driven from a rAF-throttled
-  // scroll listener rather than animation-timeline, which is Chromium-only —
+  // scroll listener rather than animation-timeline, which is Chromium-only -
   // the mock used it and it silently did nothing in Safari and Firefox.
   useEffect(() => {
     let ticking = false;
@@ -83,7 +83,7 @@ export function Experience() {
   return (
     <section id="experience">
       <div className="wrap">
-        <p className="idx rv">05 — Experience</p>
+        <p className="idx rv">05 - Experience</p>
         <h2 className="sectitle rv" style={{ marginBottom: '2.5rem' }}>
           Where I&apos;ve <span className="o">worked</span>
         </h2>

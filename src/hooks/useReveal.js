@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 //
 // NB: an IntersectionObserver never fires for a display:none element, so
 // anything that starts hidden (a case study, a pane swapped out) must not rely
-// on this for its visibility — it would open stuck at opacity 0.
+// on this for its visibility - it would open stuck at opacity 0.
 export function useReveal(rootRef, deps = []) {
   useEffect(() => {
     const root = rootRef.current;
@@ -27,7 +27,7 @@ export function useReveal(rootRef, deps = []) {
       io.observe(el);
     });
 
-    // Word-by-word blocks reveal their children, not themselves — the paragraph
+    // Word-by-word blocks reveal their children, not themselves - the paragraph
     // carries [data-words] but no .rv, and each .word starts at opacity 0.
     // Without this second observer nothing ever adds .in and the text stays
     // permanently invisible, which is exactly what happened to the About lead.

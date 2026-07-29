@@ -10,7 +10,7 @@ const MORPH = 520;
  * sites). Both need the same three behaviours, and each one is subtle enough
  * that a second copy would drift:
  *
- *  1. A morph flight — the clicked card's image is cloned, and the clone flies
+ *  1. A morph flight - the clicked card's image is cloned, and the clone flies
  *     to where the opened panel's image will sit.
  *  2. Instant placement, never smooth. This page sets `scroll-behavior:smooth`,
  *     so 'auto' would inherit it; measuring a flight target mid-scroll is what
@@ -35,7 +35,7 @@ export function useDeck(cardSelector = '.pcard') {
 
   // Centre what the reader should be looking at. Anything short enough to sit
   // whole on screen gets centred; anything taller than the viewport cannot be,
-  // so it parks just under the nav — centring a tall panel would scroll past
+  // so it parks just under the nav - centring a tall panel would scroll past
   // its own heading, which is the opposite of focusing it.
   const place = useCallback((el) => {
     if (!el) return;
@@ -75,7 +75,7 @@ export function useDeck(cardSelector = '.pcard') {
   // Runs after React has committed the open panel, so the flight target exists.
   useLayoutEffect(() => {
     // Only reposition when openKey actually CHANGED. This effect also fires on
-    // mount, where it would scroll to this deck's own section on page load —
+    // mount, where it would scroll to this deck's own section on page load -
     // with two decks mounted the second one won, dropping every visitor
     // part-way down the page instead of at the top.
     //
@@ -90,7 +90,7 @@ export function useDeck(cardSelector = '.pcard') {
       return undefined;
     }
 
-    // Land on the preview itself, not the panel's top edge — the preview is
+    // Land on the preview itself, not the panel's top edge - the preview is
     // the thing worth seeing, and centring it puts the whole screen in view
     // instead of parking the reader above it. Falls back to the panel for the
     // client breakdowns, which lead with a figure rather than an embed.
@@ -108,7 +108,7 @@ export function useDeck(cardSelector = '.pcard') {
     }
 
     // Opening swaps the deck out from under the button that had focus, which
-    // drops focus to <body> — a keyboard user is then stranded and has to tab
+    // drops focus to <body> - a keyboard user is then stranded and has to tab
     // from the top of the document again. Hand focus to the back control.
     sectionRef.current
       ?.querySelector('[data-deck-back]')
@@ -127,7 +127,7 @@ export function useDeck(cardSelector = '.pcard') {
     document.body.appendChild(clone);
     // Hide the framed container, not just its contents. .dshot carries the white
     // background, border and drop shadow, so dimming only .stage left an empty
-    // white panel on the page that the flying image visibly filled in — the
+    // white panel on the page that the flying image visibly filled in - the
     // landing read as a placeholder being populated rather than an image
     // arriving. The clone already animates to a matching radius and shadow, so
     // with the frame hidden the clone simply becomes the panel.

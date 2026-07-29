@@ -1,4 +1,4 @@
-// About, capabilities, experience and contact content — data, so copy edits
+// About, capabilities, experience and contact content - data, so copy edits
 // never mean touching a component.
 
 export const ABOUT = {
@@ -8,7 +8,7 @@ export const ABOUT = {
   lead:
     "Tech forward, operations-focused developer with 7+ years of experience in project management, workflow optimization, procurement, and business development. Proven at building scalable systems, reliable workflows, and translating operational data into clear, actionable insights. Covered everything from supply chain logistics to customer experience for 2025's Top 100 Coffee Shops in the world!",
   body: [
-    'Known for creating structure, improving efficiency, and supporting leadership through data-informed decision-making — with a design eye that makes the output actually pleasing to look at.',
+    'Known for creating structure, improving efficiency, and supporting leadership through data-informed decision-making - with a design eye that makes the output actually pleasing to look at.',
   ],
   // `year` is optional: link rows carry no date, so the cell stays empty.
   facts: [
@@ -18,7 +18,7 @@ export const ABOUT = {
     { label: 'GitHub →', href: 'https://github.com/officiallyhailey' },
     { label: 'Client sites →', href: '#clients' },
   ],
-  // The portrait renders as a player card — rarity strip, art, stat block.
+  // The portrait renders as a player card - rarity strip, art, stat block.
   // Stats are the same facts stated elsewhere on the page, not invented ones.
   card: {
     src: '/img/profile-pic.png',
@@ -36,7 +36,7 @@ export const ABOUT = {
   },
 };
 
-// Grouped capabilities. `i` is a simple-icons export name — Skills renders the
+// Grouped capabilities. `i` is a simple-icons export name - Skills renders the
 // real brand mark when one exists and falls back to a plain chip when it does
 // not, so nothing here depends on hand-drawn SVG paths that could render wrong.
 //
@@ -130,7 +130,7 @@ export const JOBS = [
     title: 'Operations Manager',
     company: 'Silk City Coffee',
     points: [
-      'Built backend data structures and a frontend dashboard using Airtable and AI agents — task management, recruiting, HR/payroll, analytics, B2B insights, vendor management, and SOP guides.',
+      'Built backend data structures and a frontend dashboard using Airtable and AI agents - task management, recruiting, HR/payroll, analytics, B2B insights, vendor management, and SOP guides.',
       'Managed scheduling, labor modeling, and payroll for high-volume, multi-location teams within target margins.',
       'Saved over $35k through vendor management and secured an additional $35k through grant proposals.',
     ],
@@ -147,7 +147,7 @@ export const JOBS = [
 ];
 
 // All contact copy, including the popup form's. Kept here with everything else
-// so text edits never mean opening a component — and so apostrophes can be
+// so text edits never mean opening a component - and so apostrophes can be
 // written normally instead of escaped as &apos; for JSX.
 export const CONTACT_FORM = {
   label: 'Contact',
@@ -158,7 +158,7 @@ export const CONTACT_FORM = {
   sending: 'Sending…',
   sent: {
     label: 'Sent',
-    heading: 'Thanks — that reached me.',
+    heading: 'Thanks - that reached me.',
     body: 'I read everything that comes through here and will reply as soon as I can.',
     close: 'Close',
   },

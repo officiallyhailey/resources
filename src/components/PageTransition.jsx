@@ -3,19 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import logoVideo from '@/assets/logo.mp4';
 
 const TRAVEL = 380;
-const HOLD   = 400;
-const HIDE   = 250;
+const HOLD = 400;
+const HIDE = 250;
 
 const TransitionContext = createContext(null);
 export const usePageTransition = () => useContext(TransitionContext);
 
 export function TransitionProvider({ children }) {
   const navigate = useNavigate();
-  const busy     = useRef(false);
+  const busy = useRef(false);
   const videoRef = useRef(null);
   const realLogo = useRef(null);
 
-  const [phase,  setPhase]  = useState('idle');
+  const [phase, setPhase] = useState('idle');
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   const transitionTo = useCallback((path) => {
@@ -28,8 +28,8 @@ export function TransitionProvider({ children }) {
     let x = 0, y = 0;
     if (logo) {
       const r = logo.getBoundingClientRect();
-      x = (r.left + r.width  / 2) - window.innerWidth  / 2;
-      y = (r.top  + r.height / 2) - window.innerHeight / 2;
+      x = (r.left + r.width / 2) - window.innerWidth / 2;
+      y = (r.top + r.height / 2) - window.innerHeight / 2;
       logo.style.opacity = '0';
     }
 
@@ -41,7 +41,7 @@ export function TransitionProvider({ children }) {
 
       if (videoRef.current) {
         videoRef.current.currentTime = 0;
-        videoRef.current.play().catch(() => {});
+        videoRef.current.play().catch(() => { });
       }
 
       setTimeout(() => setPhase('centered'), TRAVEL);
@@ -52,7 +52,7 @@ export function TransitionProvider({ children }) {
         setPhase('flying-out');
 
         setTimeout(() => {
-          // Clone is back at banner — hand off to the (same) real logo
+          // Clone is back at banner - hand off to the (same) real logo
           if (realLogo.current) realLogo.current.style.opacity = '';
           setPhase('hiding');
           setTimeout(() => {
@@ -80,10 +80,10 @@ export function TransitionProvider({ children }) {
         src={logoVideo}
         className={[
           'pt-logo',
-          phase !== 'idle'     ? 'pt-on'     : '',
-          animate              ? 'pt-animate' : '',
-          phase === 'centered' ? 'pt-pulse'   : '',
-          phase === 'hiding'   ? 'pt-hide'    : '',
+          phase !== 'idle' ? 'pt-on' : '',
+          animate ? 'pt-animate' : '',
+          phase === 'centered' ? 'pt-pulse' : '',
+          phase === 'hiding' ? 'pt-hide' : '',
         ].join(' ')}
         style={{ transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px))` }}
         muted

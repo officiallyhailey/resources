@@ -5,11 +5,11 @@ export default function Contact({ onOpenForm }) {
     <>
       <section id="contact">
         <div className="wrap">
-          <p className="idx rv">06 — Contact</p>
+          <p className="idx rv">06 - Contact</p>
           {/* The headline is one link, so the whole slab is the target. The
               accented O sits inside the word rather than colouring a whole
               line, which keeps the shape reading as a single mark. */}
-          {/* the headline opens the form rather than firing a mail client —
+          {/* the headline opens the form rather than firing a mail client -
               a mailto is a dead end for anyone without a desktop client set up */}
           <button className="cta-big rv" onClick={onOpenForm}>
             LET&apos;S W<span className="o">O</span>RK

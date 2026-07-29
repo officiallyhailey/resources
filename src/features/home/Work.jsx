@@ -18,7 +18,7 @@ export default function Work({ jump }) {
       <div className="wrap">
         <div className="head">
           <div>
-            <p className="idx rv">01 — Selected work</p>
+            <p className="idx rv">01 - Selected work</p>
             <h2 className="sectitle rv">
               Systems built
               <br />
@@ -33,45 +33,45 @@ export default function Work({ jump }) {
         <div className="fan pane rv in" ref={deckRef} hidden={!!openKey}>
           {PROJECTS.map((p) => (
             <span className="cardslot" key={p.key}>
-            <button
-              className="pcard"
-              style={{ '--rot': p.tilt.rot, '--dy': p.tilt.dy }}
-              aria-label={`Open the ${p.title} case study`}
-              onClick={(e) => open(p.key, e.currentTarget)}
-            >
-              <span className={`pbg ${p.bg}`} />
-              <span className="pglow" />
-              <span className="shot">
-                <span className="chrome">
-                  <i />
-                  <i />
-                  <i />
-                  <b>{p.chrome}</b>
-                </span>
-                <img src={p.shot} alt={p.shotAlt} loading="lazy" />
-                <span className="pfly">
-                  <p className="pteaser">{p.card.teaser}</p>
-                  <span className="pstack">
-                    {p.card.stack.map((s) => (
-                      <i key={s}>{s}</i>
-                    ))}
+              <button
+                className="pcard"
+                style={{ '--rot': p.tilt.rot, '--dy': p.tilt.dy }}
+                aria-label={`Open the ${p.title} case study`}
+                onClick={(e) => open(p.key, e.currentTarget)}
+              >
+                <span className={`pbg ${p.bg}`} />
+                <span className="pglow" />
+                <span className="shot">
+                  <span className="chrome">
+                    <i />
+                    <i />
+                    <i />
+                    <b>{p.chrome}</b>
                   </span>
-                  <span className="pgo">
-                    {p.card.cta} <em>→</em>
+                  <img src={p.shot} alt={p.shotAlt} loading="lazy" />
+                  <span className="pfly">
+                    <p className="pteaser">{p.card.teaser}</p>
+                    <span className="pstack">
+                      {p.card.stack.map((s) => (
+                        <i key={s}>{s}</i>
+                      ))}
+                    </span>
+                    <span className="pgo">
+                      {p.card.cta} <em>→</em>
+                    </span>
                   </span>
                 </span>
-              </span>
-              <span className="pbody">
-                <span className="ptop">
-                  <span className={`ptag${p.card.tag.includes('Live') || p.card.tag.includes('Public') ? ' live' : ''}`}>
-                    {p.card.tag}
+                <span className="pbody">
+                  <span className="ptop">
+                    <span className={`ptag${p.card.tag.includes('Live') || p.card.tag.includes('Public') ? ' live' : ''}`}>
+                      {p.card.tag}
+                    </span>
+                    <span className="pno">{p.no}</span>
                   </span>
-                  <span className="pno">{p.no}</span>
+                  <h3>{p.title}</h3>
+                  <span className="pscope">{p.card.scope}</span>
                 </span>
-                <h3>{p.title}</h3>
-                <span className="pscope">{p.card.scope}</span>
-              </span>
-            </button>
+              </button>
             </span>
           ))}
         </div>

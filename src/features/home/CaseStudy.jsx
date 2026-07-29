@@ -95,7 +95,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
   const [frameReady, setFrameReady] = useState(false);
   // The embed renders at a desktop width and is scaled down, so the site lays
   // out like a desktop app instead of collapsing to its mobile breakpoint. The
-  // factor has to be measured, not assumed — the column width is fluid.
+  // factor has to be measured, not assumed - the column width is fluid.
   const [scale, setScale] = useState(0.6);
   const stageEl = useRef(null);
   const techRef = useRef(null);
@@ -108,7 +108,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
   );
 
   // Every case stays mounted so the morph's flight target exists the moment it
-  // is measured — remounting on open would null the ref. State is therefore
+  // is measured - remounting on open would null the ref. State is therefore
   // reset here on close rather than by unmounting.
   useEffect(() => {
     if (!hidden) return;
@@ -117,7 +117,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
     setFrameReady(false);
   }, [hidden]);
 
-  // Opening the breakdown should move the reader to it — otherwise the content
+  // Opening the breakdown should move the reader to it - otherwise the content
   // they just asked for unfolds below the fold and nothing appears to happen.
   useEffect(() => {
     if (!tech) return;
@@ -125,7 +125,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
     if (!el) return;
     const r = el.getBoundingClientRect();
     // centre it, unless it is taller than the viewport, in which case park it
-    // under the nav — centring something tall scrolls past its own start
+    // under the nav - centring something tall scrolls past its own start
     const y = r.top + window.scrollY - Math.max(NAVH, (window.innerHeight - r.height) / 2);
     window.scrollTo({ top: Math.max(0, y), behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
   }, [tech]);
@@ -158,7 +158,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
       </div>
 
       {/* The default view carries little enough that a column split just left
-          dead space — the lede reads across the top and the preview takes the
+          dead space - the lede reads across the top and the preview takes the
           full width, which is also the largest the embedded site can be. */}
       <div className="caselede">
         <p className="casesum">{project.card.teaser}</p>
@@ -194,7 +194,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
               <iframe
                 className="scaler"
                 src={live.url}
-                title={`${project.title} — live site`}
+                title={`${project.title} - live site`}
                 loading="lazy"
                 onLoad={() => setFrameReady(true)}
                 style={{ transform: `scale(${scale})`, opacity: frameReady ? 1 : 0 }}

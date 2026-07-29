@@ -1,6 +1,6 @@
 # Portfolio site
 
-Source for **[anavahdesigns.com](https://anavahdesigns.com)** — a portfolio and résumé site built
+Source for **[anavahdesigns.com](https://anavahdesigns.com)** - a portfolio and résumé site built
 with React and Vite, deployed on GitHub Pages.
 
 Two routes: the portfolio at `/`, and a curated developer-resource directory at `/resources` that
@@ -25,7 +25,7 @@ npm run dev
 
 ```
 src/
-  content/            all copy and data — edit text here, not in components
+  content/            all copy and data - edit text here, not in components
   features/
     home/             the portfolio
     toolbox/          the /resources directory
@@ -39,7 +39,7 @@ public/
 
 **Content is data, not markup.** Every string lives in `src/content/`. Adding a project is a new
 entry in `projects.js`; adding a client site is one in `sites.js`. Components render whatever is
-there, so copy changes never mean opening a component — and apostrophes stay plain JavaScript
+there, so copy changes never mean opening a component - and apostrophes stay plain JavaScript
 instead of `&apos;` escapes.
 
 | File | Holds |
@@ -50,7 +50,7 @@ instead of `&apos;` escapes.
 | `content/about.js` | About, capabilities, experience, contact + form copy |
 | `content/toolbox.js` | The `/resources` link directory |
 
-`@` is aliased to `src/` — import as `@/content/…`, `@/hooks/…`. Configured in `vite.config.js`
+`@` is aliased to `src/` - import as `@/content/…`, `@/hooks/…`. Configured in `vite.config.js`
 (what actually builds) and `jsconfig.json` (editor IntelliSense only).
 
 ## Things worth knowing before changing them
@@ -65,7 +65,7 @@ hit on `/resources` finds no matching file. That page stashes the URL and bounce
 
 **Case studies stay mounted while hidden.** The card-to-detail morph measures its flight target the
 moment a case opens, so unmounting closed cases would null the ref and break the animation. State is
-reset on close instead — that is what the `setState`-in-effect lint warning in `CaseStudy.jsx` is
+reset on close instead - that is what the `setState`-in-effect lint warning in `CaseStudy.jsx` is
 about, and it is deliberate.
 
 **The card decks use a static hover wrapper.** `.cardslot` / `.siteslot` own layout and hover while
@@ -77,7 +77,7 @@ word-by-word blocks (`[data-words]`) by a second one that reveals their children
 `useReveal`. An element that starts at `opacity: 0` with no observer watching it never appears.
 
 **Screenshots are JPEG.** Site screenshots compress ~85% smaller than PNG with no visible loss.
-`profile-pic.png` stays PNG — it is a cutout, and JPEG has no alpha channel.
+`profile-pic.png` stays PNG - it is a cutout, and JPEG has no alpha channel.
 
 ## Deploying
 
@@ -87,10 +87,10 @@ Pushing to `main` publishes to GitHub Pages. Before pushing:
 npm run build && npm run lint
 ```
 
-Then load `/resources` directly in a fresh tab — it is the one path that behaves differently in
+Then load `/resources` directly in a fresh tab - it is the one path that behaves differently in
 production than locally, because it depends on the `404.html` redirect.
 
 ## Design references
 
-Layout templates and design mocks live outside this repo at `~/Developer/web-templates/` —
+Layout templates and design mocks live outside this repo at `~/Developer/web-templates/` -
 standalone HTML, no build step. Open its `index.html` to browse them.

@@ -6,8 +6,8 @@
     <script>
       // GitHub Pages has no server-side rewrites, so a deep link like
       // /resources has no matching file and lands here with a real 404.
-      // Stash the URL and bounce to the root — the one path the host will
-      // serve — where index.html replays it before the app boots.
+      // Stash the URL and bounce to the root - the one path the host will
+      // serve - where index.html replays it before the app boots.
       sessionStorage.setItem('spa-redirect', location.href);
       location.replace('/');
     </script>

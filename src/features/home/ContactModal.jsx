@@ -35,7 +35,7 @@ export default function ContactModal({ open, onClose }) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="cmodal-title"
-      // Only a click that both starts and ends on the backdrop closes it —
+      // Only a click that both starts and ends on the backdrop closes it -
       // otherwise a drag that happens to release outside dismisses a filled-in
       // form, which is the most annoying way to lose someone's message.
       onMouseDown={(e) => {

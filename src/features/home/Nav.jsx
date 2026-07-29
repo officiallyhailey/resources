@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { NAV_LINKS } from '@/content/profile';
 
-// The persistent pill nav. Hides on downward scroll and returns on upward —
+// The persistent pill nav. Hides on downward scroll and returns on upward -
 // so it is out of the way while reading but never more than a flick away.
 // Links only, so it must stay usable at phone width rather than be hidden.
 export default function Nav() {

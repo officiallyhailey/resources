@@ -58,7 +58,7 @@ export default function HomePage() {
   const [jump, setJump] = useState(null);
   const crossToProject = useCallback((key) => setJump({ key, n: (performance.now() | 0) }), []);
 
-  // The form opens once the reader reaches the bottom — they have seen the work
+  // The form opens once the reader reaches the bottom - they have seen the work
   // by then, so it reads as an invitation rather than an interruption. Once per
   // session only, and never if they already opened it themselves; a popup that
   // reappears on every visit is the thing people close without reading.
@@ -110,7 +110,7 @@ export default function HomePage() {
       <Skills />
       <Experience />
       <Contact onOpenForm={() => setContactOpen(true)} />
-      {/* Always reachable — a reader who decides to get in touch three sections
+      {/* Always reachable - a reader who decides to get in touch three sections
           up should not have to scroll to the bottom to find how. Hidden while
           the dialog is open so it cannot sit on top of its own panel. */}
       {!contactOpen && (
@@ -121,7 +121,7 @@ export default function HomePage() {
               d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4.2-8 4.8-8-4.8V6l8 4.8L20 6v2.2Z"
             />
           </svg>
-          
+
         </button>
       )}
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />

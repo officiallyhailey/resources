@@ -1,7 +1,7 @@
 import { SITES, SITE_KEYS, SITE_TITLES } from '@/content/sites';
 import { useDeck } from '@/hooks/useDeck';
 
-// Tier 2: client sites. Same deck gesture as the projects, in lighter stock —
+// Tier 2: client sites. Same deck gesture as the projects, in lighter stock -
 // and the breakdowns open in place, so nobody is sent off-site to learn about
 // the work. The visit link comes after the story, not instead of it.
 export default function Sites({ onCross }) {
@@ -12,7 +12,7 @@ export default function Sites({ onCross }) {
       <div className="wrap">
         <div className="head">
           <div>
-            <p className="idx rv">02 — Sites I build &amp; maintain</p>
+            <p className="idx rv">02 - Sites I build &amp; maintain</p>
             <h2 className="sectitle rv">
               Built for real <span className="o">clients</span>
             </h2>
@@ -25,29 +25,29 @@ export default function Sites({ onCross }) {
         <div className="sites pane rv in" ref={deckRef} hidden={!!openKey}>
           {SITES.map((s) => (
             <span className="siteslot" key={s.key}>
-            <button
-              className="site"
-              style={{ '--rot': s.tilt.rot, '--dy': s.tilt.dy }}
-              aria-label={`Open the ${s.title} breakdown`}
-              onClick={(e) => open(s.key, e.currentTarget)}
-            >
-              <span className="thumb">
-                <img src={s.thumb} alt={s.thumbAlt} loading="lazy" />
-                <span className="pfly">
-                  <p>{s.teaser}</p>
-                  <span className="visit">
-                    See the breakdown <em>→</em>
+              <button
+                className="site"
+                style={{ '--rot': s.tilt.rot, '--dy': s.tilt.dy }}
+                aria-label={`Open the ${s.title} breakdown`}
+                onClick={(e) => open(s.key, e.currentTarget)}
+              >
+                <span className="thumb">
+                  <img src={s.thumb} alt={s.thumbAlt} loading="lazy" />
+                  <span className="pfly">
+                    <p>{s.teaser}</p>
+                    <span className="visit">
+                      See the breakdown <em>→</em>
+                    </span>
                   </span>
                 </span>
-              </span>
-              <span className="sbody">
-                <span className="plat">
-                  <i />
-                  {s.platform}
+                <span className="sbody">
+                  <span className="plat">
+                    <i />
+                    {s.platform}
+                  </span>
+                  <h3>{s.title}</h3>
                 </span>
-                <h3>{s.title}</h3>
-              </span>
-            </button>
+              </button>
             </span>
           ))}
         </div>
@@ -119,7 +119,7 @@ function SiteCase({ site, hidden, stageRef, onGo, onCross }) {
 
       {site.shots.map((shot, n) => (
         <figure className="shotfig rv" key={shot.src}>
-          {/* the first shot is the morph target — it is the one the card's
+          {/* the first shot is the morph target - it is the one the card's
               thumbnail flies to, so it must carry the stage ref */}
           <img ref={n === 0 ? stageRef : undefined} src={shot.src} alt={shot.alt} loading="lazy" />
           <figcaption>

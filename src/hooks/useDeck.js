@@ -125,12 +125,19 @@ export function useDeck(cardSelector = '.pcard') {
     clone.className = 'morph';
     clone.style.cssText += `left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px`;
     document.body.appendChild(clone);
-    stage.style.opacity = '0';
+    // Hide the framed container, not just its contents. .dshot carries the white
+    // background, border and drop shadow, so dimming only .stage left an empty
+    // white panel on the page that the flying image visibly filled in — the
+    // landing read as a placeholder being populated rather than an image
+    // arriving. The clone already animates to a matching radius and shadow, so
+    // with the frame hidden the clone simply becomes the panel.
+    const frame = stage.closest('.dshot') || stage;
+    frame.style.opacity = '0';
 
     // Safety net: a position:fixed clone must never outlive its transition.
     const reap = setTimeout(() => {
       clone.remove();
-      stage.style.opacity = '1';
+      frame.style.opacity = '1';
       busy.current = false;
     }, MORPH + 800);
 
@@ -145,8 +152,8 @@ export function useDeck(cardSelector = '.pcard') {
 
     const done = setTimeout(() => {
       clearTimeout(reap);
-      stage.style.transition = 'none';
-      stage.style.opacity = '1';
+      frame.style.transition = 'none';
+      frame.style.opacity = '1';
       requestAnimationFrame(() => clone.remove());
       busy.current = false;
     }, MORPH);
@@ -155,7 +162,7 @@ export function useDeck(cardSelector = '.pcard') {
       clearTimeout(reap);
       clearTimeout(done);
       clone.remove();
-      stage.style.opacity = '1';
+      frame.style.opacity = '1';
       busy.current = false;
     };
   }, [openKey, place]);

@@ -3,26 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hailey Grace</title>
-    <meta name="description" content="Business Operations · Data Visualization · Web Design" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Rubik+Mono+One&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      crossorigin="anonymous" referrerpolicy="no-referrer"
-    />
-    <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
     <script>
-      // Restore URL after GitHub Pages 404 redirect (see public/404.html)
+      // Restore the route after the GitHub Pages 404 bounce (see public/404.html).
+      // Must run before the app boots so the router starts on the right path and
+      // the address bar never shows the detour.
       (function () {
         var redirect = sessionStorage.getItem('spa-redirect');
         sessionStorage.removeItem('spa-redirect');
@@ -30,9 +14,54 @@
           history.replaceState(null, null, redirect);
         }
       })();
+      // Apply the stored theme before first paint, so a dark-mode visitor never
+      // sees a flash of the light theme while React hydrates.
+      (function () {
+        try {
+          if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {}
+      })();
     </script>
-    <script type="module" crossorigin src="/assets/index-Dk8-J8Xj.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DeC8aWnV.css">
+    <title>Hailey Grace — Full-stack developer</title>
+    <meta
+      name="description"
+      content="Full-stack developer building scalable, automated systems. Operations platforms, internal tools and client sites — built end to end."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Hailey Grace — Full-stack developer" />
+    <meta
+      property="og:description"
+      content="Full-stack developer building scalable, automated systems. Operations platforms, internal tools and client sites — built end to end."
+    />
+    <meta property="og:url" content="https://anavahdesigns.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Still required by the Toolbox page (Anton/Bebas/Rubik in toolbox.css,
+         Font Awesome icons in LinkList). Remove once that page is restyled —
+         removing them before then breaks a page that is currently live. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Anton&family=Bebas+Neue&family=Rubik+Mono+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script type="module" crossorigin src="/assets/index-CssIBSzv.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Wn_NDT80.css">
   </head>
   <body>
     <div id="root"></div>

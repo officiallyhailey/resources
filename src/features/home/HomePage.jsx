@@ -1,0 +1,130 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
+import Nav from './Nav';
+import Hero from './Hero';
+import Work from './Work';
+import Sites from './Sites';
+import About from './About';
+import { Skills, Experience } from './Experience';
+import Contact from './Contact';
+import ContactModal from './ContactModal';
+import { useReveal } from '@/hooks/useReveal';
+import '@/styles/site.css';
+
+// The site shell. Everything the new design renders lives inside .site-root,
+// which is what keeps its tokens and generic rules off /resources while that
+// page still runs the old design.
+export default function HomePage() {
+  const rootRef = useRef(null);
+  const [lifted, setLifted] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  );
+  const [progress, setProgress] = useState(0);
+  // The curtain is removed outright once it has lifted rather than parked
+  // off-screen by a transform: a full-viewport fixed element that lingers can
+  // swallow clicks, and there is nothing to gain from keeping it mounted.
+  const [curtainGone, setCurtainGone] = useState(false);
+
+  useEffect(() => {
+    if (lifted) return undefined;
+    const t = setTimeout(() => setLifted(true), 520);
+    return () => clearTimeout(t);
+  }, [lifted]);
+
+  useEffect(() => {
+    if (!lifted || curtainGone) return undefined;
+    const t = setTimeout(() => setCurtainGone(true), 1100);
+    return () => clearTimeout(t);
+  }, [lifted, curtainGone]);
+
+  useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const max = document.body.scrollHeight - window.innerHeight;
+        setProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // A cross-link in a client-site breakdown opens the matching tier-1 case.
+  // The nonce makes each click a distinct signal, so following the same link
+  // twice is not swallowed as "no change".
+  const [jump, setJump] = useState(null);
+  const crossToProject = useCallback((key) => setJump({ key, n: (performance.now() | 0) }), []);
+
+  // The form opens once the reader reaches the bottom — they have seen the work
+  // by then, so it reads as an invitation rather than an interruption. Once per
+  // session only, and never if they already opened it themselves; a popup that
+  // reappears on every visit is the thing people close without reading.
+  const [contactOpen, setContactOpen] = useState(false);
+  const autoFired = useRef(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('contactPrompted')) autoFired.current = true;
+    const onScroll = () => {
+      if (autoFired.current) return;
+      const bottom = document.body.scrollHeight - window.innerHeight - window.scrollY;
+      if (bottom > 120) return;
+      autoFired.current = true;
+      sessionStorage.setItem('contactPrompted', '1');
+      setContactOpen(true);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useReveal(rootRef);
+
+  return (
+    <div className="site-root" ref={rootRef}>
+      {!curtainGone && (
+        <div id="curtain" className={lifted ? 'up' : undefined} aria-hidden="true">
+          <p className="cnt">
+            HG <b>/</b> LOADING
+          </p>
+        </div>
+      )}
+      <div id="prog" style={{ width: `${progress}%` }} />
+
+      <Nav />
+      <Hero />
+
+      <div className="marq" aria-hidden="true">
+        <div className="marq-track">
+          {['React', 'Airtable', 'Automations', 'Data viz', 'Next.js', 'Ops systems'].flatMap((w, i) => [
+            <span key={`${w}-${i}-a`}>{w}</span>,
+            <span key={`${w}-${i}-b`}>{w}</span>,
+          ])}
+        </div>
+      </div>
+
+      <Work jump={jump} />
+      <Sites onCross={crossToProject} />
+      <About />
+      <Skills />
+      <Experience />
+      <Contact onOpenForm={() => setContactOpen(true)} />
+      {/* Always reachable — a reader who decides to get in touch three sections
+          up should not have to scroll to the bottom to find how. Hidden while
+          the dialog is open so it cannot sit on top of its own panel. */}
+      {!contactOpen && (
+        <button className="cfab" onClick={() => setContactOpen(true)} aria-label="Open contact form">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4.2-8 4.8-8-4.8V6l8 4.8L20 6v2.2Z"
+            />
+          </svg>
+          
+        </button>
+      )}
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+    </div>
+  );
+}

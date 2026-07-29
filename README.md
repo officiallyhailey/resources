@@ -1,65 +1,96 @@
+# Portfolio site
 
-npm **Node Sass Installation**
+Source for **[anavahdesigns.com](https://anavahdesigns.com)** — a portfolio and résumé site built
+with React and Vite, deployed on GitHub Pages.
 
-To use Node Sass, you must first install it. You can do this by running the following command in your terminal:
+Two routes: the portfolio at `/`, and a curated developer-resource directory at `/resources` that
+predates the redesign and is still maintained.
 
-```bash
-npm install -g node-sass
-```
-
-This will install Node Sass globally, meaning that it will be available to use from any directory on your computer.
-
-**Creating a Sass File**
-
-Once you have installed Node Sass, you can create a Sass file. Sass files have the `.scss` extension. In this example, we will create a file called `style.scss`.
-
-```scss
-/* This is a Sass file. */
-
-body {
-  background-color: black;
-}
-```
-
-**Compiling the Sass File**
-
-To compile the Sass file, you can use the `node-sass` command. This command will take the Sass file as input and produce a CSS file as output. In this example, we will compile the `style.scss` file to a file called `style.css`.
+## Running it
 
 ```bash
-node-sass editing/style.scss editing/style.css
+npm install
+npm run dev
 ```
 
-This will produce a `style.css` file that contains the following CSS:
+| Script | Does |
+|---|---|
+| `npm run dev` | Dev server at http://localhost:5173 |
+| `npm run build` | Production build into `dist/` |
+| `npm run preview` | Serve the built output locally |
+| `npm run lint` | ESLint over the repo |
+| `npm run format` | Prettier (write) |
 
-```css
-/* This is the CSS file that was generated from the Sass file. */
+## Structure
 
-body {
-  background-color: black;
-}
+```
+src/
+  content/            all copy and data — edit text here, not in components
+  features/
+    home/             the portfolio
+    toolbox/          the /resources directory
+  components/         shared across both routes
+  hooks/              useDeck · useReveal · useHoverIntent
+  styles/             tokens.css · global.css · site.css
+public/
+  img/                screenshots and photography
+  404.html            GitHub Pages deep-link fix (see below)
 ```
 
-**Watching the Sass File for Changes**
+**Content is data, not markup.** Every string lives in `src/content/`. Adding a project is a new
+entry in `projects.js`; adding a client site is one in `sites.js`. Components render whatever is
+there, so copy changes never mean opening a component — and apostrophes stay plain JavaScript
+instead of `&apos;` escapes.
 
-If you want to automatically compile the Sass file whenever you make changes to it, you can use the `-w` flag with the `node-sass` command. This will cause the `node-sass` command to watch the Sass file for changes and automatically recompile it whenever it is modified.
+| File | Holds |
+|---|---|
+| `content/profile.js` | Hero copy, nav links, social links |
+| `content/projects.js` | The four case studies |
+| `content/sites.js` | Client sites and their breakdowns |
+| `content/about.js` | About, capabilities, experience, contact + form copy |
+| `content/toolbox.js` | The `/resources` link directory |
+
+`@` is aliased to `src/` — import as `@/content/…`, `@/hooks/…`. Configured in `vite.config.js`
+(what actually builds) and `jsconfig.json` (editor IntelliSense only).
+
+## Things worth knowing before changing them
+
+**Styles are scoped on purpose.** `site.css` is namespaced under `.site-root` so the portfolio
+design cannot leak into `/resources`, which still runs the older `global.css`. Unscoping it means
+restyling that page first.
+
+**`public/404.html` is not a real 404 page.** GitHub Pages has no server-side rewrites, so a direct
+hit on `/resources` finds no matching file. That page stashes the URL and bounces to `/`, where
+`index.html` replays it before the app boots. Deleting it breaks every deep link and shared URL.
+
+**Case studies stay mounted while hidden.** The card-to-detail morph measures its flight target the
+moment a case opens, so unmounting closed cases would null the ref and break the animation. State is
+reset on close instead — that is what the `setState`-in-effect lint warning in `CaseStudy.jsx` is
+about, and it is deliberate.
+
+**The card decks use a static hover wrapper.** `.cardslot` / `.siteslot` own layout and hover while
+only the inner card transforms. Move the transform back onto the card itself and hovering near an
+edge lifts it out from under the cursor, so the hover state oscillates.
+
+**Reveals need their observer.** `.rv` elements are revealed by one IntersectionObserver and
+word-by-word blocks (`[data-words]`) by a second one that reveals their children. Both live in
+`useReveal`. An element that starts at `opacity: 0` with no observer watching it never appears.
+
+**Screenshots are JPEG.** Site screenshots compress ~85% smaller than PNG with no visible loss.
+`profile-pic.png` stays PNG — it is a cutout, and JPEG has no alpha channel.
+
+## Deploying
+
+Pushing to `main` publishes to GitHub Pages. Before pushing:
 
 ```bash
-node-sass -w editing/style.scss editing/style.css
+npm run build && npm run lint
 ```
 
-This will keep the `style.css` file up-to-date with the latest changes to the `style.scss` file.
+Then load `/resources` directly in a fresh tab — it is the one path that behaves differently in
+production than locally, because it depends on the `404.html` redirect.
 
-**Using the Compiled CSS File**
+## Design references
 
-Once you have compiled the Sass file, you can use the compiled CSS file in your HTML document. To do this, you can add the following line to the `<head>` section of your HTML document:
-
-```html
-<link rel="stylesheet" href="style.css">
-```
-
-This will cause the browser to load the `style.css` file and apply the styles to your HTML document.
-
-**Conclusion**
-
-Node Sass is a powerful tool that can be used to compile Sass files into CSS files. This
-
+Layout templates and design mocks live outside this repo at `~/Developer/web-templates/` —
+standalone HTML, no build step. Open its `index.html` to browse them.

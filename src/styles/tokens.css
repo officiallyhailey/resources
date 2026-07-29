@@ -1,0 +1,61 @@
+/* ─── Tokens ───────────────────────────────────────────────────────── */
+
+:root {
+  --bg: #e7eaf1;
+  --vignette-color: rgba(231, 234, 241, 0.7);
+  --text: #3e3e3e;
+  --text-muted: #666666;
+  --glass-bg: #e7eaf1;
+  --glass-shadow: 0px 5px 10px rgba(0, 0, 0, 0.408), 0 1px 10px rgba(255, 255, 255, 1) inset, 0px 1px 2px #19191963;
+  --accent: #ff8c00;
+  --accent-subtle: rgba(107, 88, 63, 0.1);
+  --nav-bg: #e7eaf1;
+  --tag-bg: rgba(107, 87, 63, 0.08);
+  --tag-text: #e58e03;
+  --transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease: all 0.1s ease;
+  --radius: 18px;
+}
+
+html.dark {
+  --bg: #191919;
+  --vignette-color: rgba(25, 25, 25, 0.7);
+  --text: #e7eaf1;
+  --text-muted: #999999;
+  --glass-bg: rgba(15, 15, 15, 0.55);
+  --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.45), 1px 1px 20px rgba(255, 255, 255, 0.6) inset;
+  --accent-subtle: rgba(184, 155, 122, 0.1);
+  --nav-bg: #191919;
+  --tag-bg: rgba(184, 150, 122, 0.1);
+  --tag-text: #e58e03;
+}
+
+/* ─── Reset ────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: default;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar { display: none; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

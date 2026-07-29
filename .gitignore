@@ -3,14 +3,26 @@ node_modules/
 
 # Build output
 dist/
-
-# Vite cache
-.vite/
-
-# macOS
-.DS_Store
+dist-ssr/
 
 # Local env files
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
+
+# Editor / OS
+.DS_Store
+*.local
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local-only: screenshots parked for clients not currently shown on the site
+.assets-parked/

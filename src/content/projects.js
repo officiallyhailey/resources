@@ -25,11 +25,11 @@ export const PROJECTS = [
       tag: 'Deployed · private',
       scope: '2023 — ongoing · In production',
       teaser:
-        'The internal platform behind a two-location coffee company — invoices in, a weekly scorecard out, run by the leads team themselves.',
+        'A full operations landing platform for owners and managers to navigate their daily tasks, approvals, and reports. Includes a connection to claude that auto runs payroll, parses invoices, and generates a weekly scorecard.',
       stack: ['Next.js', 'Airtable', 'Claude'],
       cta: 'Read case study',
     },
-    role: 'The internal platform behind Silk City Coffee — built solo, in production across two locations',
+    role: 'The internal platform behind Silk City Coffee —  in production across two locations, four departments, and a team of 20+ people',
     metrics: [
       { to: 2, label: 'Locations running it daily' },
       { to: 6, label: 'Manual workflows it replaced' },
@@ -131,7 +131,7 @@ export const PROJECTS = [
       tag: 'Deployed · private',
       scope: 'Solo · 2025 · Daily driver',
       teaser:
-        'One installable app that runs my working day — tasks, projects, a job hunt on a map, and an assistant that does the work.',
+        'One installable app that tracks my working day — tasks, projects, a job hunt on a map, and an assistant that helps get the work done.',
       stack: ['Next.js', 'MCP', 'Mapbox'],
       cta: 'Read case study',
     },

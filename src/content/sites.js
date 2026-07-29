@@ -37,7 +37,7 @@ export const SITES = [
         alt: 'Silk City Coffee — the storefront homepage.',
         title: 'The storefront',
         caption:
-          'Retail coffee, gift cards and the Coffee Club subscription — a shop rather than a brochure, so the roastery sells beyond the two cafe counters.',
+          'Where every new customer lands, and where the brand is expressed first, before any product. The homepage is a portal to mobile ordering from our cafes, the roastery, and wholesale members accessing their purchasing portal.',
       },
       {
         src: '/img/site-scc-2.jpg',
@@ -51,7 +51,7 @@ export const SITES = [
         alt: 'Silk City Coffee — the wholesale portal.',
         title: 'Wholesale',
         caption:
-          'A separate B2B route for trade accounts, kept apart from the retail experience because a cafe buying by the case needs nothing the retail shopper does.',
+          'A separate B2B route for wholesale accounts to log in and place orders. The same products, the same inventory, but a different experience. Onboarding is automated through Shopify workflows and a custom form, so the wholesale team can focus on the accounts rather than the paperwork.',
       },
     ],
     cross: {
@@ -75,7 +75,7 @@ export const SITES = [
     thumb: '/img/site-livinghope.jpg',
     thumbAlt: 'The Living Hope Farms homepage.',
     teaser:
-      'Nonprofit residential home for survivors of exploitation. Donations, an Airtable-backed application flow, resource pages and a social-enterprise shop.',
+      'Nonprofit residential home for survivors of human trafficking. Donations, an Airtable-backed application flow, resource pages and a social-enterprise shop.',
     role: {
       lead:
         'A nonprofit residential home where survivors of exploitation and their children find safety — 15 acres, 17 bedrooms and a working garden.',
@@ -91,7 +91,7 @@ export const SITES = [
         alt: 'Living Hope Farms — the front door.',
         title: 'The front door',
         caption:
-          'Leads with the mission rather than the organisation, and puts the two things a visitor most often needs — Donate and Apply — in the primary nav.',
+          'Leads with the mission and puts the two things a visitor most often needs — Donate and Apply — in the primary nav.',
       },
       {
         src: '/img/site-livinghope-2.jpg',

@@ -63,6 +63,20 @@
   </head>
   <body>
     <div id="root"></div>
+    <!--
+      Browsers restore the previous scroll position on reload, which drops a
+      returning visitor into the middle of this one-page site with no context.
+      This has to run BEFORE the bundle: setting it from a React effect is too
+      late, because the browser has already restored by the time React mounts.
+
+      Turning restoration off is enough on its own — a fresh load then starts at
+      the top naturally. Do NOT add a scrollTo on the load event: that fires
+      only after every image and iframe settles, so anyone who clicks a nav link
+      before then is yanked back to the top mid-read.
+    -->
+    <script>
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

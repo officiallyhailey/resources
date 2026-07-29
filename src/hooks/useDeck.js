@@ -30,6 +30,8 @@ export function useDeck(cardSelector = '.pcard') {
   const stageRefs = useRef({});
   const busy = useRef(false);
   const pending = useRef(null);
+  // Seeded with the initial openKey so mount reads as 'unchanged'.
+  const prevKey = useRef(openKey);
 
   // Centre what the reader should be looking at. Anything short enough to sit
   // whole on screen gets centred; anything taller than the viewport cannot be,
@@ -72,6 +74,22 @@ export function useDeck(cardSelector = '.pcard') {
 
   // Runs after React has committed the open panel, so the flight target exists.
   useLayoutEffect(() => {
+    // Only reposition when openKey actually CHANGED. This effect also fires on
+    // mount, where it would scroll to this deck's own section on page load —
+    // with two decks mounted the second one won, dropping every visitor
+    // part-way down the page instead of at the top.
+    //
+    // A "have I mounted yet" flag does not work here: StrictMode invokes
+    // effects twice in development, so the first pass sets the flag and the
+    // second scrolls anyway. Comparing against the previous key is immune to
+    // that, because a repeated invocation is still no change.
+    const changed = prevKey.current !== openKey;
+    prevKey.current = openKey;
+    if (!changed) {
+      busy.current = false;
+      return undefined;
+    }
+
     // Land on the preview itself, not the panel's top edge — the preview is
     // the thing worth seeing, and centring it puts the whole screen in view
     // instead of parking the reader above it. Falls back to the panel for the

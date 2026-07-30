@@ -21,17 +21,23 @@ export const PROJECTS = [
     shot: '/img/frontdoor-silk-gate.jpg',
     shotAlt:
       'The Silk Operations opening screen: the Traction wordmark above a grid of section icons and a light-switch pull.',
-    // Below 900px the live embed cannot run - a desktop app scaled to phone
-    // width is unreadable - so these stand in for it. They are the platform's
-    // own mobile panels, which is a snap-paginated experience, so they are
-    // shown as a swipe gallery rather than one long scroll.
-    panelsAt: 'all',
-    panels: [
-      { src: '/img/silk-m1.jpg', alt: 'Silk Operations - one place to run it all.', label: 'The platform' },
-      { src: '/img/silk-m2.jpg', alt: 'Silk Operations - inventory, one of nine tools.', label: 'The nine tools' },
-      { src: '/img/silk-m3.jpg', alt: 'Silk Operations - finance, people and cadence.', label: 'What it covers' },
-      { src: '/img/silk-m4.jpg', alt: 'Silk Operations - the demo data is fake, the pastries are not.', label: 'The real cafe' },
-    ],
+    // Two sets, because neither can serve both: a portrait phone capture
+    // letterboxes into a narrow column on a wide frame, and a desktop capture
+    // is unreadable shrunk to phone width.
+    panels: {
+      desktop: [
+        { src: '/img/silk-desktop-1.jpg', alt: 'Silk Operations - one place to run it all.', label: 'The platform' },
+        { src: '/img/silk-desktop-2.jpg', alt: 'Silk Operations - the nine connected tools.', label: 'The nine tools' },
+        { src: '/img/silk-desktop-3.jpg', alt: 'Silk Operations - finance, people and cadence.', label: 'What it covers' },
+        { src: '/img/silk-desktop-4.jpg', alt: 'Silk Operations - the demo data is fake, the pastries are not.', label: 'The real cafe' },
+      ],
+      mobile: [
+        { src: '/img/silk-m1.jpg', alt: 'Silk Operations - one place to run it all.', label: 'The platform' },
+        { src: '/img/silk-m2.jpg', alt: 'Silk Operations - inventory, one of nine tools.', label: 'The nine tools' },
+        { src: '/img/silk-m3.jpg', alt: 'Silk Operations - finance, people and cadence.', label: 'What it covers' },
+        { src: '/img/silk-m4.jpg', alt: 'Silk Operations - the demo data is fake, the pastries are not.', label: 'The real cafe' },
+      ],
+    },
     card: {
       tag: 'Operations platform',
       scope: '2023 - ongoing · In production',
@@ -363,14 +369,18 @@ export const PROJECTS = [
     ],
     links: [],
     live: { url: '/resources' },
-    // Landscape section shots, so unlike Silk's portrait mobile panels these
-    // read at any width - hence panelsAt 'all'.
-    panelsAt: 'all',
-    panels: [
-      { src: '/img/resource-1.jpg', alt: 'Coders Resource - the welcome header and profile card.', label: 'Welcome' },
-      { src: '/img/resource-2.jpg', alt: 'Coders Resource - the resource grid with categories, clock and quote.', label: 'The grid' },
-      { src: '/img/resource-3.jpg', alt: 'Coders Resource - further resource categories.', label: 'More categories' },
-    ],
+    panels: {
+      desktop: [
+        { src: '/img/resource-1.jpg', alt: 'Coders Resource - the welcome header and profile card.', label: 'Welcome' },
+        { src: '/img/resource-2.jpg', alt: 'Coders Resource - the resource grid with categories, clock and quote.', label: 'The grid' },
+        { src: '/img/resource-3.jpg', alt: 'Coders Resource - further resource categories.', label: 'More categories' },
+      ],
+      mobile: [
+        { src: '/img/resource-mobile-1.jpg', alt: 'Coders Resource on a phone - the welcome header.', label: 'Welcome' },
+        { src: '/img/resource-mobile-2.jpg', alt: 'Coders Resource on a phone - the resource grid.', label: 'The grid' },
+        { src: '/img/resource-mobile-3.jpg', alt: 'Coders Resource on a phone - further categories.', label: 'More categories' },
+      ],
+    },
     liveNote: 'Live and maintained',
     build: {
       cap: 'How a deep link survives a static host - click a step',

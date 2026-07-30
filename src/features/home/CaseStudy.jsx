@@ -160,14 +160,20 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
   }, []);
 
   const { live } = project;
-  // Narrow screens get the platform's own mobile panels where they exist; wide
-  // screens get the desktop screenshot. Nothing is embedded any more - the live
-  // site is an out-link instead, which costs nothing to load and shows the real
-  // thing full size rather than scaled into a frame.
-  const isNarrow = typeof window !== 'undefined' && window.innerWidth <= 900;
-  // Portrait mobile captures only make sense on a phone; landscape section
-  // shots read at any width, so a project can opt into showing them always.
-  const showPanels = !!project.panels && (project.panelsAt === 'all' || isNarrow);
+  // Which set of captures to show. Tracked in state rather than read once at
+  // render, or resizing across the breakpoint would leave the wrong set up.
+  const [isNarrow, setIsNarrow] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth <= 900,
+  );
+  useEffect(() => {
+    const onResize = () => setIsNarrow(window.innerWidth <= 900);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  // Neither set can serve both widths, so each project supplies both.
+  const panels = project.panels ? (isNarrow ? project.panels.mobile : project.panels.desktop) : null;
+  const showPanels = !!panels?.length;
 
   return (
     <article className={`case${flip ? ' flip' : ''}`} hidden={hidden}>
@@ -230,7 +236,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
             {showPanels ? (
               <>
                 <div className="panels" ref={railRef} onScroll={onRailScroll}>
-                  {project.panels.map((p) => (
+                  {panels.map((p) => (
                     <figure key={p.src}>
                       {/* Not lazy: these only render once the case is open, so
                           they are never wasted - and lazy left them unfetched,
@@ -242,14 +248,14 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
                 </div>
                 {/* A snap rail can be swiped on a trackpad but a mouse has no
                     way to drive it, so the steps are made explicit. */}
-                {project.panels.length > 1 && (
+                {panels.length > 1 && (
                   <>
                     <button className="pnav prev" onClick={() => goPanel(panelAt - 1)}
                       disabled={panelAt === 0} aria-label="Previous screenshot">‹</button>
                     <button className="pnav next" onClick={() => goPanel(panelAt + 1)}
-                      disabled={panelAt === project.panels.length - 1} aria-label="Next screenshot">›</button>
+                      disabled={panelAt === panels.length - 1} aria-label="Next screenshot">›</button>
                     <div className="pdots">
-                      {project.panels.map((pn, i) => (
+                      {panels.map((pn, i) => (
                         <button key={pn.src} className={i === panelAt ? 'on' : undefined}
                           onClick={() => goPanel(i)} aria-label={`Go to ${pn.label}`}
                           aria-current={i === panelAt} />

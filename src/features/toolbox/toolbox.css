@@ -1,6 +1,10 @@
 /* ── All selectors use res- prefix to prevent any collision ────────── */
 
+/* Embedded as the live preview inside the Coders Resource case study. Without
+   this, scrolling to the end here chains out to the parent and drags the whole
+   portfolio down behind the frame. */
 .res-page {
+  overscroll-behavior: contain;
   min-height: 100vh;
   background-color: var(--bg);
   color: var(--text);

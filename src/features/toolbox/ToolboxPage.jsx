@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { usePageTransition } from '@/components/PageTransition';
-import { useHoverIntent } from '@/hooks/useHoverIntent';
 import { RESOURCE_BOXES, ACTIVITY_IDEAS, QUOTES } from '@/content/toolbox';
 import ResourceBox from './ResourceBox';
 import LinkList from './LinkList';
@@ -17,7 +16,6 @@ export default function ToolboxPage({ theme, onToggleTheme }) {
   const [advice, setAdvice] = useState('');
   const [activity, setActivity] = useState('');
   const contentRef = useRef(null);
-  const backHover = useHoverIntent(() => transitionTo('/'));
 
   // Live clock
   useEffect(() => {
@@ -47,15 +45,26 @@ export default function ToolboxPage({ theme, onToggleTheme }) {
   useEffect(randomActivity, []);
 
 
-  const scrollToContent = () =>
-    contentRef.current?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToContent = () => {
+    const el = contentRef.current;
+    if (!el) return;
+    // scrollTo on this document rather than scrollIntoView: when this page is
+    // embedded as the live preview, scrollIntoView's leftover scroll chains out
+    // to the parent, which is the whole portfolio nudging down behind the frame.
+    const y = el.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  };
 
   return (
     <div className="res-page">
       <div className="res-progress" />
 
       <div className="res-nav-bar">
-        <button className="res-back" {...backHover}>← Resume</button>
+        {/* Was hover-to-navigate, which no keyboard or touch user can trigger.
+            Click is the affordance the arrow already implies. */}
+        <button className="res-back" onClick={() => transitionTo('/')}>
+          ← Portfolio
+        </button>
         <button className="res-theme-btn" onClick={onToggleTheme} aria-label="Toggle theme">
           {theme === 'dark' ? '☀' : '◑'}
         </button>
@@ -89,8 +98,8 @@ export default function ToolboxPage({ theme, onToggleTheme }) {
         <div className="res-profile-card">
           <img src={profileImg} className="res-profile-img" alt="Hailey Grace" />
           <div className="res-profile-links">
-            <a href="https://codepen.io/officiallyhailey" target="_blank" rel="noopener noreferrer">
-              <i className="fa-regular fa-user res-accent" /> Codepen
+            <a href="https://anavahdesigns.com/" target="_blank" rel="noopener noreferrer">
+              <i className="fa-regular fa-user res-accent" /> Portfolio
             </a>
             <a href="https://github.com/officiallyhailey" target="_blank" rel="noopener noreferrer">
               <i className="fa-regular fa-user res-accent" /> Github

@@ -369,7 +369,6 @@ export const PROJECTS = [
       { src: '/img/resource-1.jpg', alt: 'Coders Resource - the welcome header and profile card.', label: 'Welcome' },
       { src: '/img/resource-2.jpg', alt: 'Coders Resource - the resource grid with categories, clock and quote.', label: 'The grid' },
       { src: '/img/resource-3.jpg', alt: 'Coders Resource - further resource categories.', label: 'More categories' },
-      { src: '/img/resource-4.jpg', alt: 'Coders Resource - the Links to Remember scratchpad.', label: 'Links to remember' },
     ],
     liveNote: 'Live and maintained',
     build: {

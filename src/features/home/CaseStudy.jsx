@@ -88,6 +88,10 @@ function BuildPane({ build }) {
 export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev, next }) {
   const [why, setWhy] = useState(null);
   const [tech, setTech] = useState(false);
+  // Gallery position. The rail is a snap-scroller: a trackpad can swipe it but
+  // a mouse has no way to drive it, hence the explicit controls.
+  const [panelAt, setPanelAt] = useState(0);
+  const railRef = useRef(null);
   const stageEl = useRef(null);
   const techRef = useRef(null);
   const setStage = useCallback(
@@ -105,6 +109,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
     if (!hidden) return;
     setWhy(null);
     setTech(false);
+    setPanelAt(0);
   }, [hidden]);
 
   // Opening the breakdown should move the reader to it - otherwise the content
@@ -119,6 +124,25 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
     const y = r.top + window.scrollY - Math.max(NAVH, (window.innerHeight - r.height) / 2);
     window.scrollTo({ top: Math.max(0, y), behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
   }, [tech]);
+
+  const goPanel = useCallback(
+    (i) => {
+      const rail = railRef.current;
+      if (!rail) return;
+      const n = project.panels?.length ?? 0;
+      const next = Math.max(0, Math.min(n - 1, i));
+      setPanelAt(next);
+      rail.scrollTo({ left: next * rail.clientWidth, behavior: 'smooth' });
+    },
+    [project.panels],
+  );
+
+  // Keeps the dots honest when someone swipes rather than clicks.
+  const onRailScroll = useCallback(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    setPanelAt(Math.round(rail.scrollLeft / rail.clientWidth));
+  }, []);
 
   const { live } = project;
   // Narrow screens get the platform's own mobile panels where they exist; wide
@@ -189,17 +213,36 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
                 panels stand in. Horizontal snap-scroll, matching how the real
                 thing paginates - swipe rather than a single frozen shot. */}
             {showPanels ? (
-              <div className="panels">
-                {project.panels.map((p) => (
-                  <figure key={p.src}>
-                    {/* Not lazy: these only render once the case is open, so
-                        they are never wasted - and lazy left them unfetched,
-                        laid out at full size but complete:false. */}
-                    <img src={p.src} alt={p.alt} />
-                    <figcaption>{p.label}</figcaption>
-                  </figure>
-                ))}
-              </div>
+              <>
+                <div className="panels" ref={railRef} onScroll={onRailScroll}>
+                  {project.panels.map((p) => (
+                    <figure key={p.src}>
+                      {/* Not lazy: these only render once the case is open, so
+                          they are never wasted - and lazy left them unfetched,
+                          laid out at full size but complete:false. */}
+                      <img src={p.src} alt={p.alt} />
+                      <figcaption>{p.label}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+                {/* A snap rail can be swiped on a trackpad but a mouse has no
+                    way to drive it, so the steps are made explicit. */}
+                {project.panels.length > 1 && (
+                  <>
+                    <button className="pnav prev" onClick={() => goPanel(panelAt - 1)}
+                      disabled={panelAt === 0} aria-label="Previous screenshot">‹</button>
+                    <button className="pnav next" onClick={() => goPanel(panelAt + 1)}
+                      disabled={panelAt === project.panels.length - 1} aria-label="Next screenshot">›</button>
+                    <div className="pdots">
+                      {project.panels.map((pn, i) => (
+                        <button key={pn.src} className={i === panelAt ? 'on' : undefined}
+                          onClick={() => goPanel(i)} aria-label={`Go to ${pn.label}`}
+                          aria-current={i === panelAt} />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </>
             ) : (
               <img src={project.shot} alt={project.shotAlt} />
             )}

@@ -513,6 +513,26 @@
     object-position:top center;border-radius:10px;background:#fff}
   .panels figcaption{flex:none;text-align:center;font-family:'JetBrains Mono',monospace;
     font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  /* Arrows sit over the frame edges; the dots below them. Both only exist
+     because a snap rail gives a mouse nothing to grab. */
+  .pnav{position:absolute;top:50%;transform:translateY(-50%);z-index:4;
+    width:38px;height:38px;border-radius:50%;border:1px solid var(--rule);
+    background:rgba(255,255,255,.92);color:var(--ink);font-size:20px;line-height:1;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,.18);transition:background .2s,opacity .2s}
+  .pnav.prev{left:.6rem}
+  .pnav.next{right:.6rem}
+  .pnav:hover:not(:disabled){background:var(--accent);color:#fff;border-color:var(--accent)}
+  .pnav:disabled{opacity:.3;cursor:default}
+  .pnav:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .pdots{position:absolute;left:0;right:0;bottom:.5rem;z-index:4;display:flex;
+    justify-content:center;gap:.4rem}
+  .pdots button{width:7px;height:7px;border-radius:50%;border:0;padding:0;cursor:pointer;
+    background:rgba(0,0,0,.25);transition:background .2s,transform .2s}
+  .pdots button.on{background:var(--accent);transform:scale(1.35)}
+  .pdots button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  /* room for the dots so they never sit on a caption */
+  .panels{padding-bottom:1.7rem}
   .panels::-webkit-scrollbar{height:5px}
   .panels::-webkit-scrollbar-thumb{background:rgba(0,0,0,.22);border-radius:3px}
   /* the tall full-page capture, scrolled inside the frame */

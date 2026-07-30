@@ -138,7 +138,8 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
       const target = figs[next];
       if (target) rail.scrollTo({ left: target.offsetLeft - rail.offsetLeft, behavior: 'smooth' });
     },
-    [project.panels],
+    // no deps: the figures are read from the DOM, not from props
+    [],
   );
 
   // Keeps the dots honest when someone swipes rather than clicks.

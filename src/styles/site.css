@@ -509,8 +509,13 @@
     scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
   .panels figure{flex:0 0 auto;width:100%;height:100%;margin:0;
     scroll-snap-align:start;display:flex;flex-direction:column;gap:.5rem}
-  .panels img{position:static;width:100%;flex:1;min-height:0;object-fit:contain;
-    object-position:top center;border-radius:10px;background:#fff}
+  /* MUST outrank `.dshot .stage img`, which absolutely positions the single
+     screenshot to fill the frame. At lower specificity that rule won, so every
+     panel was position:absolute inset:0 - all of them stacked on top of each
+     other, filling the stage, and the rail had nothing it could scroll. */
+  .dshot .stage.panelled .panels img{position:static;inset:auto;width:100%;height:auto;
+    flex:1;min-height:0;object-fit:contain;object-position:top center;
+    border-radius:10px;background:#fff}
   .panels figcaption{flex:none;text-align:center;font-family:'JetBrains Mono',monospace;
     font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
   /* Arrows sit over the frame edges; the dots below them. Both only exist

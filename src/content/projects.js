@@ -360,10 +360,17 @@ export const PROJECTS = [
         ]
       },
     ],
-    links: [
-      { kind: 'open', label: 'Open it live ↗', href: '/resources' },
+    links: [],
+    live: { url: '/resources' },
+    // Landscape section shots, so unlike Silk's portrait mobile panels these
+    // read at any width - hence panelsAt 'all'.
+    panelsAt: 'all',
+    panels: [
+      { src: '/img/resource-1.jpg', alt: 'Coders Resource - the welcome header and profile card.', label: 'Welcome' },
+      { src: '/img/resource-2.jpg', alt: 'Coders Resource - the resource grid with categories, clock and quote.', label: 'The grid' },
+      { src: '/img/resource-3.jpg', alt: 'Coders Resource - further resource categories.', label: 'More categories' },
+      { src: '/img/resource-4.jpg', alt: 'Coders Resource - the Links to Remember scratchpad.', label: 'Links to remember' },
     ],
-    live: { url: '/resources', auto: false },
     liveNote: 'Live and maintained',
     build: {
       cap: 'How a deep link survives a static host - click a step',

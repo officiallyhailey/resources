@@ -126,6 +126,9 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
   // site is an out-link instead, which costs nothing to load and shows the real
   // thing full size rather than scaled into a frame.
   const isNarrow = typeof window !== 'undefined' && window.innerWidth <= 900;
+  // Portrait mobile captures only make sense on a phone; landscape section
+  // shots read at any width, so a project can opt into showing them always.
+  const showPanels = !!project.panels && (project.panelsAt === 'all' || isNarrow);
 
   return (
     <article className={`case${flip ? ' flip' : ''}`} hidden={hidden}>
@@ -179,13 +182,13 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
       <div className="ev evwide">
         <div className="dshot">
           <div
-            className={`stage${isNarrow && project.panels ? ' panelled' : ''}`}
+            className={`stage${showPanels ? ' panelled' : ''}`}
             ref={setStage}
           >
             {/* Small screens cannot run the embed, so the platform's own mobile
                 panels stand in. Horizontal snap-scroll, matching how the real
                 thing paginates - swipe rather than a single frozen shot. */}
-            {isNarrow && project.panels ? (
+            {showPanels ? (
               <div className="panels">
                 {project.panels.map((p) => (
                   <figure key={p.src}>

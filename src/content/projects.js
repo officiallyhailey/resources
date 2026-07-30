@@ -32,7 +32,7 @@ export const PROJECTS = [
       { src: '/img/silk-m4.jpg', alt: 'Silk Operations - the demo data is fake, the pastries are not.', label: 'The real cafe' },
     ],
     card: {
-      tag: 'Deployed · private',
+      tag: 'Operations platform',
       scope: '2023 - ongoing · In production',
       teaser:
         'A full operations landing platform for owners and managers to navigate their daily tasks, approvals, and reports. Includes a connection to claude that auto runs payroll, parses invoices, and generates a weekly scorecard.',
@@ -97,9 +97,9 @@ export const PROJECTS = [
         ],
       },
     ],
-    links: [{ kind: 'soon', label: 'Private - the front door is public, the data is not' }],
+    links: [],
     live: { url: 'https://scc-green-one.vercel.app/', auto: false },
-    liveNote: 'The public front door - no client data behind the sign-in',
+    liveNote: 'The operations platform, running on sample data',
     build: {
       cap: 'Architecture - click a step to see what it does',
       flow: [
@@ -138,7 +138,7 @@ export const PROJECTS = [
     shot: '/img/frontdoor-devdeck.jpg',
     shotAlt: 'The DevDeck landing page: "All your dev needs, one deck" over a retro computer.',
     card: {
-      tag: 'Deployed · private',
+      tag: 'Career OS',
       scope: 'Solo · 2025 · Daily driver',
       teaser:
         'One installable app that tracks my working day - tasks, projects, a job hunt on a map, and an assistant that helps get the work done.',
@@ -189,9 +189,9 @@ export const PROJECTS = [
         ]
       },
     ],
-    links: [{ kind: 'soon', label: 'Private - read-only demo in progress' }],
+    links: [],
     live: { url: 'https://dev-app-roan.vercel.app/', auto: true },
-    liveNote: 'The public landing page - the app itself is gated',
+    liveNote: 'The landing page for the app I use daily',
     build: {
       cap: 'Architecture - click a step to see what it does',
       flow: [
@@ -233,13 +233,13 @@ export const PROJECTS = [
     shot: '/img/frontdoor-assessment.jpg',
     shotAlt: 'The Assessment lesson site: "Three backend topics, explained" above three lesson cards.',
     card: {
-      tag: 'Public repo · try it',
+      tag: 'Teaching tool',
       scope: 'Solo · 2026 · Taught live',
-      teaser: 'Three backend lessons - SQL, an endpoint, a React fetch - that run live in the page. Public repo.',
+      teaser: 'Three backend lessons - SQL, an endpoint, a React fetch - that run live in the page.',
       stack: ['React', 'Express', 'Postgres'],
       cta: 'Try the demo',
     },
-    role: 'Backend lessons · public repo · used to teach a live session',
+    role: 'Backend lessons · built for and taught in a live session',
     metrics: [
       { to: 3, label: 'Lessons that run live in-page' },
       { to: 5, label: 'Real API endpoints behind them' },
@@ -247,7 +247,7 @@ export const PROJECTS = [
     ],
     scope: [
       { k: 'Role', v: 'Sole developer & instructor' },
-      { k: 'Status', v: 'Public repo' },
+      { k: 'Status', v: 'Taught live' },
     ],
     beats: [
       { b: 'Problem', p: 'Teach three backend concepts - a SQL table, a POST endpoint, and a React GET - in one session, to people who had never seen any of them.' },
@@ -294,7 +294,7 @@ export const PROJECTS = [
         ['Database', 'Neon Postgres · pg Pool'],
         ['Safety net', 'DATA_SOURCE=json swaps in an in-memory twin'],
         ['Secrets', 'config.js is gitignored, never committed'],
-        ['Repo', 'Public - read every line'],
+        ['Repo', 'Read every line'],
       ],
       modsTitle: 'The three lessons',
       mods: [
@@ -317,7 +317,7 @@ export const PROJECTS = [
     shotAlt:
       'Coders Resource: categorised boxes of developer links - terminals and tools, learn, read up.',
     card: {
-      tag: 'Live · public',
+      tag: 'Resource directory',
       scope: 'Solo · live & maintained',
       teaser:
         'Forty-six developer resources I actually use, sorted into seven categories - built while learning, still live, still maintained.',
@@ -338,7 +338,7 @@ export const PROJECTS = [
       { b: 'Problem', p: 'Learning to code means drowning in bookmarks. The genuinely useful links get buried among the ones that only looked useful, and a beginner has no way to tell which is which.' },
       { b: 'Built', p: 'A single page of <em>46 resources I actually use</em>, sorted into seven plain-English categories - Answers, Practice, Terminals&nbsp;/&nbsp;Tools, Learn, Read Up, Ideas and Lil Fun. Named for what you need, not for what the tool calls itself.' },
       { b: 'Key decision', p: 'Every link is <em>content, not markup</em> - the directory is one exported array, so adding a resource is a one-line change and the rendering is never touched. The same separation the Assessment lessons use.' },
-      { b: 'Still standing', p: 'This is the oldest thing here and the only one publicly live throughout. It carries the honest scars of early work, including two lint warnings left in place rather than quietly rewritten.' },
+      { b: 'Still standing', p: 'This is the oldest thing here and the only one that has stayed up the whole time. It carries the honest scars of early work, including two lint warnings left in place rather than quietly rewritten.' },
     ],
     stack: [
       {
@@ -364,7 +364,7 @@ export const PROJECTS = [
       { kind: 'open', label: 'Open it live ↗', href: '/resources' },
     ],
     live: { url: '/resources', auto: false },
-    liveNote: 'Publicly live and maintained',
+    liveNote: 'Live and maintained',
     build: {
       cap: 'How a deep link survives a static host - click a step',
       flow: [

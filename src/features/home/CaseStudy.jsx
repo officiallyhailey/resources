@@ -129,10 +129,14 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
     (i) => {
       const rail = railRef.current;
       if (!rail) return;
-      const n = project.panels?.length ?? 0;
-      const next = Math.max(0, Math.min(n - 1, i));
+      const figs = rail.querySelectorAll('figure');
+      const next = Math.max(0, Math.min(figs.length - 1, i));
       setPanelAt(next);
-      rail.scrollTo({ left: next * rail.clientWidth, behavior: 'smooth' });
+      // Scroll to the figure's OWN offset. Stepping by rail.clientWidth drifts,
+      // because each figure is narrower than the rail and carries a gap - the
+      // rail moved but the panel in view did not line up.
+      const target = figs[next];
+      if (target) rail.scrollTo({ left: target.offsetLeft - rail.offsetLeft, behavior: 'smooth' });
     },
     [project.panels],
   );
@@ -141,7 +145,17 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
   const onRailScroll = useCallback(() => {
     const rail = railRef.current;
     if (!rail) return;
-    setPanelAt(Math.round(rail.scrollLeft / rail.clientWidth));
+    // Nearest figure by actual position, for the same reason.
+    const figs = [...rail.querySelectorAll('figure')];
+    if (!figs.length) return;
+    const x = rail.scrollLeft + rail.offsetLeft;
+    let best = 0;
+    let dist = Infinity;
+    figs.forEach((f, i) => {
+      const d = Math.abs(f.offsetLeft - x);
+      if (d < dist) { dist = d; best = i; }
+    });
+    setPanelAt(best);
   }, []);
 
   const { live } = project;

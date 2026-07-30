@@ -507,8 +507,8 @@
   .dshot .stage.panelled{aspect-ratio:auto;height:min(76vh,620px);background:var(--paper);overflow:hidden}
   .panels{display:flex;gap:.75rem;height:100%;padding:.7rem;overflow-x:auto;
     scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-  .panels figure{flex:0 0 auto;width:calc(100% - 2.4rem);height:100%;margin:0;
-    scroll-snap-align:center;display:flex;flex-direction:column;gap:.5rem}
+  .panels figure{flex:0 0 auto;width:100%;height:100%;margin:0;
+    scroll-snap-align:start;display:flex;flex-direction:column;gap:.5rem}
   .panels img{position:static;width:100%;flex:1;min-height:0;object-fit:contain;
     object-position:top center;border-radius:10px;background:#fff}
   .panels figcaption{flex:none;text-align:center;font-family:'JetBrains Mono',monospace;

@@ -194,7 +194,10 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
               <div className="panels">
                 {project.panels.map((p) => (
                   <figure key={p.src}>
-                    <img src={p.src} alt={p.alt} loading="lazy" />
+                    {/* Not lazy: these only render once the case is open, so
+                        they are never wasted - and lazy left them unfetched,
+                        laid out at full size but complete:false. */}
+                    <img src={p.src} alt={p.alt} />
                     <figcaption>{p.label}</figcaption>
                   </figure>
                 ))}

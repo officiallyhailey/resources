@@ -17,10 +17,10 @@ export const PROFILE = {
   strapline: 'Full-stack developer · operations · data',
   status: 'Open to work',
   metrics: [
-    { value: '7', label: 'Years in management' },
+    { value: '7+', label: 'Years in project management' },
     { value: '3+', label: 'Years in procurement' },
     { value: '2', label: 'Coding certifications' },
-    { value: '$60k', label: 'Cost saved & grants won' },
+    { value: '$60k+', label: 'Cost saved & grants won' },
   ],
 };
 

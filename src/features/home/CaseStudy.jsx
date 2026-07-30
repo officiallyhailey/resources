@@ -183,13 +183,30 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
 
       <div className="ev evwide">
         <div className="dshot">
-          <div className="stage" ref={setStage}>
-            <img
-              src={project.shot}
-              alt={project.shotAlt}
-              loading="lazy"
-              style={frameReady ? { opacity: 0 } : undefined}
-            />
+          <div
+            className={`stage${!canEmbed && project.panels ? ' panelled' : ''}`}
+            ref={setStage}
+          >
+            {/* Small screens cannot run the embed, so the platform's own mobile
+                panels stand in. Horizontal snap-scroll, matching how the real
+                thing paginates - swipe rather than a single frozen shot. */}
+            {!canEmbed && project.panels ? (
+              <div className="panels">
+                {project.panels.map((p) => (
+                  <figure key={p.src}>
+                    <img src={p.src} alt={p.alt} loading="lazy" />
+                    <figcaption>{p.label}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            ) : (
+              <img
+                src={project.shot}
+                alt={project.shotAlt}
+                loading="lazy"
+                style={frameReady ? { opacity: 0 } : undefined}
+              />
+            )}
             {canEmbed && (
               <iframe
                 className="scaler"

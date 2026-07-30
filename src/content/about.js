@@ -21,7 +21,7 @@ export const ABOUT = {
   // The portrait renders as a player card - rarity strip, art, stat block.
   // Stats are the same facts stated elsewhere on the page, not invented ones.
   card: {
-    src: '/img/profile-pic.png',
+    src: '/img/profile-card.jpg',
     alt: 'Hailey Grace',
     rarity: 'Open to work',
     no: 'No. 01',
@@ -32,7 +32,7 @@ export const ABOUT = {
       { v: '7', k: 'Shipped & maintained' },
       { v: '3', k: 'Certifications' },
     ],
-    foot: ['Built & maintained', 'CT · remote'],
+    foot: ['Certified Cat Lover', 'CT · remote'],
   },
 };
 

@@ -39,37 +39,25 @@ export default function Work({ jump }) {
                 aria-label={`Open the ${p.title} case study`}
                 onClick={(e) => open(p.key, e.currentTarget)}
               >
-                <span className={`pbg ${p.bg}`} />
-                <span className="pglow" />
-                <span className="shot">
-                  <span className="chrome">
-                    <i />
-                    <i />
-                    <i />
-                    <b>{p.chrome}</b>
-                  </span>
+                {/* Same shape as the client cards below: image, then two
+                    lines. The dark chrome, stack chips, scope line and number
+                    were all competing inside a window this small - the deck is
+                    for choosing, the case study is for reading. */}
+                <span className="thumb">
                   <img src={p.shot} alt={p.shotAlt} loading="lazy" />
                   <span className="pfly">
-                    <p className="pteaser">{p.card.teaser}</p>
-                    <span className="pstack">
-                      {p.card.stack.map((s) => (
-                        <i key={s}>{s}</i>
-                      ))}
-                    </span>
-                    <span className="pgo">
+                    <p>{p.card.teaser}</p>
+                    <span className="visit">
                       {p.card.cta} <em>→</em>
                     </span>
                   </span>
                 </span>
-                <span className="pbody">
-                  <span className="ptop">
-                    <span className={`ptag${p.card.tag.includes('Live') || p.card.tag.includes('Public') ? ' live' : ''}`}>
-                      {p.card.tag}
-                    </span>
-                    <span className="pno">{p.no}</span>
+                <span className="sbody">
+                  <span className="plat">
+                    <i />
+                    {p.card.tag}
                   </span>
                   <h3>{p.title}</h3>
-                  <span className="pscope">{p.card.scope}</span>
                 </span>
               </button>
             </span>

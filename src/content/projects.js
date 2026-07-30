@@ -15,12 +15,22 @@ export const PROJECTS = [
     no: '001',
     title: 'Silk Operations',
     kicker: '01 / Operations platform',
-    tilt: { rot: '-9deg', dy: '16px' },
+    tilt: { rot: '-9deg', dy: '14px' },
     bg: 'pbg-1',
     chrome: 'silk finance - front door',
     shot: '/img/frontdoor-silk-gate.jpg',
     shotAlt:
       'The Silk Operations opening screen: the Traction wordmark above a grid of section icons and a light-switch pull.',
+    // Below 900px the live embed cannot run - a desktop app scaled to phone
+    // width is unreadable - so these stand in for it. They are the platform's
+    // own mobile panels, which is a snap-paginated experience, so they are
+    // shown as a swipe gallery rather than one long scroll.
+    panels: [
+      { src: '/img/silk-m1.jpg', alt: 'Silk Operations - one place to run it all.', label: 'The platform' },
+      { src: '/img/silk-m2.jpg', alt: 'Silk Operations - inventory, one of nine tools.', label: 'The nine tools' },
+      { src: '/img/silk-m3.jpg', alt: 'Silk Operations - finance, people and cadence.', label: 'What it covers' },
+      { src: '/img/silk-m4.jpg', alt: 'Silk Operations - the demo data is fake, the pastries are not.', label: 'The real cafe' },
+    ],
     card: {
       tag: 'Deployed · private',
       scope: '2023 - ongoing · In production',
@@ -46,7 +56,7 @@ export const PROJECTS = [
       },
       {
         b: 'Built',
-        p: 'A password-protected finance dashboard. Upload invoices, statements and sales exports; review and correct the parsed data; a weekly <em>scorecard</em> rolls up COG %, labor and cost-of-service by location and department.',
+        p: 'A password-protected finance dashboard. Automate invoices, statements and sales exports; review and correct the parsed data; a weekly <em>scorecard</em> rolls up COG %, labor and cost-of-service by location and department.',
       },
       {
         b: 'Key decision',
@@ -107,7 +117,7 @@ export const PROJECTS = [
       ],
       modsTitle: "What's in it",
       mods: [
-        ['Upload', 'Invoices in, drafts out', 'Drop in invoices, receipts and statements. Claude files the line items as draft expenses, which are reviewed before anything is committed.'],
+        ['Automation', 'Invoices in, drafts out', 'Drop in invoices, receipts and statements. Claude files the line items as draft expenses, which are reviewed before anything is committed.'],
         ['Payroll', 'Timesheets and tips', 'Timesheets, tips and the weekly pivot - reviewed and approved before any of it goes to the provider.'],
         ['Expenses', 'One list, corrected once', 'Every expense in one place, with category, vendor, inventory and amounts fixed before the report runs.'],
         ['Inventory', 'The pantry', 'Every item, its vendor, its cost and what is in stock.'],
@@ -122,7 +132,7 @@ export const PROJECTS = [
     no: '002',
     title: 'DevDeck',
     kicker: '02 / Career operating system',
-    tilt: { rot: '2deg', dy: '-10px' },
+    tilt: { rot: '-3deg', dy: '-8px' },
     bg: 'pbg-2',
     chrome: 'devdeck - front door',
     shot: '/img/frontdoor-devdeck.jpg',
@@ -217,7 +227,7 @@ export const PROJECTS = [
     no: '003',
     title: 'Assessment',
     kicker: '03 / Teaching tool',
-    tilt: { rot: '-2deg', dy: '4px' },
+    tilt: { rot: '3deg', dy: '-8px' },
     bg: 'pbg-3',
     chrome: 'assessment - lesson site',
     shot: '/img/frontdoor-assessment.jpg',

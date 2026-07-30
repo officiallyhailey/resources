@@ -8,6 +8,8 @@ import { Skills, Experience } from './Experience';
 import Contact from './Contact';
 import ContactModal from './ContactModal';
 import { useReveal } from '@/hooks/useReveal';
+
+const MARQUEE = ['Front End', 'Backend', 'Automations', 'Data Visualization', 'Next.js', 'Operations', 'AI Agents'];
 import '@/styles/site.css';
 
 // The site shell. Everything the new design renders lives inside .site-root,
@@ -97,10 +99,12 @@ export default function HomePage() {
 
       <div className="marq" aria-hidden="true">
         <div className="marq-track">
-          {['React', 'Airtable', 'Automations', 'Data viz', 'Next.js', 'Ops systems'].flatMap((w, i) => [
-            <span key={`${w}-${i}-a`}>{w}</span>,
-            <span key={`${w}-${i}-b`}>{w}</span>,
-          ])}
+          {/* The list is repeated ONCE END-TO-END so the loop can wrap seamlessly.
+              Repeating each word individually instead reads as a stutter -
+              "Backend · Backend" - which is what it was doing. */}
+          {[...MARQUEE, ...MARQUEE].map((w, i) => (
+            <span key={`${w}-${i}`}>{w}</span>
+          ))}
         </div>
       </div>
 

@@ -37,14 +37,20 @@ export function useDeck(cardSelector = '.pcard') {
   // whole on screen gets centred; anything taller than the viewport cannot be,
   // so it parks just under the nav - centring a tall panel would scroll past
   // its own heading, which is the opposite of focusing it.
-  const place = useCallback((el) => {
+  // Two different jobs, so two modes.
+  //   'center' — opening: put the sample image in the middle of the screen,
+  //              which is the thing the reader just asked to see.
+  //   'top'    — closing: return to the top of the section they came from, so
+  //              the heading re-orients them rather than dropping them mid-deck.
+  const place = useCallback((el, mode) => {
     if (!el) return;
     const r = el.getBoundingClientRect();
-    const room = window.innerHeight - NAVH;
-    const y =
-      r.height < room
-        ? r.top + window.scrollY - NAVH - (room - r.height) / 2
-        : r.top + window.scrollY - NAVH - 16;
+    let y;
+    if (mode === 'center' && r.height < window.innerHeight - NAVH) {
+      y = r.top + window.scrollY - NAVH - (window.innerHeight - NAVH - r.height) / 2;
+    } else {
+      y = r.top + window.scrollY - NAVH - 12;
+    }
     window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
   }, []);
 
@@ -90,15 +96,18 @@ export function useDeck(cardSelector = '.pcard') {
       return undefined;
     }
 
-    // Land on the preview itself, not the panel's top edge - the preview is
-    // the thing worth seeing, and centring it puts the whole screen in view
-    // instead of parking the reader above it. Falls back to the panel for the
-    // client breakdowns, which lead with a figure rather than an embed.
-    const panel = openKey
+    // Opening: centre the sample image, which is what the reader asked to see.
+    // Closing: return to the top of the section they came from, so its heading
+    // re-orients them instead of dropping them part-way down the deck.
+    const openPanel = openKey
       ? sectionRef.current?.querySelector('.case:not([hidden]), .sitecase:not([hidden])')
       : null;
-    const focusEl = panel?.querySelector('.evwide, .shotfig') || panel || sectionRef.current;
-    place(focusEl);
+    const preview = openPanel?.querySelector('.dshot, .shotfig');
+    if (openKey) {
+      place(preview || openPanel || sectionRef.current, 'center');
+    } else {
+      place(sectionRef.current, 'top');
+    }
     const job = pending.current;
     pending.current = null;
 

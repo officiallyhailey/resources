@@ -4,7 +4,6 @@ import { prefersReducedMotion } from '@/hooks/useReveal';
 // Counts a metric up once, when it first appears. Numbers that simply exist
 // read as decoration; numbers that arrive read as facts.
 // the width the embedded site is rendered at before being scaled to fit
-const EMBED_W = 1280;
 const NAVH = 92;
 
 function Metric({ to, prefix = '', suffix = '', label, run }) {
@@ -89,14 +88,6 @@ function BuildPane({ build }) {
 export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev, next }) {
   const [why, setWhy] = useState(null);
   const [tech, setTech] = useState(false);
-  // The screenshot is the placeholder, not an alternative: the embed fades in
-  // over it once it has actually painted, so the panel is never empty and there
-  // is nothing for the reader to press to make the real thing appear.
-  const [frameReady, setFrameReady] = useState(false);
-  // The embed renders at a desktop width and is scaled down, so the site lays
-  // out like a desktop app instead of collapsing to its mobile breakpoint. The
-  // factor has to be measured, not assumed - the column width is fluid.
-  const [scale, setScale] = useState(0.6);
   const stageEl = useRef(null);
   const techRef = useRef(null);
   const setStage = useCallback(
@@ -114,7 +105,6 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
     if (!hidden) return;
     setWhy(null);
     setTech(false);
-    setFrameReady(false);
   }, [hidden]);
 
   // Opening the breakdown should move the reader to it - otherwise the content
@@ -130,19 +120,12 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
     window.scrollTo({ top: Math.max(0, y), behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
   }, [tech]);
 
-  useEffect(() => {
-    if (hidden) return undefined;
-    const measure = () => {
-      const el = stageEl.current;
-      if (el) setScale(el.getBoundingClientRect().width / EMBED_W);
-    };
-    measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
-  }, [hidden]);
-
   const { live } = project;
-  const canEmbed = !!live?.url && typeof window !== 'undefined' && window.innerWidth > 900;
+  // Narrow screens get the platform's own mobile panels where they exist; wide
+  // screens get the desktop screenshot. Nothing is embedded any more - the live
+  // site is an out-link instead, which costs nothing to load and shows the real
+  // thing full size rather than scaled into a frame.
+  const isNarrow = typeof window !== 'undefined' && window.innerWidth <= 900;
 
   return (
     <article className={`case${flip ? ' flip' : ''}`} hidden={hidden}>
@@ -163,17 +146,29 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
       <div className="caselede">
         <p className="casesum">{project.card.teaser}</p>
         <div className="caselede-act">
-          {project.links.some((l) => l.kind !== 'soon') && (
-            <div className="links">
-              {project.links
-                .filter((l) => l.kind !== 'soon')
-                .map((l) => (
-                  <a className="lk" key={l.label} href={l.href} target="_blank" rel="noopener noreferrer">
-                    {l.label}
-                  </a>
-                ))}
-            </div>
-          )}
+          {/* The live site is an out-link now rather than an embed: it costs
+              nothing to load and opens the real thing full size instead of
+              scaled into a frame. */}
+          <div className="links">
+            {live?.url && (
+              <a
+                className="lk"
+                href={live.url}
+                {...(live.url.startsWith('http')
+                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                  : {})}
+              >
+                Open it live <span aria-hidden="true">↗</span>
+              </a>
+            )}
+            {project.links
+              .filter((l) => l.kind !== 'soon')
+              .map((l) => (
+                <a className="lk" key={l.label} href={l.href} target="_blank" rel="noopener noreferrer">
+                  {l.label}
+                </a>
+              ))}
+          </div>
           <button className="techtoggle" aria-expanded={tech} onClick={() => setTech((v) => !v)}>
             {tech ? 'Hide the technical detail' : 'How it was built'}
             <em aria-hidden="true">{tech ? '−' : '+'}</em>
@@ -184,13 +179,13 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
       <div className="ev evwide">
         <div className="dshot">
           <div
-            className={`stage${!canEmbed && project.panels ? ' panelled' : ''}`}
+            className={`stage${isNarrow && project.panels ? ' panelled' : ''}`}
             ref={setStage}
           >
             {/* Small screens cannot run the embed, so the platform's own mobile
                 panels stand in. Horizontal snap-scroll, matching how the real
                 thing paginates - swipe rather than a single frozen shot. */}
-            {!canEmbed && project.panels ? (
+            {isNarrow && project.panels ? (
               <div className="panels">
                 {project.panels.map((p) => (
                   <figure key={p.src}>
@@ -203,22 +198,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
                 ))}
               </div>
             ) : (
-              <img
-                src={project.shot}
-                alt={project.shotAlt}
-                loading="lazy"
-                style={frameReady ? { opacity: 0 } : undefined}
-              />
-            )}
-            {canEmbed && (
-              <iframe
-                className="scaler"
-                src={live.url}
-                title={`${project.title} - live site`}
-                loading="lazy"
-                onLoad={() => setFrameReady(true)}
-                style={{ transform: `scale(${scale})`, opacity: frameReady ? 1 : 0 }}
-              />
+              <img src={project.shot} alt={project.shotAlt} />
             )}
           </div>
         </div>

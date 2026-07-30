@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { usePageTransition } from '@/components/PageTransition';
 import { RESOURCE_BOXES, ACTIVITY_IDEAS, QUOTES } from '@/content/toolbox';
 import ResourceBox from './ResourceBox';
 import LinkList from './LinkList';
@@ -9,7 +8,6 @@ import './toolbox.css';
 // The Toolbox page: a live clock, a random quote/advice/activity, and curated
 // categories of developer resource links. Rendered at /toolbox.
 export default function ToolboxPage({ theme, onToggleTheme }) {
-  const { transitionTo } = usePageTransition();
   const [time, setTime] = useState('');
   const [date, setDate] = useState('');
   const [quote] = useState(() => QUOTES[Math.floor(Math.random() * QUOTES.length)]);
@@ -60,11 +58,6 @@ export default function ToolboxPage({ theme, onToggleTheme }) {
       <div className="res-progress" />
 
       <div className="res-nav-bar">
-        {/* Was hover-to-navigate, which no keyboard or touch user can trigger.
-            Click is the affordance the arrow already implies. */}
-        <button className="res-back" onClick={() => transitionTo('/')}>
-          ← Portfolio
-        </button>
         <button className="res-theme-btn" onClick={onToggleTheme} aria-label="Toggle theme">
           {theme === 'dark' ? '☀' : '◑'}
         </button>

@@ -25,6 +25,7 @@ export const PROJECTS = [
     // width is unreadable - so these stand in for it. They are the platform's
     // own mobile panels, which is a snap-paginated experience, so they are
     // shown as a swipe gallery rather than one long scroll.
+    panelsAt: 'all',
     panels: [
       { src: '/img/silk-m1.jpg', alt: 'Silk Operations - one place to run it all.', label: 'The platform' },
       { src: '/img/silk-m2.jpg', alt: 'Silk Operations - inventory, one of nine tools.', label: 'The nine tools' },

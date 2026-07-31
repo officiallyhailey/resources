@@ -130,15 +130,23 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
   useLayoutEffect(() => {
     if (tech || !wantTop.current) return;
     wantTop.current = false;
-    const top = articleRef.current;
-    if (!top) return;
-    // scrollIntoView, not window.scrollTo: the root carries overflow-x:clip so
-    // body is the scrolling box, and scrollTo on window is a no-op here - the
-    // same reason the nav links do not jump. scrollIntoView cannot offset, so
-    // the nav is backed off afterwards.
-    const smooth = !prefersReducedMotion();
-    top.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-    setTimeout(() => window.scrollBy(0, -NAVH), smooth ? 640 : 0);
+    const art = articleRef.current;
+    if (!art) return;
+    // ONE movement to the final position. Doing scrollIntoView and then a
+    // scrollBy to clear the nav ran two scrolls back to back, which read as a
+    // jump: the page settled at the project top and then hopped again to
+    // reveal the back bar.
+    //
+    // The target is the detail pane, not the article - the pane starts at the
+    // "View all work" bar, so landing on it puts that button in view. The bar
+    // itself cannot be measured: it is position:sticky, so once pinned its
+    // rect reports the pinned offset rather than its place in the document.
+    const pane = art.closest('.pane') || art;
+    const y = pane.getBoundingClientRect().top + window.scrollY - NAVH + 4;
+    window.scrollTo({
+      top: Math.max(0, y),
+      behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+    });
   }, [tech]);
 
   useEffect(() => {

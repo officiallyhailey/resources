@@ -531,10 +531,16 @@
      uses - at 3:2 the frame was far wider than the image and read as padding. */
   .dshot .stage.panelled{aspect-ratio:5/4;height:auto;max-height:78vh;
     background:var(--paper);overflow:hidden}
-  .panels{display:flex;gap:.75rem;height:100%;padding:.7rem;overflow-x:auto;
+  /* No horizontal padding and no gap: each slide must be EXACTLY the visible
+     width. With gap:.75rem the trailing gap after the last slide showed as
+     14px of dead space on the right, and width:100% resolved against the
+     padded content box rather than the frame - so the image never reached the
+     right edge. flex-basis 100% pins each slide to the panel width instead. */
+  .panels{display:flex;gap:0;height:100%;padding:0;overflow-x:auto;
     scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-  .panels figure{flex:0 0 auto;width:100%;height:100%;margin:0;
-    scroll-snap-align:start;display:flex;flex-direction:column;gap:.5rem}
+  .panels figure{flex:0 0 100%;width:100%;height:100%;margin:0;
+    scroll-snap-align:start;display:flex;flex-direction:column;gap:.5rem;
+    padding:.5rem .5rem 0}
   /* MUST outrank `.dshot .stage img`, which absolutely positions the single
      screenshot to fill the frame. At lower specificity that rule won, so every
      panel was position:absolute inset:0 - all of them stacked on top of each
@@ -563,7 +569,7 @@
   .pdots button.on{background:var(--accent);transform:scale(1.35)}
   .pdots button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   /* room for the dots so they never sit on a caption */
-  .panels{padding:.45rem .45rem 1.6rem}
+  .panels{padding:0 0 1.5rem}
   .panels::-webkit-scrollbar{height:5px}
   .panels::-webkit-scrollbar-thumb{background:rgba(0,0,0,.22);border-radius:3px}
   /* the tall full-page capture, scrolled inside the frame */

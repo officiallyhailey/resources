@@ -1079,16 +1079,29 @@
 /* ── touch devices ───────────────────────────────────────────────────────────
    iOS keeps :hover applied after a tap until you tap elsewhere, so a tapped
    card stayed lifted and overlapped the one below it while scrolling. There is
-   no hover to communicate anything here, so the lift and the padding that
-   exists purely to contain it are both dropped.
+   no hover to communicate anything here, so the lift is dropped.
 
-   This block is LAST on purpose: several later breakpoints set their own hover
-   transforms at the same specificity, so source order is what makes this win. */
-@media (hover: none) {
+   Split by width on purpose: the resting transform is NOT the same at both.
+   Above 900 the cards are a fan and rest tilted, so the hover state has to be
+   restored to that tilt. At or below 900 they un-fan to transform:none, and
+   restoring the fan there is what put the tilt back on a phone.
+
+   Last in the file on purpose: several breakpoints set hover transforms at this
+   same specificity, so source order is what makes these win. */
+@media (hover: none) and (min-width: 901px) {
   .site-root .cardslot,
   .site-root .siteslot{padding:0;margin:.55rem 0}
   .site-root .cardslot:hover .pcard,
   .site-root .siteslot:hover .site{transform:rotate(var(--rot,0deg)) translateY(var(--dy,0px))}
+  .site-root .cardslot:hover .shot img,
+  .site-root .siteslot:hover .thumb img{transform:none}
+}
+
+@media (hover: none) and (max-width: 900px) {
+  .site-root .cardslot,
+  .site-root .siteslot{padding:0;margin:.55rem 0}
+  .site-root .cardslot:hover .pcard,
+  .site-root .siteslot:hover .site{transform:none}
   .site-root .cardslot:hover .shot img,
   .site-root .siteslot:hover .thumb img{transform:none}
 }

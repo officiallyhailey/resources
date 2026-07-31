@@ -815,7 +815,14 @@
   .cl b{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:400}
   /* Floating contact button. Collapsed to a disc on small screens so it never
      covers content; the label only rides along where there is room for it. */
-  .cfab{position:fixed;right:clamp(.9rem,2vw,1.5rem);bottom:clamp(.9rem,2vw,1.5rem);z-index:150;
+  /* Offsets use env() so the button clears the home indicator and any curved
+     edge on a phone; the max() keeps a sane minimum where the insets are 0.
+     Generous on purpose - Safari has let overflow-x:clip on the root clip
+     position:fixed children, and the button was visibly cut off at the right
+     edge on an iPhone while measuring fine in a desktop viewport. */
+  .cfab{position:fixed;
+    right:max(1.15rem, env(safe-area-inset-right, 0px) + 1.15rem);
+    bottom:max(1.15rem, env(safe-area-inset-bottom, 0px) + 1.15rem);z-index:150;
     display:inline-flex;align-items:center;gap:.55rem;background:var(--dark);color:var(--paper);
     border:0;border-radius:100px;padding:.8rem 1.15rem;cursor:pointer;font-family:inherit;
     font-size:.88rem;box-shadow:0 14px 34px rgba(0,0,0,.3);

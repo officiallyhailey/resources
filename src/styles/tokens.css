@@ -51,7 +51,9 @@ body {
   background-color: var(--bg);
   color: var(--text);
   min-height: 100vh;
-  overflow-x: hidden;
+  /* No overflow-x here: html already carries overflow-x:clip, and on iOS
+     Safari an overflow rule on BODY clips position:fixed descendants - which
+     was cutting the floating contact button off at the screen edge. */
   line-height: 1.6;
 }
 

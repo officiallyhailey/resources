@@ -1075,3 +1075,20 @@
     .datapulse{display:none}
     #curtain{display:none}
   }
+
+/* ── touch devices ───────────────────────────────────────────────────────────
+   iOS keeps :hover applied after a tap until you tap elsewhere, so a tapped
+   card stayed lifted and overlapped the one below it while scrolling. There is
+   no hover to communicate anything here, so the lift and the padding that
+   exists purely to contain it are both dropped.
+
+   This block is LAST on purpose: several later breakpoints set their own hover
+   transforms at the same specificity, so source order is what makes this win. */
+@media (hover: none) {
+  .site-root .cardslot,
+  .site-root .siteslot{padding:0;margin:.55rem 0}
+  .site-root .cardslot:hover .pcard,
+  .site-root .siteslot:hover .site{transform:rotate(var(--rot,0deg)) translateY(var(--dy,0px))}
+  .site-root .cardslot:hover .shot img,
+  .site-root .siteslot:hover .thumb img{transform:none}
+}

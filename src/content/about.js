@@ -28,8 +28,8 @@ export const ABOUT = {
     name: 'Hailey Grace',
     title: 'Full-stack developer · operations',
     stats: [
-      { v: '7+', k: 'Years experience' },
-      { v: '7', k: 'Shipped & maintained' },
+      { v: '7+', k: 'Years - Project Management' },
+      { v: '3+', k: 'Years - Procurement' },
       { v: '3', k: 'Certifications' },
     ],
     foot: ['Certified Cat Lover', 'CT · remote'],

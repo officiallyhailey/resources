@@ -6,9 +6,9 @@ export const ABOUT = {
   // length, so a long lead like this one still lands in about the same time as
   // a short one instead of crawling onto the screen.
   lead:
-    "Tech forward, operations-focused developer with 7+ years of experience in project management, workflow optimization, procurement, and business development. Proven at building scalable systems, reliable workflows, and translating operational data into clear, actionable insights. Covered everything from supply chain logistics to customer experience for 2025's Top 100 Coffee Shops in the world!",
+    "Tech forward, operations-focused developer with 7+ years of experience in project management, workflow optimization, and business/program development. Proven at building scalable systems, reliable workflows, and translating operational data into clear, actionable insights. Covered everything from vendor logistics to customer experience for 2025's Top 100 Coffee Shops in the world!",
   body: [
-    'Known for creating structure, improving efficiency, and supporting leadership through data-informed decision-making - with a design eye that makes the output actually pleasing to look at.',
+    'Known for creating structure, improving efficiency, and supporting leadership through data-informed decision-making - with a design eye that makes the output actually helpful to look at.',
   ],
   // `year` is optional: link rows carry no date, so the cell stays empty.
   facts: [

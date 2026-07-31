@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { usePanels } from '@/hooks/usePanels';
 import { prefersReducedMotion } from '@/hooks/useReveal';
 
 // Counts a metric up once, when it first appears. Numbers that simply exist
@@ -90,9 +91,8 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
   const [tech, setTech] = useState(false);
   // Gallery position. The rail is a snap-scroller: a trackpad can swipe it but
   // a mouse has no way to drive it, hence the explicit controls.
-  const [panelAt, setPanelAt] = useState(0);
-  const railRef = useRef(null);
   const stageEl = useRef(null);
+  const { at: panelAt, railRef, go: goPanel, onScroll: onRailScroll, reset: resetPanels } = usePanels();
   const techRef = useRef(null);
   const articleRef = useRef(null);
   const setStage = useCallback(
@@ -110,7 +110,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
     if (!hidden) return;
     setWhy(null);
     setTech(false);
-    setPanelAt(0);
+    resetPanels();
   }, [hidden]);
 
   // Opening the breakdown should move the reader to it - otherwise the content
@@ -160,39 +160,6 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
     window.scrollTo({ top: Math.max(0, y), behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
   }, [tech]);
 
-  const goPanel = useCallback(
-    (i) => {
-      const rail = railRef.current;
-      if (!rail) return;
-      const figs = rail.querySelectorAll('figure');
-      const next = Math.max(0, Math.min(figs.length - 1, i));
-      setPanelAt(next);
-      // Scroll to the figure's OWN offset. Stepping by rail.clientWidth drifts,
-      // because each figure is narrower than the rail and carries a gap - the
-      // rail moved but the panel in view did not line up.
-      const target = figs[next];
-      if (target) rail.scrollTo({ left: target.offsetLeft - rail.offsetLeft, behavior: 'smooth' });
-    },
-    // no deps: the figures are read from the DOM, not from props
-    [],
-  );
-
-  // Keeps the dots honest when someone swipes rather than clicks.
-  const onRailScroll = useCallback(() => {
-    const rail = railRef.current;
-    if (!rail) return;
-    // Nearest figure by actual position, for the same reason.
-    const figs = [...rail.querySelectorAll('figure')];
-    if (!figs.length) return;
-    const x = rail.scrollLeft + rail.offsetLeft;
-    let best = 0;
-    let dist = Infinity;
-    figs.forEach((f, i) => {
-      const d = Math.abs(f.offsetLeft - x);
-      if (d < dist) { dist = d; best = i; }
-    });
-    setPanelAt(best);
-  }, []);
 
   const { live } = project;
   // Which set of captures to show. Tracked in state rather than read once at

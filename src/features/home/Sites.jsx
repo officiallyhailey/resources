@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { SITES, SITE_KEYS, SITE_TITLES } from '@/content/sites';
 import { useDeck } from '@/hooks/useDeck';
+import { usePanels } from '@/hooks/usePanels';
 
 // Tier 2: client sites. Same deck gesture as the projects, in lighter stock -
 // and the breakdowns open in place, so nobody is sent off-site to learn about
@@ -84,50 +86,93 @@ function SiteCase({ site, hidden, stageRef, onGo, onCross }) {
   const i = SITE_KEYS.indexOf(site.key);
   const prev = SITE_KEYS[(i - 1 + SITE_KEYS.length) % SITE_KEYS.length];
   const next = SITE_KEYS[(i + 1) % SITE_KEYS.length];
+  const { at, railRef, go, onScroll, reset } = usePanels();
+
+  // The cases stay mounted between openings, so without this a breakdown
+  // reopens on whichever slide was last viewed.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => {
+    if (hidden) reset();
+  }, [hidden, reset]);
 
   return (
     <article className="sitecase" hidden={hidden}>
-      <div className="case-top">
-        <p className="case-no">{site.platform}</p>
-        <h3>{site.title}</h3>
-        <p className="case-role">
-          {site.role.lead}
-          {site.role.crossKey && (
-            <>
-              <button type="button" className="hostlink lk-cross" onClick={() => onCross(site.role.crossKey)}>
-                {site.role.crossLabel}
-              </button>
-              {site.role.tail}
-            </>
-          )}
-        </p>
-        <div className="scoperow">
-          {site.scope.map((s) => (
-            <div key={s.k}>
-              <b>{s.k}</b>
-              {s.href ? (
-                <a className="hostlink" href={s.href} target="_blank" rel="noopener noreferrer">
-                  {s.v}
+      {/* Same shape as the project cases: shots lead at two thirds, the write-up
+          sits beside them, and both stack below 1100px. */}
+      <div className="case-split">
+        <div className="case-aside">
+          <div className="case-top">
+            <p className="case-no">{site.platform}</p>
+            <h3>{site.title}</h3>
+            <p className="case-role">
+              {site.role.lead}
+              {site.role.crossKey && (
+                <>
+                  <button type="button" className="hostlink lk-cross" onClick={() => onCross(site.role.crossKey)}>
+                    {site.role.crossLabel}
+                  </button>
+                  {site.role.tail}
+                </>
+              )}
+            </p>
+            <div className="scoperow">
+              {site.scope.map((sc) => (
+                <div key={sc.k}>
+                  <b>{sc.k}</b>
+                  {sc.href ? (
+                    <a className="hostlink" href={sc.href} target="_blank" rel="noopener noreferrer">
+                      {sc.v}
+                    </a>
+                  ) : (
+                    sc.v
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="caselede">
+            <p className="casesum">{site.shots[at]?.caption}</p>
+            <div className="caselede-act">
+              {site.links.map((l) => (
+                <a className="lk" key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">
+                  {l.label} <span aria-hidden="true">↗</span>
                 </a>
-              ) : (
-                s.v
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="ev evwide">
+          <div className="dshot">
+            <div className="stage panelled" ref={stageRef}>
+              <div className="panels" ref={railRef} onScroll={onScroll}>
+                {site.shots.map((shot) => (
+                  <figure key={shot.src}>
+                    <img src={shot.src} alt={shot.alt} />
+                    <figcaption>{shot.title}</figcaption>
+                  </figure>
+                ))}
+              </div>
+              {site.shots.length > 1 && (
+                <>
+                  <button className="pnav prev" onClick={() => go(at - 1)}
+                    disabled={at === 0} aria-label="Previous screenshot">‹</button>
+                  <button className="pnav next" onClick={() => go(at + 1)}
+                    disabled={at === site.shots.length - 1} aria-label="Next screenshot">›</button>
+                  <div className="pdots">
+                    {site.shots.map((shot, n) => (
+                      <button key={shot.src} className={n === at ? 'on' : undefined}
+                        onClick={() => go(n)} aria-label={`Go to ${shot.title}`}
+                        aria-current={n === at} />
+                    ))}
+                  </div>
+                </>
               )}
             </div>
-          ))}
+          </div>
         </div>
       </div>
-
-      {site.shots.map((shot, n) => (
-        <figure className="shotfig rv" key={shot.src}>
-          {/* the first shot is the morph target - it is the one the card's
-              thumbnail flies to, so it must carry the stage ref */}
-          <img ref={n === 0 ? stageRef : undefined} src={shot.src} alt={shot.alt} loading="lazy" />
-          <figcaption>
-            <b>{shot.title}</b>
-            <span>{shot.caption}</span>
-          </figcaption>
-        </figure>
-      ))}
 
       {site.cross && (
         <div className="crossnote">
@@ -141,14 +186,6 @@ function SiteCase({ site, hidden, stageRef, onGo, onCross }) {
           </p>
         </div>
       )}
-
-      <div className="links">
-        {site.links.map((l) => (
-          <a className="lk" key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">
-            {l.label} <span aria-hidden="true">↗</span>
-          </a>
-        ))}
-      </div>
 
       <nav className="casenav sitenav" aria-label="Other sites">
         <button onClick={() => onGo(prev)}>

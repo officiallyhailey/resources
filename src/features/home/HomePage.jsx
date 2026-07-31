@@ -79,21 +79,12 @@ export default function HomePage() {
   // session only, and never if they already opened it themselves; a popup that
   // reappears on every visit is the thing people close without reading.
   const [contactOpen, setContactOpen] = useState(false);
-  const autoFired = useRef(false);
 
-  useEffect(() => {
-    if (sessionStorage.getItem('contactPrompted')) autoFired.current = true;
-    const onScroll = () => {
-      if (autoFired.current) return;
-      const bottom = document.body.scrollHeight - window.innerHeight - window.scrollY;
-      if (bottom > 120) return;
-      autoFired.current = true;
-      sessionStorage.setItem('contactPrompted', '1');
-      setContactOpen(true);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  // No auto-open. It fired within 120px of the bottom and ContactModal sets
+  // body{overflow:hidden} while open, so reaching the end of the page locked
+  // scrolling - which read as the page simply breaking. The contact section
+  // lights up instead, and the floating button is always there. A timed prompt
+  // could return later, but it must not lock scroll to do it.
 
   useReveal(rootRef);
 

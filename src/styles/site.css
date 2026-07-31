@@ -1150,3 +1150,45 @@
      lift guard above is: a touch laptop is wide but still cannot hover. */
   .site-root .fannote{display:none}
 }
+
+/* ── contact beacon ──────────────────────────────────────────────────────────
+   Reaching the contact section is the one moment the page should actively ask
+   for something. Rather than interrupt with a popup, the section lights up:
+   a soft wash rises behind the headline, WORK takes the accent, and the
+   floating button turns orange so the way to act is unmistakable.
+
+   Every part is a transition on a state class, not a looping animation - it
+   fires once on arrival and then sits still, so it reads as arrival rather
+   than as something demanding attention. */
+.site-root #contact{position:relative;isolation:isolate}
+.site-root #contact::before{
+  content:'';position:absolute;z-index:-1;left:50%;top:38%;
+  width:min(120%,900px);aspect-ratio:1;transform:translate(-50%,-50%) scale(.8);
+  background:radial-gradient(circle,rgba(255,77,0,.16),rgba(255,77,0,0) 62%);
+  opacity:0;transition:opacity 1.1s var(--e),transform 1.4s var(--e);pointer-events:none;
+}
+.site-root #contact.beckon::before{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+/* WORK fills with the accent, left to right, so the eye is led across it */
+.site-root .w-work{
+  background-image:linear-gradient(90deg,var(--accent),var(--accent));
+  background-repeat:no-repeat;background-size:0% 100%;background-position:0 0;
+  -webkit-background-clip:text;background-clip:text;
+  transition:background-size .85s var(--e) .15s,color .5s var(--e);
+}
+.site-root #contact.beckon .w-work{-webkit-text-fill-color:transparent;color:transparent;background-size:100% 100%}
+/* No special case for the O: it is only accent on hover (.cta-big:hover .o),
+   so at rest it is the same colour as the rest of the word and the sweep should
+   carry the whole of WORK uniformly. Pinning it would make it jump to solid
+   orange while the letters either side were still filling. */
+
+/* the floating button becomes the obvious next action */
+.site-root .cfab.beckon{background:var(--accent);box-shadow:0 14px 34px rgba(255,77,0,.42)}
+.site-root .cfab.beckon svg{transform:scale(1.06)}
+.site-root .cfab svg{transition:transform .4s var(--e)}
+
+@media (prefers-reduced-motion: reduce) {
+  /* the arrival still reads, it just does not travel */
+  .site-root #contact::before{transition:opacity .01ms}
+  .site-root .w-work{transition:none}
+}

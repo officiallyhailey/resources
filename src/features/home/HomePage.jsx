@@ -58,6 +58,20 @@ export default function HomePage() {
   // The nonce makes each click a distinct signal, so following the same link
   // twice is not swallowed as "no change".
   const [jump, setJump] = useState(null);
+  // Lights up the contact headline and the floating button once the reader
+  // reaches the end. Clicking Contact in the nav scrolls here, so that path is
+  // covered by the same observer rather than needing its own wiring.
+  const [contactLive, setContactLive] = useState(false);
+  useEffect(() => {
+    const el = document.getElementById('contact');
+    if (!el) return undefined;
+    const io = new IntersectionObserver(
+      ([e]) => setContactLive(e.isIntersecting),
+      { threshold: 0.25 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   const crossToProject = useCallback((key) => setJump({ key, n: (performance.now() | 0) }), []);
 
   // The form opens once the reader reaches the bottom - they have seen the work
@@ -113,12 +127,12 @@ export default function HomePage() {
       <About />
       <Skills />
       <Experience />
-      <Contact onOpenForm={() => setContactOpen(true)} />
+      <Contact onOpenForm={() => setContactOpen(true)} live={contactLive} />
       {/* Always reachable - a reader who decides to get in touch three sections
           up should not have to scroll to the bottom to find how. Hidden while
           the dialog is open so it cannot sit on top of its own panel. */}
       {!contactOpen && (
-        <button className="cfab" onClick={() => setContactOpen(true)} aria-label="Open contact form">
+        <button className={`cfab${contactLive ? ' beckon' : ''}`} onClick={() => setContactOpen(true)} aria-label="Open contact form">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path
               fill="currentColor"

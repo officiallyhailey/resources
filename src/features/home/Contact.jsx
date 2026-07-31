@@ -1,9 +1,9 @@
 import { CONTACT } from '@/content/about';
 
-export default function Contact({ onOpenForm }) {
+export default function Contact({ onOpenForm, live }) {
   return (
     <>
-      <section id="contact">
+      <section id="contact" className={live ? 'beckon' : undefined}>
         <div className="wrap">
           <p className="idx rv">06 - Contact</p>
           {/* The headline is one link, so the whole slab is the target. The
@@ -12,7 +12,9 @@ export default function Contact({ onOpenForm }) {
           {/* the headline opens the form rather than firing a mail client -
               a mailto is a dead end for anyone without a desktop client set up */}
           <button className="cta-big rv" onClick={onOpenForm}>
-            LET&apos;S W<span className="o">O</span>RK
+            {/* WORK is wrapped so the whole word can take the accent when the
+                section is reached, rather than only the already-accented O. */}
+            LET&apos;S <span className="w-work">W<span className="o">O</span>RK</span>
             <br />
             TOGETHER
           </button>

@@ -90,7 +90,6 @@ function SiteCase({ site, hidden, stageRef, onGo, onCross }) {
 
   // The cases stay mounted between openings, so without this a breakdown
   // reopens on whichever slide was last viewed.
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     if (hidden) reset();
   }, [hidden, reset]);

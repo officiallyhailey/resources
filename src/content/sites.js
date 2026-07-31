@@ -62,9 +62,10 @@ export const SITES = [
       tail:
         ', where it is rolled into the weekly scorecard alongside expenses and labor. The storefront is the front end customers see; the platform is where the numbers land.',
     },
-    // No "visit the site" entry: the scope row already carries a Live at link
-    // to the same URL. Square is a different destination, so it stays.
-    links: [{ href: 'https://silkcitycoffee.square.site/', label: 'Cafe ordering on Square' }],
+    // Empty on purpose: the scope row's "Live at" link is the only route these
+    // cases need. Buttons here cost more vertical space on a phone than they
+    // were worth.
+    links: [],
   },
   {
     key: 'livinghope',

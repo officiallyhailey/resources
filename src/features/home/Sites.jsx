@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { SITES, SITE_KEYS, SITE_TITLES } from '@/content/sites';
 import { useDeck } from '@/hooks/useDeck';
 import { usePanels } from '@/hooks/usePanels';
@@ -87,11 +87,29 @@ function SiteCase({ site, hidden, stageRef, onGo, onCross }) {
   const prev = SITE_KEYS[(i - 1 + SITE_KEYS.length) % SITE_KEYS.length];
   const next = SITE_KEYS[(i + 1) % SITE_KEYS.length];
   const { at, railRef, go, onScroll, reset } = usePanels();
+  // The caption cross-fades rather than swapping on the same frame. `shown`
+  // lags `at` by one fade so the OLD text fades out before the new one fades
+  // in - binding the text straight to `at` swaps mid-transition, which is what
+  // read as a glitch.
+  const [shown, setShown] = useState(0);
+  const [swapping, setSwapping] = useState(false);
+  useEffect(() => {
+    if (shown === at) return undefined;
+    setSwapping(true);
+    const t = setTimeout(() => {
+      setShown(at);
+      setSwapping(false);
+    }, 190);
+    return () => clearTimeout(t);
+  }, [at, shown]);
 
   // The cases stay mounted between openings, so without this a breakdown
   // reopens on whichever slide was last viewed.
   useEffect(() => {
-    if (hidden) reset();
+    if (hidden) {
+      reset();
+      setShown(0);
+    }
   }, [hidden, reset]);
 
   return (
@@ -131,7 +149,7 @@ function SiteCase({ site, hidden, stageRef, onGo, onCross }) {
           </div>
 
           <div className="caselede">
-            <p className="casesum">{site.shots[at]?.caption}</p>
+            <p className={`casesum${swapping ? ' swapping' : ''}`}>{site.shots[shown]?.caption}</p>
             <div className="caselede-act">
               {site.links.map((l) => (
                 <a className="lk" key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">

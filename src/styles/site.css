@@ -162,7 +162,7 @@
   .hostlink.lk-cross{border:0;padding:0;font:inherit;color:var(--accent);
     border-bottom:1px solid rgba(255,77,0,.4)}
   .hostlink.lk-cross:hover{border-bottom-color:var(--accent)}
-  .crossnote{border:1px solid var(--rule);border-radius:12px;
+  .crossnote{margin-top:clamp(1.6rem,3vw,2.6rem);border:1px solid var(--rule);border-radius:12px;
     background:var(--paper);padding:1.2rem 1.4rem;margin-bottom:2rem}
   .crossnote b{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;
     text-transform:uppercase;color:var(--muted);font-weight:400;margin-bottom:.4rem}
@@ -492,7 +492,9 @@
      the preview starts as high as possible */
   .caselede{display:flex;justify-content:space-between;align-items:flex-end;gap:clamp(1.2rem,3vw,3rem);
     flex-wrap:wrap;margin-bottom:clamp(1.2rem,2.4vw,1.8rem)}
-  .casesum{font-size:1.02rem;line-height:1.6;max-width:56ch;margin:0}
+  .casesum{font-size:1.02rem;line-height:1.6;max-width:56ch;margin:0;
+    transition:opacity .19s var(--e)}
+  .casesum.swapping{opacity:0}
   .caselede-act{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
   /* full-bleed within the wrap - the preview is the point of the default view */
   /* ── case split: gallery leads, details sit beside it ──

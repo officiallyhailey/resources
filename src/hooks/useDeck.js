@@ -104,7 +104,18 @@ export function useDeck(cardSelector = '.pcard') {
       : null;
     const preview = openPanel?.querySelector('.dshot, .shotfig');
     if (openKey) {
-      place(preview || openPanel || sectionRef.current, 'center');
+      const target = preview || openPanel || sectionRef.current;
+      place(target, 'center');
+      // The project stage reserves its height with a fixed aspect, but the
+      // client breakdowns use plain lazy-loaded figures with no reserved box -
+      // so at this moment the figure is nearly empty and centring lands short,
+      // then the image loads and pushes everything down. Re-centre once it has
+      // real height. Harmless where the image is already cached: `complete` is
+      // true and this never runs.
+      const img = target?.querySelector?.('img');
+      if (img && !img.complete) {
+        img.addEventListener('load', () => place(target, 'center'), { once: true });
+      }
     } else {
       place(sectionRef.current, 'top');
     }

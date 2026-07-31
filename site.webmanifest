@@ -1,0 +1,15 @@
+{
+  "name": "Hailey Grace — Full-stack developer",
+  "short_name": "Hailey Grace",
+  "description": "Portfolio: systems built end to end, and client sites built and maintained.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#EDECE9",
+  "theme_color": "#EDECE9",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

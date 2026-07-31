@@ -165,6 +165,9 @@ function SiteCase({ site, hidden, stageRef, onGo, onCross }) {
               ))}
               <p className={`casesum${swapping ? ' swapping' : ''}`}>{site.shots[shown]?.caption}</p>
             </div>
+            {/* Sites whose only link duplicated the Live at row now have none,
+                so the row must not render as an empty gap. */}
+            {site.links.length > 0 && (
             <div className="caselede-act">
               {site.links.map((l) => (
                 <a className="lk" key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">
@@ -172,6 +175,7 @@ function SiteCase({ site, hidden, stageRef, onGo, onCross }) {
                 </a>
               ))}
             </div>
+            )}
           </div>
         </div>
 

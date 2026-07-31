@@ -162,11 +162,14 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
   const { live } = project;
   // Which set of captures to show. Tracked in state rather than read once at
   // render, or resizing across the breakpoint would leave the wrong set up.
+  // 768, not 900: a tablet frame is still wide enough that portrait phone
+  // captures letterbox into a narrow column. Above this the desktop set fits
+  // far better, and below it the frame is narrow enough for the phone shots.
   const [isNarrow, setIsNarrow] = useState(
-    () => typeof window !== 'undefined' && window.innerWidth <= 900,
+    () => typeof window !== 'undefined' && window.innerWidth <= 768,
   );
   useEffect(() => {
-    const onResize = () => setIsNarrow(window.innerWidth <= 900);
+    const onResize = () => setIsNarrow(window.innerWidth <= 768);
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
@@ -177,102 +180,106 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
 
   return (
     <article className={`case${flip ? ' flip' : ''}`} hidden={hidden}>
-      <div className="case-top">
-        <p className="case-no">{project.kicker}</p>
-        <h3>{project.title}</h3>
-        <p className="case-role">{project.role}</p>
-        <div className="mstrip">
-          {project.metrics.map((m) => (
-            <Metric key={m.label} {...m} run={!hidden} />
-          ))}
+      <div className="case-split">
+        <div className="case-aside">
+        <div className="case-top">
+          <p className="case-no">{project.kicker}</p>
+          <h3>{project.title}</h3>
+          <p className="case-role">{project.role}</p>
+          <div className="mstrip">
+            {project.metrics.map((m) => (
+              <Metric key={m.label} {...m} run={!hidden} />
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* The default view carries little enough that a column split just left
-          dead space - the lede reads across the top and the preview takes the
-          full width, which is also the largest the embedded site can be. */}
-      <div className="caselede">
-        <p className="casesum">{project.card.teaser}</p>
-        <div className="caselede-act">
-          {/* The live site is an out-link now rather than an embed: it costs
-              nothing to load and opens the real thing full size instead of
-              scaled into a frame. */}
-          <div className="links">
-            {live?.url && (
-              <a
-                className="lk"
-                href={live.url}
-                {...(live.url.startsWith('http')
-                  ? { target: '_blank', rel: 'noopener noreferrer' }
-                  : {})}
-              >
-                Open it live <span aria-hidden="true">↗</span>
-              </a>
-            )}
-            {project.links
-              .filter((l) => l.kind !== 'soon')
-              .map((l) => (
-                <a className="lk" key={l.label} href={l.href} target="_blank" rel="noopener noreferrer">
-                  {l.label}
+        {/* The default view carries little enough that a column split just left
+            dead space - the lede reads across the top and the preview takes the
+            full width, which is also the largest the embedded site can be. */}
+        <div className="caselede">
+          <p className="casesum">{project.card.teaser}</p>
+          <div className="caselede-act">
+            {/* The live site is an out-link now rather than an embed: it costs
+                nothing to load and opens the real thing full size instead of
+                scaled into a frame. */}
+            <div className="links">
+              {live?.url && (
+                <a
+                  className="lk"
+                  href={live.url}
+                  {...(live.url.startsWith('http')
+                    ? { target: '_blank', rel: 'noopener noreferrer' }
+                    : {})}
+                >
+                  Open it live <span aria-hidden="true">↗</span>
                 </a>
-              ))}
-          </div>
-          <button className="techtoggle" aria-expanded={tech} onClick={() => setTech((v) => !v)}>
-            {tech ? 'Hide the technical detail' : 'How it was built'}
-            <em aria-hidden="true">{tech ? '−' : '+'}</em>
-          </button>
-        </div>
-      </div>
-
-      <div className="ev evwide">
-        <div className="dshot">
-          <div
-            className={`stage${showPanels ? ' panelled' : ''}`}
-            ref={setStage}
-          >
-            {/* Small screens cannot run the embed, so the platform's own mobile
-                panels stand in. Horizontal snap-scroll, matching how the real
-                thing paginates - swipe rather than a single frozen shot. */}
-            {showPanels ? (
-              <>
-                <div className="panels" ref={railRef} onScroll={onRailScroll}>
-                  {panels.map((p) => (
-                    <figure key={p.src}>
-                      {/* Not lazy: these only render once the case is open, so
-                          they are never wasted - and lazy left them unfetched,
-                          laid out at full size but complete:false. */}
-                      <img src={p.src} alt={p.alt} />
-                      <figcaption>{p.label}</figcaption>
-                    </figure>
-                  ))}
-                </div>
-                {/* A snap rail can be swiped on a trackpad but a mouse has no
-                    way to drive it, so the steps are made explicit. */}
-                {panels.length > 1 && (
-                  <>
-                    <button className="pnav prev" onClick={() => goPanel(panelAt - 1)}
-                      disabled={panelAt === 0} aria-label="Previous screenshot">‹</button>
-                    <button className="pnav next" onClick={() => goPanel(panelAt + 1)}
-                      disabled={panelAt === panels.length - 1} aria-label="Next screenshot">›</button>
-                    <div className="pdots">
-                      {panels.map((pn, i) => (
-                        <button key={pn.src} className={i === panelAt ? 'on' : undefined}
-                          onClick={() => goPanel(i)} aria-label={`Go to ${pn.label}`}
-                          aria-current={i === panelAt} />
-                      ))}
-                    </div>
-                  </>
-                )}
-              </>
-            ) : (
-              <img src={project.shot} alt={project.shotAlt} />
-            )}
+              )}
+              {project.links
+                .filter((l) => l.kind !== 'soon')
+                .map((l) => (
+                  <a className="lk" key={l.label} href={l.href} target="_blank" rel="noopener noreferrer">
+                    {l.label}
+                  </a>
+                ))}
+            </div>
+            <button className="techtoggle" aria-expanded={tech} onClick={() => setTech((v) => !v)}>
+              {tech ? 'Hide the technical detail' : 'How it was built'}
+              <em aria-hidden="true">{tech ? '−' : '+'}</em>
+            </button>
           </div>
         </div>
+        </div>
+        <div className="ev evwide">
+          <div className="dshot">
+            <div
+              className={`stage${showPanels ? ' panelled' : ''}`}
+              ref={setStage}
+            >
+              {/* Small screens cannot run the embed, so the platform's own mobile
+                  panels stand in. Horizontal snap-scroll, matching how the real
+                  thing paginates - swipe rather than a single frozen shot. */}
+              {showPanels ? (
+                <>
+                  <div className="panels" ref={railRef} onScroll={onRailScroll}>
+                    {panels.map((p) => (
+                      <figure key={p.src}>
+                        {/* Not lazy: these only render once the case is open, so
+                            they are never wasted - and lazy left them unfetched,
+                            laid out at full size but complete:false. */}
+                        <img src={p.src} alt={p.alt} />
+                        <figcaption>{p.label}</figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                  {/* A snap rail can be swiped on a trackpad but a mouse has no
+                      way to drive it, so the steps are made explicit. */}
+                  {panels.length > 1 && (
+                    <>
+                      <button className="pnav prev" onClick={() => goPanel(panelAt - 1)}
+                        disabled={panelAt === 0} aria-label="Previous screenshot">‹</button>
+                      <button className="pnav next" onClick={() => goPanel(panelAt + 1)}
+                        disabled={panelAt === panels.length - 1} aria-label="Next screenshot">›</button>
+                      <div className="pdots">
+                        {panels.map((pn, i) => (
+                          <button key={pn.src} className={i === panelAt ? 'on' : undefined}
+                            onClick={() => goPanel(i)} aria-label={`Go to ${pn.label}`}
+                            aria-current={i === panelAt} />
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </>
+              ) : (
+                <img src={project.shot} alt={project.shotAlt} />
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Everything technical lives here, closed by default. Full width because
+            the architecture diagram and grouped stack need the room. */}
       </div>
 
-      {/* Everything technical lives here, closed by default. Full width because
-          the architecture diagram and grouped stack need the room. */}
       <div className="tech" ref={techRef} hidden={!tech}>
         <div className="tech-grid">
           <div>

@@ -495,6 +495,29 @@
   .casesum{font-size:1.02rem;line-height:1.6;max-width:56ch;margin:0}
   .caselede-act{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
   /* full-bleed within the wrap - the preview is the point of the default view */
+  /* ── case split: gallery leads, details sit beside it ──
+     The captures are roughly square, so a full-width frame left large empty
+     bands either side. Two thirds for the images and one third for the header
+     lets the frame hug them instead. DOM order is details-then-gallery, so the
+     stacked layout below 1100px needs no reordering - only the wide layout
+     flips them with `order`. */
+  .case-split{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);
+    gap:clamp(1.2rem,2.4vw,2.2rem);align-items:start}
+  .case-split .ev{order:1;min-width:0}
+  .case-split .case-aside{order:2;min-width:0}
+  .case-aside .case-top{margin-bottom:1.1rem}
+  .case-aside .caselede{flex-direction:column;align-items:flex-start;gap:.9rem}
+  .case-aside .casesum{max-width:none}
+  .case-aside .mstrip{grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
+  .case-aside .caselede-act{flex-direction:column;align-items:stretch;gap:.5rem}
+  .case-aside .lk,.case-aside .techtoggle{justify-content:center}
+  @media (max-width:1100px){
+    .case-split{grid-template-columns:minmax(0,1fr)}
+    .case-split .ev,.case-split .case-aside{order:0}
+    .case-aside .caselede{flex-direction:row;align-items:flex-end;justify-content:space-between}
+    .case-aside .caselede-act{flex-direction:row;align-items:center;width:auto}
+  }
+
   /* Capped and centred so it reads as a computer screen, not a full-bleed band.
      The stage aspect MUST match the embed's own 1280x853 or the bottom of the
      previewed site is clipped - it was 16/9, which cut ~120px off every site. */
@@ -504,7 +527,10 @@
      Stands in for the embed below 900px. Horizontal snap-scroll so a swipe
      moves exactly one panel, which is how the real platform paginates. The
      3:2 stage is a letterbox for portrait panels, so height is taken over. */
-  .dshot .stage.panelled{aspect-ratio:auto;height:min(76vh,620px);background:var(--paper);overflow:hidden}
+  /* Sized to the captures (~1.25:1) rather than the 3:2 the single screenshot
+     uses - at 3:2 the frame was far wider than the image and read as padding. */
+  .dshot .stage.panelled{aspect-ratio:5/4;height:auto;max-height:78vh;
+    background:var(--paper);overflow:hidden}
   .panels{display:flex;gap:.75rem;height:100%;padding:.7rem;overflow-x:auto;
     scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
   .panels figure{flex:0 0 auto;width:100%;height:100%;margin:0;
@@ -537,7 +563,7 @@
   .pdots button.on{background:var(--accent);transform:scale(1.35)}
   .pdots button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   /* room for the dots so they never sit on a caption */
-  .panels{padding-bottom:1.7rem}
+  .panels{padding:.45rem .45rem 1.6rem}
   .panels::-webkit-scrollbar{height:5px}
   .panels::-webkit-scrollbar-thumb{background:rgba(0,0,0,.22);border-radius:3px}
   /* the tall full-page capture, scrolled inside the frame */

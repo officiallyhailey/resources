@@ -396,10 +396,18 @@
   .cardslot:hover .thumb img,
   .siteslot:hover .thumb img{transform:scale(1.03)}
   .sbody{padding:1rem 1.1rem 1.1rem;display:flex;flex-direction:column;gap:.4rem;flex:1}
+  /* Reserves the height of two lines. "Operations platform" wraps where the
+     shorter tags do not, and without this its title dropped a line and sat out
+     of step with the rest of the row. align-items:start keeps the dot on the
+     first line rather than centring it against the reserved space. */
   .plat{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;
-    color:var(--muted);display:flex;align-items:center;gap:.4rem}
+    color:var(--muted);display:flex;align-items:flex-start;gap:.4rem;
+    min-height:2.6em;line-height:1.3}
+  .plat i{margin-top:.45em}
   .plat i{font-style:normal;width:4px;height:4px;border-radius:50%;background:var(--accent);flex:none}
-  .site h3{font-family:'Archivo Black';font-size:1.05rem;letter-spacing:-.03em;line-height:1.1}
+  .site h3,
+  .pcard h3{font-family:'Archivo Black';font-size:1.05rem;letter-spacing:-.03em;line-height:1.1;
+    color:var(--accent)}
   .site p{font-size:.8rem;color:var(--muted);line-height:1.55;flex:1}
   .visit{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;
     color:var(--accent);display:inline-flex;align-items:center;gap:.4rem;margin-top:.2rem}
@@ -519,6 +527,16 @@
   .case-aside .mstrip{grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
   .case-aside .caselede-act{flex-direction:column;align-items:stretch;gap:.5rem}
   .case-aside .lk,.case-aside .techtoggle{justify-content:center}
+  /* Cards match in both directions: the grid stretches every slot to the tallest
+     in its row, and the card fills its slot rather than sizing to its own
+     content. Without this a shorter teaser made a shorter card. */
+  /* grid-auto-rows:1fr equalises rows against EACH OTHER. align-items:stretch
+     alone only matches cards within the same row, which left row two 19px
+     taller than row one at phone width. */
+  .fan,.sites{align-items:stretch;grid-auto-rows:1fr}
+  .cardslot,.siteslot{display:flex}
+  .pcard,.site{height:100%}
+
   @media (max-width:1100px){
     /* Stacked, the description sits directly above the screenshot, so the
        lede's bottom margin and the grid row gap compound - 34px measured.
@@ -890,6 +908,16 @@
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.82rem;opacity:.72}
   .badge{position:fixed;right:12px;bottom:12px;background:var(--dark);color:var(--paper);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;padding:7px 12px;border-radius:100px;z-index:130}
 
+  /* Cards match in both directions: the grid stretches every slot to the tallest
+     in its row, and the card fills its slot rather than sizing to its own
+     content. Without this a shorter teaser made a shorter card. */
+  /* grid-auto-rows:1fr equalises rows against EACH OTHER. align-items:stretch
+     alone only matches cards within the same row, which left row two 19px
+     taller than row one at phone width. */
+  .fan,.sites{align-items:stretch;grid-auto-rows:1fr}
+  .cardslot,.siteslot{display:flex}
+  .pcard,.site{height:100%}
+
   @media (max-width:1100px){
     .hl{font-size:clamp(2.4rem,9vw,4.6rem)}
     .hbody{grid-template-columns:minmax(0,1fr);gap:var(--stack-md);align-content:center}
@@ -913,6 +941,16 @@
     .pcard{transform:none}
     .cardslot:hover .pcard,.pcard:focus-visible{transform:translateY(-8px)}
   }
+
+  /* Cards match in both directions: the grid stretches every slot to the tallest
+     in its row, and the card fills its slot rather than sizing to its own
+     content. Without this a shorter teaser made a shorter card. */
+  /* grid-auto-rows:1fr equalises rows against EACH OTHER. align-items:stretch
+     alone only matches cards within the same row, which left row two 19px
+     taller than row one at phone width. */
+  .fan,.sites{align-items:stretch;grid-auto-rows:1fr}
+  .cardslot,.siteslot{display:flex}
+  .pcard,.site{height:100%}
 
   @media (max-width:1100px){
     /* Below the fan, this becomes a real grid. A centred flex row of fixed-width
@@ -1104,4 +1142,11 @@
   .site-root .siteslot:hover .site{transform:none}
   .site-root .cardslot:hover .shot img,
   .site-root .siteslot:hover .thumb img{transform:none}
+}
+
+@media (hover: none) {
+  /* "Hover a card to bring it forward" describes an interaction that does not
+     exist on touch. Keyed to hover rather than width for the same reason the
+     lift guard above is: a touch laptop is wide but still cannot hover. */
+  .site-root .fannote{display:none}
 }

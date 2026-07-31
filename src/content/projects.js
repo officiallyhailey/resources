@@ -164,7 +164,7 @@ export const PROJECTS = [
       tag: 'Career OS',
       scope: 'Solo · 2025 · Daily driver',
       teaser:
-        'One installable app that tracks my working day - tasks, projects, a job hunt on a map, and an assistant that helps get the work done.',
+        'Fullstack application that tracks my working day - tasks, projects, a job hunt on a map, and an AI assistant that helps get the work done.',
       stack: ['Next.js', 'MCP', 'Mapbox'],
       cta: 'Read case study',
     },

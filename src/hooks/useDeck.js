@@ -109,15 +109,13 @@ export function useDeck(cardSelector = '.pcard') {
       : null;
     const preview = openPanel?.querySelector('.dshot, .shotfig');
     if (openKey) {
-      // On a phone the panel fills the screen, so centring it hides the section
-      // heading entirely and the reader loses track of where they are. Open at
-      // the section top instead, so "Built for real clients" stays in view.
+      // Desktop centres the preview - it is the thing worth looking at, and a
+      // phone cannot centre it without the panel filling the screen. So on a
+      // phone the PROJECT title goes to the very top instead, which both
+      // orients the reader and puts the screenshots immediately below.
       const narrow = typeof window !== 'undefined' && window.innerWidth <= 768;
-      // Target the HEADING, not the section box. The section carries several
-      // rem of top padding, so landing on its top edge left the previous
-      // section's cards still on screen above the title.
-      const heading = sectionRef.current?.querySelector('.head') || sectionRef.current;
-      const target = narrow ? heading : preview || openPanel || sectionRef.current;
+      const title = openPanel?.querySelector('.case-top') || openPanel;
+      const target = narrow ? title : preview || openPanel || sectionRef.current;
       place(target, narrow ? 'tight' : 'center');
       // The project stage reserves its height with a fixed aspect, but the
       // client breakdowns use plain lazy-loaded figures with no reserved box -
@@ -130,7 +128,15 @@ export function useDeck(cardSelector = '.pcard') {
         img.addEventListener('load', () => place(target, 'center'), { once: true });
       }
     } else {
-      place(sectionRef.current, 'top');
+      // Closing returns to the section the reader came from: centred on
+      // desktop, pinned to the top on a phone where centring a tall section
+      // just hides its heading again.
+      const narrowClose = typeof window !== 'undefined' && window.innerWidth <= 768;
+      // On a phone, target the heading rather than the section box - the
+      // section's own top padding would otherwise push its title down the
+      // screen. Desktop centres the whole section, so the box is correct there.
+      const closeHead = sectionRef.current?.querySelector('.head') || sectionRef.current;
+      place(narrowClose ? closeHead : sectionRef.current, narrowClose ? 'tight' : 'center');
     }
     const job = pending.current;
     pending.current = null;

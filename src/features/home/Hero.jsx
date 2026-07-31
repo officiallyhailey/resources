@@ -67,7 +67,7 @@ export default function Hero() {
             <div className={`actions hrv${entered ? ' on' : ''}`} style={{ transitionDelay: '620ms' }}>
               <a className="cta" href="#work">
                 <span>See the work</span>
-                <em>↗</em>
+                <em>↓</em>
               </a>
               <div className="socials">
                 {SOCIALS.map((s) => (

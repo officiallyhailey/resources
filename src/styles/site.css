@@ -520,7 +520,11 @@
   .case-aside .caselede-act{flex-direction:column;align-items:stretch;gap:.5rem}
   .case-aside .lk,.case-aside .techtoggle{justify-content:center}
   @media (max-width:1100px){
-    .case-split{grid-template-columns:minmax(0,1fr)}
+    /* Stacked, the description sits directly above the screenshot, so the
+       lede's bottom margin and the grid row gap compound - 34px measured.
+       Zero the margin and let one small row gap do the spacing. */
+    .case-split{grid-template-columns:minmax(0,1fr);row-gap:.7rem}
+    .case-aside .caselede{margin-bottom:0}
     .case-split .ev,.case-split .case-aside{order:0}
     .case-aside .caselede{flex-direction:row;align-items:flex-end;justify-content:space-between}
     .case-aside .caselede-act{flex-direction:row;align-items:center;width:auto}

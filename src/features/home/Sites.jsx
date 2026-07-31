@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { SITES, SITE_KEYS, SITE_TITLES } from '@/content/sites';
 import { useDeck } from '@/hooks/useDeck';
 import { usePanels } from '@/hooks/usePanels';
@@ -105,11 +105,15 @@ function SiteCase({ site, hidden, stageRef, onGo, onCross }) {
 
   // The cases stay mounted between openings, so without this a breakdown
   // reopens on whichever slide was last viewed.
-  useEffect(() => {
-    if (hidden) {
-      reset();
-      setShown(0);
-    }
+  // Reset when the case becomes VISIBLE, not when it hides. A hidden element
+  // is display:none and has no scroll box, so setting scrollLeft on it does
+  // nothing - the index reset but the rail stayed put, and the next opening
+  // showed a later slide with the first slide's caption beside it.
+  // Layout effect so it lands before paint rather than flashing the old slide.
+  useLayoutEffect(() => {
+    if (hidden) return;
+    reset();
+    setShown(0);
   }, [hidden, reset]);
 
   return (

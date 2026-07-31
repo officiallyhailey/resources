@@ -63,7 +63,7 @@ export const SITES = [
         ', where it is rolled into the weekly scorecard alongside expenses and labor. The storefront is the front end customers see; the platform is where the numbers land.',
     },
     links: [
-      { href: 'https://silkcitycoffee.com/', label: 'Visit silkcitycoffee.com' },
+      { href: 'https://silkcitycoffee.com/', label: 'Visit Their Site' },
       { href: 'https://silkcitycoffee.square.site/', label: 'Cafe ordering on Square' },
     ],
   },
@@ -75,7 +75,7 @@ export const SITES = [
     thumb: '/img/site-livinghope.jpg',
     thumbAlt: 'The Living Hope Farms homepage.',
     teaser:
-      'Nonprofit residential home for survivors of human trafficking. Donations, an Airtable-backed application flow, resource pages and a social-enterprise shop.',
+      'Nonprofit residential home for survivors of human trafficking. Donations, an Airtable build application, resource pages and a social-enterprise shop.',
     role: {
       lead:
         'A nonprofit residential home where survivors of exploitation and their children find safety - 15 acres, 17 bedrooms and a working garden.',
@@ -91,24 +91,24 @@ export const SITES = [
         alt: 'Living Hope Farms - the front door.',
         title: 'The front door',
         caption:
-          'Leads with the mission and puts the two things a visitor most often needs - Donate and Apply - in the primary nav.',
+          'Leads with the mission to help people looking for help gain a clear picture of what they can find here',
       },
       {
         src: '/img/site-livinghope-2.jpg',
         alt: 'Living Hope Farms - services.',
         title: 'Services',
         caption:
-          'The programmes set out plainly, so a referring agency can see what is offered without having to make a phone call first.',
+          'The services set out plainly, so a referring agency can see what is offered without having to make a phone call first.',
       },
       {
         src: '/img/site-livinghope-3.jpg',
         alt: 'Living Hope Farms - giving.',
         title: 'Giving',
         caption:
-          'Donations handled on-site rather than handed off to a third-party page, so a donor never leaves the brand mid-decision.',
+          'Donations embedded from a secure third-party, so a donor never leaves the site mid-decision and donations are securely processed.',
       },
     ],
-    links: [{ href: 'https://www.livinghopefarms.org/', label: 'Visit livinghopefarms.org' }],
+    links: [{ href: 'https://www.livinghopefarms.org/', label: 'Visit Their Site' }],
   },
   {
     key: 'anavah',
@@ -118,10 +118,10 @@ export const SITES = [
     thumb: '/img/site-anavah.jpg',
     thumbAlt: 'The Anavah Publishing homepage.',
     teaser:
-      'Independent children’s publisher. Book catalogue, Square checkout, author visits, newsletter and four retail stockists.',
+      'Independent children’s publisher. Book catalogue, Square checkout, author visits, newsletter and four retail locations.',
     role: {
       lead:
-        'An independent children’s publisher with an award-winning picture book, an activity book and four brick-and-mortar stockists.',
+        'An independent children’s publisher with an award-winning picture book, an activity book and four brick-and-mortar locations.',
     },
     scope: [
       { k: 'Platform', v: 'WordPress' },
@@ -134,14 +134,14 @@ export const SITES = [
         alt: 'Anavah Publishing - the front door.',
         title: 'The front door',
         caption:
-          'Brand first: the mark, the promise and the publisher’s own voice before any product, which is what an indie author is deciding on.',
+          'A clean hero section for the author to introduce themselves to visitors and a clear navigation to their content and resources.',
       },
       {
         src: '/img/site-anavah-2.jpg',
         alt: 'Anavah Publishing - the catalogue.',
         title: 'The catalogue',
         caption:
-          'Each title with room for its story and its awards, rather than a grid of covers competing for the same glance.',
+          'Each title with room for its story and its awards, so visitors can get the clear vision the author intended.',
       },
       {
         src: '/img/site-anavah-3.jpg',
@@ -151,7 +151,7 @@ export const SITES = [
           'Square checkout wired into WordPress, so payments run on infrastructure the owner already uses for events and signings.',
       },
     ],
-    links: [{ href: 'https://anavahpublishing.com/', label: 'Visit anavahpublishing.com' }],
+    links: [{ href: 'https://anavahpublishing.com/', label: 'Visit Their Site' }],
   },
 ];
 

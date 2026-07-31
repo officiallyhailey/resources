@@ -110,8 +110,14 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
     if (!hidden) return;
     setWhy(null);
     setTech(false);
-    resetPanels();
   }, [hidden]);
+
+  // Same reasoning as Sites: the rail can only be scrolled while it is visible,
+  // so resetting on hide left the index and the rail disagreeing.
+  useLayoutEffect(() => {
+    if (hidden) return;
+    resetPanels();
+  }, [hidden, resetPanels]);
 
   // Opening the breakdown should move the reader to it - otherwise the content
   // they just asked for unfolds below the fold and nothing appears to happen.

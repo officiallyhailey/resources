@@ -153,7 +153,18 @@ function SiteCase({ site, hidden, stageRef, onGo, onCross }) {
           </div>
 
           <div className="caselede">
-            <p className={`casesum${swapping ? ' swapping' : ''}`}>{site.shots[shown]?.caption}</p>
+            {/* All captions occupy the same grid cell, so the box is always as
+                tall as the LONGEST one and swapping slides cannot resize it -
+                which is what made the page jump. The hidden copies are
+                aria-hidden so they are not read out. */}
+            <div className="casesum-box">
+              {site.shots.map((sh) => (
+                <p className="casesum ghost" key={sh.src} aria-hidden="true">
+                  {sh.caption}
+                </p>
+              ))}
+              <p className={`casesum${swapping ? ' swapping' : ''}`}>{site.shots[shown]?.caption}</p>
+            </div>
             <div className="caselede-act">
               {site.links.map((l) => (
                 <a className="lk" key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">

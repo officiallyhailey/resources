@@ -104,8 +104,12 @@ export function useDeck(cardSelector = '.pcard') {
       : null;
     const preview = openPanel?.querySelector('.dshot, .shotfig');
     if (openKey) {
-      const target = preview || openPanel || sectionRef.current;
-      place(target, 'center');
+      // On a phone the panel fills the screen, so centring it hides the section
+      // heading entirely and the reader loses track of where they are. Open at
+      // the section top instead, so "Built for real clients" stays in view.
+      const narrow = typeof window !== 'undefined' && window.innerWidth <= 768;
+      const target = narrow ? sectionRef.current : preview || openPanel || sectionRef.current;
+      place(target, narrow ? 'top' : 'center');
       // The project stage reserves its height with a fixed aspect, but the
       // client breakdowns use plain lazy-loaded figures with no reserved box -
       // so at this moment the figure is nearly empty and centring lands short,

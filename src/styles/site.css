@@ -492,8 +492,14 @@
      the preview starts as high as possible */
   .caselede{display:flex;justify-content:space-between;align-items:flex-end;gap:clamp(1.2rem,3vw,3rem);
     flex-wrap:wrap;margin-bottom:clamp(1.2rem,2.4vw,1.8rem)}
+  /* Every caption shares one grid cell, so the box is as tall as the longest
+     and changing slides cannot resize it. The ghosts hold the space; only the
+     live one is visible. */
+  .casesum-box{display:grid}
+  .casesum-box > *{grid-area:1/1}
   .casesum{font-size:1.02rem;line-height:1.6;max-width:56ch;margin:0;
     transition:opacity .19s var(--e)}
+  .casesum.ghost{visibility:hidden;pointer-events:none}
   .casesum.swapping{opacity:0}
   .caselede-act{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
   /* full-bleed within the wrap - the preview is the point of the default view */
@@ -815,6 +821,13 @@
   .cfab:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   .cfab svg{width:18px;height:18px;flex:none;display:block}
   @media (max-width:640px){
+    /* Two full-size buttons wrapped onto separate rows and ate the screen.
+       Compact them so they sit on one line, and let long labels truncate
+       rather than force a second row. */
+    .caselede-act{flex-wrap:nowrap;gap:.4rem;width:100%}
+    .caselede-act .lk,.caselede-act .techtoggle{flex:1 1 0;min-width:0;
+      padding:.55rem .7rem;font-size:.78rem;white-space:nowrap;overflow:hidden;
+      text-overflow:ellipsis;justify-content:center}
     .cfab{padding:.85rem;border-radius:50%}
     .cfab span{display:none}
   }
@@ -988,6 +1001,13 @@
     .navpill a{font-size:.7rem;padding:.4rem .62rem}
   }
   @media (max-width:640px){
+    /* Two full-size buttons wrapped onto separate rows and ate the screen.
+       Compact them so they sit on one line, and let long labels truncate
+       rather than force a second row. */
+    .caselede-act{flex-wrap:nowrap;gap:.4rem;width:100%}
+    .caselede-act .lk,.caselede-act .techtoggle{flex:1 1 0;min-width:0;
+      padding:.55rem .7rem;font-size:.78rem;white-space:nowrap;overflow:hidden;
+      text-overflow:ellipsis;justify-content:center}
     /* The mono labels sit at 8-10px, which is a desktop detail size. On a phone
        that is pinch-to-read, so the whole scale gets a floor here. Measured 79
        elements below 11px before this. */

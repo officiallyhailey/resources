@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { prefersReducedMotion } from '@/hooks/useReveal';
 
 // Counts a metric up once, when it first appears. Numbers that simply exist
@@ -94,6 +94,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
   const railRef = useRef(null);
   const stageEl = useRef(null);
   const techRef = useRef(null);
+  const articleRef = useRef(null);
   const setStage = useCallback(
     (el) => {
       stageEl.current = el;
@@ -114,6 +115,32 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
 
   // Opening the breakdown should move the reader to it - otherwise the content
   // they just asked for unfolds below the fold and nothing appears to happen.
+  // Closing returns to the top of the project. Without this the reader is left
+  // wherever the collapsed section dumped them, usually mid-page with no
+  // context about which case they are even in.
+  // Only flags the intent. The scroll itself has to wait until the section has
+  // actually collapsed: measuring here reads the pre-collapse position, and the
+  // page then lands hundreds of pixels short once the DOM shrinks under it.
+  const wantTop = useRef(false);
+  const closeTech = () => {
+    wantTop.current = true;
+    setTech(false);
+  };
+
+  useLayoutEffect(() => {
+    if (tech || !wantTop.current) return;
+    wantTop.current = false;
+    const top = articleRef.current;
+    if (!top) return;
+    // scrollIntoView, not window.scrollTo: the root carries overflow-x:clip so
+    // body is the scrolling box, and scrollTo on window is a no-op here - the
+    // same reason the nav links do not jump. scrollIntoView cannot offset, so
+    // the nav is backed off afterwards.
+    const smooth = !prefersReducedMotion();
+    top.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+    setTimeout(() => window.scrollBy(0, -NAVH), smooth ? 640 : 0);
+  }, [tech]);
+
   useEffect(() => {
     if (!tech) return;
     const el = techRef.current;
@@ -179,7 +206,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
   const showPanels = !!panels?.length;
 
   return (
-    <article className={`case${flip ? ' flip' : ''}`} hidden={hidden}>
+    <article className={`case${flip ? ' flip' : ''}`} hidden={hidden} ref={articleRef}>
       <div className="case-split">
         <div className="case-aside">
         <div className="case-top">
@@ -222,7 +249,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
                   </a>
                 ))}
             </div>
-            <button className="techtoggle" aria-expanded={tech} onClick={() => setTech((v) => !v)}>
+            <button className="techtoggle" aria-expanded={tech} onClick={() => (tech ? closeTech() : setTech(true))}>
               {tech ? 'Hide the technical detail' : 'How it was built'}
               <em aria-hidden="true">{tech ? '−' : '+'}</em>
             </button>
@@ -325,6 +352,12 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
           </div>
 
           <BuildPane build={project.build} />
+        </div>
+
+        <div className="techclose">
+          <button className="techtoggle" onClick={closeTech}>
+            Hide the technical detail <em aria-hidden="true">−</em>
+          </button>
         </div>
       </div>
 

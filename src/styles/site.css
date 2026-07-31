@@ -594,6 +594,10 @@
   .tech{margin-top:clamp(1.6rem,3vw,2.4rem);border-top:1px solid var(--rule);
     padding-top:clamp(1.4rem,2.6vw,2rem)}
   .tech[hidden]{display:none}
+  /* Sits at the end of the section so the control is where the reader finishes,
+     not back up in the header column they scrolled past. */
+  .techclose{display:flex;justify-content:center;margin-top:clamp(1.4rem,2.6vw,2rem);
+    padding-top:1.2rem;border-top:1px solid var(--rule)}
   .tech-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
     gap:clamp(1.8rem,3.5vw,3rem);align-items:start}
   .dshot{position:relative;border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--rule);

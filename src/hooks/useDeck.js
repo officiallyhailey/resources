@@ -48,6 +48,11 @@ export function useDeck(cardSelector = '.pcard') {
     let y;
     if (mode === 'center' && r.height < window.innerHeight - NAVH) {
       y = r.top + window.scrollY - NAVH - (window.innerHeight - NAVH - r.height) / 2;
+    } else if (mode === 'tight') {
+      // Sits the target directly under the nav with no breathing room. Used on
+      // phones, where 12px of slack is enough to leave the previous section's
+      // cards peeking around the nav pill.
+      y = r.top + window.scrollY - NAVH + 34;
     } else {
       y = r.top + window.scrollY - NAVH - 12;
     }
@@ -108,8 +113,12 @@ export function useDeck(cardSelector = '.pcard') {
       // heading entirely and the reader loses track of where they are. Open at
       // the section top instead, so "Built for real clients" stays in view.
       const narrow = typeof window !== 'undefined' && window.innerWidth <= 768;
-      const target = narrow ? sectionRef.current : preview || openPanel || sectionRef.current;
-      place(target, narrow ? 'top' : 'center');
+      // Target the HEADING, not the section box. The section carries several
+      // rem of top padding, so landing on its top edge left the previous
+      // section's cards still on screen above the title.
+      const heading = sectionRef.current?.querySelector('.head') || sectionRef.current;
+      const target = narrow ? heading : preview || openPanel || sectionRef.current;
+      place(target, narrow ? 'tight' : 'center');
       // The project stage reserves its height with a fixed aspect, but the
       // client breakdowns use plain lazy-loaded figures with no reserved box -
       // so at this moment the figure is nearly empty and centring lands short,

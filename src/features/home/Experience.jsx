@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   siAirtable, siAnthropic, siCplusplus, siExpress, siFigma, siGithub, siGoogle,
   siJavascript, siMapbox, siNextdotjs, siNodedotjs, siPostgresql, siPython,
@@ -55,11 +55,18 @@ export function Skills() {
 
 export function Experience() {
   const tlRef = useRef(null);
-  const [fill, setFill] = useState(0);
+  const fillRef = useRef(null);
 
   // The rule fills as the timeline scrolls past. Driven from a rAF-throttled
   // scroll listener rather than animation-timeline, which is Chromium-only -
   // the mock used it and it silently did nothing in Safari and Firefox.
+  //
+  // The height is written straight to the node rather than held in state. It
+  // changes on virtually every scroll frame, so setState here re-rendered the
+  // whole section continuously while scrolling - cheap on a desktop, but on a
+  // phone it competed with the nav's own scroll listener and made the page feel
+  // like it had stopped scrolling altogether. Nothing else reads this value, so
+  // there is no reason for React to know about it.
   useEffect(() => {
     let ticking = false;
     const onScroll = () => {
@@ -67,10 +74,11 @@ export function Experience() {
       ticking = true;
       requestAnimationFrame(() => {
         const el = tlRef.current;
-        if (el) {
+        const bar = fillRef.current;
+        if (el && bar) {
           const r = el.getBoundingClientRect();
           const p = Math.max(0, Math.min(1, (window.innerHeight * 0.7 - r.top) / r.height));
-          setFill(p * 100);
+          bar.style.height = `${p * 100}%`;
         }
         ticking = false;
       });
@@ -88,7 +96,7 @@ export function Experience() {
           Where I&apos;ve <span className="o">worked</span>
         </h2>
         <div className="tl" ref={tlRef}>
-          <span className="tl-fill" style={{ height: `${fill}%` }} />
+          <span className="tl-fill" ref={fillRef} />
           {JOBS.map((j) => (
             <div className="job rv" key={j.title}>
               <p className="mono">{j.period}</p>

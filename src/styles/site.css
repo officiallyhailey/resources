@@ -550,6 +550,14 @@
      right edge. flex-basis 100% pins each slide to the panel width instead. */
   .panels{display:flex;gap:0;height:100%;padding:0;overflow-x:auto;
     scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  /* A phone capture is portrait in a landscape frame, so it can never fill the
+     width. Rather than leave it floating in white, it gets a device-ish frame:
+     dark surround, rounded, sized to its own aspect. The empty space becomes
+     deliberate rather than accidental. */
+  .panels figure.phoneshot img{border-radius:14px;border:1px solid var(--rule);
+    box-shadow:0 10px 30px rgba(0,0,0,.18);background:#fff;
+    width:auto;max-width:100%;margin:0 auto}
+  .panels figure.phoneshot{background:linear-gradient(180deg,rgba(0,0,0,.045),rgba(0,0,0,.02))}
   .panels figure{flex:0 0 100%;width:100%;height:100%;margin:0;
     scroll-snap-align:start;display:flex;flex-direction:column;gap:.5rem;
     padding:.5rem .5rem 0}

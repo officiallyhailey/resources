@@ -168,22 +168,23 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
 
 
   const { live } = project;
-  // Which set of captures to show. Tracked in state rather than read once at
-  // render, or resizing across the breakpoint would leave the wrong set up.
-  // 768, not 900: a tablet frame is still wide enough that portrait phone
-  // captures letterbox into a narrow column. Above this the desktop set fits
-  // far better, and below it the frame is narrow enough for the phone shots.
-  const [isNarrow, setIsNarrow] = useState(
-    () => typeof window !== 'undefined' && window.innerWidth <= 768,
-  );
-  useEffect(() => {
-    const onResize = () => setIsNarrow(window.innerWidth <= 768);
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-
-  // Neither set can serve both widths, so each project supplies both.
-  const panels = project.panels ? (isNarrow ? project.panels.mobile : project.panels.desktop) : null;
+  // Both sets now show at every width, so there is no breakpoint to track and
+  // no resize listener to keep in sync.
+  // One rail carrying both sets: the desktop captures first, then the phone
+  // ones. The frame is 5/4, so a portrait capture leaves bands either side -
+  // labelling those slides "on a phone" makes that shape read as the point
+  // (it IS a phone screen) rather than as a broken fit. Showing both is what
+  // demonstrates the app is genuinely responsive, not just desktop-first.
+  const panels = project.panels
+    ? [
+        ...(project.panels.desktop || []),
+        ...(project.panels.mobile || []).map((m) => ({
+          ...m,
+          label: `${m.label} · on a phone`,
+          phone: true,
+        })),
+      ]
+    : null;
   const showPanels = !!panels?.length;
 
   return (
@@ -250,7 +251,7 @@ export default function CaseStudy({ project, hidden, flip, stageRef, onNav, prev
                 <>
                   <div className="panels" ref={railRef} onScroll={onRailScroll}>
                     {panels.map((p) => (
-                      <figure key={p.src}>
+                      <figure key={p.src} className={p.phone ? 'phoneshot' : undefined}>
                         {/* Not lazy: these only render once the case is open, so
                             they are never wasted - and lazy left them unfetched,
                             laid out at full size but complete:false. */}

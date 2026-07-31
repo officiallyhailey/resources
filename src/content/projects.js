@@ -144,6 +144,22 @@ export const PROJECTS = [
     chrome: 'devdeck - front door',
     shot: '/img/frontdoor-devdeck.jpg',
     shotAlt: 'The DevDeck landing page: "All your dev needs, one deck" over a retro computer.',
+    // Labels describe what each capture actually shows - taken from the page
+    // itself rather than invented, so they stay true if the site is recaptured.
+    panels: {
+      desktop: [
+        { src: '/img/devdeck-desktop-1.jpg', alt: 'DevDeck - all your dev needs, one deck.', label: 'The command deck' },
+        { src: '/img/devdeck-desktop-2.jpg', alt: 'DevDeck - Deva the in-app assistant, and the modules it threads together.', label: 'Deva & the modules' },
+        { src: '/img/devdeck-desktop-3.jpg', alt: 'DevDeck - weekly time tracking and the live theming engine.', label: 'Time, tracked' },
+        { src: '/img/devdeck-desktop-4.jpg', alt: 'DevDeck - the engineering write-up and the request flow.', label: "How it's built" },
+      ],
+      mobile: [
+        { src: '/img/devdeck-mobile-1.jpg', alt: 'DevDeck - all your dev needs, one deck.', label: 'The command deck' },
+        { src: '/img/devdeck-mobile-2.jpg', alt: 'DevDeck - Deva the in-app assistant, and the modules it threads together.', label: 'Deva & the modules' },
+        { src: '/img/devdeck-mobile-3.jpg', alt: 'DevDeck - weekly time tracking and the live theming engine.', label: 'Time, tracked' },
+        { src: '/img/devdeck-mobile-4.jpg', alt: 'DevDeck - the engineering write-up and the request flow.', label: "How it's built" },
+      ],
+    },
     card: {
       tag: 'Career OS',
       scope: 'Solo · 2025 · Daily driver',

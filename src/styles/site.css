@@ -15,7 +15,11 @@
     --stack-md:clamp(1.4rem,3.2vh,2.2rem);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;overflow-x:clip}
+  /* No overflow-x:clip here. Clip on the ROOT clips position:fixed descendants
+     in WebKit, which is what kept cutting the floating contact button off at
+     the screen edge. Anything that would overflow sideways is clipped at its
+     own container instead - see .marq and .site-hero. */
+  html{scroll-behavior:smooth}
   .site-root{background:var(--ground);color:var(--ink);font-family:'Archivo',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
   .mono{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
   .wrap{max-width:1280px;margin:0 auto;padding:0 4vw}
@@ -1160,7 +1164,11 @@
    Every part is a transition on a state class, not a looping animation - it
    fires once on arrival and then sits still, so it reads as arrival rather
    than as something demanding attention. */
-.site-root #contact{position:relative;isolation:isolate}
+/* overflow:clip contains the wash, which is deliberately wider than the section
+   and used to rely on the root clip that fixed elements needed removed. Safe
+   here because the floating button is a SIBLING of this section, not a child -
+   an overflow rule on an ancestor would clip it exactly as the root did. */
+.site-root #contact{position:relative;isolation:isolate;overflow:clip}
 .site-root #contact::before{
   content:'';position:absolute;z-index:-1;left:50%;top:38%;
   width:min(120%,900px);aspect-ratio:1;transform:translate(-50%,-50%) scale(.8);

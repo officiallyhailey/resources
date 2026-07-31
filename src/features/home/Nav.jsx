@@ -35,8 +35,12 @@ export default function Nav() {
     if (!el) return;
     e.preventDefault();
     window.history.replaceState(null, '', href);
+    // Target the footer, the last thing on the page. scrollIntoView on <body>
+    // does not reliably reach the true end, and window.scrollTo is unreliable
+    // here for the same reason the nav links needed scrollIntoView originally.
     const smooth = !prefersReducedMotion();
-    document.body.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'end' });
+    const end = document.querySelector('.site-root footer') || el;
+    end.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'end' });
   };
 
   return (

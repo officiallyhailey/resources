@@ -92,5 +92,5 @@ production than locally, because it depends on the `404.html` redirect.
 
 ## Design references
 
-Layout templates and design mocks live outside this repo at `~/Developer/web-templates/` -
+Layout templates and design mocks live outside this repo at `~/Developer/dev-bricks/` -
 standalone HTML, no build step. Open its `index.html` to browse them.

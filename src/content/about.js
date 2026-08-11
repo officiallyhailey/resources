@@ -6,15 +6,15 @@ export const ABOUT = {
   // length, so a long lead like this one still lands in about the same time as
   // a short one instead of crawling onto the screen.
   lead:
-    "Tech forward, operations-focused developer with 7+ years of experience in project management, workflow optimization, and business/program development. Proven at building scalable systems, reliable workflows, and translating operational data into clear, actionable insights. Covered everything from vendor logistics to customer experience for 2025's Top 100 Coffee Shops in the world!",
+    "Tech forward, operations-focused developer with 7+ years of experience in project management, workflow optimization, and business/program development. Proven history of building scalable systems, reliable workflows, and translating operational data into clear, actionable insights. Covered everything from vendor logistics to customer experience for 2025's Top 100 Coffee Shops in the world!",
   body: [
     'Known for creating structure, improving efficiency, and supporting leadership through data-informed decision-making - with a design eye that makes the output actually helpful to look at.',
   ],
   // `year` is optional: link rows carry no date, so the cell stays empty.
   facts: [
+    { label: 'Back End Certification (In Progress)', year: '2026' },
     { label: 'Programming Certification', year: '2023' },
     { label: 'HR Certification', year: '2023' },
-    { label: 'Back End Certification (In Progress)', year: '2026' },
     { label: 'GitHub →', href: 'https://github.com/officiallyhailey' },
     { label: 'Client sites →', href: '#clients' },
   ],
@@ -169,6 +169,6 @@ export const CONTACT = {
   links: [
     { label: 'Email', value: 'haileydgrace@gmail.com', href: 'mailto:haileydgrace@gmail.com' },
     { label: 'LinkedIn', value: 'hailey-g', href: 'https://www.linkedin.com/in/hailey-g/' },
-    { label: 'Design work', value: 'Client sites on this site', href: '#clients' },
+    { label: 'Design work', value: 'View client sites', href: '#clients' },
   ],
 };

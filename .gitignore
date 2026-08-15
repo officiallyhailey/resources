@@ -26,3 +26,9 @@ pnpm-debug.log*
 
 # Local-only: screenshots parked for clients not currently shown on the site
 .assets-parked/
+
+# The portable mockup: the same page with every image inlined as base64, so it
+# can be opened from anywhere. It is 2.4MB, it is regenerated from
+# narrative-home.html whenever that changes, and in history it would never
+# leave again.
+mockups/*-portable.html

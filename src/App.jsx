@@ -12,7 +12,11 @@ export default function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
 
   useEffect(() => {
+    // both classes, not just one: the stylesheet takes its default from the
+    // system preference, so removing `dark` on a dark-preferring machine left
+    // the reader exactly where they started.
     document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.classList.toggle('light', theme === 'light');
     localStorage.setItem('theme', theme);
   }, [theme]);
 
@@ -21,9 +25,17 @@ export default function App() {
   return (
     <TransitionProvider>
       <Routes>
-        <Route path="/resources" element={<><LogoBanner /><ToolboxPage theme={theme} onToggleTheme={toggleTheme} /></>} />
-        <Route path="/"    element={<NarrativeHome />} />
-        <Route path="*"    element={<NarrativeHome />} />
+        <Route
+          path="/resources"
+          element={
+            <>
+              <LogoBanner />
+              <ToolboxPage theme={theme} onToggleTheme={toggleTheme} />
+            </>
+          }
+        />
+        <Route path="/" element={<NarrativeHome />} />
+        <Route path="*" element={<NarrativeHome />} />
       </Routes>
     </TransitionProvider>
   );

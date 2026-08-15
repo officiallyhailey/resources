@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Anavah Designs · the thread, three ways</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ground:#EFEDE8; --paper:#FBFAF8; --ink:#22201C; --muted:#7A776F;
+  --rule:rgba(120,115,105,.18); --accent:#C86B43;
+  --e:cubic-bezier(.16,1,.3,1);
+  --speed:1;              /* the slow-motion switch multiplies every duration */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#E5E2DB;color:var(--ink);
+  font-family:'Archivo',system-ui,sans-serif;line-height:1.55;
+  -webkit-font-smoothing:antialiased;padding:clamp(1.5rem,5vw,4rem)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+.page{max-width:1240px;margin:0 auto}
+.masthead{margin-bottom:clamp(1.6rem,4vh,2.4rem);max-width:62ch}
+.masthead h1{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(2rem,4.6vw,3.2rem);line-height:1.08;letter-spacing:-.025em;
+  margin:.5rem 0 .9rem}
+.masthead p{color:var(--muted);font-size:.98rem}
+.masthead em{font-style:italic;color:var(--accent)}
+
+.bar{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:.9rem 0;margin-bottom:clamp(1.6rem,4vh,2.4rem)}
+.bar .sw{display:flex;align-items:center;gap:.5rem;padding:.42rem .9rem;
+  border-radius:100px;border:1px solid var(--rule);background:rgba(255,255,255,.6);
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);transition:background .3s,color .3s}
+.bar .sw.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.bar .sw i{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.55}
+.bar .sw.on i{opacity:1;background:var(--accent)}
+
+.row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(1rem,2.4vw,1.8rem)}
+@media (max-width:940px){.row{grid-template-columns:minmax(0,1fr)}}
+
+.col > .head{display:flex;align-items:baseline;gap:.7rem;margin-bottom:.7rem}
+.col .head .n{font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:.2em;color:var(--accent)}
+.col .head h2{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:1.55rem;letter-spacing:-.02em;line-height:1.1}
+
+/* the demo frame stands in for the bottom half of a panel */
+.screen{position:relative;height:400px;border-radius:18px;overflow:hidden;
+  background:var(--ground);border:1px solid rgba(255,255,255,.8);
+  box-shadow:0 24px 54px -30px rgba(60,55,45,.5);
+  display:flex;flex-direction:column;align-items:center;padding:2.4rem 1.5rem 0}
+.sample{text-align:center;pointer-events:none}
+.sample h3{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:1.5rem;letter-spacing:-.025em;line-height:1.1}
+.sample p{color:var(--muted);font-size:.82rem;margin-top:.35rem}
+
+/* every variant shares this shell: label, then a 130px run of line to the floor */
+.sig{position:absolute;left:0;right:0;bottom:0;height:200px;
+  display:flex;flex-direction:column;align-items:center;cursor:pointer;
+  background:linear-gradient(transparent,rgba(239,237,232,.9) 55%)}
+.sig .say{margin-bottom:.9rem;transition:color .35s}
+.sig:hover .say{color:var(--ink)}
+.sig svg{width:14px;height:130px;overflow:visible}
+.sig .track{stroke:var(--rule);stroke-width:1}
+.sig:hover .track{stroke:rgba(200,107,67,.3)}
+
+.notes{margin-top:.9rem}
+.notes p{font-size:.9rem;color:var(--muted);margin-bottom:.7rem}
+.notes b{color:var(--ink);font-weight:600}
+.notes .cost{border-top:1px solid var(--rule);padding-top:.7rem;font-size:.86rem}
+
+/* ══════════════════════════════════════════════════════════════════
+   1A · THE PLUMB
+   A weighted bead falls the length of the line, lands, and settles with
+   one small recoil. The line never moves. What carries the meaning is
+   gravity: it starts slow, gathers speed, and arrives somewhere.
+   ══════════════════════════════════════════════════════════════════ */
+.plumb .bead{fill:var(--accent);
+  animation:plumb calc(2.9s * var(--speed)) linear infinite}
+.plumb .rest{stroke:var(--accent);stroke-width:1.5;stroke-linecap:round;opacity:0;
+  animation:plumb-rest calc(2.9s * var(--speed)) linear infinite}
+@keyframes plumb{
+  0%   {transform:translateY(0);opacity:0;
+        animation-timing-function:cubic-bezier(.55,0,.9,.35)}
+  6%   {opacity:1}
+  46%  {transform:translateY(112px);
+        animation-timing-function:cubic-bezier(.2,1.4,.4,1)}
+  58%  {transform:translateY(104px)}
+  66%  {transform:translateY(110px)}
+  72%  {transform:translateY(108px)}
+  88%  {transform:translateY(108px);opacity:1}
+  100% {transform:translateY(108px);opacity:0}
+}
+@keyframes plumb-rest{
+  0%,44%{opacity:0;transform:scaleX(.2)}
+  50%   {opacity:.85;transform:scaleX(1)}
+  84%   {opacity:.85;transform:scaleX(1)}
+  100%  {opacity:0;transform:scaleX(1)}
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   1B · THE TETHER
+   The line hangs slack, then something below tugs it - a quick pull
+   down, then a slow recovery. The fast half of the motion is the half
+   that points where you are going, so the eye reads "down" every time.
+   ══════════════════════════════════════════════════════════════════ */
+.tether .cord{stroke:var(--accent);stroke-width:1.5;stroke-linecap:round;
+  transform-origin:6px 0;
+  animation:tether-cord calc(3.4s * var(--speed)) linear infinite}
+.tether .weight{fill:var(--accent);
+  animation:tether-weight calc(3.4s * var(--speed)) linear infinite}
+@keyframes tether-cord{
+  0%,18%{transform:scaleY(.62);animation-timing-function:cubic-bezier(.35,0,.15,1)}
+  34%   {transform:scaleY(1);animation-timing-function:cubic-bezier(.5,0,.5,1)}
+  76%   {transform:scaleY(.62)}
+  100%  {transform:scaleY(.62)}
+}
+@keyframes tether-weight{
+  0%,18%{transform:translateY(0);animation-timing-function:cubic-bezier(.35,0,.15,1)}
+  34%   {transform:translateY(45px);animation-timing-function:cubic-bezier(.5,0,.5,1)}
+  76%   {transform:translateY(0)}
+  100%  {transform:translateY(0)}
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   1C · THE POUR
+   The line is not there to begin with - it draws itself downward, like
+   ink running, and pools at the floor. Nothing travels along a path;
+   the path IS the motion, and it arrives.
+   ══════════════════════════════════════════════════════════════════ */
+.pour .run{stroke:var(--accent);stroke-width:1.5;stroke-linecap:round;
+  stroke-dasharray:130;stroke-dashoffset:130;
+  animation:pour calc(3.2s * var(--speed)) linear infinite}
+.pour .pool{fill:var(--accent);opacity:0;
+  animation:pour-pool calc(3.2s * var(--speed)) linear infinite}
+@keyframes pour{
+  0%  {stroke-dashoffset:130;opacity:1;
+       animation-timing-function:cubic-bezier(.4,0,.5,1)}
+  42% {stroke-dashoffset:0}
+  76% {stroke-dashoffset:0;opacity:1}
+  95% {stroke-dashoffset:0;opacity:0}
+  100%{stroke-dashoffset:130;opacity:0}
+}
+@keyframes pour-pool{
+  0%,40%{opacity:0;transform:scale(.2)}
+  50%   {opacity:1;transform:scale(1)}
+  76%   {opacity:1;transform:scale(1)}
+  92%   {opacity:0;transform:scale(1.5)}
+  100%  {opacity:0;transform:scale(.2)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .sig *{animation:none !important}
+  .pour .run{stroke-dashoffset:0}
+  .plumb .bead{transform:translateY(108px)}
+  .pour .pool,.plumb .rest{opacity:1}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <p class="mono">Anavah Designs · gate study 02</p>
+    <h1>The thread, <em>three ways</em></h1>
+    <p>Same idea in all three: a hairline runs from the end of the section down off
+      the bottom of the screen, and the whole strip is the target. What differs is
+      what the line does. One drops something down it, one gets pulled down it, and
+      one draws itself down. Watch them together, then at half speed.</p>
+  </header>
+
+  <div class="bar">
+    <span class="mono">Compare at</span>
+    <button class="sw on" data-speed="1"><i></i>Full speed</button>
+    <button class="sw" data-speed="2.2"><i></i>Half speed</button>
+    <button class="sw" data-speed="4"><i></i>Quarter</button>
+  </div>
+
+  <div class="row">
+
+    <!-- ── 1A ──────────────────────────────────────────────────── -->
+    <div class="col">
+      <div class="head"><span class="n">1A</span><h2>The plumb</h2></div>
+      <div class="screen">
+        <div class="sample">
+          <h3>The full picture</h3>
+          <p>a section, finished, waiting</p>
+        </div>
+        <button class="sig plumb" aria-label="Continue">
+          <span class="mono say">Where I have worked</span>
+          <svg viewBox="0 0 14 130" aria-hidden="true">
+            <line class="track" x1="7" y1="0" x2="7" y2="122" />
+            <line class="rest" x1="2" y1="122" x2="12" y2="122" />
+            <circle class="bead" cx="7" cy="10" r="3.5" />
+          </svg>
+        </button>
+      </div>
+      <div class="notes">
+        <p><b>What it does.</b> A weighted bead falls the length of the line, lands on
+          a small rest, and recoils once. Slow to start, fastest in the middle, and it
+          stops somewhere.</p>
+        <p><b>How it reads.</b> Gravity. It is the only one of the three with a
+          destination built into the motion - something arrives, and the rest mark says
+          "here". Most legible from the corner of the eye.</p>
+        <p class="cost"><b>Cost:</b> the most animated of the three, so it is also the
+          most likely to feel busy on a page this quiet.</p>
+      </div>
+    </div>
+
+    <!-- ── 1B ──────────────────────────────────────────────────── -->
+    <div class="col">
+      <div class="head"><span class="n">1B</span><h2>The tether</h2></div>
+      <div class="screen">
+        <div class="sample">
+          <h3>The full picture</h3>
+          <p>a section, finished, waiting</p>
+        </div>
+        <button class="sig tether" aria-label="Continue">
+          <span class="mono say">Where I have worked</span>
+          <svg viewBox="0 0 14 130" aria-hidden="true">
+            <line class="track" x1="7" y1="0" x2="7" y2="122" />
+            <line class="cord" x1="7" y1="0" x2="7" y2="76" />
+            <circle class="weight" cx="7" cy="76" r="3.5" />
+          </svg>
+        </button>
+      </div>
+      <div class="notes">
+        <p><b>What it does.</b> The cord hangs short, then is tugged down quickly and
+          recovers slowly. The pull is the fast half of the cycle; the return is the
+          slow half you barely notice.</p>
+        <p><b>How it reads.</b> Something below wants you. It is the only one that
+          implies a force rather than a path - closest to the brief of "the page is
+          prompting you", because a tug is directed at someone.</p>
+        <p class="cost"><b>Cost:</b> asymmetric timing is doing all the work. Get the
+          ratio wrong and it reads as bouncing, which is the thing we are avoiding.</p>
+      </div>
+    </div>
+
+    <!-- ── 1C ──────────────────────────────────────────────────── -->
+    <div class="col">
+      <div class="head"><span class="n">1C</span><h2>The pour</h2></div>
+      <div class="screen">
+        <div class="sample">
+          <h3>The full picture</h3>
+          <p>a section, finished, waiting</p>
+        </div>
+        <button class="sig pour" aria-label="Continue">
+          <span class="mono say">Where I have worked</span>
+          <svg viewBox="0 0 14 130" aria-hidden="true">
+            <line class="track" x1="7" y1="0" x2="7" y2="122" />
+            <line class="run" x1="7" y1="0" x2="7" y2="122" />
+            <circle class="pool" cx="7" cy="122" r="3.5" />
+          </svg>
+        </button>
+      </div>
+      <div class="notes">
+        <p><b>What it does.</b> The line is not there to begin with. It draws itself
+          downward like ink running down a page, pools at the floor, holds, and clears.</p>
+        <p><b>How it reads.</b> The path is the motion - nothing travels along a route,
+          the route builds itself towards where you are going. The calmest of the three
+          and the one that sits most naturally under serif copy.</p>
+        <p class="cost"><b>Cost:</b> quietest, so also the easiest to miss. Wants the
+          label beside it doing half the work.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* One control, one custom property. Every duration in the sheet is written as
+   `calc(<base> * var(--speed))`, so slowing the study down is a single value
+   rather than three sets of numbers kept in step by hand. */
+const bar = document.querySelector('.bar');
+bar.addEventListener('click', (e) => {
+  const btn = e.target.closest('.sw');
+  if (!btn) return;
+  bar.querySelectorAll('.sw').forEach((b) => b.classList.toggle('on', b === btn));
+  document.documentElement.style.setProperty('--speed', btn.dataset.speed);
+});
+</script>
+</body>
+</html>

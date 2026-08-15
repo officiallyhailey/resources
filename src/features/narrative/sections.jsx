@@ -68,7 +68,7 @@ export function WorkPanel({ shown, onReady, onOpen }) {
         </div>
       </div>
 
-      <Coverflow fan={fan} onOpen={onOpen} />
+      <Coverflow fan={fan} shown={shown} onOpen={onOpen} />
 
       <div className="wrap">
         <p className="pilenote mono" style={{ textAlign: 'center', marginTop: '1rem' }}>

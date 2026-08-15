@@ -1,0 +1,1912 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Anavah Designs · scroll narrative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   TOKENS
+   ══════════════════════════════════════════════════════════════════════ */
+:root{
+  --ground:#EFEDE8; --paper:#FBFAF8; --ink:#22201C; --muted:#7A776F;
+  --rule:rgba(120,115,105,.18);
+  --accent:#C86B43;
+  --e:cubic-bezier(.16,1,.3,1);
+  --pad-x:clamp(1.25rem,4.2vw,4rem);
+  --wrap:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+/* HARD GATE: the document itself never scrolls. Sections are a deck of
+   full-viewport panels and only the arrows move between them. A panel whose
+   content is taller than the screen scrolls INSIDE itself, because content
+   you cannot reach is not a gate, it is a bug. */
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+body{background:var(--ground);color:var(--ink);font-family:'Archivo',system-ui,sans-serif;
+  line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad-x)}
+
+/* the veil is the transition itself: a bank of light that thickens over a
+   change so the swap happens inside it rather than in plain sight */
+#veil{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:0;
+  background:
+    radial-gradient(70% 50% at 28% 58%,rgba(255,255,255,.95),rgba(255,255,255,0) 72%),
+    radial-gradient(62% 44% at 74% 36%,rgba(255,255,255,.92),rgba(255,255,255,0) 74%),
+    linear-gradient(180deg,rgba(250,249,245,.7),rgba(250,249,245,.95));
+  transition:opacity .32s ease;will-change:opacity}
+#veil.on{opacity:1}
+main{position:fixed;inset:0;z-index:3}
+.panel{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  opacity:0;visibility:hidden;transform:translateY(26px);
+  transition:opacity .42s var(--e),transform .42s var(--e),visibility 0s linear .42s}
+/* visibility:hidden also takes an inactive panel out of the tab order, so the
+   keyboard cannot wander into a section the reader has not reached */
+.panel.active{opacity:1;visibility:visible;transform:none;
+  transition:opacity .5s var(--e),transform .5s var(--e),visibility 0s}
+/* direction: forward, a panel rises in from below and the old one leaves
+   upward. Reverse mirrors it, so going back reads as going back. */
+.panel.off{display:none}
+.panel.from-above{transform:translateY(-26px)}
+.panel.leave-down{transform:translateY(26px)}
+.panel.leave-up{transform:translateY(-26px)}
+.panel-inner{min-height:100%;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(3.5rem,8vh,5.5rem) 0 clamp(6rem,12vh,8rem)}
+
+/* ══════════════════════════════════════════════════════════════════════
+   THE TYPEWRITER
+   Every line is laid out IN FULL before a single character shows, as one
+   span per character, hidden. Typing only flips characters visible, so
+   nothing ever reflows and the letters already written never move. That
+   is the whole trick - the old version retyped into a growing text node,
+   which re-centred the line on every keystroke.
+   ══════════════════════════════════════════════════════════════════════ */
+.tblock{display:block}
+.tline{display:block;white-space:pre-wrap}
+/* each word is held together: characters are separate inline spans, so
+   without this a line could break in the middle of one */
+.tline .w{white-space:nowrap}
+/* Opacity, not visibility. The layout was already fixed either way - every
+   character is placed before any of them show - but flipping visibility
+   snapped each glyph on hard, which at display sizes reads as stuttering.
+   A short fade turns the same reveal into one smooth wipe across the line.
+   It also means the whole line is present for screen readers from the start,
+   rather than being announced a letter at a time. */
+.c{opacity:0;position:relative;transition:opacity .24s ease-out}
+.c.on{opacity:1}
+/* the caret rides the last revealed character and is absolutely placed, so
+   it cannot push anything sideways either */
+.c.tip::after{content:'';position:absolute;right:-.08em;top:.16em;bottom:.06em;
+  width:.05em;background:var(--accent);opacity:.75;
+  animation:blink 1.05s steps(1) infinite}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+
+/* ══════════════════════════════════════════════════════════════════════
+   STAGE ONE - the intro. Three beats sharing one screen, advanced by
+   click rather than by scroll: each beat plays, stops, and waits.
+   ══════════════════════════════════════════════════════════════════════ */
+/* overflow-y:auto, not hidden: once the arc is in the beat this panel can be
+   taller than a phone screen, and hidden clipped the bottom with no way to
+   reach it. x stays hidden so a rotated arc card cannot widen the page. */
+.stage{display:grid;place-items:center;
+  padding:clamp(4.5rem,9vh,6rem) var(--pad-x) clamp(7rem,14vh,9rem);
+  overflow-x:hidden;overflow-y:auto}
+.beat{grid-area:1/1;width:100%;max-width:var(--wrap);
+  opacity:0;transform:translateY(46px);pointer-events:none;
+  transition:opacity .5s var(--e),transform .55s var(--e)}
+.beat.on{opacity:1;transform:none;pointer-events:auto}
+.beat.out{opacity:0;transform:translateY(-46px)}
+
+.b-welcome{text-align:center}
+.b-welcome .line{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(2rem,5.4vw,4.2rem);line-height:1.14;letter-spacing:-.015em}
+.b-welcome .sub{margin-top:1.5rem;line-height:1.9}
+
+/* softness comes from a lighter GREY, not from low opacity */
+.b-statement{text-align:center}
+.b-statement .say{font-family:'Instrument Serif',serif;
+  font-size:clamp(1.8rem,4.6vw,3.9rem);line-height:1.3;letter-spacing:-.02em;
+  color:#5F5B54}
+.b-statement em{font-style:italic;color:#B0603A}
+
+/* the pair is centred as a unit, rather than a wide text column shoving the
+   card out to the right */
+/* Explicit column widths, not `auto`: an auto column is sized by the huge
+   headline's max-content, which is wider than the text actually occupies and
+   threw the pair off centre. Fixed widths make the two sit centred as a unit. */
+/* The copy column hugs its text and the card column is fixed, so the pair
+   centres on its actual ink. `auto` is safe here only because every typed
+   block is laid out up front - sized lazily it would collapse to nothing and
+   then shove the card sideways as the text arrived. */
+/* copy | centre focus | the arc of work. The middle column is the anchor:
+   the profile card sits there, and a chosen project takes its place. */
+/* equal side columns, so the fixed centre column - and the profile card in
+   it - is genuinely centred on the screen rather than merely between things */
+.b-intro{position:relative;display:grid;
+  grid-template-columns:minmax(0,1fr) 25rem minmax(0,1fr);
+  justify-content:center;align-items:center;gap:clamp(1.2rem,3vw,2.6rem);
+  width:100%;max-width:1420px}
+/* the profile card sits ABOVE the ring, which is the whole point of it */
+.b-intro .cardside{position:relative;z-index:5}
+.b-intro .copyside{max-width:20rem;justify-self:end}
+.b-intro .cardside{width:100%}
+
+/* ── the centre focus slot ── */
+.focus{position:relative;width:100%}
+.focus-me,.focus-work{transition:opacity .55s var(--e),transform .65s var(--e)}
+.focus-work{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(.92);pointer-events:none}
+.focus.on-work .focus-me{opacity:0;transform:scale(.94);pointer-events:none}
+.focus.on-work .focus-work{opacity:1;transform:none;pointer-events:auto}
+
+.wfocus{width:100%;background:var(--paper);border:1px solid rgba(255,255,255,.95);
+  border-radius:22px;overflow:hidden;position:relative;
+  box-shadow:0 40px 84px -34px rgba(60,55,45,.6)}
+.wfocus .shot{display:block;aspect-ratio:4/2.9;overflow:hidden;background:#E4E2DC}
+.wfocus .shot img{width:100%;height:100%;object-fit:cover;display:block}
+.wfocus .body{padding:.95rem 1.1rem 1.15rem}
+.wfocus .row{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+.wfocus h3{font-size:1.28rem;font-weight:600;letter-spacing:-.025em;margin:.3rem 0 .35rem}
+.wfocus p{font-size:.83rem;color:var(--muted);line-height:1.45;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.wfocus .chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.65rem}
+.wfocus .chips span{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;
+  text-transform:uppercase;padding:.3rem .55rem;border-radius:100px;
+  background:rgba(200,107,67,.1);color:#9C5433}
+.wfocus .open{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;
+  margin-top:.85rem;padding:.68rem;border-radius:100px;background:var(--ink);
+  color:var(--paper);font-size:.86rem;font-weight:500}
+.wfocus .open em{font-style:normal;transition:transform .35s var(--e)}
+.wfocus .open:hover em{transform:translateX(4px)}
+.wfocus .back{position:absolute;top:.65rem;right:.65rem;width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.9);display:grid;place-items:center;font-size:.9rem;line-height:1;
+  box-shadow:0 6px 16px -8px rgba(60,55,45,.6);transition:background .3s,color .3s}
+.wfocus .back:hover{background:var(--ink);color:var(--paper)}
+
+/* ── the half circle ── */
+/* The ring is centred on the profile card and runs behind it, so it is taken
+   out of the grid entirely and placed against the beat. Deliberately NO
+   z-index: that would make the arc its own stacking context and trap the
+   cards behind the profile card, so a hovered one could never come forward.
+   Their own z-index values compete with the profile card's directly. */
+.arc{position:absolute;inset:0;pointer-events:none}
+.acard-hit{pointer-events:auto}
+.acard{position:absolute;top:0;left:0;width:var(--aw);
+  transform:translate(var(--x),var(--y)) rotate(var(--rot)) scale(var(--s,1));
+  transform-origin:50% 50%;z-index:var(--z);
+  opacity:0;
+  transition:transform .55s var(--e),opacity .5s var(--e),
+             filter .45s var(--e),box-shadow .45s var(--e);
+  will-change:transform}
+/* the further back a card sits, the lighter it reads - the depth cue from
+   the reference, where the darkest card is the one nearest the front */
+.arc.dealt .acard{filter:saturate(var(--sat,1)) brightness(var(--br,1))}
+.arc.dealt:not(.picked) .acard.lifted{filter:none}
+.arc.dealt .acard.chosen{filter:none}
+/* dealt out one after another once the line finishes */
+.arc.dealt .acard{opacity:var(--o,1);transition-delay:calc(var(--i) * 70ms)}
+.arc.dealt .acard.lifted,.arc.dealt .acard.chosen{transition-delay:0s}
+.acard-hit{display:block;width:100%;text-align:left;border-radius:15px;overflow:hidden;
+  background:var(--paper);border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 16px 34px -18px rgba(60,55,45,.55)}
+.acard .thumb{display:block;aspect-ratio:4/3;overflow:hidden;background:#E4E2DC}
+.acard .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.acard .cap{display:block;padding:.42rem .6rem .5rem;text-align:right}
+.acard .cap b{display:block;font-size:.76rem;font-weight:600;letter-spacing:-.015em;
+  line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acard .cap span{display:block;font-family:'JetBrains Mono',monospace;font-size:7.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.14rem;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* hover pops it forward off the arc */
+/* :not(.picked) - once a project has been chosen the focus card in the middle
+   is the subject, and a ring card rearing up in front of it fights for
+   attention with the thing the reader just asked to see */
+.arc.dealt:not(.picked) .acard.lifted{
+  transform:translate(var(--x),calc(var(--y) - 14px)) rotate(0deg) scale(1.06);
+  z-index:60}
+.arc.dealt:not(.picked) .acard.lifted .acard-hit{box-shadow:0 26px 48px -20px rgba(60,55,45,.62)}
+.arc.picked .acard{cursor:pointer}
+.acard.chosen .acard-hit{border-color:var(--accent);
+  box-shadow:0 0 0 2px rgba(200,107,67,.45),0 22px 44px -20px rgba(60,55,45,.6)}
+.b-intro h1{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(3rem,8vw,6.4rem);line-height:1;letter-spacing:-.03em}
+.b-intro .tools{margin-top:1.4rem;font-size:clamp(1rem,1.7vw,1.24rem);
+  color:var(--muted);line-height:1.75}
+.b-intro .cardside{display:flex;justify-content:center;align-items:center}
+
+/* ── the profile card ── */
+.pcard{width:min(100%,330px);background:rgba(255,255,255,.72);
+  backdrop-filter:blur(20px) saturate(1.1);border:1px solid rgba(255,255,255,.9);
+  border-radius:24px;overflow:hidden;
+  box-shadow:0 30px 70px -34px rgba(60,55,45,.55),0 2px 8px rgba(60,55,45,.05)}
+.b-intro .pcard{width:100%;opacity:0;
+  transform:translateY(52px) rotate(-4deg) scale(.9);
+  transition:opacity 1.1s var(--e),transform 1.25s var(--e)}
+.b-intro .pcard.shown{opacity:1;transform:none}
+.pc-art{position:relative;aspect-ratio:4/3.4;overflow:hidden;background:#DDE3D8}
+.pc-art img{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block}
+.pc-rarity,.pc-no{position:absolute;top:.7rem;font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+  background:rgba(255,255,255,.85);padding:.28rem .6rem;border-radius:100px}
+.pc-rarity{left:.7rem;display:flex;align-items:center;gap:.4rem}
+.pc-no{right:.7rem;color:var(--muted)}
+.pc-dot{width:6px;height:6px;border-radius:50%;background:#7FA37B;flex:none}
+.pc-name{position:absolute;left:0;right:0;bottom:0;padding:2.2rem .95rem .8rem;
+  background:linear-gradient(transparent,rgba(255,255,255,.92) 62%)}
+.pc-name b{display:block;font-size:1.05rem;font-weight:600;letter-spacing:-.015em}
+.pc-name span{display:block;font-size:.74rem;color:var(--muted)}
+.b-intro .pc-name b{font-size:1.25rem}
+.b-intro .pc-name span{font-size:.82rem}
+.pc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;padding:1rem .95rem}
+.pc-stat b{display:block;font-size:1.3rem;font-weight:600;letter-spacing:-.03em;line-height:1}
+.pc-stat span{display:block;font-size:.64rem;color:var(--muted);line-height:1.3;margin-top:.25rem}
+.b-intro .pc-stat b{font-size:1.55rem}
+.b-intro .pc-stat span{font-size:.7rem}
+.b-intro .pc-stat{opacity:0;transform:translateY(14px);
+  transition:opacity .7s var(--e),transform .7s var(--e)}
+.b-intro .pcard.shown .pc-stat{opacity:1;transform:none}
+.b-intro .pcard.shown .pc-stat:nth-child(1){transition-delay:.65s}
+.b-intro .pcard.shown .pc-stat:nth-child(2){transition-delay:.8s}
+.b-intro .pcard.shown .pc-stat:nth-child(3){transition-delay:.95s}
+.pc-foot{display:flex;justify-content:space-between;gap:.6rem;padding:.7rem .95rem;
+  border-top:1px solid var(--rule);font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ══════════════════════════════════════════════════════════════════════
+   THE GATE - the control that ends every section. It appears only once
+   that section has finished playing, which is what makes each section
+   stop and wait rather than run on.
+   ══════════════════════════════════════════════════════════════════════ */
+/* Fixed, not in the flow: on a tall panel the gate used to sit below the fold
+   and had to be scrolled to. It now holds the same line as the mail button so
+   it is reachable the moment it appears, on every panel. */
+.gate{position:fixed;left:0;right:0;bottom:0;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:70;
+  /* lifted well clear of the bottom edge: sat level with the mail button it
+     was an awkward reach on a phone and close to the browser's own chrome */
+  padding:2.4rem 0 clamp(4rem,11vh,6.5rem);
+  /* a soft floor rather than a hard edge: panel content fades out as it
+     passes beneath instead of colliding with the controls */
+  background:linear-gradient(transparent,rgba(239,237,232,.86) 42%,var(--ground) 76%);
+  opacity:0;transform:translateY(14px);pointer-events:none;
+  transition:opacity .45s var(--e),transform .45s var(--e)}
+.gate.on{opacity:1;transform:none;pointer-events:auto}
+.gate>*{pointer-events:auto}
+/* nothing may run underneath it */
+.panel-inner{padding-bottom:clamp(10rem,22vh,14rem)}
+.stage{padding-bottom:clamp(10rem,22vh,14rem)}
+.gate-row{display:flex;align-items:center;gap:.8rem}
+/* going back is the same gesture upward - with no scroll, a reader who
+   advanced would otherwise have no way to re-read a section */
+.gate-back{width:40px;height:40px;border-radius:50%;border:1px solid var(--rule);
+  display:grid;place-items:center;color:var(--muted);
+  transition:background .3s,color .3s,transform .3s var(--e)}
+.gate-back:hover{background:var(--ink);color:var(--paper);transform:translateY(-3px)}
+.gate-back[hidden]{display:none}
+.gate-label{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted)}
+.gate-btn{position:relative;width:58px;height:58px;border-radius:50%;
+  background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 18px 38px -18px rgba(60,55,45,.6);display:grid;place-items:center;
+  animation:bob 3.6s var(--e) infinite;transition:transform .35s var(--e),background .35s}
+.gate-btn:hover{transform:translateY(5px);background:#fff}
+.gate-btn::after{content:'';position:absolute;inset:-5px;border-radius:50%;
+  border:1px solid var(--accent);opacity:0;animation:ring 2.8s ease-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes ring{0%{transform:scale(.9);opacity:.55}100%{transform:scale(1.35);opacity:0}}
+
+/* ══════════════════════════════════════════════════════════════════════
+   SECTIONS
+   ══════════════════════════════════════════════════════════════════════ */
+/* no position here: every .sec is also a .panel, and .sec comes later in the
+   sheet, so a `position:relative` would beat the panel's `absolute` and stop
+   panels being viewport-height */
+.sec{}
+.sec-head{margin-bottom:clamp(2rem,5vh,3.2rem)}
+.sec-head .idx{margin-bottom:.6rem}
+.sectitle{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(2.1rem,5.4vw,4rem);line-height:1.06;letter-spacing:-.025em}
+.sectitle em{font-style:italic;color:var(--accent)}
+.fade{opacity:0;transform:translateY(18px);
+  transition:opacity 1s var(--e),transform 1s var(--e)}
+.fade.in{opacity:1;transform:none}
+.fade[data-d="1"]{transition-delay:.1s}
+.fade[data-d="2"]{transition-delay:.2s}
+.fade[data-d="3"]{transition-delay:.3s}
+
+/* ══════════════════════════════════════════════════════════════════════
+   PORTFOLIO - a coverflow that fans in from a single stack
+   ══════════════════════════════════════════════════════════════════════ */
+/* padded, not tight: a flush box clipped the card shadows into a hard flat
+   line straight across the section. The mask softens the side edges instead
+   of cutting them. */
+.flow{position:relative;width:100%;height:clamp(470px,66vh,620px);
+  overflow:hidden;padding:18px 0 26px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.flow-track{top:18px;bottom:26px;height:auto}
+@media (max-width:900px){.flow-track{top:10px;bottom:16px}}
+.flow-track{position:absolute;inset:0}
+.fcard{position:absolute;top:50%;left:50%;width:var(--cw);
+  transform:translate(-50%,-50%) translateX(var(--x)) scale(var(--s));
+  opacity:var(--o);filter:blur(var(--b)) saturate(var(--sat)) brightness(var(--br));
+  z-index:var(--z);
+  transition:transform .72s var(--e),opacity .55s var(--e),filter .55s var(--e);
+  will-change:transform}
+/* before the fan: every card stacked dead centre, square and invisible */
+.flow:not(.fanned) .fcard{transform:translate(-50%,-50%) scale(.82);opacity:0;filter:none}
+.flow.fanning .fcard{transition:transform .95s var(--e),opacity .65s var(--e),filter .65s var(--e)}
+.fhit{display:block;width:100%;text-align:left;border-radius:22px;overflow:hidden;
+  background:var(--paper);border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 30px 64px -30px rgba(60,55,45,.5)}
+.fcard.is-center .fhit{box-shadow:0 46px 90px -34px rgba(60,55,45,.62);border-color:#fff}
+.fshot{display:block;aspect-ratio:4/3.1;overflow:hidden;background:#E4E2DC;
+  border-radius:22px 22px 0 0}
+.fshot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--e)}
+.fcard.is-center .fhit:hover .fshot img{transform:scale(1.045)}
+.fmeta{display:block;padding:.95rem 1.05rem 1.1rem}
+.frow{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+.ftag{display:flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ftag i{width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none}
+.fbadge{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;
+  text-transform:uppercase;padding:.28rem .55rem;border-radius:100px;
+  background:var(--ink);color:var(--paper);white-space:nowrap}
+.fcard h3{font-size:1.3rem;font-weight:600;letter-spacing:-.025em;line-height:1.15;
+  margin:.35rem 0 .4rem}
+.fteaser{font-size:.84rem;color:var(--muted);line-height:1.45;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.fchips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.7rem}
+.fchips span{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;
+  text-transform:uppercase;padding:.3rem .55rem;border-radius:100px;
+  background:rgba(200,107,67,.1);color:#9C5433}
+.fcta{display:flex;align-items:center;justify-content:center;gap:.6rem;
+  margin-top:.9rem;padding:.7rem;border-radius:100px;background:var(--ink);
+  color:var(--paper);font-size:.88rem;font-weight:500;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .5s var(--e),transform .5s var(--e)}
+.fcard.is-center .fcta{opacity:1;transform:none;transition-delay:.18s}
+.fcta em{font-style:normal;transition:transform .35s var(--e)}
+.fhit:hover .fcta em{transform:translateX(4px)}
+
+.flow-nav{display:flex;justify-content:center;align-items:center;gap:.6rem;
+  margin-top:clamp(1.4rem,4vh,2.2rem)}
+.flow-nav button{width:46px;height:46px;border-radius:50%;border:1px solid var(--rule);
+  display:grid;place-items:center;background:rgba(255,255,255,.6);
+  transition:background .3s,color .3s,transform .3s var(--e)}
+.flow-nav button:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+.flow-dots{display:flex;gap:.4rem;margin:0 .5rem}
+.flow-dots button{width:7px;height:7px;border-radius:50%;background:var(--rule);
+  border:0;padding:0;transition:background .3s,width .3s var(--e)}
+.flow-dots button.on{background:var(--accent);width:20px;border-radius:100px}
+
+/* ── the breakdown, centred over the page ── */
+.bd-scrim{position:fixed;inset:0;z-index:80;background:rgba(239,237,232,.55);
+  backdrop-filter:blur(14px);opacity:0;pointer-events:none;transition:opacity .45s var(--e)}
+.bd-scrim.on{opacity:1;pointer-events:auto;touch-action:none;overscroll-behavior:contain}
+/* the page is PINNED while a modal is open - iOS Safari touch-scrolls straight
+   through overflow:hidden, which is how a reader loses their place */
+.bd{position:fixed;z-index:81;inset:clamp(1rem,4vh,3rem) clamp(1rem,4vw,3rem);
+  margin:auto;max-width:1080px;max-height:min(88svh,860px);
+  background:rgba(255,255,255,.9);backdrop-filter:blur(22px);
+  border:1px solid rgba(255,255,255,.95);border-radius:26px;
+  box-shadow:0 50px 110px -50px rgba(60,55,45,.65);
+  display:flex;flex-direction:column;overflow:hidden;
+  opacity:0;transform:translateY(22px) scale(.97);pointer-events:none;
+  transition:opacity .5s var(--e),transform .5s var(--e)}
+.bd.on{opacity:1;transform:none;pointer-events:auto}
+.bd-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;
+  padding:1.3rem clamp(1.1rem,3vw,1.9rem) .9rem;border-bottom:1px solid var(--rule)}
+.bd-top h3{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.05;letter-spacing:-.02em}
+.bd-close{width:38px;height:38px;border-radius:50%;border:1px solid var(--rule);
+  display:grid;place-items:center;flex:none;transition:background .3s,color .3s}
+.bd-close:hover{background:var(--ink);color:var(--paper)}
+/* the only scrollable thing while the modal is open, and only when its content
+   overflows. `contain` stops a flick at the end chaining out to the page. */
+.bd-body{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+  gap:clamp(1rem,3vw,2rem);padding:clamp(1.1rem,3vw,1.9rem);
+  overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;min-height:0}
+.bd-shots{position:relative;border-radius:16px;overflow:hidden;background:#E4E2DC;
+  border:1px solid var(--rule);align-self:start}
+.bd-rail{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.bd-rail::-webkit-scrollbar{display:none}
+.bd-rail figure{flex:0 0 100%;scroll-snap-align:center}
+.bd-rail img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+.bd-dots{display:flex;gap:.4rem;justify-content:center;padding:.6rem}
+.bd-dots button{width:7px;height:7px;border-radius:50%;background:var(--rule)}
+.bd-dots button.on{background:var(--accent)}
+.bd-side .teaser{margin:.7rem 0 1rem;color:var(--muted);font-size:.95rem}
+.bd-scope{display:grid;gap:.5rem;border-top:1px solid var(--rule);padding-top:.9rem}
+.bd-scope div{display:flex;justify-content:space-between;gap:1rem;font-size:.85rem}
+.bd-scope b{font-weight:600}
+.bd-scope span{color:var(--muted);text-align:right}
+.bd-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.chip{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;padding:.34rem .6rem;border-radius:100px;
+  background:rgba(200,107,67,.1);color:#9C5433}
+
+/* ══════════════════════════════════════════════════════════════════════
+   THE FULL PICTURE
+   ══════════════════════════════════════════════════════════════════════ */
+.about{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);
+  gap:clamp(1.5rem,5vw,4rem);align-items:start}
+.about .lead{font-size:clamp(1.05rem,1.9vw,1.32rem);line-height:1.5;text-wrap:pretty}
+.about .body{margin-top:1rem;color:var(--muted);font-size:.98rem}
+.facts{border-top:1px solid var(--rule)}
+.fact{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;
+  border-bottom:1px solid var(--rule);font-size:.9rem}
+.fact b{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--muted)}
+
+/* ══════════════════════════════════════════════════════════════════════
+   TOOLKIT - a full page of bare icons and accent labels, rising. No pill
+   containers: the marks and the words ARE the page. On advance the whole
+   field lifts away, and that flight IS the transition into Experience.
+   ══════════════════════════════════════════════════════════════════════ */
+#skills{overflow:hidden}
+.field{position:relative;height:clamp(460px,64vh,720px);overflow:hidden;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 14%,#000 86%,transparent);
+          mask-image:linear-gradient(180deg,transparent,#000 14%,#000 86%,transparent);
+  display:grid;gap:clamp(.8rem,2.4vw,2rem)}
+.lane{position:relative;overflow:hidden}
+/* NO gap here, and every mark carries its own trailing space instead. With a
+   flex gap the track is 2n*h + (2n-1)*g tall, so translateY(-50%) moves half
+   a gap short of one full copy and the loop jumps by that much every cycle -
+   the jerk you could see. Folding the gap into each item makes the track
+   exactly two identical copies, so -50% lands dead on the seam. */
+.lane-track{display:flex;flex-direction:column;align-items:center;gap:0;
+  animation:rise var(--dur) linear infinite;
+  will-change:transform;transform:translate3d(0,0,0);backface-visibility:hidden}
+/* direction follows travel: arriving forwards the columns climb, arriving
+   backwards they fall, so the field moves the way the reader is moving */
+.field.down .lane-track{animation-direction:reverse}
+/* clicking freezes it so the marks can actually be read; clicking again
+   sets it going. Hover no longer pauses - it fought the click. */
+.field.held .lane-track{animation-play-state:paused}
+@keyframes rise{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,-50%,0)}}
+.field{cursor:pointer}
+.fieldhint{text-align:center;margin-top:.9rem;font-family:'JetBrains Mono',monospace;
+  font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+  transition:opacity .4s var(--e)}
+.tool{display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  color:var(--accent);text-align:center;
+  margin-bottom:clamp(1.6rem,4vh,2.8rem)}
+.tool svg{width:clamp(26px,3vw,38px);height:clamp(26px,3vw,38px);display:block}
+.tool span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent)}
+.tool.grow span{color:var(--ink)}
+/* the lift-off: the field accelerates upward and thins out */
+#skills.launch .liftoff{animation:launch 1.3s cubic-bezier(.55,0,.85,.3) forwards}
+#skills.launch .lane-track{animation-play-state:running}
+/* the heading is part of the flight, not a fixed label the field slides under */
+.liftoff{display:flex;flex-direction:column;gap:clamp(1rem,3vh,2rem)}
+@keyframes launch{
+  0%{transform:translateY(0);opacity:1;filter:blur(0)}
+  100%{transform:translateY(-115vh);opacity:0;filter:blur(5px)}
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   EXPERIENCE
+   ══════════════════════════════════════════════════════════════════════ */
+.tl{position:relative;padding-left:clamp(1.4rem,4vw,2.6rem)}
+.tl::before{content:'';position:absolute;left:0;top:.4rem;bottom:.4rem;width:2px;background:var(--rule)}
+.tl-fill{position:absolute;left:0;top:.4rem;width:2px;height:0;background:var(--accent);
+  transition:height .2s linear}
+.job{position:relative;padding-bottom:2.4rem}
+.job::before{content:'';position:absolute;left:calc(-1 * clamp(1.4rem,4vw,2.6rem) - 4px);
+  top:.55rem;width:10px;height:10px;border-radius:50%;background:var(--ground);
+  border:2px solid var(--accent)}
+.job h3{font-size:1.2rem;font-weight:600;letter-spacing:-.02em;margin-top:.2rem}
+.job .co{color:var(--accent);font-size:.9rem;margin-bottom:.6rem}
+.job ul{list-style:none;display:grid;gap:.45rem}
+.job li{position:relative;padding-left:1rem;font-size:.93rem;color:var(--muted)}
+.job li::before{content:'';position:absolute;left:0;top:.6em;width:5px;height:5px;
+  border-radius:50%;background:var(--rule)}
+
+/* ══════════════════════════════════════════════════════════════════════
+   CONTACT
+   ══════════════════════════════════════════════════════════════════════ */
+#contact{text-align:center}
+.ask{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(1.9rem,5.2vw,4rem);line-height:1.16;letter-spacing:-.025em;
+  max-width:22ch;margin:0 auto}
+.clinks{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+.cl{padding:.6rem 1.1rem;border-radius:100px;background:rgba(255,255,255,.7);
+  border:1px solid rgba(255,255,255,.9);font-size:.88rem;
+  box-shadow:0 12px 26px -18px rgba(60,55,45,.5);transition:transform .3s var(--e)}
+.cl:hover{transform:translateY(-3px)}
+.cl b{font-weight:600}
+.cl span{color:var(--muted);margin-left:.5rem}
+
+.cform{position:fixed;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);
+  z-index:90;width:min(calc(100vw - 2rem),400px);
+  background:rgba(255,255,255,.92);backdrop-filter:blur(22px);
+  border:1px solid rgba(255,255,255,.95);border-radius:24px;
+  box-shadow:0 40px 90px -44px rgba(60,55,45,.7);padding:1.3rem;
+  transform-origin:100% 100%;
+  opacity:0;transform:translateY(18px) scale(.9);pointer-events:none;
+  transition:opacity .5s var(--e),transform .5s var(--e)}
+.cform.on{opacity:1;transform:none;pointer-events:auto}
+.cform h4{font-family:'Instrument Serif',serif;font-weight:400;font-size:1.5rem;letter-spacing:-.02em}
+.cform p{font-size:.82rem;color:var(--muted);margin-bottom:.9rem}
+.cform label{display:block;margin-bottom:.6rem}
+.cform span{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.25rem}
+.cform input,.cform textarea{width:100%;font:inherit;font-size:.9rem;padding:.55rem .7rem;
+  border:1px solid var(--rule);border-radius:12px;background:rgba(255,255,255,.7)}
+.cform textarea{resize:vertical;min-height:76px}
+.cform .send{width:100%;margin-top:.5rem;padding:.7rem;border-radius:100px;
+  background:var(--accent);color:#fff;font-size:.92rem;transition:transform .3s var(--e)}
+.cform .send:hover{transform:translateY(-2px)}
+.cform .min{position:absolute;top:.9rem;right:.9rem;width:30px;height:30px;border-radius:50%;
+  border:1px solid var(--rule);display:grid;place-items:center;font-size:1.1rem;line-height:1}
+.cform .min:hover{background:var(--ink);color:var(--paper)}
+
+.fab{position:fixed;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:89;
+  width:58px;height:58px;border-radius:50%;background:var(--ink);color:var(--paper);
+  display:grid;place-items:center;box-shadow:0 20px 44px -20px rgba(60,55,45,.8);
+  transition:transform .4s var(--e),opacity .3s}
+.fab svg{width:22px;height:22px}
+.fab:hover{transform:translateY(-3px) scale(1.04)}
+.fab[hidden]{display:none}
+.fab.beckon::after{content:'';position:absolute;inset:-6px;border-radius:50%;
+  border:1px solid var(--accent);animation:ping 2.4s ease-out infinite}
+@keyframes ping{0%{transform:scale(.85);opacity:1}100%{transform:scale(1.35);opacity:0}}
+
+footer{padding:2rem 0 0;border-top:1px solid var(--rule)}
+.contact-mid{flex:1;display:flex;flex-direction:column;justify-content:center}
+/* the footer already holds the floor here, so the panel's own bottom padding
+   would only push the question up off centre */
+#contact .panel-inner{padding-bottom:0}
+footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+/* ══════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════════════ */
+@media (max-width:700px){
+  /* the contact button is fixed bottom-right and paints over everything, so
+     the centred note has to stay clear of the ~74px it occupies */
+  .pilenote{font-size:9.5px;letter-spacing:.1em}
+}
+@media (max-width:900px){
+  .b-intro{grid-template-columns:minmax(0,1fr);gap:1.4rem;text-align:center;
+    justify-items:center}
+  /* the desktop rule right-aligns the copy against the centre column; stacked
+     there is no centre column to align to, so it goes back to centred */
+  .b-intro .copyside{justify-self:center;max-width:26rem}
+  /* On a phone the fan is dropped entirely: the intro is card, name, line,
+     arrow - and the work gets the Up and running deck to itself, which is a
+     better read on a small screen than a rail nobody scrolls. The focus card
+     goes with it: it belongs to the arc, and a pick made at desktop width
+     would otherwise still be sitting over the intro after a resize. */
+  .arc,.focus-work{display:none}
+  .b-intro .cardside{order:-1}
+  /* the beats stay centred on the screen; they fit without scrolling */
+  .stage{padding-top:clamp(2rem,6vh,3.5rem)}
+  .b-intro h1{font-size:clamp(2.6rem,13vw,3.6rem)}
+  .b-welcome .line{font-size:clamp(1.7rem,7.6vw,2.4rem)}
+  /* The deck, its controls and its note all have to land above the gate now
+     that it is lifted clear of the bottom edge. Rather than squeeze the
+     container - which sliced the card's own button off - the card itself is
+     made shorter: a two line teaser and tighter chrome. */
+  .flow{height:clamp(340px,44vh,390px);padding:10px 0 16px}
+  /* a wider crop keeps the whole card, button included, inside the frame */
+  .fshot{aspect-ratio:16/9}
+  .flow-nav{margin-top:.7rem}
+  .pilenote{margin-top:.5rem !important}
+  .fteaser{-webkit-line-clamp:2}
+  .fcard h3{font-size:1.12rem;margin:.25rem 0 .3rem}
+  .fmeta{padding:.7rem .85rem .8rem}
+  .fchips{margin-top:.5rem}
+  .fcta{margin-top:.6rem;padding:.58rem;font-size:.82rem}
+  #work .sec-head{margin-bottom:.8rem}
+  .panel-inner{padding-bottom:clamp(11rem,26vh,15rem)}
+  .b-statement .say{font-size:clamp(1.5rem,6.4vw,2.1rem)}
+  .b-intro .tools{margin-top:.9rem;font-size:1rem;line-height:1.6}
+  .pcard{width:min(100%,250px)}
+  .b-intro .pcard{width:min(100%,300px)}
+  .about{grid-template-columns:minmax(0,1fr)}
+  .bd-body{grid-template-columns:minmax(0,1fr)}
+  .bd{inset:.6rem;max-height:94svh}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .fade{opacity:1;transform:none;transition:none}
+  .lane-track{animation:none}
+  .gate-btn{animation:none}
+  .gate-btn::after{animation:none}
+  .c.tip::after{animation:none}
+  .fab.beckon::after{animation:none}
+  #skills.launch .liftoff{animation-duration:.01s}
+}
+</style>
+</head>
+<body>
+
+<div id="veil" aria-hidden="true"></div>
+<main id="page"></main>
+
+<button class="fab" id="fab" aria-label="Open the contact form">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4.2-8 4.8-8-4.8V6l8 4.8L20 6v2.2Z"/></svg>
+</button>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   1 · CONTENT - copy and data only, mirroring src/content/*
+   ══════════════════════════════════════════════════════════════════════ */
+const ICONS = {"siReact":{"hex":"#61DAFB","path":"M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"},"siNextdotjs":{"hex":"#000000","path":"M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z"},"siTypescript":{"hex":"#3178C6","path":"M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"},"siJavascript":{"hex":"#F7DF1E","path":"M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"},"siVite":{"hex":"#9135FF","path":"M13.056 23.238a.57.57 0 0 1-1.02-.355v-5.202c0-.63-.512-1.143-1.144-1.143H5.148a.57.57 0 0 1-.464-.903l3.777-5.29c.54-.753 0-1.804-.93-1.804H.57a.574.574 0 0 1-.543-.746.6.6 0 0 1 .08-.157L5.008.78a.57.57 0 0 1 .467-.24h14.589a.57.57 0 0 1 .466.903l-3.778 5.29c-.54.755 0 1.806.93 1.806h5.745c.238 0 .424.138.513.322a.56.56 0 0 1-.063.603z"},"siNodedotjs":{"hex":"#5FA04E","path":"M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z"},"siExpress":{"hex":"#0A0A0A","path":"M12.262 16.666h1.146l6.975-9.325H19.22zm9.778 1.441v.004l-4.334-5.706-.557.74 4.873 6.682H.945V4.173h9.505l5.026 6.7.574-.772-4.374-5.928h.003l-.719-.945H0v17.544h24zM10.917 8.705a3.8 3.8 0 0 0-1.292-1.183q-.796-.45-1.916-.45c-.746 0-1.37.14-1.906.424a3.76 3.76 0 0 0-1.31 1.12 4.9 4.9 0 0 0-.75 1.581 7.17 7.17 0 0 0 0 3.696c.148.567.402 1.101.75 1.573a3.5 3.5 0 0 0 1.31 1.066q.803.39 1.906.389 1.77 0 2.739-.868.966-.867 1.328-2.457h-1.139q-.271 1.084-.977 1.734-.704.651-1.952.65-.812 0-1.392-.342a3.1 3.1 0 0 1-.957-.869 3.5 3.5 0 0 1-.551-1.182 5 5 0 0 1-.17-1.133 9 9 0 0 0-.015-.286 4.5 4.5 0 0 1 .015-.829c.047-.418.147-.83.296-1.223A3.7 3.7 0 0 1 5.54 9.05a2.9 2.9 0 0 1 .922-.742q.541-.28 1.246-.28c.47 0 .869.093 1.23.28q.541.281.922.742.379.461.587 1.057t.225 1.246H5.625l.004.957h6.182a7.3 7.3 0 0 0-.18-1.924 4.9 4.9 0 0 0-.715-1.68z"},"siPostgresql":{"hex":"#4169E1","path":"M23.5594 14.7228a.5269.5269 0 0 0-.0563-.1191c-.139-.2632-.4768-.3418-1.0074-.2321-1.6533.3411-2.2935.1312-2.5256-.0191 1.342-2.0482 2.445-4.522 3.0411-6.8297.2714-1.0507.7982-3.5237.1222-4.7316a1.5641 1.5641 0 0 0-.1509-.235C21.6931.9086 19.8007.0248 17.5099.0005c-1.4947-.0158-2.7705.3461-3.1161.4794a9.449 9.449 0 0 0-.5159-.0816 8.044 8.044 0 0 0-1.3114-.1278c-1.1822-.0184-2.2038.2642-3.0498.8406-.8573-.3211-4.7888-1.645-7.2219.0788C.9359 2.1526.3086 3.8733.4302 6.3043c.0409.818.5069 3.334 1.2423 5.7436.4598 1.5065.9387 2.7019 1.4334 3.582.553.9942 1.1259 1.5933 1.7143 1.7895.4474.1491 1.1327.1441 1.8581-.7279.8012-.9635 1.5903-1.8258 1.9446-2.2069.4351.2355.9064.3625 1.39.3772a.0569.0569 0 0 0 .0004.0041 11.0312 11.0312 0 0 0-.2472.3054c-.3389.4302-.4094.5197-1.5002.7443-.3102.064-1.1344.2339-1.1464.8115-.0025.1224.0329.2309.0919.3268.2269.4231.9216.6097 1.015.6331 1.3345.3335 2.5044.092 3.3714-.6787-.017 2.231.0775 4.4174.3454 5.0874.2212.5529.7618 1.9045 2.4692 1.9043.2505 0 .5263-.0291.8296-.0941 1.7819-.3821 2.5557-1.1696 2.855-2.9059.1503-.8707.4016-2.8753.5388-4.1012.0169-.0703.0357-.1207.057-.1362.0007-.0005.0697-.0471.4272.0307a.3673.3673 0 0 0 .0443.0068l.2539.0223.0149.001c.8468.0384 1.9114-.1426 2.5312-.4308.6438-.2988 1.8057-1.0323 1.5951-1.6698zM2.371 11.8765c-.7435-2.4358-1.1779-4.8851-1.2123-5.5719-.1086-2.1714.4171-3.6829 1.5623-4.4927 1.8367-1.2986 4.8398-.5408 6.108-.13-.0032.0032-.0066.0061-.0098.0094-2.0238 2.044-1.9758 5.536-1.9708 5.7495-.0002.0823.0066.1989.0162.3593.0348.5873.0996 1.6804-.0735 2.9184-.1609 1.1504.1937 2.2764.9728 3.0892.0806.0841.1648.1631.2518.2374-.3468.3714-1.1004 1.1926-1.9025 2.1576-.5677.6825-.9597.5517-1.0886.5087-.3919-.1307-.813-.5871-1.2381-1.3223-.4796-.839-.9635-2.0317-1.4155-3.5126zm6.0072 5.0871c-.1711-.0428-.3271-.1132-.4322-.1772.0889-.0394.2374-.0902.4833-.1409 1.2833-.2641 1.4815-.4506 1.9143-1.0002.0992-.126.2116-.2687.3673-.4426a.3549.3549 0 0 0 .0737-.1298c.1708-.1513.2724-.1099.4369-.0417.156.0646.3078.26.3695.4752.0291.1016.0619.2945-.0452.4444-.9043 1.2658-2.2216 1.2494-3.1676 1.0128zm2.094-3.988-.0525.141c-.133.3566-.2567.6881-.3334 1.003-.6674-.0021-1.3168-.2872-1.8105-.8024-.6279-.6551-.9131-1.5664-.7825-2.5004.1828-1.3079.1153-2.4468.079-3.0586-.005-.0857-.0095-.1607-.0122-.2199.2957-.2621 1.6659-.9962 2.6429-.7724.4459.1022.7176.4057.8305.928.5846 2.7038.0774 3.8307-.3302 4.7363-.084.1866-.1633.3629-.2311.5454zm7.3637 4.5725c-.0169.1768-.0358.376-.0618.5959l-.146.4383a.3547.3547 0 0 0-.0182.1077c-.0059.4747-.054.6489-.115.8693-.0634.2292-.1353.4891-.1794 1.0575-.11 1.4143-.8782 2.2267-2.4172 2.5565-1.5155.3251-1.7843-.4968-2.0212-1.2217a6.5824 6.5824 0 0 0-.0769-.2266c-.2154-.5858-.1911-1.4119-.1574-2.5551.0165-.5612-.0249-1.9013-.3302-2.6462.0044-.2932.0106-.5909.019-.8918a.3529.3529 0 0 0-.0153-.1126 1.4927 1.4927 0 0 0-.0439-.208c-.1226-.4283-.4213-.7866-.7797-.9351-.1424-.059-.4038-.1672-.7178-.0869.067-.276.1831-.5875.309-.9249l.0529-.142c.0595-.16.134-.3257.213-.5012.4265-.9476 1.0106-2.2453.3766-5.1772-.2374-1.0981-1.0304-1.6343-2.2324-1.5098-.7207.0746-1.3799.3654-1.7088.5321a5.6716 5.6716 0 0 0-.1958.1041c.0918-1.1064.4386-3.1741 1.7357-4.4823a4.0306 4.0306 0 0 1 .3033-.276.3532.3532 0 0 0 .1447-.0644c.7524-.5706 1.6945-.8506 2.802-.8325.4091.0067.8017.0339 1.1742.081 1.939.3544 3.2439 1.4468 4.0359 2.3827.8143.9623 1.2552 1.9315 1.4312 2.4543-1.3232-.1346-2.2234.1268-2.6797.779-.9926 1.4189.543 4.1729 1.2811 5.4964.1353.2426.2522.4522.2889.5413.2403.5825.5515.9713.7787 1.2552.0696.087.1372.1714.1885.245-.4008.1155-1.1208.3825-1.0552 1.717-.0123.1563-.0423.4469-.0834.8148-.0461.2077-.0702.4603-.0994.7662zm.8905-1.6211c-.0405-.8316.2691-.9185.5967-1.0105a2.8566 2.8566 0 0 0 .135-.0406 1.202 1.202 0 0 0 .1342.103c.5703.3765 1.5823.4213 3.0068.1344-.2016.1769-.5189.3994-.9533.6011-.4098.1903-1.0957.333-1.7473.3636-.7197.0336-1.0859-.0807-1.1721-.151zm.5695-9.2712c-.0059.3508-.0542.6692-.1054 1.0017-.055.3576-.112.7274-.1264 1.1762-.0142.4368.0404.8909.0932 1.3301.1066.887.216 1.8003-.2075 2.7014a3.5272 3.5272 0 0 1-.1876-.3856c-.0527-.1276-.1669-.3326-.3251-.6162-.6156-1.1041-2.0574-3.6896-1.3193-4.7446.3795-.5427 1.3408-.5661 2.1781-.463zm.2284 7.0137a12.3762 12.3762 0 0 0-.0853-.1074l-.0355-.0444c.7262-1.1995.5842-2.3862.4578-3.4385-.0519-.4318-.1009-.8396-.0885-1.2226.0129-.4061.0666-.7543.1185-1.0911.0639-.415.1288-.8443.1109-1.3505.0134-.0531.0188-.1158.0118-.1902-.0457-.4855-.5999-1.938-1.7294-3.253-.6076-.7073-1.4896-1.4972-2.6889-2.0395.5251-.1066 1.2328-.2035 2.0244-.1859 2.0515.0456 3.6746.8135 4.8242 2.2824a.908.908 0 0 1 .0667.1002c.7231 1.3556-.2762 6.2751-2.9867 10.5405zm-8.8166-6.1162c-.025.1794-.3089.4225-.6211.4225a.5821.5821 0 0 1-.0809-.0056c-.1873-.026-.3765-.144-.5059-.3156-.0458-.0605-.1203-.178-.1055-.2844.0055-.0401.0261-.0985.0925-.1488.1182-.0894.3518-.1226.6096-.0867.3163.0441.6426.1938.6113.4186zm7.9305-.4114c.0111.0792-.049.201-.1531.3102-.0683.0717-.212.1961-.4079.2232a.5456.5456 0 0 1-.075.0052c-.2935 0-.5414-.2344-.5607-.3717-.024-.1765.2641-.3106.5611-.352.297-.0414.6111.0088.6356.1851z"},"siAirtable":{"hex":"#18BFFF","path":"M11.992 1.966c-.434 0-.87.086-1.28.257L1.779 5.917c-.503.208-.49.908.012 1.116l8.982 3.558a3.266 3.266 0 0 0 2.454 0l8.982-3.558c.503-.196.503-.908.012-1.116l-8.957-3.694a3.255 3.255 0 0 0-1.272-.257zM23.4 8.056a.589.589 0 0 0-.222.045l-10.012 3.877a.612.612 0 0 0-.38.564v8.896a.6.6 0 0 0 .821.552L23.62 18.1a.583.583 0 0 0 .38-.551V8.653a.6.6 0 0 0-.6-.596zM.676 8.095a.644.644 0 0 0-.48.19C.086 8.396 0 8.53 0 8.69v8.355c0 .442.515.737.908.54l6.27-3.006.307-.147 2.969-1.436c.466-.22.43-.908-.061-1.092L.883 8.138a.57.57 0 0 0-.207-.044z"},"siAnthropic":{"hex":"#191919","path":"M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"},"siMapbox":{"hex":"#000000","path":"M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm5.696 14.943c-4.103 4.103-11.433 2.794-11.433 2.794S4.94 10.421 9.057 6.304c2.281-2.281 6.061-2.187 8.45.189s2.471 6.168.189 8.45zm-4.319-7.91l-1.174 2.416-2.416 1.174 2.416 1.174 1.174 2.416 1.174-2.416 2.416-1.174-2.416-1.174-1.174-2.416z"},"siFigma":{"hex":"#F24E1E","path":"M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z"},"siShopify":{"hex":"#7AB55C","path":"M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"},"siSquarespace":{"hex":"#000000","path":"M22.655 8.719c-1.802-1.801-4.726-1.801-6.564 0l-7.351 7.35c-.45.45-.45 1.2 0 1.65.45.449 1.2.449 1.65 0l7.351-7.351c.899-.899 2.362-.899 3.264 0 .9.9.9 2.364 0 3.264l-7.239 7.239c.9.899 2.362.899 3.263 0l5.589-5.589c1.836-1.838 1.836-4.763.037-6.563zm-2.475 2.437c-.451-.45-1.201-.45-1.65 0l-7.354 7.389c-.9.899-2.361.899-3.262 0-.45-.45-1.2-.45-1.65 0s-.45 1.2 0 1.649c1.801 1.801 4.726 1.801 6.564 0l7.351-7.35c.449-.487.449-1.239.001-1.688zm-2.439-7.35c-1.801-1.801-4.726-1.801-6.564 0l-7.351 7.351c-.45.449-.45 1.199 0 1.649s1.2.45 1.65 0l7.395-7.351c.9-.899 2.371-.899 3.27 0 .451.45 1.201.45 1.65 0 .421-.487.421-1.199-.029-1.649h-.021zm-2.475 2.437c-.45-.45-1.2-.45-1.65 0l-7.351 7.389c-.899.9-2.363.9-3.265 0-.9-.899-.9-2.363 0-3.264l7.239-7.239c-.9-.9-2.362-.9-3.263 0L1.35 8.719c-1.8 1.8-1.8 4.725 0 6.563 1.801 1.801 4.725 1.801 6.564 0l7.35-7.351c.451-.488.451-1.238 0-1.688h.002z"},"siWordpress":{"hex":"#21759B","path":"M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"},"siSquare":{"hex":"#3E4348","path":"M4.01 0A4.01 4.01 0 000 4.01v15.98c0 2.21 1.8 4 4.01 4.01h15.98C22.2 24 24 22.2 24 19.99V4A4.01 4.01 0 0019.99 0H4zm1.62 4.36h12.74c.7 0 1.26.57 1.26 1.27v12.74c0 .7-.56 1.27-1.26 1.27H5.63c-.7 0-1.26-.57-1.26-1.27V5.63a1.27 1.27 0 011.26-1.27zm3.83 4.35a.73.73 0 00-.73.73v5.09c0 .4.32.72.72.72h5.1a.73.73 0 00.73-.72V9.44a.73.73 0 00-.73-.73h-5.1Z"},"siVercel":{"hex":"#000000","path":"m12 1.608 12 20.784H0Z"},"siGoogle":{"hex":"#4285F4","path":"M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"},"siGithub":{"hex":"#181717","path":"M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"},"siPython":{"hex":"#3776AB","path":"M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"},"siCplusplus":{"hex":"#00599C","path":"M22.394 6c-.167-.29-.398-.543-.652-.69L12.926.22c-.509-.294-1.34-.294-1.848 0L2.26 5.31c-.508.293-.923 1.013-.923 1.6v10.18c0 .294.104.62.271.91.167.29.398.543.652.69l8.816 5.09c.508.293 1.34.293 1.848 0l8.816-5.09c.254-.147.485-.4.652-.69.167-.29.27-.616.27-.91V6.91c.003-.294-.1-.62-.268-.91zM12 19.11c-3.92 0-7.109-3.19-7.109-7.11 0-3.92 3.19-7.11 7.11-7.11a7.133 7.133 0 016.156 3.553l-3.076 1.78a3.567 3.567 0 00-3.08-1.78A3.56 3.56 0 008.444 12 3.56 3.56 0 0012 15.555a3.57 3.57 0 003.08-1.778l3.078 1.78A7.135 7.135 0 0112 19.11zm7.11-6.715h-.79v.79h-.79v-.79h-.79v-.79h.79v-.79h.79v.79h.79zm2.962 0h-.79v.79h-.79v-.79h-.79v-.79h.79v-.79h.79v.79h.79z"}};
+
+const CONTENT = {
+  brand: 'Anavah Designs',
+
+  // Every line here is written live. *asterisks* mark the accent words, so
+  // emphasis travels with the copy instead of being baked into a layout.
+  script: {
+    welcome:   'Welcome to Anavah Designs...',
+    welcomeSub:'Let me show you around',
+    statement: 'I help you with the stuff you *have* to do - so you can get back to the stuff you *want* to do...',
+    name:      "I'm Hals",
+    workIdx:   '01 · Selected work',
+    workTitle: 'Up and *running*',
+    workNote:  'Click a card to bring it forward · click the centre one to open it',
+    tools:     "Here are some of the tools I've made recently...",
+    ask:       'What can I make easier for you, today?',
+  },
+
+  card: {
+    src:'/img/profile-card.jpg', alt:'Hailey Grace',
+    rarity:'Open to work', no:'No. 01',
+    name:'Hailey Grace', title:'Full-stack developer · operations',
+    stats:[{v:'7+',k:'Project Management'},{v:'3+',k:'Procurement'},{v:'3',k:'Certifications'}],
+    foot:['Certified Cat Lover','CT · remote'],
+  },
+
+  portfolio: [
+    { key:'silk', kind:'project', title:'Silk Operations', tag:'Operations platform',
+      shot:'/img/frontdoor-silk-gate.jpg',
+      teaser:'A full operations landing platform for owners and managers to navigate their daily tasks, approvals, and reports. Includes a connection to Claude that auto runs payroll, parses invoices, and generates a weekly scorecard.',
+      scope:[{k:'Role',v:'Sole developer'},{k:'Status',v:'In production'},{k:'Running since',v:'2023'}],
+      stack:['Next.js','Airtable','Claude'],
+      shots:[{src:'/img/silk-desktop-1.jpg',title:'The platform'},{src:'/img/silk-desktop-2.jpg',title:'The nine tools'},{src:'/img/silk-desktop-3.jpg',title:'What it covers'},{src:'/img/silk-desktop-4.jpg',title:'The real cafe'}] },
+
+    { key:'devdeck', kind:'project', title:'DevDeck', tag:'Career OS',
+      shot:'/img/frontdoor-devdeck.jpg',
+      teaser:'Fullstack application that tracks my working day - tasks, projects, a job hunt on a map, and an AI assistant that helps get the work done.',
+      scope:[{k:'Role',v:'Sole developer'},{k:'Status',v:'Daily driver'},{k:'Year',v:'2025'}],
+      stack:['Next.js','MCP','Mapbox'],
+      shots:[{src:'/img/devdeck-desktop-1.jpg',title:'The command deck'},{src:'/img/devdeck-desktop-2.jpg',title:'Deva & the modules'},{src:'/img/devdeck-desktop-3.jpg',title:'Time, tracked'},{src:'/img/devdeck-desktop-4.jpg',title:"How it's built"}] },
+
+    { key:'assessment', kind:'project', title:'Assessment', tag:'Teaching tool',
+      shot:'/img/frontdoor-assessment.jpg',
+      teaser:'Three backend lessons - SQL, an endpoint, a React fetch - that run live in the page.',
+      scope:[{k:'Role',v:'Sole developer'},{k:'Status',v:'Taught live'},{k:'Year',v:'2026'}],
+      stack:['React','Express','Postgres'],
+      shots:[{src:'/img/frontdoor-assessment.jpg',title:'The lesson'}] },
+
+    { key:'toolbox', kind:'project', title:'Coders Resource', tag:'Resource directory',
+      shot:'/img/frontdoor-toolbox.jpg',
+      teaser:'Forty-six developer resources I actually use, sorted into seven categories - built while learning, still live, still maintained.',
+      scope:[{k:'Role',v:'Sole developer'},{k:'Status',v:'Live & maintained'}],
+      stack:['React','Vite','Router'],
+      shots:[{src:'/img/resource-1.jpg',title:'Welcome'},{src:'/img/resource-2.jpg',title:'The grid'},{src:'/img/resource-3.jpg',title:'More categories'}] },
+
+    { key:'scc', kind:'site', title:'Silk City Coffee', tag:'Shopify · client site',
+      shot:'/img/site-scc.jpg',
+      teaser:'The storefront customers actually buy from. Retail beans, gift cards, a subscription coffee club and a wholesale portal for trade accounts.',
+      scope:[{k:'Platform',v:'Shopify'},{k:'Role',v:'Built & maintained'},{k:'Live at',v:'silkcitycoffee.com'}],
+      stack:['Shopify','Square'],
+      shots:[{src:'/img/site-scc.jpg',title:'The storefront'},{src:'/img/site-scc-2.jpg',title:'The coffee'},{src:'/img/site-scc-3.jpg',title:'Wholesale'}] },
+
+    { key:'livinghope', kind:'site', title:'Living Hope Farms', tag:'Squarespace · client site',
+      shot:'/img/site-livinghope.jpg',
+      teaser:'Nonprofit residential home for survivors of human trafficking. Donations, an Airtable build application, resource pages and a social-enterprise shop.',
+      scope:[{k:'Platform',v:'Squarespace'},{k:'Role',v:'Built & maintained'}],
+      stack:['Squarespace','Airtable'],
+      shots:[{src:'/img/site-livinghope.jpg',title:'The front door'},{src:'/img/site-livinghope-2.jpg',title:'Services'},{src:'/img/site-livinghope-3.jpg',title:'Giving'}] },
+
+  ],
+
+  about: {
+    lead:"Tech forward, operations-focused developer with 7+ years of experience in project management, workflow optimization, and business/program development. Proven history of building scalable systems, reliable workflows, and translating operational data into clear, actionable insights.",
+    body:'Known for creating structure, improving efficiency, and supporting leadership through data-informed decision-making - with a design eye that makes the output actually helpful to look at.',
+    facts:[
+      {label:'Back End Certification (In Progress)',year:'2026'},
+      {label:'Programming Certification',year:'2023'},
+      {label:'HR Certification',year:'2023'},
+      {label:'GitHub →',href:'https://github.com/officiallyhailey'},
+    ],
+  },
+
+  caps:[
+    {k:'Frontend',items:[{n:'React',i:'siReact'},{n:'Next.js',i:'siNextdotjs'},{n:'TypeScript',i:'siTypescript'},{n:'JavaScript',i:'siJavascript'},{n:'Vite',i:'siVite'},{n:'HTML & CSS'}]},
+    {k:'Backend & data',items:[{n:'Node.js',i:'siNodedotjs'},{n:'Express',i:'siExpress'},{n:'Postgres',i:'siPostgresql'},{n:'Airtable',i:'siAirtable'},{n:'REST APIs'}]},
+    {k:'AI & automation',items:[{n:'Claude',i:'siAnthropic'},{n:'Tool-use agents'},{n:'MCP servers'},{n:'Workflow automation'}]},
+    {k:'Data & reporting',items:[{n:'Dashboards'},{n:'Mapbox',i:'siMapbox'},{n:'Scorecards & KPIs'},{n:'Forecasting'}]},
+    {k:'Design',items:[{n:'Figma',i:'siFigma'},{n:'Design systems'},{n:'Interface design'},{n:'Canva'},{n:'Training guides'}]},
+    {k:'Platforms',items:[{n:'Shopify',i:'siShopify'},{n:'Squarespace',i:'siSquarespace'},{n:'WordPress',i:'siWordpress'},{n:'Square',i:'siSquare'},{n:'Vercel',i:'siVercel'},{n:'Google',i:'siGoogle'}]},
+    {k:'Ways of working',items:[{n:'Git & GitHub',i:'siGithub'},{n:'Vitest'},{n:'CI pipelines'},{n:'Procurement'},{n:'Payroll & scheduling'}]},
+    {k:'Currently learning',growing:true,items:[{n:'Python',i:'siPython'},{n:'C++',i:'siCplusplus'}]},
+  ],
+
+  jobs:[
+    {period:'2023 – Present',title:'Operations Manager',company:'Silk City Coffee',points:[
+      'Built backend data structures and a frontend dashboard using Airtable and AI agents - task management, recruiting, HR/payroll, analytics, B2B insights, vendor management, and SOP guides.',
+      'Managed scheduling, labor modeling, and payroll for high-volume, multi-location teams within target margins.',
+      'Saved over $35k through vendor management and secured an additional $35k through grant proposals.']},
+    {period:'2019 – 2022',title:'Non-profit Project Manager',company:'The Underground NE',points:[
+      'Contributed to a 4-year collaborative project to build and improve services for adult survivors of human trafficking in New England.',
+      'Worked alongside non-profits, social services, state agencies, and law enforcement including the FBI.']},
+  ],
+
+  contact:{links:[
+    {label:'Email',value:'haileydgrace@gmail.com',href:'mailto:haileydgrace@gmail.com'},
+    {label:'LinkedIn',value:'hailey-g',href:'https://www.linkedin.com/in/hailey-g/'},
+  ]},
+};
+
+/* ══════════════════════════════════════════════════════════════════════
+   2 · THE SCRIPT - reorder these arrays to reorder the experience
+   ══════════════════════════════════════════════════════════════════════ */
+const ACT_ONE = [
+  { id:'welcome',   layout:'welcome',   gate:'Right this way' },
+  { id:'statement', layout:'statement', gate:'Go on' },
+  { id:'intro',     layout:'intro',     gate:'See the work' },
+];
+
+// The work appears twice on purpose: the arc inside the "I'm Hals" beat is
+// the glance, and this section is the browse.
+const PAGE_ORDER = ['portfolio','about','experience','toolkit','contact'];
+
+// which section each gate hands off to, and what its button says
+const GATES = {
+  work:       { next:'#about',      label:'The full picture' },
+  about:      { next:'#experience', label:'Where I have worked' },
+  experience: { next:'#skills',     label:'What I build with' },
+  // the toolkit's flight now lands on the contact panel rather than the
+  // timeline, since Experience moved ahead of it
+  skills:     { next:'#contact',    label:"Let's talk" },
+};
+
+/* ══════════════════════════════════════════════════════════════════════
+   3 · HELPERS
+   ══════════════════════════════════════════════════════════════════════ */
+const el = (h) => { const t = document.createElement('template'); t.innerHTML = h.trim(); return t.content.firstElementChild; };
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Resolves once an element has finished sliding into place. Typing that
+   begins while its own block is still travelling reads as the text jumping
+   upward as characters appear - which is exactly what a long entrance plus an
+   immediate write-out produced. Falls back to a timeout so a transition that
+   never fires cannot stall the sequence. */
+function settled(el, prop = 'transform', max = 900){
+  if (REDUCED || !el) return Promise.resolve();
+  return new Promise((resolve) => {
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      el.removeEventListener('transitionend', onEnd);
+      resolve();
+    };
+    const onEnd = (e) => { if (e.target === el && e.propertyName === prop) finish(); };
+    el.addEventListener('transitionend', onEnd);
+    setTimeout(finish, max);
+  });
+}
+const emph = (s) => s.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+const esc = (s) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+function icon(name){
+  const d = ICONS[name];
+  return d ? `<svg viewBox="0 0 24 24" aria-hidden="true" style="fill:currentColor"><path d="${d.path}"/></svg>` : '';
+}
+
+/* ── the typewriter ──────────────────────────────────────────────────
+   Copy is split into at most four balanced lines, then every character of
+   every line is rendered up front as its own hidden span. Typing reveals
+   them in order. Because the full text is already laid out, nothing moves:
+   no re-centring, no rewrap, no jitter.
+   ------------------------------------------------------------------- */
+const MAX_LINES = 4;
+
+function wrapLines(text, target){
+  const words = text.split(' ');
+  const n = Math.min(MAX_LINES, Math.max(1, Math.ceil(text.length / target)));
+  if (n === 1) return [text];
+  // aim every line at the same length, so the block sits evenly
+  const per = Math.ceil(text.length / n);
+  const lines = [];
+  let cur = '';
+  for (const w of words){
+    const grown = cur ? `${cur} ${w}` : w;
+    if (cur && grown.length > per && lines.length < n - 1){ lines.push(cur); cur = w; }
+    else cur = grown;
+  }
+  if (cur) lines.push(cur);
+  return lines;
+}
+
+// one span per character, emphasis preserved, everything hidden to start
+function buildLine(line){
+  const html = emph(esc(line));
+  const holder = document.createElement('span');
+  holder.innerHTML = html;
+  const out = document.createElement('span');
+  out.className = 'tline';
+  const cells = [];
+  const cell = (ch, into) => {
+    const sp = document.createElement('span');
+    sp.className = 'c';
+    sp.textContent = ch;
+    into.appendChild(sp);
+    cells.push(sp);
+  };
+  const walk = (src, dest) => {
+    src.childNodes.forEach((node) => {
+      if (node.nodeType === 3){
+        // split on whitespace so a line can only ever break BETWEEN words
+        node.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)){
+            for (const ch of part) cell(ch, dest);
+          } else {
+            const w = document.createElement('span');
+            w.className = 'w';
+            dest.appendChild(w);
+            for (const ch of part) cell(ch, w);
+          }
+        });
+      } else {
+        const tag = document.createElement(node.tagName);
+        dest.appendChild(tag);
+        walk(node, tag);
+      }
+    });
+  };
+  walk(holder, out);
+  return { node: out, cells };
+}
+
+function buildBlock(host, text){
+  const target = Number(host.dataset.wrap) || 42;
+  const lines = wrapLines(text, target);
+  host.classList.add('tblock');
+  host.textContent = '';
+  const cells = [];
+  lines.forEach((l) => {
+    const built = buildLine(l);
+    host.appendChild(built.node);
+    cells.push(...built.cells);
+  });
+  return cells;
+}
+
+/* Every typed block is built ONCE, up front, before anything is shown. That
+   is what keeps the layout still: the copy already occupies its final box, so
+   a column cannot widen mid-sentence and shove a neighbour (the profile card)
+   sideways. Typing then only flips characters visible. */
+function prepareType(root){
+  root.querySelectorAll('.type').forEach((n) => {
+    if (n.dataset.built) return;
+    n.dataset.built = '1';
+    buildBlock(n, CONTENT.script[n.dataset.type]);
+  });
+}
+
+function typeText(host, text){
+  if (host.dataset.typed) return Promise.resolve();
+  host.dataset.typed = 'done';
+  if (!host.dataset.built){ host.dataset.built = '1'; buildBlock(host, text); }
+  const cells = [...host.querySelectorAll('.c')];
+
+  if (REDUCED){ cells.forEach((c) => c.classList.add('on')); return Promise.resolve(); }
+
+  /* Driven by the frame clock, not by a chain of timers. setTimeout drifts and
+     is clamped by the browser, and the old version added random jitter and a
+     long pause on punctuation on top of that - which is what read as stalling
+     and stuttering. How many characters should be showing is now a pure
+     function of elapsed time, so the reveal is even and frame-accurate. The
+     layout never moves either way: every character is already in place and
+     only its visibility flips. */
+  const rate = clamp(1500 / Math.max(12, cells.length), 13, 46);
+  const lead = 180;
+  host.classList.add('writing');
+
+  return new Promise((resolve) => {
+    let start = performance.now();
+    let last = start;
+    let shown = 0;
+    let tip = null;
+    const frame = (now) => {
+      // If frames stopped for a while - a hidden tab pauses rAF entirely - do
+      // not let the elapsed time cash in all at once and dump the rest of the
+      // line on screen. Slide the clock instead and carry on from here.
+      if (now - last > 400) start += now - last;
+      last = now;
+      const due = clamp(Math.floor((now - start - lead) / rate), 0, cells.length);
+      while (shown < due){
+        cells[shown].classList.add('on');
+        shown += 1;
+      }
+      if (shown > 0 && cells[shown - 1] !== tip){
+        if (tip) tip.classList.remove('tip');
+        tip = cells[shown - 1];
+        tip.classList.add('tip');
+      }
+      if (shown < cells.length){ requestAnimationFrame(frame); return; }
+      host.classList.remove('writing');
+      setTimeout(() => { if (tip) tip.classList.remove('tip'); resolve(); }, 140);
+    };
+    requestAnimationFrame(frame);
+  });
+}
+
+// writes every .type inside a container, one line after the next
+function typeGroup(root, gap = 260){
+  if (root.dataset.typing) return Promise.resolve();
+  root.dataset.typing = 'done';
+  const lines = [...root.querySelectorAll('.type')];
+  return lines.reduce(
+    (chain, n, i) => chain
+      .then(() => typeText(n, CONTENT.script[n.dataset.type]))
+      // no pause after the LAST line: whatever comes next (the arrow) should
+      // arrive as the final character does, not a beat behind it
+      .then(() => wait(REDUCED || i === lines.length - 1 ? 0 : gap)),
+    Promise.resolve(),
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   4 · LAYOUTS
+   ══════════════════════════════════════════════════════════════════════ */
+const S = CONTENT.script;
+
+const LAYOUTS = {
+  welcome: () => `
+    <div class="beat b-welcome" data-beat="welcome">
+      <p class="line"><span class="type" data-type="welcome" data-wrap="30"></span></p>
+      <p class="mono sub"><span class="type" data-type="welcomeSub" data-wrap="30"></span></p>
+    </div>`,
+
+  statement: () => `
+    <div class="beat b-statement" data-beat="statement">
+      <p class="say"><span class="type" data-type="statement" data-wrap="34"></span></p>
+    </div>`,
+
+  intro: () => `
+    <div class="beat b-intro" data-beat="intro">
+      <div class="copyside">
+        <h1><span class="type" data-type="name" data-wrap="20"></span></h1>
+        <p class="tools"><span class="type" data-type="tools" data-wrap="26"></span></p>
+      </div>
+      <!-- the centre slot holds the profile card until a project takes its
+           place; the arc deals out to the right once the line finishes -->
+      <div class="cardside">
+        <div class="focus" id="focus">
+          <div class="focus-me">${profileCard()}</div>
+          <div class="focus-work" id="focusWork" aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="arc" id="arc" role="list" aria-label="Selected work"></div>
+    </div>`,
+};
+
+function profileCard(){
+  const c = CONTENT.card;
+  return `
+  <div class="pcard">
+    <div class="pc-art">
+      <span class="pc-rarity"><i class="pc-dot"></i>${c.rarity}</span>
+      <span class="pc-no">${c.no}</span>
+      <img src="${c.src}" alt="${c.alt}" />
+      <div class="pc-name"><b>${c.name}</b><span>${c.title}</span></div>
+    </div>
+    <div class="pc-stats">
+      ${c.stats.map((s) => `<div class="pc-stat"><b>${s.v}</b><span>${s.k}</span></div>`).join('')}
+    </div>
+    <div class="pc-foot">${c.foot.map((f) => `<span>${f}</span>`).join('')}</div>
+  </div>`;
+}
+
+const ARROW_DOWN = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12l7 7 7-7"/></svg>`;
+const ARROW_UP = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 19V5M5 12l7-7 7 7"/></svg>`;
+
+/* One gate for the whole deck, mounted on the body. Per-panel gates were
+   position:fixed inside a panel that carries a transform, and a transformed
+   ancestor becomes the containing block for fixed children - so the gate
+   drifted with the panel mid-transition instead of holding the screen. */
+const gateHTML = () => `
+  <div class="gate" id="gate">
+    <span class="gate-label" id="gateLabel"></span>
+    <div class="gate-row">
+      <button class="gate-back" id="gateBack" aria-label="Back to the previous section">${ARROW_UP}</button>
+      <button class="gate-btn" id="gateNext" aria-label="Continue">${ARROW_DOWN}</button>
+    </div>
+  </div>`;
+
+/* ══════════════════════════════════════════════════════════════════════
+   5 · SECTIONS
+   ══════════════════════════════════════════════════════════════════════ */
+const SECTIONS = {
+  portfolio: () => `
+    <section class="sec panel" id="work"><div class="panel-inner">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="mono idx"><span class="type" data-type="workIdx" data-wrap="40"></span></p>
+          <h2 class="sectitle"><span class="type" data-type="workTitle" data-wrap="26"></span></h2>
+        </div>
+      </div>
+      <div class="flow"><div class="flow-track" id="flow"></div></div>
+      <div class="wrap">
+        <div class="flow-nav fade" data-d="1">
+          <button id="flowPrev" aria-label="Previous project">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="flow-dots" id="flowDots"></div>
+          <button id="flowNext" aria-label="Next project">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <p class="pilenote mono" style="text-align:center;margin-top:1rem"><span class="type" data-type="workNote" data-wrap="40"></span></p>
+      </div>
+      </div>
+    </section>`,
+
+  about: () => `
+    <section class="sec panel" id="about"><div class="panel-inner">
+      <div class="wrap">
+        <div class="sec-head fade">
+          <p class="mono idx">02 · About</p>
+          <h2 class="sectitle">The full <em>picture</em></h2>
+        </div>
+        <!-- no profile card here: it has already had its moment in the
+             intro, and repeating it makes this section read as a rerun -->
+        <div class="about">
+          <div class="fade" data-d="1">
+            <p class="lead">${CONTENT.about.lead}</p>
+            <p class="body">${CONTENT.about.body}</p>
+          </div>
+          <div class="fade" data-d="2">
+            <div class="facts">
+              ${CONTENT.about.facts.map((f) => `
+                <div class="fact">
+                  ${f.href ? `<a href="${f.href}" target="_blank" rel="noopener noreferrer">${f.label}</a>` : `<span>${f.label}</span>`}
+                  <b>${f.year || ''}</b>
+                </div>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>`,
+
+  toolkit: () => `
+    <!-- a transition, not a destination: arriving here plays the field's
+         flight and hands straight over to Experience -->
+    <section class="sec panel" id="skills"><div class="panel-inner">
+      <div class="liftoff">
+        <div class="wrap">
+          <div class="sec-head fade" style="text-align:center;margin-bottom:0">
+            <p class="mono idx">03 · Toolkit</p>
+            <h2 class="sectitle">Current tech stacks <em>&amp; what's next</em></h2>
+          </div>
+        </div>
+        <div class="field" id="field"></div>
+      </div>
+      <p class="fieldhint" id="fieldHint">Click to hold · click again to release</p>
+      </div>
+    </section>`,
+
+  experience: () => `
+    <section class="sec panel" id="experience"><div class="panel-inner">
+      <div class="wrap">
+        <div class="sec-head fade">
+          <p class="mono idx">04 · Experience</p>
+          <h2 class="sectitle">Where I've <em>worked</em></h2>
+        </div>
+        <div class="tl fade" data-d="1" id="tl">
+          <span class="tl-fill" id="tlFill"></span>
+          ${CONTENT.jobs.map((j) => `
+            <div class="job">
+              <p class="mono">${j.period}</p>
+              <h3>${j.title}</h3>
+              <p class="co">${j.company}</p>
+              <ul>${j.points.map((p) => `<li>${p}</li>`).join('')}</ul>
+            </div>`).join('')}
+        </div>
+      </div>
+      </div>
+    </section>`,
+
+  contact: () => `
+    <section class="sec panel" id="contact" data-typegroup><div class="panel-inner">
+      <!-- the question sits in the middle of the screen and the footer keeps
+           the floor: without this wrapper the footer's auto margin ate the
+           free space and pushed everything to the top -->
+      <div class="contact-mid">
+      <div class="wrap">
+        <p class="mono idx fade" style="margin-bottom:1.2rem">05 · Contact</p>
+        <h2 class="ask"><span class="type" data-type="ask" data-wrap="24"></span></h2>
+        <div class="clinks fade" data-d="2">
+          ${CONTENT.contact.links.map((l) => `
+            <a class="cl" href="${l.href}"${l.href.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>
+              <b>${l.label}</b><span>${l.value}</span></a>`).join('')}
+        </div>
+      </div>
+      </div>
+      <!-- inside the panel: a footer left as a sibling of the sections sits at
+           the top of the fixed <main> and prints itself over every panel -->
+      <footer><div class="wrap">
+        <span class="mono">© ${new Date().getFullYear()} ${CONTENT.brand}</span>
+        <span class="mono">[ABC = true]</span>
+      </div></footer>
+      </div>
+    </section>`,
+};
+
+/* ══════════════════════════════════════════════════════════════════════
+   6 · BUILD
+   ══════════════════════════════════════════════════════════════════════ */
+const page = document.getElementById('page');
+page.appendChild(el(`
+  <section class="stage panel" id="intro">
+    ${ACT_ONE.map((b) => LAYOUTS[b.layout](b)).join('')}
+  </section>`));
+page.insertAdjacentHTML('beforeend', PAGE_ORDER.map((k) => SECTIONS[k]()).join(''));
+
+document.body.insertAdjacentHTML('beforeend', `
+  ${gateHTML()}
+  <div class="bd-scrim" id="bdScrim"></div>
+  <article class="bd" id="bd" role="dialog" aria-modal="true" aria-label="Project breakdown"></article>
+  <form class="cform" id="cform" novalidate>
+    <button type="button" class="min" id="cformMin" aria-label="Minimise the form">–</button>
+    <h4>Let's talk</h4>
+    <p>Tell me what needs to get easier.</p>
+    <label><span>Name</span><input name="name" autocomplete="name" /></label>
+    <label><span>Email</span><input name="email" type="email" autocomplete="email" /></label>
+    <label><span>What do you need?</span><textarea name="message"></textarea></label>
+    <button class="send" type="submit">Send it</button>
+  </form>`);
+
+// lay every line out before a single character shows
+prepareType(document);
+
+const veil = document.getElementById('veil');
+
+/* ── stage one: three beats, click to advance ───────────────────────── */
+const beats = [...document.querySelectorAll('#intro .beat')];
+const gate = document.getElementById('gate');
+const gateLabel = document.getElementById('gateLabel');
+let beatAt = -1;
+let advancing = false;
+
+function showGate(on, label){
+  if (label) gateLabel.textContent = label;
+  gate.classList.toggle('on', on);
+}
+
+/* Each beat plays its own animation, then stops and raises the gate. The
+   sequence is written out here rather than spread across CSS delays, so the
+   pacing of one beat is edited in one place. */
+async function playBeat(i){
+  const beat = beats[i];
+  beat.classList.remove('out');
+  beat.classList.add('on');
+  // let the beat land before a single character is written into it
+  await settled(beat);
+
+  if (beat.dataset.beat === 'intro'){
+    // name, card, a short beat, the line - and the work deals itself out the
+    // moment the line lands, so nobody has to be told to go and look
+    const name = beat.querySelector('[data-type="name"]');
+    const tools = beat.querySelector('[data-type="tools"]');
+    await typeText(name, S.name);
+    await wait(REDUCED ? 0 : 240);
+    beat.querySelector('.pcard').classList.add('shown');
+    await wait(REDUCED ? 0 : 850);
+    await typeText(tools, S.tools);
+    dealArc();
+    await wait(REDUCED ? 0 : 380);
+  } else {
+    await typeGroup(beat);
+  }
+
+  showGate(true, i === ACT_ONE.length - 1 ? introEndLabel() : ACT_ONE[i].gate);
+}
+
+async function goToBeat(i){
+  if (advancing) return;
+  advancing = true;
+  showGate(false);
+
+  if (beatAt >= 0){
+    // the change happens inside a bank of light rather than in plain sight
+    veil.classList.add('on');
+    await wait(REDUCED ? 0 : 420);
+    beats[beatAt].classList.add('out');
+    beats[beatAt].classList.remove('on');
+    await wait(REDUCED ? 0 : 120);
+    veil.classList.remove('on');
+  }
+
+  beatAt = i;
+  advancing = false;
+  await playBeat(i);
+}
+
+document.getElementById('gateNext').addEventListener('click', advance);
+document.getElementById('gateBack').addEventListener('click', () => goBack());
+
+/* ── the deck ────────────────────────────────────────────────────────
+   With the document frozen, navigation IS this. `at` is the panel the
+   reader is on; nothing else is visible or focusable.
+
+   FORWARD is gated: the arrow, or the forward keys, and nothing else.
+   BACKWARD is free: the back chevron, the up keys, or simply scrolling up.
+   Going back should never be work.
+   ------------------------------------------------------------------- */
+const allPanels = [...document.querySelectorAll('main .panel')];
+/* Panels that only belong on a small screen. On desktop the work already
+   fans out behind the profile card in the intro beat, so a second pass at
+   the same six projects is a repeat; on a phone the fan is dropped and this
+   deck IS how the work gets shown. */
+const NARROW_ONLY = new Set(['work']);
+const isNarrow = () => window.innerWidth <= 900;
+
+let panels = [];
+let PANEL_IDS = [];
+// panels that exist only to be travelled through. Entering one forwards plays
+// its flight and hands on; going backwards skips it, or the reader would be
+// bounced straight forward again by its own animation.
+// Nothing auto-flies through any more: the toolkit is somewhere you arrive,
+// read, and leave by the arrow. Kept as a set so a section can be made a
+// pure corridor again by naming it here.
+const TRANSITION = new Set();
+let at = 0;
+let moving = false;
+
+function panelIndex(sel){ return PANEL_IDS.indexOf(String(sel).replace('#', '')); }
+
+/* Rebuilds the deck for the current width. Called at boot and whenever a
+   resize crosses the breakpoint, so a panel cannot be stranded as the active
+   one after it has been dropped from the running order. */
+function syncDeck(){
+  // a project chosen from the fan has no place in the narrow layout
+  if (isNarrow()) clearWork();
+  const current = panels[at] ? panels[at].id : 'intro';
+  panels = allPanels.filter((p) => !(NARROW_ONLY.has(p.id) && !isNarrow()));
+  PANEL_IDS = panels.map((p) => p.id);
+  allPanels.forEach((p) => {
+    const dropped = !panels.includes(p);
+    p.classList.toggle('off', dropped);
+    if (dropped) p.classList.remove('active');
+  });
+  let i = PANEL_IDS.indexOf(current);
+  if (i < 0) i = Math.min(PANEL_IDS.length - 1, Math.max(0, at));   // it was dropped
+  at = i;
+  panels.forEach((p, n) => p.classList.toggle('active', n === at));
+  updateBackButtons();
+}
+
+// where the intro hands off depends on whether the work deck is in play
+const afterIntro = () => (isNarrow() ? '#work' : '#about');
+const introEndLabel = () => (isNarrow() ? 'See the work' : 'The full picture');
+
+async function goPanel(i, { back = false } = {}){
+  if (back) while (i > 0 && TRANSITION.has(PANEL_IDS[i])) i -= 1;
+  if (moving || i < 0 || i >= panels.length || i === at) return;
+  moving = true;
+  const from = panels[at];
+  const to = panels[i];
+
+  showGate(false);
+  try {
+    from.classList.add(back ? 'leave-down' : 'leave-up');
+    if (back) to.classList.add('from-above');
+
+    if (!REDUCED){
+      veil.classList.add('on');
+      await wait(230);
+    }
+    from.classList.remove('active');
+    to.classList.add('active');
+    // a panel always opens at its own top, never halfway down from last time
+    to.scrollTop = 0;
+    at = i;
+    if (!REDUCED){
+      await wait(60);
+      veil.classList.remove('on');
+    }
+  } finally {
+    // `moving` must clear even if something above throws: leave it set and the
+    // deck wedges for good, with every arrow and key silently doing nothing
+    from.classList.remove('leave-down', 'leave-up');
+    to.classList.remove('from-above');
+    veil.classList.remove('on');
+    moving = false;
+  }
+  updateBackButtons();
+  if (to.id === 'skills') setFieldDirection(back);
+  // same rule for a panel: it finishes arriving before anything types
+  settled(to, 'transform', 700).then(() => reveal(to));
+
+  // a transition panel plays itself and moves on, unprompted
+  if (!back && TRANSITION.has(to.id)) setTimeout(() => launchToolkit(GATES[to.id].next), REDUCED ? 0 : 620);
+}
+
+function updateBackButtons(){
+  // nothing to go back to from the opening beat of the opening panel
+  document.getElementById('gateBack').hidden = at === 0 && beatAt <= 0;
+}
+
+function handOff(sel){
+  const i = panelIndex(sel);
+  if (i >= 0) goPanel(i);
+}
+
+function goBack(){ goPanel(at - 1, { back: true }); }
+
+
+
+/* The same two moves from the keyboard. Without this the gate would lock out
+   anyone not using a mouse, which is the one cost of hard-gating worth
+   refusing to pay. */
+document.addEventListener('keydown', (e) => {
+  if (breakdownOpen || formOpen) return;
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea') return;
+  const fwd = ['ArrowDown', 'PageDown', ' ', 'Spacebar'];
+  const bwd = ['ArrowUp', 'PageUp'];
+  // the coverflow owns left/right, so the deck deliberately does not
+  if (fwd.includes(e.key)){ e.preventDefault(); advance(); }
+  else if (bwd.includes(e.key)){ e.preventDefault(); goBack(); }
+});
+
+/* Scrolling UP goes back. Forward scrolling stays gated, so the wheel can
+   only ever retreat. A panel that scrolls internally has to reach its own
+   top first, or the gesture would yank the reader out of half-read copy. */
+let gestureLock = 0;
+function atTop(){ return (panels[at]?.scrollTop || 0) <= 1; }
+function tryBack(){
+  const now = performance.now();
+  if (moving || breakdownOpen || now < gestureLock || !atTop()) return;
+  gestureLock = now + 700;
+  goBack();
+}
+
+window.addEventListener('wheel', (e) => { if (e.deltaY < -12) tryBack(); }, { passive: true });
+
+let touchY = null;
+window.addEventListener('touchstart', (e) => { touchY = e.touches[0].clientY; }, { passive: true });
+window.addEventListener('touchmove', (e) => {
+  if (touchY === null) return;
+  // finger travelling DOWN the screen is the content moving up: going back
+  if (e.touches[0].clientY - touchY > 60){ touchY = null; tryBack(); }
+}, { passive: true });
+window.addEventListener('touchend', () => { touchY = null; }, { passive: true });
+
+// what the forward key does depends on where you are
+function advance(){
+  const panel = panels[at];
+  if (panel.id === 'intro'){
+    if (beatAt < beats.length - 1) goToBeat(beatAt + 1);
+    else handOff(afterIntro());
+    return;
+  }
+  const next = GATES[panel.id] && GATES[panel.id].next;
+  if (!next) return;
+  // the toolkit's exit IS its transition, so let the field fly before moving
+  if (panel.id === 'skills') launchToolkit(next);
+  else handOff(next);
+}
+
+/* ── revealing a panel ──────────────────────────────────────────────── */
+const revealed = new Set();
+
+function reveal(section){
+  if (!section || revealed.has(section.id)) return;
+  revealed.add(section.id);
+  section.querySelectorAll('.fade').forEach((n) => n.classList.add('in'));
+
+  if (section.id === 'work'){
+    // heading first, then the cards land, and only THEN the note - typing all
+    // three before the fan left a big empty stage for several seconds
+    typeGroup(section.querySelector('.sec-head'))
+      .then(() => { fanIn(); raiseGate(section); return wait(REDUCED ? 0 : 420); })
+      .then(() => typeGroup(section.querySelector('.pilenote')));
+  } else if (section.id === 'contact'){
+    // the form opens itself once the question has finished asking
+    typeGroup(section).then(() => {
+      raiseGate(section);
+      return wait(REDUCED ? 0 : 320);
+    }).then(() => { if (!breakdownOpen) setForm(true); });
+  } else {
+    if (section.id === 'experience') fillTimeline();
+    raiseGate(section);
+  }
+}
+
+function raiseGate(section){
+  const g = GATES[section.id];
+  if (!g) return;
+  setTimeout(() => showGate(true, g.label), REDUCED ? 0 : 260);
+}
+
+/* ── the work, as a half circle ──────────────────────────────────────
+   The cards sit on an arc opening leftward, so the fan wraps around the
+   profile card in the centre rather than queueing beside it. ARC is the
+   whole shape: change these four numbers and the curve changes.
+   ------------------------------------------------------------------- */
+/* A true half circle. The cards sit ON the curve: it starts at the top
+   right, sweeps out to the left at the midpoint, and returns to the bottom
+   right. Equal angular steps means equal spacing ALONG the arc, which is
+   what reads as uniform, and each card leans with the tangent. */
+/* Two branches from the middle of the profile card: one climbing, one
+   dropping, each card starting half a card along from the last, both curving
+   right on the same circle until they meet the screen border.
+
+   The card size is SOLVED rather than picked: given the branch length, the
+   overlap and the curvature, there is exactly one card height that lands the
+   outermost card on the border. That is what keeps the spacing uniform and
+   the cards as large as the space allows. */
+/* Taken straight off the reference drawing, which measures as two straight
+   fans rather than a curve:
+     - every card steps sideways by exactly HALF A CARD WIDTH
+     - the innermost card's centre sits on the profile card's edge
+     - the vertical steps are uniform, and the first offset is ~3x one step
+     - depth runs inward: the nearest card is darkest, the furthest lightest
+   The reference canvas is square; a widescreen has far less height than
+   width, so the vertical spread is scaled to fit while its proportions and
+   every horizontal rule above are kept exactly. */
+const ARC = {
+  perBranch: 3,     // cards climbing, and the same number dropping
+  stepX: 0.5,       // sideways travel per card, in card widths
+  dropRatio: 3.05,  // first vertical offset, in vertical steps
+  margin: 14,       // clearance kept from every border
+  depth: [          // per rank out from the middle, nearest first
+    { sat: 1,    br: 1     },
+    { sat: 0.82, br: 0.985 },
+    { sat: 0.62, br: 0.97  },
+  ],
+  minCard: 190,
+  maxCard: 380,
+};
+const THUMB = 3 / 4;    // the card's picture aspect, used to solve its height
+
+const items = CONTENT.portfolio;
+const arc = document.getElementById('arc');
+const focus = document.getElementById('focus');
+const focusWork = document.getElementById('focusWork');
+const KIND = { project: 'Project', site: 'Client site' };
+let chosen = null;
+
+arc.innerHTML = items.map((p, i) => `
+  <div class="acard" data-key="${p.key}" data-i="${i}" style="--i:${i}" role="listitem">
+    <button class="acard-hit" aria-label="Bring ${p.title} to the centre">
+      <span class="thumb"><img src="${p.shot}" alt="" loading="lazy" /></span>
+      <span class="cap"><b>${p.title}</b><span>${p.tag}</span></span>
+    </button>
+  </div>`).join('');
+
+const acards = [...arc.querySelectorAll('.acard')];
+
+function layoutArc(){
+  // the phone layout is a plain scrolling rail, so the maths is skipped
+  if (window.innerWidth <= 900){
+    acards.forEach((c) => c.removeAttribute('style'));
+    acards.forEach((c, i) => c.style.setProperty('--i', i));
+    return;
+  }
+  const beat = arc.parentElement;
+  const br = beat.getBoundingClientRect();
+  const slot = beat.querySelector('.focus');
+  const sr = slot.getBoundingClientRect();
+  // everything is measured from the middle of the profile card
+  const cx = sr.left + sr.width / 2 - br.left;
+  const cy = sr.top + sr.height / 2 - br.top;
+  const vx = sr.left + sr.width / 2;         // the same point, in the viewport
+  const vy = sr.top + sr.height / 2;
+
+  const P = ARC.perBranch;
+  const M = ARC.margin;
+  const capH = arc.querySelector('.cap').getBoundingClientRect().height || 43;
+  const halfPW = sr.width / 2;      // the profile card's half width and height
+  const halfPH = sr.height / 2;
+
+  // WIDTH comes from the sideways rule: the outermost card's far edge lands on
+  // the screen border, having stepped half a card at a time from the profile
+  // card's edge.  halfPW + (P-1)*aw/2 + aw/2 = spaceToBorder
+  const spaceX = innerWidth - M - vx - halfPW;
+  const aw = clamp(spaceX / (P / 2), ARC.minCard, ARC.maxCard);
+  const h = aw * THUMB + capH;
+
+  // HEIGHT is what a widescreen cannot give at the reference's scale, so the
+  // spread is fitted to the room there is, keeping the reference's 3.05:1
+  // ratio between the first offset and each step after it.
+  const budget = Math.min(vy, innerHeight - vy) - M - h / 2;
+  const step = Math.max(18, budget / (ARC.dropRatio + (P - 1)));
+  const drop = step * ARC.dropRatio;
+
+  acards.forEach((c, i) => {
+    const up = i < P;
+    const j = up ? i : i - P;                       // rank out from the middle
+    const dx = halfPW + j * (aw * ARC.stepX);       // exactly half a card, each
+    const dy = drop + j * step;
+    const d = ARC.depth[Math.min(j, ARC.depth.length - 1)];
+    c.style.setProperty('--aw', `${aw.toFixed(1)}px`);
+    c.style.setProperty('--x', `${(cx + dx - aw / 2).toFixed(1)}px`);
+    c.style.setProperty('--y', `${(cy + (up ? -dy : dy) - h / 2).toFixed(1)}px`);
+    c.style.setProperty('--rot', '0deg');           // upright, every one of them
+    c.style.setProperty('--sat', d.sat);
+    c.style.setProperty('--br', d.br);
+    // Nearest the middle sits in front of its neighbours, which is what the
+    // darkest card in the reference says. These stay UNDER the profile card
+    // (z-index 5) so the ring reads as being behind it; hovering lifts one
+    // clear above it, see .acard.lifted.
+    c.style.setProperty('--z', String(4 - j));
+  });
+}
+
+function dealArc(){ layoutArc(); arc.classList.add('dealt'); }
+
+acards.forEach((c) => {
+  const hit = c.querySelector('.acard-hit');
+  c.addEventListener('mouseenter', () => c.classList.add('lifted'));
+  c.addEventListener('mouseleave', () => c.classList.remove('lifted'));
+  hit.addEventListener('focus', () => c.classList.add('lifted'));
+  hit.addEventListener('blur', () => c.classList.remove('lifted'));
+  hit.addEventListener('click', () => chooseWork(c.dataset.key));
+});
+
+/* Clicking an arc card moves it into the centre, taking the profile card's
+   place. Clicking the centre card opens the full breakdown. */
+function chooseWork(key){
+  const p = items.find((x) => x.key === key);
+  if (!p) return;
+  chosen = key;
+  acards.forEach((c) => c.classList.toggle('chosen', c.dataset.key === key));
+  arc.classList.add('picked');   // hover lift stands down while one is open
+  focusWork.innerHTML = `
+    <article class="wfocus">
+      <button class="back" data-clear aria-label="Back to the profile card">✕</button>
+      <span class="shot"><img src="${p.shot}" alt="" /></span>
+      <div class="body">
+        <div class="row">
+          <span class="ftag"><i></i>${p.tag}</span>
+          <span class="fbadge">${KIND[p.kind]}</span>
+        </div>
+        <h3>${p.title}</h3>
+        <p>${p.teaser}</p>
+        <div class="chips">${p.stack.map((x) => `<span>${x}</span>`).join('')}</div>
+        <button class="open" data-open>Open the breakdown <em>&rarr;</em></button>
+      </div>
+    </article>`;
+  focusWork.querySelector('[data-open]').addEventListener('click', () => openBreakdown(key));
+  focusWork.querySelector('[data-clear]').addEventListener('click', clearWork);
+  focus.classList.add('on-work');
+}
+
+function clearWork(){
+  chosen = null;
+  acards.forEach((c) => c.classList.remove('chosen'));
+  arc.classList.remove('picked');
+  focus.classList.remove('on-work');
+}
+
+layoutArc();
+window.addEventListener('resize', layoutArc);
+// the beat shifts a little as fonts and images land, and the run is measured
+// off the profile card - so measure again once those have settled
+window.addEventListener('load', layoutArc);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutArc);
+
+/* ── the portfolio coverflow ────────────────────────────────────────── */
+const DEPTH = [
+  { x: 0.00, s: 1.00, o: 1,    b: 0,   sat: 1,    br: 1    },
+  { x: 0.68, s: 0.84, o: 0.95, b: 0.6, sat: 0.8,  br: 0.97 },
+  { x: 1.30, s: 0.71, o: 0.78, b: 1.6, sat: 0.6,  br: 0.95 },
+  { x: 1.95, s: 0.60, o: 0.55, b: 2.6, sat: 0.45, br: 0.94 },
+];
+
+const flowWrap = document.querySelector('.flow');
+const flow = document.getElementById('flow');
+const flowDots = document.getElementById('flowDots');
+// `items` and `KIND` are already declared by the arc above: both views read
+// the same seven entries, so the browse and the glance can never disagree
+let active = Math.max(0, items.findIndex((p) => p.key === 'devdeck'));
+
+flow.innerHTML = items.map((p, i) => `
+  <article class="fcard" data-key="${p.key}" data-i="${i}">
+    <button class="fhit">
+      <span class="fshot"><img src="${p.shot}" alt="" loading="lazy" /></span>
+      <span class="fmeta">
+        <span class="frow">
+          <span class="ftag"><i></i>${p.tag}</span>
+          <span class="fbadge">${KIND[p.kind]}</span>
+        </span>
+        <h3>${p.title}</h3>
+        <p class="fteaser">${p.teaser}</p>
+        <span class="fchips">${p.stack.map((s) => `<span>${s}</span>`).join('')}</span>
+        <span class="fcta">Open the breakdown <em>&rarr;</em></span>
+      </span>
+    </button>
+  </article>`).join('');
+flowDots.innerHTML = items.map((p, i) => `<button data-i="${i}" aria-label="Go to ${p.title}"></button>`).join('');
+
+const cards = [...flow.querySelectorAll('.fcard')];
+const dots = [...flowDots.querySelectorAll('button')];
+
+function ringDist(i, from, n){
+  let d = i - from;
+  if (d > n / 2) d -= n;
+  if (d < -n / 2) d += n;
+  return d;
+}
+const cardWidth = () => clamp(window.innerWidth * 0.26, 230, 340);
+
+function paintFlow(){
+  const n = items.length;
+  const cw = cardWidth();
+  cards.forEach((c, i) => {
+    const d = ringDist(i, active, n);
+    const rank = Math.min(Math.abs(d), DEPTH.length - 1);
+    const step = DEPTH[rank];
+    c.style.setProperty('--cw', `${cw}px`);
+    c.style.setProperty('--x', `${Math.sign(d) * step.x * cw}px`);
+    c.style.setProperty('--s', step.s);
+    c.style.setProperty('--o', step.o);
+    c.style.setProperty('--b', `${step.b}px`);
+    c.style.setProperty('--sat', step.sat);
+    c.style.setProperty('--br', step.br);
+    c.style.setProperty('--z', String(50 - Math.abs(d)));
+    const center = d === 0;
+    c.classList.toggle('is-center', center);
+    const btn = c.querySelector('.fhit');
+    btn.tabIndex = center ? 0 : -1;
+    btn.setAttribute('aria-label',
+      center ? `Open the ${items[i].title} breakdown` : `Bring ${items[i].title} forward`);
+  });
+  dots.forEach((d, i) => d.classList.toggle('on', i === active));
+}
+
+// the fan: cards leave one stack at the centre and deal out to their places
+function fanIn(){
+  if (flowWrap.classList.contains('fanned')) return;
+  paintFlow();
+  flowWrap.classList.add('fanning');
+  // force the stacked state to be committed before the fanned one lands, so
+  // the deal-out actually animates. A synchronous reflow rather than rAF:
+  // rAF is deferred while the tab is backgrounded, and the cards would sit
+  // invisible until it resumed.
+  void flowWrap.offsetWidth;
+  flowWrap.classList.add('fanned');
+  setTimeout(() => flowWrap.classList.remove('fanning'), 1150);
+}
+
+function goTo(i){ active = ((i % items.length) + items.length) % items.length; paintFlow(); }
+
+cards.forEach((c) => {
+  c.querySelector('.fhit').addEventListener('click', () => {
+    const i = Number(c.dataset.i);
+    if (i === active) openBreakdown(c.dataset.key);
+    else goTo(i);
+  });
+});
+dots.forEach((d) => d.addEventListener('click', () => goTo(Number(d.dataset.i))));
+document.getElementById('flowPrev').addEventListener('click', () => goTo(active - 1));
+document.getElementById('flowNext').addEventListener('click', () => goTo(active + 1));
+flowWrap.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft'){ e.preventDefault(); goTo(active - 1); }
+  if (e.key === 'ArrowRight'){ e.preventDefault(); goTo(active + 1); }
+});
+let dragX = null;
+flow.addEventListener('pointerdown', (e) => { dragX = e.clientX; });
+flow.addEventListener('pointerup', (e) => {
+  if (dragX === null) return;
+  const dx = e.clientX - dragX; dragX = null;
+  if (Math.abs(dx) > 45) goTo(active + (dx < 0 ? 1 : -1));
+});
+flow.addEventListener('pointercancel', () => { dragX = null; });
+paintFlow();
+window.addEventListener('resize', paintFlow);
+
+/* ── freezing the page behind the breakdown ─────────────────────────
+   The document cannot scroll at all now, so there is no body to pin. What
+   can still move is the active panel's own overflow, so that is what gets
+   frozen, and its offset is restored exactly on close.
+   ------------------------------------------------------------------- */
+let lockedTop = 0, scrollLocked = false, breakdownOpen = false;
+
+function lockScroll(){
+  if (scrollLocked) return;
+  const p = panels[at];
+  if (p){ lockedTop = p.scrollTop; p.style.overflowY = 'hidden'; }
+  scrollLocked = true;
+}
+function unlockScroll(){
+  if (!scrollLocked) return;
+  const p = panels[at];
+  if (p){ p.style.overflowY = ''; p.scrollTop = lockedTop; }
+  scrollLocked = false;
+}
+
+/* ── the breakdown panel ────────────────────────────────────────────── */
+const bd = document.getElementById('bd');
+const bdScrim = document.getElementById('bdScrim');
+let lastFocus = null;
+
+function openBreakdown(key){
+  const p = items.find((x) => x.key === key);
+  if (!p) return;
+  lastFocus = document.activeElement;
+  bd.innerHTML = `
+    <div class="bd-top">
+      <div><p class="mono">${p.tag}</p><h3>${p.title}</h3></div>
+      <button class="bd-close" aria-label="Close">✕</button>
+    </div>
+    <div class="bd-body">
+      <div class="bd-shots">
+        <div class="bd-rail">${p.shots.map((s) => `<figure><img src="${s.src}" alt="${s.title}" /></figure>`).join('')}</div>
+        ${p.shots.length > 1 ? `<div class="bd-dots">${p.shots.map((s, i) => `<button aria-label="${s.title}"${i === 0 ? ' class="on"' : ''}></button>`).join('')}</div>` : ''}
+      </div>
+      <div class="bd-side">
+        <p class="mono">What it is</p>
+        <p class="teaser">${p.teaser}</p>
+        <div class="bd-scope">${p.scope.map((s) => `<div><b>${s.k}</b><span>${s.v}</span></div>`).join('')}</div>
+        <div class="bd-chips">${p.stack.map((s) => `<span class="chip">${s}</span>`).join('')}</div>
+      </div>
+    </div>`;
+
+  const rail = bd.querySelector('.bd-rail');
+  const bdots = [...bd.querySelectorAll('.bd-dots button')];
+  bdots.forEach((d, i) => d.addEventListener('click', () => rail.scrollTo({ left: rail.clientWidth * i, behavior: 'smooth' })));
+  rail.addEventListener('scroll', () => {
+    const i = Math.round(rail.scrollLeft / rail.clientWidth);
+    bdots.forEach((d, n) => d.classList.toggle('on', n === i));
+  }, { passive: true });
+  bd.querySelector('.bd-close').addEventListener('click', closeBreakdown);
+
+  lockScroll();
+  if (formOpen) setForm(false);
+  breakdownOpen = true;
+  syncFab();
+  bd.classList.add('on');
+  bdScrim.classList.add('on');
+  bd.querySelector('.bd-close').focus({ preventScroll: true });
+}
+
+function closeBreakdown(){
+  if (!bd.classList.contains('on')) return;
+  bd.classList.remove('on');
+  bdScrim.classList.remove('on');
+  breakdownOpen = false;
+  syncFab();
+  unlockScroll();
+  if (lastFocus) lastFocus.focus({ preventScroll: true });
+}
+bdScrim.addEventListener('click', closeBreakdown);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBreakdown(); });
+
+/* ── the toolkit field ──────────────────────────────────────────────── */
+const skills = document.getElementById('skills');
+const field = document.getElementById('field');
+
+function buildField(){
+  const narrow = window.innerWidth < 700;
+  const lanes = narrow ? 3 : window.innerWidth < 1050 ? 5 : 7;
+  const all = CONTENT.caps.flatMap((c) => c.items.map((it) => ({ ...it, grow: !!c.growing })));
+
+  // Every lane gets the SAME number of marks. Dealt round-robin off a list
+  // that does not divide evenly, some columns ran short, so their tracks were
+  // shorter and the field looked ragged and unevenly spaced across.
+  const per = Math.ceil(all.length / lanes);
+  const cols = Array.from({ length: lanes }, (_, i) =>
+    Array.from({ length: per }, (_, j) => all[(j * lanes + i) % all.length]));
+
+  field.style.gridTemplateColumns = `repeat(${lanes},minmax(0,1fr))`;
+  field.innerHTML = cols.map((col, i) => {
+    const marks = col.map((it) => `
+      <span class="tool${it.grow ? ' grow' : ''}">${it.i ? icon(it.i) : ''}<span>${it.n}</span></span>`).join('');
+    // Tracks are equal length now, so pace is set purely here. A wide desktop
+    // field at 74s read as barely moving; a phone column still wants slow.
+    const dur = narrow ? 70 + i * 8 : 34 + i * 3;
+    // duplicated once so translateY(-50%) lands exactly on the seam
+    return `<div class="lane"><div class="lane-track" style="--dur:${dur}s">${marks}${marks}</div></div>`;
+  }).join('');
+}
+buildField();
+let fieldTimer;
+window.addEventListener('resize', () => { clearTimeout(fieldTimer); fieldTimer = setTimeout(buildField, 200); });
+
+/* The field's direction mirrors how the reader got here, so the columns
+   climb on the way forward and fall on the way back. */
+function setFieldDirection(back){
+  field.classList.toggle('down', !!back);
+}
+
+/* Click anywhere on the field to hold it still, click again to let it run.
+   Without this the marks scroll past faster than they can be read. */
+const fieldHint = document.getElementById('fieldHint');
+function toggleHold(){
+  const held = field.classList.toggle('held');
+  fieldHint.textContent = held ? 'Held · click again to release' : 'Click to hold · click again to release';
+}
+field.addEventListener('click', toggleHold);
+field.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleHold(); }
+});
+field.tabIndex = 0;
+field.setAttribute('role', 'button');
+field.setAttribute('aria-label', 'Hold or release the toolkit animation');
+
+// the field flying away IS the page transition into Experience
+function launchToolkit(next){
+  if (skills.classList.contains('launch')) return;
+  showGate(false);
+  // a held field would fly away frozen, which reads as a bug
+  field.classList.remove('held');
+  skills.classList.add('launch');
+  const done = () => { handOff(next); };
+  if (REDUCED){ done(); return; }
+  setTimeout(done, 880);
+}
+
+/* ── the timeline fill ──────────────────────────────────────────────
+   Nothing to hang a scroll listener on any more, so the rule draws itself
+   once the panel is reached.
+   ------------------------------------------------------------------- */
+const tlFill = document.getElementById('tlFill');
+function fillTimeline(){
+  if (!tlFill) return;
+  setTimeout(() => { tlFill.style.transition = REDUCED ? 'none' : 'height 1.6s ease-out'; tlFill.style.height = '100%'; },
+    REDUCED ? 0 : 500);
+}
+
+/* ── the contact form ───────────────────────────────────────────────── */
+const cform = document.getElementById('cform');
+const fab = document.getElementById('fab');
+let formOpen = false;
+
+// one place decides whether the floating button shows, so the form and the
+// breakdown cannot disagree about it
+function syncFab(){ fab.hidden = formOpen || breakdownOpen; }
+function setForm(open){
+  formOpen = open;
+  cform.classList.toggle('on', open);
+  syncFab();
+}
+fab.addEventListener('click', () => setForm(true));
+document.getElementById('cformMin').addEventListener('click', () => setForm(false));
+cform.addEventListener('submit', (e) => { e.preventDefault(); setForm(false); });
+setForm(false);
+
+const contactSec = document.getElementById('contact');
+new IntersectionObserver((entries) => {
+  entries.forEach((e) => fab.classList.toggle('beckon', e.isIntersecting && !formOpen && !breakdownOpen));
+}, { threshold: 0.3 }).observe(contactSec);
+
+// handle for driving the sequence from the console while designing
+window.__narr = { goToBeat, goPanel, goBack, reveal, dealArc, chooseWork, fanIn, launchToolkit, typeText, wrapLines,
+  panels: () => PANEL_IDS, at: () => at };
+
+syncDeck();
+// a resize that crosses the breakpoint changes the running order
+let deckTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(deckTimer);
+  deckTimer = setTimeout(syncDeck, 220);
+});
+goToBeat(0);
+</script>
+</body>
+</html>

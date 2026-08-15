@@ -8,13 +8,23 @@
    still needs to scroll.
    ══════════════════════════════════════════════════════════════════════ */
 
+/* The accent is a live value, so it has to be a registered property: an
+   unregistered custom property cannot be transitioned or read back reliably,
+   and the walk in accent.js depends on both. */
+@property --accent-h {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 20;
+}
+
 body.narr {
-  --ground: #efede8;
-  --paper: #fbfaf8;
-  --ink: #22201c;
-  --muted: #7a776f;
-  --rule: rgba(120, 115, 105, 0.18);
-  --accent: #c86b43;
+  --accent-h: 20;
+  /* --accent, --on-accent and --accent-ink are written by accent.js, solved
+     for whichever hue is on screen. These are only what shows before the
+     first paint. */
+  --accent: hsl(var(--accent-h) 98% 46%);
+  --on-accent: #000;
+
   --e: cubic-bezier(0.16, 1, 0.3, 1);
   --pad-x: clamp(1.25rem, 4.2vw, 4rem);
   --wrap: 1280px;
@@ -22,8 +32,99 @@ body.narr {
   background: var(--ground);
   color: var(--ink);
   font-family: 'Archivo', system-ui, sans-serif;
-  line-height: 1.55;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ── the two palettes ────────────────────────────────────────────────
+   Light is the base and dark arrives by preference, and both are reachable by
+   class as well. That ordering matters: with dark as the base, a reader whose
+   system prefers dark could never be moved to light, because taking the dark
+   class off only fell back to the preference that had put them there.
+
+   The dark values are the Ember library's own, unchanged. The light ones are
+   DERIVED: Ember is dark-only by design, since its heat ramp is mixed against
+   pure black, so a light counterpart is not something the library ships. */
+body.narr {
+  --ground: #ffffff;
+  --card: #f7f7f8;
+  --paper: rgba(255, 255, 255, 0.72);
+  --paper-solid: #f7f7f8;
+  --ink: #131417;
+  --muted: #45474c;
+  --faint: #62656b;
+  --rule: #dcdde1;
+  --accent-ink: hsl(var(--accent-h) 90% 30%);
+  --glass-edge: rgba(19, 20, 23, 0.1);
+  --glass-blur: 18px;
+  --glass-sat: 1.1;
+  --scrim: rgba(255, 255, 255, 0.5);
+  --halo: 0 1px 14px rgba(255, 255, 255, 0.85);
+  --shadow: rgba(19, 20, 23, 0.28);
+  --well: #eeeef1;
+  --tint: hsl(var(--accent-h) 90% 30% / 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  body.narr {
+    --ground: #000000;
+    --card: #0d0e10;
+    --paper: rgba(22, 24, 27, 0.72);
+    --paper-solid: #16181b;
+    --ink: #f9f9f9;
+    --muted: #a7a7a7;
+    --faint: #7c7c7c;
+    --rule: #26282c;
+    --accent-ink: hsl(var(--accent-h) 98% 52%);
+    --glass-edge: rgba(255, 255, 255, 0.08);
+    --glass-blur: 18px;
+    --glass-sat: 1.1;
+    --scrim: rgba(0, 0, 0, 0.42);
+    --halo: 0 1px 16px rgba(0, 0, 0, 0.8);
+    --shadow: rgba(0, 0, 0, 0.75);
+    --well: #16181b;
+    --tint: hsl(var(--accent-h) 98% 46% / 0.16);
+  }
+}
+
+html.dark body.narr {
+  --ground: #000000;
+  --card: #0d0e10;
+  --paper: rgba(22, 24, 27, 0.72);
+  --paper-solid: #16181b;
+  --ink: #f9f9f9;
+  --muted: #a7a7a7;
+  --faint: #7c7c7c;
+  --rule: #26282c;
+  --accent-ink: hsl(var(--accent-h) 98% 52%);
+  --glass-edge: rgba(255, 255, 255, 0.08);
+  --glass-blur: 18px;
+  --glass-sat: 1.1;
+  --scrim: rgba(0, 0, 0, 0.42);
+  --halo: 0 1px 16px rgba(0, 0, 0, 0.8);
+  --shadow: rgba(0, 0, 0, 0.75);
+  --well: #16181b;
+  --tint: hsl(var(--accent-h) 98% 46% / 0.16);
+}
+
+html.light body.narr {
+  --ground: #ffffff;
+  --card: #f7f7f8;
+  --paper: rgba(255, 255, 255, 0.72);
+  --paper-solid: #f7f7f8;
+  --ink: #131417;
+  --muted: #45474c;
+  --faint: #62656b;
+  --rule: #dcdde1;
+  --accent-ink: hsl(var(--accent-h) 90% 30%);
+  --glass-edge: rgba(19, 20, 23, 0.1);
+  --glass-blur: 18px;
+  --glass-sat: 1.1;
+  --scrim: rgba(255, 255, 255, 0.5);
+  --halo: 0 1px 14px rgba(255, 255, 255, 0.85);
+  --shadow: rgba(19, 20, 23, 0.28);
+  --well: #eeeef1;
+  --tint: hsl(var(--accent-h) 90% 30% / 0.1);
 }
 
 /* HARD GATE: the document itself never scrolls. Sections are a deck of
@@ -244,9 +345,9 @@ body.narr main {
   text-align: center;
 }
 .narr .b-welcome .line {
-  font-family: 'Instrument Serif', serif;
-  font-weight: 400;
-  font-size: clamp(2rem, 5.4vw, 4.2rem);
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.6vw, 3.4rem);
   line-height: 1.14;
   letter-spacing: -0.015em;
 }
@@ -260,8 +361,8 @@ body.narr main {
   text-align: center;
 }
 .narr .b-statement .say {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(1.8rem, 4.6vw, 3.9rem);
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-size: clamp(1.7rem, 4vw, 2.9rem);
   line-height: 1.3;
   letter-spacing: -0.02em;
   color: #5f5b54;
@@ -299,9 +400,9 @@ body.narr main {
   justify-self: end;
 }
 .narr .b-intro h1 {
-  font-family: 'Instrument Serif', serif;
-  font-weight: 400;
-  font-size: clamp(3rem, 8vw, 6.4rem);
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 5.6vw, 4.2rem);
   line-height: 1;
   letter-spacing: -0.03em;
 }
@@ -316,6 +417,13 @@ body.narr main {
 .narr .focus {
   position: relative;
   width: 100%;
+}
+/* The card is a block inside a full-width column, so it sat against the left
+   edge as soon as the layout collapsed to one column. On desktop the column is
+   exactly a card wide, which is why this only ever showed on a small screen. */
+.narr .focus-me {
+  display: flex;
+  justify-content: center;
 }
 .narr .focus-me,
 .narr .focus-work {
@@ -347,17 +455,17 @@ body.narr main {
 .narr .wfocus {
   width: 100%;
   background: var(--paper);
-  border: 1px solid rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--glass-edge);
   border-radius: 22px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 40px 84px -34px rgba(60, 55, 45, 0.6);
+  box-shadow: 0 40px 84px -34px var(--shadow);
 }
 .narr .wfocus .shot {
   display: block;
   aspect-ratio: 4/2.9;
   overflow: hidden;
-  background: #e4e2dc;
+  background: var(--well);
 }
 .narr .wfocus .shot img {
   width: 100%;
@@ -402,8 +510,8 @@ body.narr main {
   text-transform: uppercase;
   padding: 0.3rem 0.55rem;
   border-radius: 100px;
-  background: rgba(200, 107, 67, 0.1);
-  color: #9c5433;
+  background: var(--tint);
+  color: var(--accent-ink);
 }
 .narr .wfocus .open {
   display: flex;
@@ -433,12 +541,12 @@ body.narr main {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--paper);
   display: grid;
   place-items: center;
   font-size: 0.9rem;
   line-height: 1;
-  box-shadow: 0 6px 16px -8px rgba(60, 55, 45, 0.6);
+  box-shadow: 0 6px 16px -8px var(--shadow);
   transition:
     background 0.3s,
     color 0.3s;
@@ -505,14 +613,14 @@ body.narr main {
   border-radius: 15px;
   overflow: hidden;
   background: var(--paper);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 16px 34px -18px rgba(60, 55, 45, 0.55);
+  border: 1px solid var(--glass-edge);
+  box-shadow: 0 16px 34px -18px var(--shadow);
 }
 .narr .acard .thumb {
   display: block;
   aspect-ratio: 4/3;
   overflow: hidden;
-  background: #e4e2dc;
+  background: var(--well);
 }
 .narr .acard .thumb img {
   width: 100%;
@@ -555,7 +663,7 @@ body.narr main {
   z-index: 60;
 }
 .narr .arc.dealt:not(.picked) .acard.lifted .acard-hit {
-  box-shadow: 0 26px 48px -20px rgba(60, 55, 45, 0.62);
+  box-shadow: 0 26px 48px -20px var(--shadow);
 }
 .narr .arc.picked .acard {
   cursor: pointer;
@@ -563,21 +671,21 @@ body.narr main {
 .narr .acard.chosen .acard-hit {
   border-color: var(--accent);
   box-shadow:
-    0 0 0 2px rgba(200, 107, 67, 0.45),
-    0 22px 44px -20px rgba(60, 55, 45, 0.6);
+    0 0 0 2px hsl(var(--accent-h) 98% 46% / 0.45),
+    0 22px 44px -20px var(--shadow);
 }
 
 /* ── the profile card ── */
 .narr .pcard {
   width: min(100%, 330px);
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--paper);
   backdrop-filter: blur(20px) saturate(1.1);
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--glass-edge);
   border-radius: 24px;
   overflow: hidden;
   box-shadow:
-    0 30px 70px -34px rgba(60, 55, 45, 0.55),
-    0 2px 8px rgba(60, 55, 45, 0.05);
+    0 30px 70px -34px var(--shadow),
+    0 2px 8px var(--shadow);
 }
 .narr .b-intro .pcard {
   width: 100%;
@@ -612,7 +720,9 @@ body.narr main {
   font-size: 9px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.85);
+  /* nearly opaque on purpose: these sit on the photograph, and translucent a
+     pale patch of it comes through and takes the label's contrast with it */
+  background: color-mix(in srgb, var(--paper-solid) 92%, transparent);
   padding: 0.28rem 0.6rem;
   border-radius: 100px;
 }
@@ -639,7 +749,12 @@ body.narr main {
   right: 0;
   bottom: 0;
   padding: 2.2rem 0.95rem 0.8rem;
-  background: linear-gradient(transparent, rgba(255, 255, 255, 0.92) 62%);
+  /* the plate takes the card's own colour, not a fixed white: the name sits
+     in --ink, and on a white plate in dark mode it disappears */
+  background: linear-gradient(
+    transparent,
+    color-mix(in srgb, var(--paper-solid) 94%, transparent) 62%
+  );
 }
 .narr .pc-name b {
   display: block;
@@ -740,7 +855,11 @@ body.narr main {
   padding: 2.4rem 0 clamp(4rem, 11vh, 6.5rem);
   /* a soft floor rather than a hard edge: panel content fades out as it
      passes beneath instead of colliding with the controls */
-  background: linear-gradient(transparent, rgba(239, 237, 232, 0.86) 42%, var(--ground) 76%);
+  background: linear-gradient(
+    transparent,
+    color-mix(in srgb, var(--ground) 86%, transparent) 42%,
+    var(--ground) 76%
+  );
   opacity: 0;
   transform: translateY(14px);
   pointer-events: none;
@@ -800,9 +919,9 @@ body.narr main {
   width: 58px;
   height: 58px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 18px 38px -18px rgba(60, 55, 45, 0.6);
+  background: var(--paper);
+  border: 1px solid var(--glass-edge);
+  box-shadow: 0 18px 38px -18px var(--shadow);
   display: grid;
   place-items: center;
   animation: narr-bob 3.6s var(--e) infinite;
@@ -812,7 +931,9 @@ body.narr main {
 }
 .narr .gate-btn:hover {
   transform: translateY(5px);
-  background: #fff;
+  /* a raised surface, not a fixed white: on a dark ground white here left the
+     arrow, which draws in the ink colour, invisible on its own button */
+  background: var(--well);
 }
 .narr .gate-btn::after {
   content: '';
@@ -853,15 +974,16 @@ body.narr main {
   margin-bottom: 0.6rem;
 }
 .narr .sectitle {
-  font-family: 'Instrument Serif', serif;
-  font-weight: 400;
-  font-size: clamp(2.1rem, 5.4vw, 4rem);
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem);
   line-height: 1.06;
   letter-spacing: -0.025em;
 }
 .narr .sectitle em {
-  font-style: italic;
-  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+  color: var(--accent-ink);
 }
 .narr .fade {
   opacity: 0;
@@ -890,13 +1012,25 @@ body.narr main {
 /* padded, not tight: a flush box clips the card shadows into a hard flat line
    straight across the section. The mask softens the side edges instead. */
 .narr .flow {
+  /* --fade is the strip at the foot the shadow is allowed to dissolve into.
+     It is BOTH the padding keeping a card clear of the edge and the length of
+     the mask's fade, so a card always ends exactly where the fade begins and a
+     shadow can never meet the container's clip as a hard line. In pixels, not
+     a percentage, so it does not drift with the deck's height. */
+  --fade: 44px;
   position: relative;
   width: 100%;
   height: clamp(470px, 66vh, 620px);
   overflow: hidden;
-  padding: 18px 0 26px;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  padding: 18px 0 var(--fade);
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent),
+    linear-gradient(180deg, #000 calc(100% - var(--fade)), transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent),
+    linear-gradient(180deg, #000 calc(100% - var(--fade)), transparent 100%);
+  mask-composite: intersect;
 }
 .narr .flow-track {
   position: absolute;
@@ -939,18 +1073,18 @@ body.narr main {
   border-radius: 22px;
   overflow: hidden;
   background: var(--paper);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 30px 64px -30px rgba(60, 55, 45, 0.5);
+  border: 1px solid var(--glass-edge);
+  box-shadow: 0 30px 64px -30px var(--shadow);
 }
 .narr .fcard.is-center .fhit {
-  box-shadow: 0 46px 90px -34px rgba(60, 55, 45, 0.62);
+  box-shadow: 0 46px 90px -34px var(--shadow);
   border-color: #fff;
 }
 .narr .fshot {
   display: block;
   aspect-ratio: 4/3.1;
   overflow: hidden;
-  background: #e4e2dc;
+  background: var(--well);
   border-radius: 22px 22px 0 0;
 }
 .narr .fshot img {
@@ -1030,8 +1164,8 @@ body.narr main {
   text-transform: uppercase;
   padding: 0.3rem 0.55rem;
   border-radius: 100px;
-  background: rgba(200, 107, 67, 0.1);
-  color: #9c5433;
+  background: var(--tint);
+  color: var(--accent-ink);
 }
 .narr .fcta {
   display: flex;
@@ -1078,7 +1212,7 @@ body.narr main {
   border: 1px solid var(--rule);
   display: grid;
   place-items: center;
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--paper);
   transition:
     background 0.3s,
     color 0.3s,
@@ -1116,7 +1250,7 @@ body.narr main {
   position: fixed;
   inset: 0;
   z-index: 80;
-  background: rgba(239, 237, 232, 0.55);
+  background: color-mix(in srgb, var(--ground) 55%, transparent);
   backdrop-filter: blur(14px);
   opacity: 0;
   pointer-events: none;
@@ -1139,11 +1273,11 @@ body.narr main {
      sat in a half-empty box that read as something failing to load. */
   height: fit-content;
   max-height: min(88svh, 860px);
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--paper);
   backdrop-filter: blur(22px);
-  border: 1px solid rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--glass-edge);
   border-radius: 26px;
-  box-shadow: 0 50px 110px -50px rgba(60, 55, 45, 0.65);
+  box-shadow: 0 50px 110px -50px var(--shadow);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -1168,9 +1302,9 @@ body.narr main {
   border-bottom: 1px solid var(--rule);
 }
 .narr .bd-top h3 {
-  font-family: 'Instrument Serif', serif;
-  font-weight: 400;
-  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
 }
@@ -1215,7 +1349,7 @@ body.narr main {
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  background: #e4e2dc;
+  background: var(--well);
   border: 1px solid var(--rule);
   align-self: start;
 }
@@ -1275,8 +1409,8 @@ body.narr main {
   text-transform: uppercase;
   padding: 0.34rem 0.6rem;
   border-radius: 100px;
-  background: rgba(200, 107, 67, 0.1);
-  color: #9c5433;
+  background: var(--tint);
+  color: var(--accent-ink);
 }
 
 /* ── Built with ──────────────────────────────────────────────────────
@@ -1388,7 +1522,8 @@ body.narr main {
 }
 .narr .bd-out:hover {
   background: var(--accent);
-  color: #fff;
+  /* black or white, whichever passes on this hue: accent.js solves it */
+  color: var(--on-accent);
   border-color: var(--accent);
   transform: translateY(-2px);
 }
@@ -1440,8 +1575,8 @@ body.narr main {
   place-items: center;
   font-size: 1.1rem;
   line-height: 1;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 8px 20px -10px rgba(60, 55, 45, 0.7);
+  background: var(--paper);
+  box-shadow: 0 8px 20px -10px var(--shadow);
   transition:
     background 0.3s,
     color 0.3s,
@@ -1641,7 +1776,7 @@ body.narr main {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  color: var(--accent);
+  color: var(--accent-ink);
   text-align: center;
   margin-bottom: clamp(1.6rem, 4vh, 2.8rem);
 }
@@ -1655,7 +1790,7 @@ body.narr main {
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 .narr .tool.grow span {
   color: var(--ink);
@@ -1730,7 +1865,7 @@ body.narr main {
   margin-top: 0.2rem;
 }
 .narr .job .co {
-  color: var(--accent);
+  color: var(--accent-ink);
   font-size: 0.9rem;
   margin-bottom: 0.6rem;
 }
@@ -1763,9 +1898,9 @@ body.narr main {
   text-align: center;
 }
 .narr .ask {
-  font-family: 'Instrument Serif', serif;
-  font-weight: 400;
-  font-size: clamp(1.9rem, 5.2vw, 4rem);
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4.2vw, 3rem);
   line-height: 1.16;
   letter-spacing: -0.025em;
   max-width: 22ch;
@@ -1781,10 +1916,10 @@ body.narr main {
 .narr .cl {
   padding: 0.6rem 1.1rem;
   border-radius: 100px;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: var(--paper);
+  border: 1px solid var(--glass-edge);
   font-size: 0.88rem;
-  box-shadow: 0 12px 26px -18px rgba(60, 55, 45, 0.5);
+  box-shadow: 0 12px 26px -18px var(--shadow);
   transition: transform 0.3s var(--e);
 }
 .narr .cl:hover {
@@ -1804,11 +1939,11 @@ body.narr main {
   bottom: clamp(1rem, 3vw, 2rem);
   z-index: 90;
   width: min(calc(100vw - 2rem), 400px);
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--paper);
   backdrop-filter: blur(22px);
-  border: 1px solid rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--glass-edge);
   border-radius: 24px;
-  box-shadow: 0 40px 90px -44px rgba(60, 55, 45, 0.7);
+  box-shadow: 0 40px 90px -44px var(--shadow);
   padding: 1.3rem;
   transform-origin: 100% 100%;
   opacity: 0;
@@ -1824,8 +1959,8 @@ body.narr main {
   pointer-events: auto;
 }
 .narr .cform h4 {
-  font-family: 'Instrument Serif', serif;
-  font-weight: 400;
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-weight: 700;
   font-size: 1.5rem;
   letter-spacing: -0.02em;
 }
@@ -1855,7 +1990,7 @@ body.narr main {
   padding: 0.55rem 0.7rem;
   border: 1px solid var(--rule);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--paper);
   cursor: text;
 }
 .narr .cform textarea {
@@ -1868,7 +2003,8 @@ body.narr main {
   padding: 0.7rem;
   border-radius: 100px;
   background: var(--accent);
-  color: #fff;
+  /* black or white, whichever passes on this hue: accent.js solves it */
+  color: var(--on-accent);
   font-size: 0.92rem;
   transition: transform 0.3s var(--e);
 }
@@ -1909,7 +2045,7 @@ body.narr main {
   color: var(--paper);
   display: grid;
   place-items: center;
-  box-shadow: 0 20px 44px -20px rgba(60, 55, 45, 0.8);
+  box-shadow: 0 20px 44px -20px var(--shadow);
   transition:
     transform 0.4s var(--e),
     opacity 0.3s;
@@ -2105,5 +2241,86 @@ body.narr footer {
   }
   .narr #skills.launch .liftoff {
     animation-duration: 0.01s;
+  }
+}
+
+/* ── glass ───────────────────────────────────────────────────────────
+   One treatment shared by every raised surface, so the profile card, the
+   dialog, the deck's cards, the gate and the form read as the same material
+   rather than as five different panels. */
+.narr .pcard,
+.narr .bd,
+.narr .fhit,
+.narr .acard-hit,
+.narr .cform,
+.narr .gate-btn,
+.narr .cl,
+.narr .flow-nav button,
+.narr .bd-close,
+.narr .bd-out,
+.narr .gate-back {
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  border-color: var(--glass-edge);
+}
+.narr .gate-back,
+.narr .bd-close,
+.narr .bd-out,
+.narr .flow-nav button {
+  --glass-blur: 10px;
+}
+
+@media (max-width: 900px) {
+  /* a phone gives the deck almost the whole screen, and the card takes it */
+  .narr .flow {
+    --fade: 30px;
+    height: clamp(345px, 46vh, 470px);
+    padding: 10px 0 var(--fade);
+  }
+  /* sized to the room the deck actually has below a card, so the shadow fades
+     out inside the container instead of meeting its edge */
+  .narr .fhit {
+    box-shadow: 0 14px 30px -16px var(--shadow);
+  }
+  .narr .fcard.is-center .fhit {
+    box-shadow: 0 18px 38px -16px var(--shadow);
+  }
+  .narr .flow-nav {
+    margin-top: 0.2rem;
+  }
+  /* Archivo sets taller than the face this was tuned for, so the card's meta
+     block grew and pushed the card past the strip its shadow fades into. */
+  .narr .fcard h3 {
+    font-size: 1.1rem;
+    margin: 0.2rem 0 0.25rem;
+  }
+  .narr .fmeta {
+    padding: 0.6rem 0.85rem 0.7rem;
+  }
+  .narr .fchips {
+    margin-top: 0.4rem;
+  }
+  .narr .fcta {
+    margin-top: 0.45rem;
+    padding: 0.52rem;
+    font-size: 0.8rem;
+  }
+  /* the card scales with the screen rather than being the same on a phone and
+     a tablet */
+  .narr .b-intro .pcard {
+    width: min(100%, clamp(300px, 50vw, 420px));
+  }
+  /* A 46px entrance is a small move against a desktop's empty margins and a
+     large one against a phone screen the content nearly fills, where it reads
+     as the page jumping rather than as an arrival. The typed copy itself never
+     moves: it is laid out in full before a character shows. */
+  .narr .beat {
+    transform: translateY(20px);
+  }
+  .narr .beat.out {
+    transform: translateY(-20px);
+  }
+  .narr .b-intro .pcard {
+    transform: translateY(24px) scale(0.97);
   }
 }

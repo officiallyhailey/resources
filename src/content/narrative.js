@@ -163,6 +163,23 @@ export const WORK = [...PROJECT_KEYS.map(fromProject), ...SITE_KEYS.map(fromSite
 
 export const KIND = { project: 'Project', site: 'Client site' };
 
+/* The accent's journey, one stop at a time.
+   ------------------------------------------------------------------- 
+   Keyed by STEP rather than by section, because the opening panel holds three
+   beats and keying by section left the colour sitting still through all of
+   them: the first change did not arrive until the reader's fourth move.
+
+   The walk stops short of magenta. It runs orange to violet and no further,
+   so the accent never lands on pink. */
+export const ACCENT_WALK = [20, 46, 88, 146, 186, 224, 262];
+
+/* Which step the reader is on. The opening panel counts its beats; every
+   panel after it takes the next step along. */
+export const accentStep = (panel, beat, order) =>
+  panel === 'intro'
+    ? Math.min(beat, 2)
+    : Math.min(ACCENT_WALK.length - 1, 3 + Math.max(0, order.indexOf(panel) - 1));
+
 /* ══════════════════════════════════════════════════════════════════════
    THE RUNNING ORDER - reorder these arrays to reorder the experience
    ══════════════════════════════════════════════════════════════════════ */

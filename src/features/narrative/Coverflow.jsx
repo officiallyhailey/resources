@@ -10,7 +10,15 @@ function ringDist(i, from, n) {
   return d;
 }
 
-const cardWidth = () => clamp(window.innerWidth * 0.26, 230, 340);
+/* This deck only ever renders below 900px, so both bands are small screens
+   and the card takes the room each actually has. A phone is limited by height,
+   not width: a wider card is a taller one, and it has to leave the deck's
+   controls and the gate their space. A tablet has height to spare, so it is
+   width that decides. */
+const cardWidth = () =>
+  window.innerWidth <= 700
+    ? clamp(window.innerWidth * 0.68, 240, 300)
+    : clamp(window.innerWidth * 0.42, 260, 340);
 
 /* The Up and running deck: the work as a coverflow, dealt out of a single
    stack. This is how the work is shown on a phone or tablet, where the ring
@@ -19,7 +27,7 @@ const cardWidth = () => clamp(window.innerWidth * 0.26, 230, 340);
    Positions are written as custom properties straight onto the nodes rather
    than held in state - they change on every arrow press and every resize, and
    nothing else needs to know them. */
-export default function Coverflow({ fan, onOpen }) {
+export default function Coverflow({ fan, shown, onOpen }) {
   const wrapRef = useRef(null);
   const trackRef = useRef(null);
   const dragX = useRef(null);
@@ -146,7 +154,7 @@ export default function Coverflow({ fan, onOpen }) {
       </div>
 
       <div className="wrap">
-        <div className="flow-nav fade" data-d="1">
+        <div className={`flow-nav fade${shown ? ' in' : ''}`} data-d="1">
           <button onClick={() => goTo(active - 1)} aria-label="Previous project">
             <svg
               width="17"

@@ -46,6 +46,14 @@ html {
 
 html::-webkit-scrollbar { display: none; }
 
+/* No scrollbar anywhere on the site, not just on the document. Panels, the
+   project dialog and its screenshot rail all scroll inside themselves, and a
+   bar appearing over the content in any of them breaks the surface. The
+   regions still scroll by wheel, trackpad, touch and keyboard; the bar is
+   simply not drawn. */
+* { scrollbar-width: none; }
+*::-webkit-scrollbar { display: none; }
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg);

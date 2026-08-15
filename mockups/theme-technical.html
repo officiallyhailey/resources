@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Anavah Designs · Technical theme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#eef1f4; --ink-soft:rgba(238,241,244,.72); --accent:#5ad1c4;
+  --glass:rgba(18,24,30,.55); --glass-edge:rgba(120,200,195,.30); --blur:14px; --sat:1.2;
+  --scrim:rgba(12,17,22,.72); --shadow:0 2px 16px rgba(8,12,16,.7);
+  --display:'Space Grotesk', system-ui, sans-serif; --body:'IBM Plex Sans', system-ui, sans-serif; --mono:'JetBrains Mono', monospace;
+  --e:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--body);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;
+  background:#111;overflow-x:hidden}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+.mono{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase}
+
+/* ── the backdrop ──────────────────────────────────────────────────
+   One image, fixed, blurred back so it reads as light and texture rather
+   than as a subject competing with the copy. Swapping in a photograph is
+   this one url() and nothing else. */
+.backdrop{position:fixed;inset:-4vmax;z-index:0;
+  background:url("/img/bg-user.jpg") center/cover no-repeat;
+  filter:blur(var(--bd-blur,14px)) saturate(1.05);transform:scale(1.06)}
+.backdrop::after{content:'';position:absolute;inset:0;background:var(--scrim);
+  opacity:var(--scrim-on,1);transition:opacity .35s}
+.stage{position:relative;z-index:1}
+
+/* ── floating copy: no container, only a scrim of its own ───────────
+   A radial wash centred on the text, sized to the text. It reads as the
+   light behind the words rather than as a box, which is the whole point:
+   the copy floats, and it is still legible. */
+.float{position:relative;padding:clamp(2rem,5vw,4rem) clamp(1.5rem,5vw,4rem)}
+.float::before{content:'';position:absolute;inset:-6% -4%;z-index:-1;
+  background:radial-gradient(ellipse at 50% 50%,var(--scrim) 0,transparent 64%);
+  opacity:var(--wash-on,1);transition:opacity .35s}
+.float>*{text-shadow:var(--halo,var(--shadow))}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
+
+/* ── header ─────────────────────────────────────────────────────── */
+.head{padding:clamp(3rem,9vh,6rem) 0 0}
+.head .mono{color:var(--accent)}
+.head h1{font-family:var(--display);font-weight:400;line-height:1.02;letter-spacing:-.02em;
+  font-size:clamp(2.6rem,7vw,5.2rem);margin:.6rem 0 1rem}
+.head p{max-width:54ch;color:var(--ink-soft);font-size:clamp(1rem,1.5vw,1.12rem)}
+
+/* ── the intro beat, as the deck lays it out ────────────────────── */
+.beat{display:grid;grid-template-columns:minmax(0,1fr) 22rem;gap:clamp(1.5rem,4vw,3.5rem);
+  align-items:center;padding:clamp(3rem,10vh,7rem) 0}
+@media (max-width:820px){.beat{grid-template-columns:minmax(0,1fr);text-align:center;justify-items:center}}
+.beat h2{font-family:var(--display);font-weight:400;letter-spacing:-.03em;line-height:1;
+  font-size:clamp(3rem,9vw,6.5rem)}
+.beat .said{margin-top:1.2rem;font-size:clamp(1.05rem,1.8vw,1.3rem);color:var(--ink-soft);max-width:24ch}
+@media (max-width:820px){.beat .said{margin-inline:auto}}
+
+/* ── glass ─────────────────────────────────────────────────────── */
+.glass{background:var(--glass);backdrop-filter:blur(var(--blur)) saturate(var(--sat));
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(var(--sat));
+  border:1px solid var(--glass-edge);border-radius:22px;
+  box-shadow:0 30px 70px -34px rgba(0,0,0,.55)}
+.card{overflow:hidden;color:#eef1f4}
+.card .art{position:relative;aspect-ratio:4/3.4;overflow:hidden;background:rgba(0,0,0,.2)}
+.card .art img{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block}
+.card .tag{position:absolute;top:.7rem;left:.7rem;font-family:var(--mono);font-size:9px;
+  letter-spacing:.16em;text-transform:uppercase;padding:.3rem .6rem;border-radius:100px;
+  background:rgba(0,0,0,.4);color:#fff;backdrop-filter:blur(6px)}
+.card .name{padding:1rem 1.1rem .3rem}
+.card .name b{display:block;font-family:var(--display);font-weight:600;font-size:1.25rem;letter-spacing:-.01em}
+.card .name span{display:block;font-size:.82rem;color:rgba(238,241,244,.62)}
+.card .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;padding:.9rem 1.1rem 1.1rem}
+.card .stats b{display:block;font-family:var(--display);font-size:1.5rem;line-height:1;font-weight:600}
+.card .stats span{display:block;font-size:.66rem;color:rgba(238,241,244,.62);margin-top:.25rem;line-height:1.3}
+
+/* ── a panel of body copy, floating, and the same copy on glass ──── */
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:clamp(1.5rem,4vw,3rem);padding-bottom:clamp(3rem,10vh,7rem);align-items:start}
+.pair h3{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:.9rem}
+.pair p{font-size:1rem;line-height:1.65}
+.pair .onglass{padding:clamp(1.4rem,3vw,2rem)}
+.pair .onglass p{color:#eef1f4}
+.pair .onglass p+p{margin-top:.8rem}
+
+/* ── the control strip ─────────────────────────────────────────── */
+.bar{position:fixed;left:50%;bottom:1.1rem;transform:translateX(-50%);z-index:9;
+  display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;
+  padding:.5rem;border-radius:100px;background:rgba(20,20,20,.72);
+  backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14)}
+.bar button{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.72);padding:.5rem .85rem;border-radius:100px;transition:background .25s,color .25s}
+.bar button.on{background:#fff;color:#111}
+
+/* ── the contrast readout ──────────────────────────────────────── */
+.meter{padding:0 0 clamp(4rem,12vh,8rem)}
+.meter table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:10px;letter-spacing:.1em}
+.meter th{text-align:left;text-transform:uppercase;color:var(--accent);padding:.6rem .5rem;
+  border-bottom:1px solid var(--glass-edge)}
+.meter td{padding:.55rem .5rem;border-bottom:1px solid rgba(128,128,128,.22);color:var(--ink-soft)}
+.meter td b{color:var(--ink);font-weight:500}
+.meter .pass{color:#5fbf7d}.meter .fail{color:#e0684f}
+.meter .note{margin-top:1rem;font-family:var(--body);font-size:.88rem;color:var(--ink-soft);max-width:70ch;
+  letter-spacing:0;text-transform:none}
+</style>
+</head>
+<body>
+<div class="backdrop" id="bd"></div>
+
+<div class="stage">
+  <header class="head float">
+    <div class="wrap">
+      <p class="mono">Anavah Designs · theme study 03 of 03</p>
+      <h1>Technical</h1>
+      <p>Precise and quiet. This one uses a real photograph already in the repo, the circuit plate, blurred back until it reads as texture rather than subject. Backdrop: the circuit plate already in public/img, blurred back.</p>
+    </div>
+  </header>
+
+  <section class="wrap">
+    <div class="beat">
+      <div class="float">
+        <h2>I&rsquo;m Hals</h2>
+        <p class="said">Here are some of the tools I&rsquo;ve made recently&hellip;</p>
+      </div>
+      <article class="glass card">
+        <div class="art">
+          <span class="tag">Open to work</span>
+          <img src="/img/profile-card.jpg" alt="Hailey Grace" />
+        </div>
+        <div class="name"><b>Hailey Grace</b><span>Full-stack developer · operations</span></div>
+        <div class="stats">
+          <div><b>7+</b><span>Project Management</span></div>
+          <div><b>3+</b><span>Procurement</span></div>
+          <div><b>3</b><span>Certifications</span></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="pair">
+      <div class="float" id="floatCopy">
+        <h3>Floating · no container</h3>
+        <p>Tech forward, operations-focused developer with 7+ years of experience in project
+        management, workflow optimization, and business development. Proven history of building
+        scalable systems, reliable workflows, and translating operational data into clear,
+        actionable insights.</p>
+      </div>
+      <div class="glass onglass">
+        <h3>The same copy, on glass</h3>
+        <p>Tech forward, operations-focused developer with 7+ years of experience in project
+        management, workflow optimization, and business development.</p>
+        <p>Known for creating structure, improving efficiency, and supporting leadership through
+        data-informed decision-making.</p>
+      </div>
+    </div>
+
+    <section class="meter float">
+      <h3 class="mono" style="color:var(--accent);margin-bottom:.8rem">Measured legibility</h3>
+      <table>
+        <thead><tr><th>Where</th><th>Worst contrast</th><th>Body 4.5:1</th><th>Large 3:1</th></tr></thead>
+        <tbody id="rows"><tr><td colspan="4">measuring…</td></tr></tbody>
+      </table>
+      <p class="note" id="note"></p>
+    </section>
+  </section>
+</div>
+
+<div class="bar">
+  <button data-t="wash" class="on">Text wash</button>
+  <button data-t="scrim" class="on">Backdrop scrim</button>
+  <button data-t="blur" class="on">Backdrop blur</button>
+</div>
+
+<script>
+/* Legibility is measured, not eyeballed. The backdrop is drawn to a canvas at
+   low resolution, the scrim is composited over it exactly as CSS does, and the
+   worst-case contrast under each block of floating copy is computed against
+   the WCAG thresholds. Blur is deliberately NOT simulated: blurring only pulls
+   pixels toward the local mean, so the unblurred image is the harder case and
+   the real page is always at least this legible. */
+const BD = "/img/bg-user.jpg";
+const SCRIM = 'rgba(12,17,22,.72)';
+const INK = '#eef1f4';
+
+const parse = (c) => {
+  const m = c.match(/rgba?\(([^)]+)\)/);
+  if (m) { const p = m[1].split(',').map(Number); return { r:p[0], g:p[1], b:p[2], a:p[3] === undefined ? 1 : p[3] }; }
+  const h = c.replace('#','');
+  const n = h.length === 3 ? h.split('').map(x => x+x).join('') : h;
+  return { r:parseInt(n.slice(0,2),16), g:parseInt(n.slice(2,4),16), b:parseInt(n.slice(4,6),16), a:1 };
+};
+const lum = ({r,g,b}) => {
+  const f = (v) => { v /= 255; return v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4); };
+  return 0.2126*f(r) + 0.7152*f(g) + 0.0722*f(b);
+};
+const ratio = (a, b) => { const [x,y] = [lum(a), lum(b)].sort((m,n) => n-m); return (x+0.05)/(y+0.05); };
+const over = (top, base) => ({
+  r: top.r*top.a + base.r*(1-top.a),
+  g: top.g*top.a + base.g*(1-top.a),
+  b: top.b*top.a + base.b*(1-top.a), a: 1,
+});
+
+const img = new Image();
+img.crossOrigin = 'anonymous';
+img.onload = () => {
+  const W = 160, H = 100;
+  const cv = document.createElement('canvas');
+  cv.width = W; cv.height = H;
+  const cx = cv.getContext('2d', { willReadFrequently: true });
+  cx.drawImage(img, 0, 0, W, H);
+  const data = cx.getImageData(0, 0, W, H).data;
+  const scrim = parse(SCRIM), ink = parse(INK);
+
+  // Sample the strip of the backdrop each block actually sits over.
+  const bands = [
+    ['Headline, top of page', 0.00, 0.28],
+    ['"I\'m Hals" and its line', 0.24, 0.58],
+    ['Body copy, floating', 0.52, 0.82],
+  ];
+  const rows = bands.map(([label, from, to]) => {
+    let worst = Infinity;
+    for (let y = Math.floor(from*H); y < Math.floor(to*H); y++) {
+      for (let x = 0; x < W; x++) {
+        const i = (y*W + x) * 4;
+        const px = over(scrim, { r:data[i], g:data[i+1], b:data[i+2], a:1 });
+        const c = ratio(ink, px);
+        if (c < worst) worst = c;
+      }
+    }
+    return { label, c: worst };
+  });
+
+  document.getElementById('rows').innerHTML = rows.map((r) => {
+    const body = r.c >= 4.5, large = r.c >= 3;
+    return `<tr><td><b>${r.label}</b></td><td><b>${r.c.toFixed(2)}:1</b></td>
+      <td class="${body?'pass':'fail'}">${body?'pass':'below'}</td>
+      <td class="${large?'pass':'fail'}">${large?'pass':'below'}</td></tr>`;
+  }).join('');
+
+  const min = Math.min(...rows.map(r => r.c));
+  document.getElementById('note').textContent =
+    `Worst case anywhere on this backdrop is ${min.toFixed(2)}:1, measured against the unblurred image with the `
+    + `scrim composited over it. The page blurs the backdrop as well, which only pulls pixels toward the local `
+    + `average and raises the floor, so the real thing is never worse than this. The text wash adds more on top `
+    + `again, and is not counted here. Turn the controls off below to see what each is buying.`;
+};
+img.onerror = () => {
+  document.getElementById('rows').innerHTML =
+    '<tr><td colspan="4">backdrop could not be read for measurement</td></tr>';
+  document.getElementById('note').textContent =
+    'This theme reads its backdrop from /img, so the measurement only runs when the file is served '
+    + '(npm run dev, then open it from localhost) rather than opened straight from disk.';
+};
+img.src = BD;
+
+document.querySelector('.bar').addEventListener('click', (e) => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  const on = b.classList.toggle('on');
+  const root = document.documentElement.style;
+  if (b.dataset.t === 'wash') root.setProperty('--wash-on', on ? 1 : 0);
+  if (b.dataset.t === 'scrim') root.setProperty('--scrim-on', on ? 1 : 0);
+  if (b.dataset.t === 'blur') root.setProperty('--bd-blur', on ? '14px' : '0px');
+});
+</script>
+</body>
+</html>

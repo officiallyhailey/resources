@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Anavah Designs · three ways to say "keep going"</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ground:#EFEDE8; --paper:#FBFAF8; --ink:#22201C; --muted:#7A776F;
+  --rule:rgba(120,115,105,.18); --accent:#C86B43;
+  --e:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#E5E2DB;color:var(--ink);
+  font-family:'Archivo',system-ui,sans-serif;line-height:1.55;
+  -webkit-font-smoothing:antialiased;padding:clamp(1.5rem,5vw,4rem)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+.page{max-width:1180px;margin:0 auto}
+.masthead{margin-bottom:clamp(2rem,5vh,3.5rem);max-width:60ch}
+.masthead h1{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(2rem,4.6vw,3.2rem);line-height:1.08;letter-spacing:-.025em;
+  margin:.5rem 0 .9rem}
+.masthead p{color:var(--muted);font-size:.98rem}
+.masthead em{font-style:italic;color:var(--accent)}
+
+.demo{margin-bottom:clamp(2.5rem,6vh,4rem)}
+.demo-head{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:.9rem}
+.demo-head h2{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(1.4rem,2.6vw,2rem);letter-spacing:-.02em;line-height:1.1}
+.demo-head .n{font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:.2em;color:var(--accent)}
+.demo-body{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);
+  gap:clamp(1rem,3vw,2.2rem);align-items:start}
+@media (max-width:860px){.demo-body{grid-template-columns:minmax(0,1fr)}}
+
+/* the demo frame stands in for the bottom half of a panel */
+.screen{position:relative;height:400px;border-radius:18px;overflow:hidden;
+  background:var(--ground);border:1px solid rgba(255,255,255,.8);
+  box-shadow:0 24px 54px -30px rgba(60,55,45,.5);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:2.5rem 2rem 0}
+.sample{text-align:center;pointer-events:none;margin-bottom:auto;margin-top:1.5rem}
+.sample h3{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(1.5rem,3vw,2.3rem);letter-spacing:-.025em;line-height:1.1}
+.sample p{color:var(--muted);font-size:.9rem;margin-top:.5rem}
+.notes p{font-size:.95rem;color:var(--muted);margin-bottom:.8rem}
+.notes b{color:var(--ink);font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1rem}
+.tags span{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;padding:.32rem .58rem;border-radius:100px;
+  background:rgba(200,107,67,.1);color:#9C5433}
+.cost{border-top:1px solid var(--rule);margin-top:1rem;padding-top:.8rem;
+  font-size:.88rem;color:var(--muted)}
+.cost b{color:var(--ink)}
+
+/* ══════════════════════════════════════════════════════════════════
+   ONE · THE THREAD
+   A line is drawn downward, off the bottom of the screen. Nothing sits
+   still and throbs; the signal is travel, and it always travels the way
+   you are meant to go. The whole strip is the target.
+   ══════════════════════════════════════════════════════════════════ */
+.thread{position:absolute;left:0;right:0;bottom:0;height:190px;
+  display:flex;flex-direction:column;align-items:center;
+  background:linear-gradient(transparent,rgba(239,237,232,.9) 55%);
+  cursor:pointer}
+.thread .say{margin-bottom:.9rem;transition:color .35s}
+/* a 1:1 coordinate space, so the bead and the stroke travel together */
+.thread svg{width:12px;height:130px;overflow:visible}
+.thread .track{stroke:var(--rule);stroke-width:1}
+.thread .run{stroke:var(--accent);stroke-width:1.5;stroke-linecap:round;
+  stroke-dasharray:24 130;stroke-dashoffset:24;
+  animation:thread-run 2.4s cubic-bezier(.45,0,.55,1) infinite}
+.thread .tip{fill:var(--accent);
+  animation:thread-tip 2.4s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes thread-run{
+  0%{stroke-dashoffset:24;opacity:0}
+  12%{opacity:1}
+  82%{opacity:1}
+  100%{stroke-dashoffset:-130;opacity:0}
+}
+@keyframes thread-tip{
+  0%{transform:translateY(-24px);opacity:0}
+  12%{opacity:1}
+  82%{opacity:1}
+  100%{transform:translateY(106px);opacity:0}
+}
+.thread:hover .track{stroke:rgba(200,107,67,.35)}
+.thread:hover .say{color:var(--ink)}
+
+/* ══════════════════════════════════════════════════════════════════
+   TWO · THE PAGE SPEAKS
+   No control at all: the site simply carries on talking, in the same
+   typed voice the rest of the page uses, and the sentence IS the link.
+   A rule wipes in under it, left to right, the way a hand underlines.
+   ══════════════════════════════════════════════════════════════════ */
+.speaks{position:absolute;left:0;right:0;bottom:0;padding:0 2rem 2.6rem;
+  display:flex;justify-content:center;
+  background:linear-gradient(transparent,rgba(239,237,232,.9) 55%)}
+.speaks button{position:relative;padding-bottom:.7rem}
+.speaks .line{font-family:'Instrument Serif',serif;font-size:clamp(1.3rem,2.6vw,1.9rem);
+  letter-spacing:-.02em;line-height:1.2;white-space:nowrap}
+.speaks .line i{font-style:normal;color:var(--accent);
+  display:inline-block;transition:transform .4s var(--e)}
+.speaks .c{opacity:0;animation:speak-in .01s linear forwards}
+.speaks .underline{position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--accent);transform-origin:0 50%;transform:scaleX(0);
+  animation:speak-rule 5.4s var(--e) infinite}
+@keyframes speak-in{to{opacity:1}}
+@keyframes speak-rule{
+  0%,26%{transform:scaleX(0)}
+  46%,88%{transform:scaleX(1)}
+  100%{transform:scaleX(1);opacity:0}
+}
+.speaks button:hover .line i{transform:translateY(4px)}
+
+/* ══════════════════════════════════════════════════════════════════
+   THREE · THE PAGE BENEATH
+   The next panel is already there, and it lifts a sliver of itself over
+   the bottom edge before settling back - the way a page under a page
+   shows you it exists. The thing you click is the next section itself.
+   ══════════════════════════════════════════════════════════════════ */
+.beneath{position:absolute;left:0;right:0;bottom:0;height:150px;
+  overflow:hidden;pointer-events:none}
+.beneath .sheet{position:absolute;left:2.2rem;right:2.2rem;top:100px;height:200px;
+  background:var(--paper);border:1px solid rgba(255,255,255,.95);
+  border-radius:18px 18px 0 0;box-shadow:0 -18px 44px -22px rgba(60,55,45,.55);
+  padding:.85rem 1.4rem 0;pointer-events:auto;cursor:pointer;
+  animation:beneath-lift 4.4s var(--e) infinite;
+  transition:top .45s var(--e),box-shadow .45s var(--e)}
+.beneath .sheet:hover{animation-play-state:paused;top:56px;
+  box-shadow:0 -26px 60px -22px rgba(60,55,45,.65)}
+.beneath .grip{display:block;width:34px;height:3px;border-radius:100px;
+  background:var(--rule);margin:0 auto .7rem}
+.beneath .next{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.beneath .next b{font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:1.25rem;letter-spacing:-.02em}
+@keyframes beneath-lift{
+  0%,100%{top:100px}
+  38%{top:74px}
+  62%{top:78px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .thread .run,.thread .tip,.speaks .underline,.beneath .sheet{animation:none}
+  .thread .run{stroke-dasharray:none;opacity:1}
+  .speaks .underline{transform:scaleX(1)}
+  .beneath .sheet{top:74px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <p class="mono">Anavah Designs · gate study</p>
+    <h1>Three ways to say <em>keep going</em></h1>
+    <p>The deck is hard-gated, so this control is the only way forward and it has to
+      read as an instruction rather than as decoration. None of these is a circle
+      that pulses in place: each says "continue" by a different means. All three sit
+      where the current gate sits, hold the mail button's line, and are clickable
+      below.</p>
+  </header>
+
+  <!-- ── 1 ───────────────────────────────────────────────────────── -->
+  <section class="demo">
+    <div class="demo-head">
+      <span class="n">01</span>
+      <h2>The thread</h2>
+      <span class="mono">travel, not throb</span>
+    </div>
+    <div class="demo-body">
+      <div class="screen">
+        <div class="sample">
+          <h3>The full picture</h3>
+          <p>a section, finished, waiting</p>
+        </div>
+        <button class="thread" aria-label="Continue">
+          <span class="mono say">Where I have worked</span>
+          <svg viewBox="0 0 12 130" aria-hidden="true">
+            <line class="track" x1="6" y1="0" x2="6" y2="130" />
+            <line class="run" x1="6" y1="0" x2="6" y2="130" />
+            <circle class="tip" cx="6" cy="24" r="3" />
+          </svg>
+        </button>
+      </div>
+      <div class="notes">
+        <p><b>What it is.</b> A hairline runs from the end of the section down off the
+          bottom of the screen, and a short bright stroke travels down it, over and
+          over. The line is always there; the movement is always downward.</p>
+        <p><b>Why it reads.</b> A pulse says "look at me". A line going somewhere says
+          "this way". It also gives the eye a direction to follow rather than a point
+          to stare at, which is the actual instruction.</p>
+        <div class="tags"><span>Quietest</span><span>Directional</span><span>Full-width target</span></div>
+        <p class="cost"><b>The cost:</b> it is subtle. Someone skimming may take a
+          beat longer to spot it than a 58px button. Worth pairing with the label.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 2 ───────────────────────────────────────────────────────── -->
+  <section class="demo">
+    <div class="demo-head">
+      <span class="n">02</span>
+      <h2>The page speaks</h2>
+      <span class="mono">the sentence is the control</span>
+    </div>
+    <div class="demo-body">
+      <div class="screen">
+        <div class="sample">
+          <h3>The full picture</h3>
+          <p>a section, finished, waiting</p>
+        </div>
+        <div class="speaks">
+          <button aria-label="Continue">
+            <span class="line" id="speakLine"></span>
+            <span class="underline"></span>
+          </button>
+        </div>
+      </div>
+      <div class="notes">
+        <p><b>What it is.</b> No button at all. The site carries on talking, in the same
+          typed serif voice as every other line on the page, and the sentence itself is
+          what you click. A rule wipes in beneath it the way a hand underlines a word.</p>
+        <p><b>Why it reads.</b> The whole design has trained the reader that typed text
+          is the page addressing them. This turns the gate into the last thing the page
+          says rather than a piece of furniture bolted to the bottom of it.</p>
+        <div class="tags"><span>In your voice</span><span>No new chrome</span><span>Most on-brand</span></div>
+        <p class="cost"><b>The cost:</b> text does not look clickable at a glance the way
+          a circle does. Needs the underline, and needs the wording to be an invitation
+          every time - "Where I have worked" works, a bare noun would not.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3 ───────────────────────────────────────────────────────── -->
+  <section class="demo">
+    <div class="demo-head">
+      <span class="n">03</span>
+      <h2>The page beneath</h2>
+      <span class="mono">show, don't point</span>
+    </div>
+    <div class="demo-body">
+      <div class="screen">
+        <div class="sample">
+          <h3>The full picture</h3>
+          <p>a section, finished, waiting</p>
+        </div>
+        <div class="beneath">
+          <div class="sheet" role="button" tabindex="0">
+            <span class="grip"></span>
+            <span class="next">
+              <b>Where I have worked</b>
+              <span class="mono">Pull up</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="notes">
+        <p><b>What it is.</b> The next section is already there, underneath, and it lifts
+          a sliver of itself over the bottom edge and settles back - the way a page under
+          a page tells you it exists. Hovering lifts it further and holds it. The thing
+          you click is the next section itself.</p>
+        <p><b>Why it reads.</b> It never has to say "there is more": it shows the more.
+          It is also the only one of the three that names the destination inside the
+          control, so the reader knows what they are agreeing to before they click.</p>
+        <div class="tags"><span>Most explicit</span><span>Names the destination</span><span>Physical</span></div>
+        <p class="cost"><b>The cost:</b> the heaviest of the three, and it eats about
+          70px of the bottom of every panel. On a phone that competes with the mail
+          button, so one of the two would have to move.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* Two of these are pure CSS. Only the typed line needs script - it is the same
+   trick the live site uses: the whole sentence is laid out first, one span per
+   character, and typing only flips characters visible. Nothing reflows. */
+const LINE = 'Where I have worked ↓';
+const host = document.getElementById('speakLine');
+
+function lay(){
+  host.textContent = '';
+  const cells = [];
+  // the arrow is its own element so it can shift on hover independent of the words
+  [...LINE].forEach((ch) => {
+    const sp = document.createElement(ch === '↓' ? 'i' : 'span');
+    sp.className = 'c';
+    sp.textContent = ch;
+    sp.style.animationDelay = '0s';
+    host.appendChild(sp);
+    cells.push(sp);
+  });
+  return cells;
+}
+
+function play(cells){
+  cells.forEach((c) => { c.style.opacity = 0; });
+  cells.forEach((c, i) => {
+    setTimeout(() => { c.style.opacity = 1; }, 260 + i * 34);
+  });
+}
+
+const cells = lay();
+play(cells);
+setInterval(() => play(cells), 5400);
+</script>
+</body>
+</html>

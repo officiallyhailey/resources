@@ -1,10 +1,19 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ACT_ONE, GATES, NARROW_AT, NARROW_ONLY, PAGE_ORDER } from '@/content/narrative';
+import {
+  ACCENT_WALK,
+  accentStep,
+  ACT_ONE,
+  GATES,
+  NARROW_AT,
+  NARROW_ONLY,
+  PAGE_ORDER,
+} from '@/content/narrative';
 import Breakdown from './Breakdown';
 import ContactForm from './ContactForm';
 import Gate from './Gate';
 import Stage from './Stage';
 import { AboutPanel, ContactPanel, ExperiencePanel, ToolkitPanel, WorkPanel } from './sections';
+import { paintAccent } from './accent';
 import { REDUCED, settled, wait } from './typewriter';
 import '@/styles/narrative.css';
 
@@ -58,6 +67,44 @@ export default function NarrativeHome() {
     currentRef.current = current;
     beatRef.current = beatAt;
   }, [current, beatAt]);
+
+  /* The accent walks further round the wheel with every section reached, and
+     is eased here rather than by a CSS transition: the colours derived from it
+     have to be re-solved as it travels, not only at the two ends. */
+  const hueRef = useRef(ACCENT_WALK[0]);
+  useEffect(() => {
+    const to = ACCENT_WALK[accentStep(current, beatAt, visible)];
+    if (to === undefined) return undefined;
+    const surface = () => {
+      const v = getComputedStyle(document.body).getPropertyValue('--card').trim() || '#0d0e10';
+      const m = v.replace('#', '');
+      return [0, 2, 4].map((i) => parseInt(m.slice(i, i + 2), 16));
+    };
+    const ground = surface();
+    const from = hueRef.current;
+    // always the short way round, so it never spins the long way for one step
+    const delta = ((to - from + 540) % 360) - 180;
+    if (REDUCED) {
+      hueRef.current = to;
+      document.body.style.setProperty('--accent-h', String(to));
+      paintAccent(document.body, to, ground);
+      return undefined;
+    }
+    const start = performance.now();
+    const DUR = 2600;
+    let raf;
+    const frame = (now) => {
+      const t2 = Math.min(1, (now - start) / DUR);
+      const eased = t2 < 0.5 ? 2 * t2 * t2 : 1 - (-2 * t2 + 2) ** 2 / 2;
+      const h = from + delta * eased;
+      hueRef.current = h;
+      document.body.style.setProperty('--accent-h', String(Math.round(h)));
+      paintAccent(document.body, h, ground);
+      if (t2 < 1) raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+    return () => cancelAnimationFrame(raf);
+  }, [current, beatAt, visible]);
 
   /* ── the page is a deck, so the document itself must not scroll ──────
      Scoped to a class rather than set on html/body outright: /resources is

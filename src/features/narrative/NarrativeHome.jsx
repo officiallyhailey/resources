@@ -393,12 +393,7 @@ export default function NarrativeHome() {
         </section>
 
         <section className={panel('skills', launching ? ' launch' : '')} id="skills">
-          <ToolkitPanel
-            shown={isShown('skills')}
-            onReady={readySkills}
-            down={fieldDown}
-            launching={launching}
-          />
+          <ToolkitPanel shown={isShown('skills')} onReady={readySkills} down={fieldDown} />
         </section>
 
         <section className={panel('contact')} id="contact">

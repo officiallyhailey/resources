@@ -129,7 +129,6 @@ const fromProject = (key) => {
       metrics: p.metrics,
       beats: p.beats,
       stack: p.stack,
-      build: p.build,
     },
   };
 };
@@ -156,7 +155,7 @@ const fromSite = (key) => {
     // client-site shots carry a caption saying what the screen does; the rail
     // shows it under the image at the second depth
     shots: s.shots.map((sh) => ({ src: sh.src, title: sh.title, caption: sh.caption })),
-    detail: { role: s.role, cross: s.cross },
+    detail: { cross: s.cross, stack: s.stackDetail },
   };
 };
 

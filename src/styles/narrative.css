@@ -1279,6 +1279,62 @@ body.narr main {
   color: #9c5433;
 }
 
+/* ── Built with ──────────────────────────────────────────────────────
+   Every reason is on the page. It used to be a row of chips that revealed
+   its reason on hover, which hid the most useful part of the section behind
+   a gesture that does not exist on a touch screen. */
+.narr .bd-built {
+  /* Multi-column, not grid. A grid puts each group in a cell, so four groups
+     across three columns strands the fourth on a row of its own with two
+     empty cells beside it. Columns balance by height instead, so a group
+     flows under the shortest column and no row is ever left holding one
+     item. */
+  columns: 260px 3;
+  column-gap: clamp(1.2rem, 3vw, 2.4rem);
+}
+.narr .bd-built section {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: clamp(1.2rem, 3vh, 1.8rem);
+}
+.narr .bd-layer {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 400;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.9rem;
+  border-bottom: 1px solid var(--rule);
+}
+.narr .bd-tool {
+  margin-bottom: 0.9rem;
+}
+.narr .bd-tool > b {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+/* the mark keeps its own brand colour; anything without one is text, and the
+   text sits at the same left edge either way */
+.narr .bd-mark {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  display: block;
+}
+.narr .bd-tool > p {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
 /* ── the dialog's second depth ───────────────────────────────────────
    Not a second dialog: the write-up unfolds inside this one and the body
    scrolls to it. The summary above stays where it was, so the reader can
@@ -1343,6 +1399,19 @@ body.narr main {
   padding: 0.55rem 0.85rem 0.75rem;
   background: var(--paper);
   border-top: 1px solid var(--rule);
+  /* every caption stacked in one cell, so the box holds the height of the
+     longest and never resizes as the rail moves */
+  display: grid;
+}
+.narr .bd-shotcap > span {
+  grid-area: 1/1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.narr .bd-shotcap > span.on {
+  opacity: 1;
+  pointer-events: auto;
 }
 .narr .bd-shotcap b {
   display: block;
@@ -1353,8 +1422,9 @@ body.narr main {
   color: var(--muted);
   font-weight: 400;
 }
-.narr .bd-shotcap span {
+.narr .bd-shotcap i {
   display: block;
+  font-style: normal;
   margin-top: 0.4rem;
   font-size: 0.84rem;
   line-height: 1.45;
@@ -1443,11 +1513,6 @@ body.narr main {
   text-wrap: pretty;
   margin-bottom: 1.2rem;
 }
-.narr .bd-cap {
-  font-size: 0.88rem;
-  color: var(--muted);
-  margin-bottom: 0.9rem;
-}
 
 .narr .bd-beat {
   margin-bottom: 1.1rem;
@@ -1474,179 +1539,6 @@ body.narr main {
 }
 .narr .bd-beat p b {
   font-weight: 600;
-}
-
-.narr .bd-stackgrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 1rem;
-}
-.narr .bd-stackgrid > div > b {
-  display: block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 400;
-  margin-bottom: 0.45rem;
-}
-.narr .bd-stackgrid > div > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
-.narr .chip.live {
-  cursor: help;
-  transition:
-    background 0.25s,
-    color 0.25s;
-}
-.narr .chip.live:hover,
-.narr .chip.live:focus {
-  background: var(--accent);
-  color: #fff;
-  outline: none;
-}
-/* a fixed two-line box: the line changes as chips are hovered, and a box that
-   resizes with the sentence shoves the rest of the panel around */
-.narr .bd-why {
-  min-height: 2.8em;
-  margin-top: 0.9rem;
-  font-size: 0.86rem;
-  line-height: 1.4;
-  color: var(--muted);
-  opacity: 0.55;
-  transition: opacity 0.25s;
-}
-.narr .bd-why.lit {
-  opacity: 1;
-}
-.narr .bd-why em {
-  font-style: normal;
-  color: var(--accent);
-  font-weight: 500;
-  margin-right: 0.45rem;
-}
-
-.narr .bd-flow {
-  display: flex;
-  align-items: stretch;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-.narr .bd-farrow {
-  align-self: center;
-  color: var(--rule);
-}
-.narr .bd-fstep {
-  flex: 1 1 130px;
-  text-align: left;
-  padding: 0.6rem 0.75rem;
-  border-radius: 12px;
-  border: 1px solid var(--rule);
-  background: rgba(255, 255, 255, 0.5);
-  transition:
-    background 0.3s,
-    border-color 0.3s;
-}
-.narr .bd-fstep.on {
-  border-color: var(--accent);
-  background: rgba(200, 107, 67, 0.08);
-}
-.narr .bd-fstep b {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-.narr .bd-fstep span {
-  display: block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 8.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 0.2rem;
-}
-.narr .bd-fdetail {
-  margin-top: 0.7rem;
-  font-size: 0.9rem;
-  line-height: 1.55;
-  color: var(--muted);
-  min-height: 4.6em;
-}
-
-.narr .bd-kv {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0.4rem 1.4rem;
-  margin-top: 1.2rem;
-}
-.narr .bd-kv > div {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  font-size: 0.85rem;
-  border-bottom: 1px solid var(--rule);
-  padding: 0.45rem 0;
-}
-.narr .bd-kv b {
-  font-weight: 600;
-}
-.narr .bd-kv span {
-  color: var(--muted);
-  text-align: right;
-}
-
-.narr .bd-mods {
-  margin-top: 1.4rem;
-}
-.narr .bd-mods > b {
-  display: block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 400;
-  margin-bottom: 0.5rem;
-}
-.narr .bd-mods details {
-  border-bottom: 1px solid var(--rule);
-  padding: 0.55rem 0;
-}
-.narr .bd-mods summary {
-  display: flex;
-  align-items: baseline;
-  gap: 0.7rem;
-  cursor: pointer;
-  list-style: none;
-}
-.narr .bd-mods summary::-webkit-details-marker {
-  display: none;
-}
-.narr .bd-mods summary::after {
-  content: '+';
-  margin-left: auto;
-  color: var(--muted);
-}
-.narr .bd-mods details[open] summary::after {
-  content: '−';
-}
-.narr .bd-mods summary b {
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-.narr .bd-mods summary i {
-  font-style: normal;
-  font-size: 0.82rem;
-  color: var(--muted);
-}
-.narr .bd-mods details p {
-  font-size: 0.88rem;
-  line-height: 1.5;
-  color: var(--muted);
-  padding: 0.5rem 0 0.2rem;
 }
 
 .narr .bd-more-foot {
@@ -1736,11 +1628,6 @@ body.narr main {
 .narr .field.down .lane-track {
   animation-direction: reverse;
 }
-/* clicking freezes it so the marks can actually be read; clicking again sets
-   it going. Hover does not pause - it fought the click. */
-.narr .field.held .lane-track {
-  animation-play-state: paused;
-}
 @keyframes narr-rise {
   from {
     transform: translate3d(0, 0, 0);
@@ -1748,16 +1635,6 @@ body.narr main {
   to {
     transform: translate3d(0, -50%, 0);
   }
-}
-.narr .fieldhint {
-  text-align: center;
-  margin-top: 0.9rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9.5px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
-  transition: opacity 0.4s var(--e);
 }
 .narr .tool {
   display: flex;
@@ -1786,9 +1663,6 @@ body.narr main {
 /* the lift-off: the field accelerates upward and thins out */
 .narr #skills.launch .liftoff {
   animation: narr-launch 1.3s cubic-bezier(0.55, 0, 0.85, 0.3) forwards;
-}
-.narr #skills.launch .lane-track {
-  animation-play-state: running;
 }
 /* the heading is part of the flight, not a fixed label the field slides under */
 .narr .liftoff {

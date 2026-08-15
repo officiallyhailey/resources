@@ -177,14 +177,14 @@ export function ExperiencePanel({ shown, onReady }) {
 /* ── the toolkit ────────────────────────────────────────────────────
    Somewhere you arrive, read, and leave by the arrow. Leaving is the whole
    transition: the field flies up off the screen and lands on Contact. */
-export function ToolkitPanel({ shown, onReady, down, launching }) {
+export function ToolkitPanel({ shown, onReady, down }) {
   useEffect(() => {
     if (shown) onReady();
   }, [shown, onReady]);
 
   return (
     <div className="panel-inner">
-      <Toolkit shown={shown} down={down} launching={launching} />
+      <Toolkit shown={shown} down={down} />
     </div>
   );
 }

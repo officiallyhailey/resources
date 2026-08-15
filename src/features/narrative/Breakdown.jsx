@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { KIND, WORK } from '@/content/narrative';
+import Mark from './marks';
 
 /* The project dialog: ONE container, two depths.
    ══════════════════════════════════════════════════════════════════════
@@ -149,12 +150,25 @@ function Body({ p, onClose }) {
                 </div>
               </>
             )}
-            {/* The caption belongs to the shot on screen, not inside the rail.
-              Inside it, every figure takes the height of the longest caption
-              and the whole column outgrows its grid row. */}
+            {/* The caption belongs to the shot on screen, not inside the rail:
+                inside it, every figure takes the height of the longest caption.
+
+                Every caption is laid out here and only the current one is
+                shown, so the box is always the height of the longest and the
+                dialog cannot grow and shrink as the reader moves through the
+                screenshots. The same reason the typed lines are measured in
+                full before a character appears. */}
             <div className="bd-shotcap">
-              <b>{p.shots[shot]?.title}</b>
-              {deep && p.shots[shot]?.caption && <span>{p.shots[shot].caption}</span>}
+              {p.shots.map((s, i) => (
+                <span
+                  key={s.src}
+                  className={i === shot ? 'on' : undefined}
+                  aria-hidden={i !== shot}
+                >
+                  <b>{s.title}</b>
+                  {deep && s.caption && <i>{s.caption}</i>}
+                </span>
+              ))}
             </div>
           </div>
 
@@ -196,12 +210,10 @@ function Body({ p, onClose }) {
    so each renders what it actually has rather than being forced into one
    shape with empty rows in it. */
 function Detail({ p, d }) {
-  return p.kind === 'project' ? <ProjectDetail d={d} /> : <SiteDetail p={p} d={d} />;
+  return p.kind === 'project' ? <ProjectDetail d={d} /> : <SiteDetail d={d} />;
 }
 
 function ProjectDetail({ d }) {
-  const [why, setWhy] = useState(null);
-
   return (
     <>
       {d.role && <p className="bd-role">{d.role}</p>}
@@ -215,117 +227,19 @@ function ProjectDetail({ d }) {
         </div>
       ))}
 
-      {d.stack?.length > 0 && (
-        <>
-          <p className="mono bd-sub">Built with</p>
-          <div className="bd-stackgrid">
-            {d.stack.map((g) => (
-              <div key={g.group}>
-                <b>{g.group}</b>
-                <div>
-                  {g.chips.map((c) => (
-                    <span
-                      key={c.name}
-                      className="chip live"
-                      tabIndex={0}
-                      onMouseEnter={() => setWhy(c)}
-                      onFocus={() => setWhy(c)}
-                      onMouseLeave={() => setWhy(null)}
-                      onBlur={() => setWhy(null)}
-                    >
-                      {c.name}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className={`bd-why${why ? ' lit' : ''}`}>
-            {why ? (
-              <>
-                <em>{why.name}</em>
-                {why.why}
-              </>
-            ) : (
-              'Hover or tap a technology to see why it is there.'
-            )}
-          </p>
-        </>
-      )}
-
-      {d.build && <BuildFlow build={d.build} />}
+      <BuiltWith stack={d.stack} />
     </>
   );
 }
 
-function BuildFlow({ build }) {
-  const [step, setStep] = useState(0);
-
-  return (
-    <>
-      <p className="mono bd-sub">How it runs</p>
-      {build.cap && <p className="bd-cap">{build.cap}</p>}
-      <div className="bd-flow">
-        {build.flow.map((f, i) => (
-          <span key={f.label} style={{ display: 'contents' }}>
-            {i > 0 && (
-              <span className="bd-farrow" aria-hidden="true">
-                →
-              </span>
-            )}
-            <button
-              type="button"
-              className={`bd-fstep${i === step ? ' on' : ''}`}
-              onClick={() => setStep(i)}
-            >
-              <b>{f.label}</b>
-              <span>{f.sub}</span>
-            </button>
-          </span>
-        ))}
-      </div>
-      <p className="bd-fdetail">{build.flow[step].detail}</p>
-
-      {build.kv?.length > 0 && (
-        <div className="bd-kv">
-          {build.kv.map(([k, v]) => (
-            <div key={k}>
-              <b>{k}</b>
-              <span>{v}</span>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {build.mods?.length > 0 && (
-        <div className="bd-mods">
-          <b>{build.modsTitle}</b>
-          {build.mods.map(([name, what, detail]) => (
-            <details key={name}>
-              <summary>
-                <b>{name}</b>
-                <i>{what}</i>
-              </summary>
-              <p>{detail}</p>
-            </details>
-          ))}
-        </div>
-      )}
-    </>
-  );
-}
-
+/* A client site ends the same way a project does: whatever beat it has, then
+   Built With. It used to lead with a second description of the site and close
+   on a note saying the screenshots carry captions, which the screenshots
+   already demonstrate - so the panel said little and left the column beside
+   it empty. */
 function SiteDetail({ d }) {
-  const r = d.role || {};
   return (
     <>
-      {r.lead && (
-        <p className="bd-role">
-          {r.lead}
-          {r.crossLabel && <b>{r.crossLabel}</b>}
-          {r.tail || ''}
-        </p>
-      )}
       {d.cross?.lead && (
         <div className="bd-beat">
           <b>{d.cross.title}</b>
@@ -336,10 +250,33 @@ function SiteDetail({ d }) {
           </p>
         </div>
       )}
-      <p className="mono bd-sub">The screens</p>
-      <p className="bd-cap">
-        Each shot above carries what that screen does, and why it is built that way.
-      </p>
+      <BuiltWith stack={d.stack} />
+    </>
+  );
+}
+
+// Shared: both kinds end on the same section, laid out the same way.
+function BuiltWith({ stack }) {
+  if (!stack?.length) return null;
+  return (
+    <>
+      <p className="mono bd-sub">Built with</p>
+      <div className="bd-built">
+        {stack.map((g) => (
+          <section key={g.group}>
+            <b className="bd-layer">{g.group}</b>
+            {g.chips.map((c) => (
+              <div className="bd-tool" key={c.name}>
+                <b>
+                  <Mark name={c.name} />
+                  {c.name}
+                </b>
+                {c.why && <p>{c.why}</p>}
+              </div>
+            ))}
+          </section>
+        ))}
+      </div>
     </>
   );
 }

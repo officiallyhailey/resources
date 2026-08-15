@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   siAirtable,
   siAnthropic,
@@ -49,11 +49,6 @@ const ICONS = {
   siWordpress,
 };
 
-const HINT = {
-  held: 'Held · click again to release',
-  running: 'Click to hold · click again to release',
-};
-
 /* A full page of bare marks and accent labels, rising. No pill containers:
    the icons and the words ARE the page.
 
@@ -71,9 +66,8 @@ function lanesFor(width) {
   return width < 1050 ? 5 : 7;
 }
 
-export default function Toolkit({ shown, down, launching }) {
+export default function Toolkit({ shown, down }) {
   const [lanes, setLanes] = useState(() => lanesFor(window.innerWidth));
-  const [held, setHeld] = useState(false);
   const timer = useRef(null);
 
   useEffect(() => {
@@ -88,18 +82,11 @@ export default function Toolkit({ shown, down, launching }) {
     };
   }, []);
 
-  // a held field would fly away frozen, which reads as a bug - so the hold is
-  // read as released during the flight rather than being cleared, which would
-  // leave it released once the reader came back
-  const frozen = held && !launching;
-
   const marks = CAPABILITIES.flatMap((c) => c.items.map((it) => ({ ...it, grow: !!c.growing })));
   const per = Math.ceil(marks.length / lanes);
   const cols = Array.from({ length: lanes }, (_, i) =>
     Array.from({ length: per }, (_, j) => marks[(j * lanes + i) % marks.length])
   );
-
-  const toggle = useCallback(() => setHeld((h) => !h), []);
 
   return (
     <>
@@ -117,18 +104,9 @@ export default function Toolkit({ shown, down, launching }) {
         </div>
 
         <div
-          className={`field${down ? ' down' : ''}${frozen ? ' held' : ''}`}
+          className={`field${down ? ' down' : ''}`}
           style={{ gridTemplateColumns: `repeat(${lanes},minmax(0,1fr))` }}
-          role="button"
-          tabIndex={0}
-          aria-label="Hold or release the toolkit animation"
-          onClick={toggle}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              toggle();
-            }
-          }}
+          aria-hidden="true"
         >
           {cols.map((col, i) => {
             // Tracks are equal length, so pace is set purely here. A wide
@@ -161,7 +139,6 @@ export default function Toolkit({ shown, down, launching }) {
           })}
         </div>
       </div>
-      <p className="fieldhint">{frozen ? HINT.held : HINT.running}</p>
     </>
   );
 }

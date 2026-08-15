@@ -63,7 +63,7 @@ export const PROJECTS = [
       },
       {
         b: 'Built',
-        p: 'A password-protected finance dashboard. Automate invoices, statements and sales exports; review and correct the parsed data; a weekly <em>scorecard</em> rolls up COG %, labor and cost-of-service by location and department.',
+        p: 'A secure operations dashboard. Automate invoices, statements and sales exports; review and correct the parsed data; a weekly <em>scorecard</em> rolls up COG %, labor and cost-of-service by location and department.',
       },
       {
         b: 'Key decision',
@@ -78,8 +78,8 @@ export const PROJECTS = [
       {
         group: 'Frontend',
         chips: [
-          { name: 'Next.js 16', why: 'App Router gives pages and the server-side API routes in one codebase, so there is no separate backend to deploy.' },
-          { name: 'React 19', why: 'The dashboard is mostly forms and tables reacting to fetched data - exactly what React is for.' },
+          { name: 'Next.js', why: 'App Router gives pages and the server-side API routes in one codebase, so there is no separate backend to deploy.' },
+          { name: 'React', why: 'The dashboard is mostly forms and tables reacting to fetched data - exactly what React is for.' },
           { name: 'TypeScript strict', why: 'Financial data has shapes worth enforcing. The compiler catches a mis-keyed field before a report does.' },
         ],
       },
@@ -100,7 +100,7 @@ export const PROJECTS = [
         group: 'Infra',
         chips: [
           { name: 'Vercel', why: 'Static pages plus serverless route handlers - the handlers are the only place the Airtable token exists.' },
-          { name: 'Signed-cookie auth', why: 'One password mints an HMAC-SHA256 signed cookie via Web Crypto, so no auth library and nothing sensitive on the client.' },
+          { name: 'Signed-cookie auth', why: 'Access is gated by a signed session cookie, so there is no auth library to maintain and nothing sensitive is kept on the client.' },
         ],
       },
     ],
@@ -115,8 +115,8 @@ export const PROJECTS = [
         { label: 'Airtable + Claude', sub: 'REST · invoice parsing', detail: 'Airtable returns the records. Messy PDF invoices go to Claude with forced tool-use, which hands back structured line items instead of prose I would have to re-parse.' },
       ],
       kv: [
-        ['Framework', 'Next.js 16 (App Router)'],
-        ['UI', 'React 19 · TypeScript strict'],
+        ['Framework', 'Next.js (App Router)'],
+        ['UI', 'React · TypeScript strict'],
         ['Data', 'Airtable REST · SWR polling every 6s'],
         ['AI', 'Anthropic SDK · forced tool-use'],
         ['Auth', 'HMAC-SHA256 signed cookie (Web Crypto)'],
@@ -187,8 +187,8 @@ export const PROJECTS = [
     stack: [
       {
         group: 'Frontend', chips: [
-          { name: 'Next.js 16', why: 'One codebase serving both the interface and the API routes that hold the secrets.' },
-          { name: 'React 19', why: 'Nine sections of interactive boards, filters and live-updating fields.' },
+          { name: 'Next.js', why: 'One codebase serving both the interface and the API routes that hold the secrets.' },
+          { name: 'React', why: 'Nine sections of interactive boards, filters and live-updating fields.' },
           { name: 'TypeScript strict', why: 'Typed end to end; the types double as documentation of every data shape.' },
         ]
       },
@@ -223,8 +223,8 @@ export const PROJECTS = [
         { label: 'Airtable + Mapbox', sub: 'REST · geocoding', detail: 'Airtable returns the records; Mapbox geocodes addresses for the Jobs map. The response travels back through the proxy to the browser.' },
       ],
       kv: [
-        ['Framework', 'Next.js 16 (App Router)'],
-        ['UI', 'React 19 · TypeScript strict'],
+        ['Framework', 'Next.js (App Router)'],
+        ['UI', 'React · TypeScript strict'],
         ['Data fetching', 'SWR (suspense mode)'],
         ['Maps', 'Mapbox GL · react-map-gl'],
         ['Auth', 'Signed cookie · middleware gate on every route'],
@@ -276,25 +276,25 @@ export const PROJECTS = [
       { b: 'Problem', p: 'Teach three backend concepts - a SQL table, a POST endpoint, and a React GET - in one session, to people who had never seen any of them.' },
       { b: 'Built', p: 'An interactive lesson site where the explanation sits beside the code: hover a word for what it means, hover a line for when it runs, and press <em>Try it</em> to send a real request against a live Postgres database.' },
       { b: 'Key decision', p: 'The lessons are written as <em>data</em>, not markup, so content is editable without touching rendering. The database reseeds to the same three rows on every restart - a session always starts from a known state, so a demo cannot be broken by the last person who used it.' },
-      { b: 'Safety net', p: 'A <em>DATA_SOURCE=json</em> mode swaps the database for an in-memory twin. If the connection dies five minutes before a class, the lesson still runs.' },
+      { b: 'Safety net', p: 'A <em>fallback mode</em> swaps the database for an in-memory twin. If the connection dies five minutes before a class, the lesson still runs.' },
     ],
     stack: [
       {
         group: 'Frontend', chips: [
-          { name: 'React 18', why: 'Lesson 3 teaches useState and useEffect, so the site itself had to be the thing being taught.' },
+          { name: 'React', why: 'Lesson 3 teaches useState and useEffect, so the site itself had to be the thing being taught.' },
           { name: 'Vite', why: 'Instant reloads matter when you are editing a lesson live in front of a room.' },
         ]
       },
       {
         group: 'Backend', chips: [
-          { name: 'Express 4', why: 'Five endpoints in one readable file - small enough that a beginner can hold it in their head.' },
+          { name: 'Express', why: 'Five endpoints in one readable file - small enough that a beginner can hold it in their head.' },
           { name: 'Neon Postgres', why: 'A real hosted database, so "Try it" sends a genuine request rather than a simulated one.' },
         ]
       },
       {
         group: 'Teaching', chips: [
           { name: 'Lessons as data', why: 'Content lives in one array per lesson, so editing a lesson never means touching rendering code.' },
-          { name: 'Offline mode', why: 'DATA_SOURCE=json swaps in an in-memory twin, so a dead connection cannot cancel a class.' },
+          { name: 'Offline mode', why: 'A fallback mode swaps in an in-memory twin, so a dead connection cannot cancel a class.' },
         ]
       },
     ],
@@ -309,14 +309,12 @@ export const PROJECTS = [
         { label: 'React client', sub: 'vite · useState + useEffect', detail: 'The lesson site runs in the browser. Every demo fires a real request and puts the timing on screen, because a request not being instant is the whole point of lesson 3.' },
         { label: 'Vite proxy', sub: 'strips the /api prefix', detail: 'Everything the demos fetch starts with /api, and the proxy rewrites that prefix away before forwarding. The server itself knows nothing about /api.' },
         { label: 'Express', sub: 'one file, five endpoints', detail: 'Every endpoint does the same three steps: read the input, call a helper, send a response. No SQL lives in this file - the queries all sit in helpers.js.' },
-        { label: 'Neon Postgres', sub: 'client_form · parameterised', detail: 'Values are always passed separately as $1, $2, so a value can never be read as part of the command. That is SQL injection, prevented by construction.' },
+        { label: 'Neon Postgres', sub: 'parameterised queries', detail: 'Values are always passed separately as $1, $2, so a value can never be read as part of the command. That is SQL injection, prevented by construction.' },
       ],
       kv: [
-        ['Client', 'React 18 · Vite'],
-        ['Server', 'Express 4 · five endpoints'],
+        ['Client', 'React · Vite'],
+        ['Server', 'Express · five endpoints'],
         ['Database', 'Neon Postgres · pg Pool'],
-        ['Safety net', 'DATA_SOURCE=json swaps in an in-memory twin'],
-        ['Secrets', 'config.js is gitignored, never committed'],
         ['Repo', 'Read every line'],
       ],
       modsTitle: 'The three lessons',
@@ -366,7 +364,7 @@ export const PROJECTS = [
     stack: [
       {
         group: 'Frontend', chips: [
-          { name: 'React 18', why: 'The page is a few small components - a box, a link list, a clock - which is all a directory needs.' },
+          { name: 'React', why: 'The page is a few small components - a box, a link list, a clock - which is all a directory needs.' },
           { name: 'Vite', why: 'Instant dev server and a tiny static build; there is no backend to speak of.' },
           { name: 'React Router', why: 'Client-side routing so the resource page and the resume ship as one deploy.' },
         ]

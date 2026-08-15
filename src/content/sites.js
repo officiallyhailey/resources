@@ -19,6 +19,36 @@ export const SITES = [
     thumbAlt: 'The Silk City Coffee storefront homepage.',
     // What it actually runs on, for the chips on the narrative deck's cards.
     stack: ['Shopify', 'Square'],
+    // Grouped the way the tier-1 projects are, so the dialog ends on the same
+    // Built With section rather than on a second description.
+    //
+    // Every reason here is drawn from what this file already states, in the
+    // scope rows and the shot captions. Where nothing states why a platform
+    // was chosen, the entry carries NO reason rather than an inferred one: a
+    // guess about a client's business reads exactly like a fact, and one of
+    // these said the storefront handled gifting, which it does not.
+    stackDetail: [
+      {
+        group: 'Platform',
+        chips: [
+          { name: 'Shopify', why: 'Business site and coffee bean orders.' },
+          { name: 'Square', why: 'Cafe ordering.' },
+        ],
+      },
+      {
+        group: 'Built on top',
+        chips: [
+          {
+            name: 'Wholesale portal',
+            why: 'A separate B2B route for wholesale accounts to log in and place orders.',
+          },
+          {
+            name: 'Automated onboarding',
+            why: 'Runs through Shopify workflows and a custom form.',
+          },
+        ],
+      },
+    ],
     teaser:
       'The storefront customers actually buy from. Retail beans, gift cards, a subscription coffee club and a wholesale portal for trade accounts.',
     // The only site whose story continues into tier 1 - same business, other half.
@@ -61,8 +91,7 @@ export const SITES = [
       lead: 'Every order placed here becomes a sales row the leads team reconciles in ',
       crossKey: 'silk',
       crossLabel: 'Silk Operations',
-      tail:
-        ', where it is rolled into the weekly scorecard alongside expenses and labor. The storefront is the front end customers see; the platform is where the numbers land.',
+      tail: ', where it is rolled into the weekly scorecard alongside expenses and labor. The storefront is the front end customers see; the platform is where the numbers land.',
     },
     // Empty on purpose: the scope row's "Live at" link is the only route these
     // cases need. Buttons here cost more vertical space on a phone than they
@@ -77,11 +106,25 @@ export const SITES = [
     thumb: '/img/site-livinghope.jpg',
     thumbAlt: 'The Living Hope Farms homepage.',
     stack: ['Squarespace', 'Airtable'],
+    stackDetail: [
+      {
+        group: 'Platform',
+        chips: [{ name: 'Squarespace' }, { name: 'Airtable', why: 'Form data interface.' }],
+      },
+      {
+        group: 'Built on top',
+        chips: [
+          {
+            name: 'Embedded giving',
+            why: 'Donations are embedded from a secure third-party, so a donor never leaves the site mid-decision.',
+          },
+        ],
+      },
+    ],
     teaser:
       'Nonprofit residential home for survivors of human trafficking. Donations, an Airtable build application, resource pages and a social-enterprise shop.',
     role: {
-      lead:
-        'A nonprofit residential home where survivors of exploitation and their children find safety - 15 acres, 17 bedrooms and a working garden.',
+      lead: 'A nonprofit residential home where survivors of exploitation and their children find safety - 15 acres, 17 bedrooms and a working garden.',
     },
     scope: [
       { k: 'Platform', v: 'Squarespace' },
@@ -123,8 +166,7 @@ export const SITES = [
     teaser:
       'Independent children’s publisher. Book catalogue, Square checkout, author visits, newsletter and four retail locations.',
     role: {
-      lead:
-        'An independent children’s publisher with an award-winning picture book, an activity book and four brick-and-mortar locations.',
+      lead: 'An independent children’s publisher with an award-winning picture book, an activity book and four brick-and-mortar locations.',
     },
     scope: [
       { k: 'Platform', v: 'WordPress' },

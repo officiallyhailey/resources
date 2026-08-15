@@ -83,7 +83,7 @@ const inkSurface = () => {
   return [0, 2, 4].map((i) => parseInt(m.slice(i, i + 2), 16));
 };
 
-export default function NarrativeHome() {
+export default function NarrativeHome({ theme, onToggleTheme }) {
   const [narrow, setNarrow] = useState(() => window.innerWidth <= NARROW_AT);
   const [current, setCurrent] = useState('intro');
   const [beatAt, setBeatAt] = useState(0);
@@ -562,6 +562,29 @@ export default function NarrativeHome() {
         onNext={advance}
         onBack={goBack}
       />
+
+      {/* The deck follows the machine's own light/dark setting on its own; this
+          is for a reader who wants the other one anyway. Quieter than the mail
+          button opposite it - that is the thing worth pressing, this is a
+          preference - and it hides with it whenever a dialog is over the deck. */}
+      <button
+        type="button"
+        className="tmode"
+        hidden={formOpen || bdOn}
+        aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        onClick={onToggleTheme}
+      >
+        {theme === 'dark' ? (
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor">
+            <circle cx="12" cy="12" r="4.1" />
+            <path d="M12 2.7v2.3M12 19v2.3M2.7 12H5m14 0h2.3M5.6 5.6 7.2 7.2m9.6 9.6 1.6 1.6m0-13.2-1.6 1.6M7.2 16.8l-1.6 1.6" />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M21 12.9A9.1 9.1 0 1 1 11.1 3a7.1 7.1 0 0 0 9.9 9.9Z" />
+          </svg>
+        )}
+      </button>
 
       <button
         className={`fab${current === 'contact' && !formOpen && !bdOn ? ' beckon' : ''}`}

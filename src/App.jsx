@@ -10,6 +10,7 @@ import useTheme from '@/hooks/useTheme';
 
 export default function App() {
   const { theme, toggleTheme } = useTheme();
+  const home = <NarrativeHome theme={theme} onToggleTheme={toggleTheme} />;
 
   return (
     <TransitionProvider>
@@ -23,8 +24,8 @@ export default function App() {
             </>
           }
         />
-        <Route path="/" element={<NarrativeHome />} />
-        <Route path="*" element={<NarrativeHome />} />
+        <Route path="/" element={home} />
+        <Route path="*" element={home} />
       </Routes>
     </TransitionProvider>
   );

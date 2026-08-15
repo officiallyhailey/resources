@@ -2097,6 +2097,45 @@ body.narr main {
   color: var(--paper);
 }
 
+/* The light/dark switch, opposite the mail button and deliberately quieter:
+   the same corner geometry so the two read as a pair, but a glass surface and
+   a muted mark rather than the solid ink of the one thing on the page worth
+   pressing. Smaller too, so it never competes with the gate between them. */
+.narr .tmode {
+  position: fixed;
+  left: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 89;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  border: 1px solid var(--glass-edge);
+  color: var(--muted);
+  box-shadow: 0 14px 30px -18px var(--shadow);
+  transition:
+    transform 0.4s var(--e),
+    color 0.3s,
+    border-color 0.3s;
+}
+.narr .tmode svg {
+  width: 19px;
+  height: 19px;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.narr .tmode:hover {
+  transform: translateY(-3px);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+.narr .tmode[hidden] {
+  display: none;
+}
+
 .narr .fab {
   position: fixed;
   right: clamp(1rem, 3vw, 2rem);

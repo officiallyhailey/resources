@@ -14,15 +14,6 @@
           history.replaceState(null, null, redirect);
         }
       })();
-      // Apply the stored theme before first paint, so a dark-mode visitor never
-      // sees a flash of the light theme while React hydrates.
-      (function () {
-        try {
-          if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark');
-          }
-        } catch (e) {}
-      })();
     </script>
     <title>Hailey Grace - Full-stack developer</title>
     <meta
@@ -34,7 +25,31 @@
          manifest's icons; Android uses the manifest. Both are needed. -->
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#EDECE9" />
+    <meta name="theme-color" content="#ffffff" />
+    <script>
+      // Settle light or dark before first paint, so nobody watches the page
+      // change mode as the bundle boots. Same two inputs as the app's own
+      // useTheme, in the same order, because the two disagreeing IS the flash:
+      // a stored choice if there is one, otherwise whatever the machine says.
+      // Reading only the stored value here is what left a dark-mode visitor
+      // looking at a white page until React mounted.
+      // Sits below the meta tag it edits, and above the stylesheets.
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var mode =
+            stored === 'dark' || stored === 'light'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+          document.documentElement.classList.add(mode);
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute('content', mode === 'dark' ? '#000000' : '#ffffff');
+        } catch (e) {}
+      })();
+    </script>
     <meta name="apple-mobile-web-app-title" content="Hailey Grace" />
 
     <meta property="og:type" content="website" />
@@ -49,7 +64,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
@@ -66,8 +81,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <script type="module" crossorigin src="/assets/index-BNjjnBqh.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BfnNDoCA.css">
+    <script type="module" crossorigin src="/assets/index-D3reMlkZ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-C6cyJPs5.css">
   </head>
   <body>
     <div id="root"></div>

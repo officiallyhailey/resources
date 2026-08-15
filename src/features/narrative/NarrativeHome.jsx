@@ -34,6 +34,13 @@ import '@/styles/narrative.css';
 
 const ALL = ['intro', ...PAGE_ORDER];
 
+// the surface the accent will be read on, whichever palette is in force
+const cardColour = () => {
+  const v = getComputedStyle(document.body).getPropertyValue('--card').trim() || '#0d0e10';
+  const m = v.replace('#', '');
+  return [0, 2, 4].map((i) => parseInt(m.slice(i, i + 2), 16));
+};
+
 export default function NarrativeHome() {
   const [narrow, setNarrow] = useState(() => window.innerWidth <= NARROW_AT);
   const [current, setCurrent] = useState('intro');
@@ -68,6 +75,29 @@ export default function NarrativeHome() {
     beatRef.current = beatAt;
   }, [current, beatAt]);
 
+  /* The accent's derived colours are solved against the surface they will be
+     read on, so a change of mode has to re-solve them: switching to dark left
+     the accent holding a value worked out against the light card, which on a
+     black ground is a different and worse thing. Watches the class the shell
+     sets and the system preference behind it. */
+  useEffect(() => {
+    // reads the hue that is actually applied rather than the walk's own ref,
+    // so the two never have to share a mutable value
+    const repaint = () => {
+      const h = parseFloat(getComputedStyle(document.body).getPropertyValue('--accent-h')) || 20;
+      paintAccent(document.body, h, cardColour());
+    };
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const mo = new MutationObserver(repaint);
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    mq.addEventListener('change', repaint);
+    repaint();
+    return () => {
+      mo.disconnect();
+      mq.removeEventListener('change', repaint);
+    };
+  }, []);
+
   /* The accent walks further round the wheel with every section reached, and
      is eased here rather than by a CSS transition: the colours derived from it
      have to be re-solved as it travels, not only at the two ends. */
@@ -75,12 +105,7 @@ export default function NarrativeHome() {
   useEffect(() => {
     const to = ACCENT_WALK[accentStep(current, beatAt, visible)];
     if (to === undefined) return undefined;
-    const surface = () => {
-      const v = getComputedStyle(document.body).getPropertyValue('--card').trim() || '#0d0e10';
-      const m = v.replace('#', '');
-      return [0, 2, 4].map((i) => parseInt(m.slice(i, i + 2), 16));
-    };
-    const ground = surface();
+    const ground = cardColour();
     const from = hueRef.current;
     // always the short way round, so it never spins the long way for one step
     const delta = ((to - from + 540) % 360) - 180;

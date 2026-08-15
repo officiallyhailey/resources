@@ -368,8 +368,12 @@ body.narr main {
   color: #5f5b54;
 }
 .narr .b-statement em {
-  font-style: italic;
-  color: #b0603a;
+  font-style: normal;
+  font-weight: 700;
+  /* "have" and "want" are the only accented thing on that screen, so they are
+     where the travelling colour reads most clearly. This was a fixed
+     terracotta held over from the palette before this one. */
+  color: var(--accent-ink);
 }
 
 /* copy | centre focus | the ring of work. The middle column is the anchor:
@@ -924,6 +928,9 @@ body.narr main {
   box-shadow: 0 18px 38px -18px var(--shadow);
   display: grid;
   place-items: center;
+  /* the arrow draws in currentColor, so this is what puts the travelling
+     colour on the first screen and keeps it on every one after it */
+  color: var(--accent-ink);
   animation: narr-bob 3.6s var(--e) infinite;
   transition:
     transform 0.35s var(--e),
@@ -940,7 +947,7 @@ body.narr main {
   position: absolute;
   inset: -5px;
   border-radius: 50%;
-  border: 1px solid var(--accent);
+  border: 1.5px solid var(--accent);
   opacity: 0;
   animation: narr-ring 2.8s ease-out infinite;
 }

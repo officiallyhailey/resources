@@ -48,14 +48,14 @@ export default function Coverflow({ fan, shown, onOpen }) {
     [...track.querySelectorAll('.fcard')].forEach((c, i) => {
       const d = ringDist(i, active, n);
       const rank = Math.min(Math.abs(d), DEPTH.length - 1);
-      const step = DEPTH[rank];
+      const depth = DEPTH[rank];
       c.style.setProperty('--cw', `${cw}px`);
-      c.style.setProperty('--x', `${Math.sign(d) * step.x * cw}px`);
-      c.style.setProperty('--s', step.s);
-      c.style.setProperty('--o', step.o);
-      c.style.setProperty('--b', `${step.b}px`);
-      c.style.setProperty('--sat', step.sat);
-      c.style.setProperty('--br', step.br);
+      c.style.setProperty('--x', `${Math.sign(d) * depth.x * cw}px`);
+      c.style.setProperty('--s', depth.s);
+      c.style.setProperty('--o', depth.o);
+      c.style.setProperty('--b', `${depth.b}px`);
+      c.style.setProperty('--sat', depth.sat);
+      c.style.setProperty('--br', depth.br);
       c.style.setProperty('--z', String(50 - Math.abs(d)));
       c.classList.toggle('is-center', d === 0);
       const btn = c.querySelector('.fhit');
@@ -84,7 +84,17 @@ export default function Coverflow({ fan, shown, onOpen }) {
     return () => clearTimeout(t);
   }, [fan, paint]);
 
-  const goTo = (i) => setActive(((i % WORK.length) + WORK.length) % WORK.length);
+  const wrapIndex = (i) => ((i % WORK.length) + WORK.length) % WORK.length;
+  // jumping to a known card: the dots, and a card that was clicked
+  const goTo = (i) => setActive(wrapIndex(i));
+  /* Stepping is written against the LAST index rather than the one this render
+     closed over. Both arrows used to read `active` from the render that drew
+     them, so a second press landing before that render committed computed the
+     same destination as the first and the deck did not move. On a phone the
+     cards carry a blur filter and a commit can take long enough for two
+     ordinary taps to fall inside one, which read as the arrow going dead after
+     a few presses. */
+  const step = (d) => setActive((a) => wrapIndex(a + d));
 
   return (
     <>
@@ -94,11 +104,11 @@ export default function Coverflow({ fan, shown, onOpen }) {
         onKeyDown={(e) => {
           if (e.key === 'ArrowLeft') {
             e.preventDefault();
-            goTo(active - 1);
+            step(-1);
           }
           if (e.key === 'ArrowRight') {
             e.preventDefault();
-            goTo(active + 1);
+            step(1);
           }
         }}
       >
@@ -112,7 +122,7 @@ export default function Coverflow({ fan, shown, onOpen }) {
             if (dragX.current === null) return;
             const dx = e.clientX - dragX.current;
             dragX.current = null;
-            if (Math.abs(dx) > 45) goTo(active + (dx < 0 ? 1 : -1));
+            if (Math.abs(dx) > 45) step(dx < 0 ? 1 : -1);
           }}
           onPointerCancel={() => {
             dragX.current = null;
@@ -157,7 +167,7 @@ export default function Coverflow({ fan, shown, onOpen }) {
 
       <div className="wrap">
         <div className={`flow-nav fade${shown ? ' in' : ''}`} data-d="1">
-          <button onClick={() => goTo(active - 1)} aria-label="Previous project">
+          <button onClick={() => step(-1)} aria-label="Previous project">
             <svg
               width="17"
               height="17"
@@ -179,7 +189,7 @@ export default function Coverflow({ fan, shown, onOpen }) {
               />
             ))}
           </div>
-          <button onClick={() => goTo(active + 1)} aria-label="Next project">
+          <button onClick={() => step(1)} aria-label="Next project">
             <svg
               width="17"
               height="17"

@@ -38,18 +38,12 @@ export function WorkPanel({ shown, onReady, onOpen }) {
     if (!shown) return undefined;
     let cancelled = false;
     const root = rootRef.current;
-    // heading first, then the cards land, and only THEN the note - typing all
-    // three before the fan left a big empty stage for several seconds
-    playGroup(root.querySelector('.sec-head'))
-      .then(() => {
-        if (cancelled) return null;
-        setFan(true);
-        onReady();
-        return wait(REDUCED ? 0 : 420);
-      })
-      .then(() => {
-        if (!cancelled) playGroup(root.querySelector('.pilenote'));
-      });
+    // the heading types, then the cards land
+    playGroup(root.querySelector('.sec-head')).then(() => {
+      if (cancelled) return;
+      setFan(true);
+      onReady();
+    });
     return () => {
       cancelled = true;
     };
@@ -69,12 +63,6 @@ export function WorkPanel({ shown, onReady, onOpen }) {
       </div>
 
       <Coverflow fan={fan} shown={shown} onOpen={onOpen} />
-
-      <div className="wrap">
-        <p className="pilenote mono">
-          <Typed text={SCRIPT.workNote} wrap={40} />
-        </p>
-      </div>
     </div>
   );
 }

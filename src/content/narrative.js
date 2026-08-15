@@ -32,7 +32,6 @@ export const SCRIPT = {
   name: "I'm Hals",
   workIdx: '01 · Selected work',
   workTitle: 'Up and *running*',
-  workNote: 'Click a card to bring it forward · click the centre one to open it',
   tools: "Here are some of the tools I've made recently...",
   ask: 'What can I make easier for you, today?',
 };

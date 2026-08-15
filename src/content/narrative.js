@@ -41,7 +41,7 @@ export const SCRIPT = {
 // larger dialog; this one is small and asks for three things.
 export const FORM = {
   heading: "Let's talk",
-  lede: 'Tell me what needs to get easier.',
+  lede: "Let's get you back to why you started the work to begin with",
   fields: { name: 'Name', email: 'Email', message: 'What do you need?' },
   send: 'Send it',
   sending: 'Sending…',

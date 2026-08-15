@@ -3,7 +3,7 @@ import { CONTACT_FORM as T } from '@/content/about';
 import { useForm, ValidationError } from '@formspree/react';
 
 // The same Formspree endpoint the previous site posted to, so submissions keep
-// landing in the inbox Hailey already watches.
+// landing in the inbox
 const FORM_ID = 'mdavozgw';
 
 export default function ContactModal({ open, onClose }) {

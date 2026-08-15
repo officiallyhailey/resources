@@ -26,7 +26,7 @@ export const ABOUT = {
     rarity: 'Open to work',
     no: 'No. 01',
     name: 'Hailey Grace',
-    title: 'Full-stack developer · operations',
+    title: 'Full-stack developer · Operations',
     stats: [
       { v: '7+', k: 'Project Management' },
       { v: '3+', k: 'Procurement' },

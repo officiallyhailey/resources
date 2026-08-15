@@ -14,7 +14,7 @@ export const PROFILE = {
   ],
   name: 'Hailey Grace',
   role: 'Full-stack developer',
-  strapline: 'Full-stack developer · operations · data',
+  strapline: 'Developer · Operations · AI/Automation',
   status: 'Open to work',
   metrics: [
     { value: '7+', label: 'Years in project management' },

@@ -71,7 +71,7 @@ export function WorkPanel({ shown, onReady, onOpen }) {
       <Coverflow fan={fan} shown={shown} onOpen={onOpen} />
 
       <div className="wrap">
-        <p className="pilenote mono" style={{ textAlign: 'center', marginTop: '1rem' }}>
+        <p className="pilenote mono">
           <Typed text={SCRIPT.workNote} wrap={40} />
         </p>
       </div>

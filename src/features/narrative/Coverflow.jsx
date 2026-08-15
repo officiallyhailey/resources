@@ -13,12 +13,14 @@ function ringDist(i, from, n) {
 /* This deck only ever renders below 900px, so both bands are small screens
    and the card takes the room each actually has. A phone is limited by height,
    not width: a wider card is a taller one, and it has to leave the deck's
-   controls and the gate their space. A tablet has height to spare, so it is
-   width that decides. */
+   controls and the gate their space. So the phone width is whichever of the
+   two limits binds first, rather than width alone - which is what let a tall
+   phone hand back room the card could have used, and a short one overflow.
+   A tablet has height to spare, so there it is width that decides. */
 const cardWidth = () =>
   window.innerWidth <= 700
-    ? clamp(window.innerWidth * 0.68, 240, 300)
-    : clamp(window.innerWidth * 0.42, 260, 340);
+    ? clamp(Math.min(window.innerWidth * 0.82, window.innerHeight * 0.38), 240, 340)
+    : clamp(window.innerWidth * 0.48, 260, 380);
 
 /* The Up and running deck: the work as a coverflow, dealt out of a single
    stack. This is how the work is shown on a phone or tablet, where the ring

@@ -14,8 +14,40 @@ import Gate from './Gate';
 import Stage from './Stage';
 import { AboutPanel, ContactPanel, ExperiencePanel, ToolkitPanel, WorkPanel } from './sections';
 import { paintAccent } from './accent';
-import { REDUCED, settled, wait } from './typewriter';
+import { clamp, REDUCED, settled, wait } from './typewriter';
 import '@/styles/narrative.css';
+
+/* The gate's distance from the foot of the screen, as a fraction of it, and
+   the two overflow ratios those ends are pinned to. GATE_FULL is a panel with
+   more to show than fits, GATE_SPARSE one whose content stops inside the
+   screen. */
+const GATE_LOW = 0.055;
+const GATE_HIGH = 0.2;
+const GATE_FULL = 1.12;
+const GATE_SPARSE = 1;
+
+/* The gate's own height above its bottom padding - label, gap, button - and
+   the air kept between a panel's last line and that label. */
+const GATE_STACK = 81;
+const GATE_GAP = 14;
+
+/* The blocks a panel is actually made of, named rather than inferred. Two
+   attempts to find the lowest ink by walking the tree both failed on this
+   markup: full-height decorative layers measure as content, and the last
+   child in source order is not the lowest one on screen. A list is duller and
+   it does not guess. */
+const BLOCKS = 'h1, h2, h3, p, ul, ol, form, figure, .flow, .flow-nav, .pcard, .lanes, .arc';
+
+const blockBottom = (p) => {
+  const box = p.getBoundingClientRect();
+  let bot = -Infinity;
+  p.querySelectorAll(BLOCKS).forEach((el) => {
+    const b = el.getBoundingClientRect();
+    if (!b.height || b.top > box.bottom) return;
+    bot = Math.max(bot, b.bottom);
+  });
+  return bot === -Infinity ? box.bottom : bot;
+};
 
 /* ══════════════════════════════════════════════════════════════════════
    THE DECK
@@ -74,6 +106,46 @@ export default function NarrativeHome() {
     currentRef.current = current;
     beatRef.current = beatAt;
   }, [current, beatAt]);
+
+  /* ── where the gate sits ──────────────────────────────────────────────
+     A section with more to show wants its arrow out of the way, at the very
+     foot of the screen. A sparse one does not: an arrow pinned to the bottom
+     of a mostly empty panel reads as stranded, a long way under the thing it
+     follows, so there it rises to meet the content.
+
+     How much the panel overflows is the measure, because it is the same thing
+     the reader is being told: a panel that runs past the fold has more to
+     show. Panels are their own scroll containers, so it is a read of two
+     numbers. Measuring where the ink actually ends would be the truer signal
+     and was tried twice - it kept finding full-height decorative layers, and
+     then the last child in source order rather than the lowest one on screen.
+     The ratio is coarser and it is right. */
+  useEffect(() => {
+    const place = () => {
+      const p = panelEl(currentRef.current);
+      if (!p || !p.clientHeight) return;
+      const over = p.scrollHeight / p.clientHeight;
+      const t = clamp((over - GATE_FULL) / (GATE_SPARSE - GATE_FULL), 0, 1);
+      const vh = window.innerHeight;
+      // and never so high that it lands on the panel's own last line: the deck
+      // is a fixed-height box, so the work panel barely overflows while its
+      // content still reaches most of the way down
+      const ceiling = vh - blockBottom(p) - GATE_STACK - GATE_GAP;
+      const lift = Math.min(vh * (GATE_LOW + t * (GATE_HIGH - GATE_LOW)), ceiling);
+      document.body.style.setProperty(
+        '--gate-lift',
+        `${Math.round(clamp(lift, vh * GATE_LOW, vh * GATE_HIGH))}px`
+      );
+    };
+    // after the panel has arrived and its copy has been laid out, or it is the
+    // outgoing panel's height being measured
+    const id = window.setTimeout(place, 60);
+    window.addEventListener('resize', place);
+    return () => {
+      window.clearTimeout(id);
+      window.removeEventListener('resize', place);
+    };
+  }, [current, beatAt, narrow, shown]);
 
   /* The accent's derived colours are solved against the surface they will be
      read on, so a change of mode has to re-solve them: switching to dark left

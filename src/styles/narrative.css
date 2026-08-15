@@ -29,6 +29,13 @@ body.narr {
   --pad-x: clamp(1.25rem, 4.2vw, 4rem);
   --wrap: 1280px;
 
+  /* How much of what sits behind a glass surface comes through. Kept out of
+     the two palettes and in one place, because it is not a colour: a narrow
+     screen needs a thicker glass than a wide one and should be able to say so
+     without restating the palette. The narrow value is set with the rest of
+     the small-screen rules at the foot of the file. */
+  --paper-a: 0.72;
+
   background: var(--ground);
   color: var(--ink);
   font-family: 'Archivo', system-ui, sans-serif;
@@ -48,7 +55,7 @@ body.narr {
 body.narr {
   --ground: #ffffff;
   --card: #f7f7f8;
-  --paper: rgba(255, 255, 255, 0.72);
+  --paper: rgb(255 255 255 / var(--paper-a));
   --paper-solid: #f7f7f8;
   --ink: #131417;
   --muted: #45474c;
@@ -63,13 +70,14 @@ body.narr {
   --shadow: rgba(19, 20, 23, 0.28);
   --well: #eeeef1;
   --tint: hsl(var(--accent-h) 90% 30% / 0.1);
+  --veil: 255 255 255;
 }
 
 @media (prefers-color-scheme: dark) {
   body.narr {
     --ground: #000000;
     --card: #0d0e10;
-    --paper: rgba(22, 24, 27, 0.72);
+    --paper: rgb(22 24 27 / var(--paper-a));
     --paper-solid: #16181b;
     --ink: #f9f9f9;
     --muted: #a7a7a7;
@@ -84,13 +92,14 @@ body.narr {
     --shadow: rgba(0, 0, 0, 0.75);
     --well: #16181b;
     --tint: hsl(var(--accent-h) 98% 46% / 0.16);
+    --veil: 0 0 0;
   }
 }
 
 html.dark body.narr {
   --ground: #000000;
   --card: #0d0e10;
-  --paper: rgba(22, 24, 27, 0.72);
+  --paper: rgb(22 24 27 / var(--paper-a));
   --paper-solid: #16181b;
   --ink: #f9f9f9;
   --muted: #a7a7a7;
@@ -105,12 +114,13 @@ html.dark body.narr {
   --shadow: rgba(0, 0, 0, 0.75);
   --well: #16181b;
   --tint: hsl(var(--accent-h) 98% 46% / 0.16);
+  --veil: 0 0 0;
 }
 
 html.light body.narr {
   --ground: #ffffff;
   --card: #f7f7f8;
-  --paper: rgba(255, 255, 255, 0.72);
+  --paper: rgb(255 255 255 / var(--paper-a));
   --paper-solid: #f7f7f8;
   --ink: #131417;
   --muted: #45474c;
@@ -125,6 +135,7 @@ html.light body.narr {
   --shadow: rgba(19, 20, 23, 0.28);
   --well: #eeeef1;
   --tint: hsl(var(--accent-h) 90% 30% / 0.1);
+  --veil: 255 255 255;
 }
 
 /* HARD GATE: the document itself never scrolls. Sections are a deck of
@@ -182,18 +193,22 @@ body.narr main {
   padding: 0 var(--pad-x);
 }
 
-/* the veil is the transition itself: a bank of light that thickens over a
-   change so the swap happens inside it rather than in plain sight */
+/* The veil is the transition itself: a bank of the ground that thickens over a
+   change, so the swap happens inside it rather than in plain sight. Built from
+   the ground rather than from a fixed white, which in dark mode threw a nearly
+   opaque cream sheet over a black page on every move between panels. */
 #veil {
   position: fixed;
   inset: 0;
   z-index: 60;
   pointer-events: none;
   opacity: 0;
+  /* the transparent stops are the same colour at zero alpha, never the keyword
+     `transparent`: that is black, and fading white to it greys the edge */
   background:
-    radial-gradient(70% 50% at 28% 58%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 72%),
-    radial-gradient(62% 44% at 74% 36%, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0) 74%),
-    linear-gradient(180deg, rgba(250, 249, 245, 0.7), rgba(250, 249, 245, 0.95));
+    radial-gradient(70% 50% at 28% 58%, rgb(var(--veil) / 0.95), rgb(var(--veil) / 0) 72%),
+    radial-gradient(62% 44% at 74% 36%, rgb(var(--veil) / 0.92), rgb(var(--veil) / 0) 74%),
+    linear-gradient(180deg, rgb(var(--veil) / 0.7), rgb(var(--veil) / 0.95));
   transition: opacity 0.32s ease;
   will-change: opacity;
 }
@@ -854,9 +869,12 @@ body.narr main {
   align-items: center;
   gap: 0.5rem;
   z-index: 70;
-  /* lifted well clear of the bottom edge: level with the mail button it is an
-     awkward reach on a phone and close to the browser's own chrome */
-  padding: 2.4rem 0 clamp(4rem, 11vh, 6.5rem);
+  /* Lifted well clear of the bottom edge: level with the mail button it is an
+     awkward reach on a phone and close to the browser's own chrome. The lift
+     is written per panel by the deck, from how much that panel overflows; the
+     clamp is the value before the first measurement lands. */
+  padding: 2.4rem 0 var(--gate-lift, clamp(4rem, 11vh, 6.5rem));
+  transition: padding-bottom 0.45s var(--e);
   /* a soft floor rather than a hard edge: panel content fades out as it
      passes beneath instead of colliding with the controls */
   background: linear-gradient(
@@ -1083,9 +1101,12 @@ body.narr main {
   border: 1px solid var(--glass-edge);
   box-shadow: 0 30px 64px -30px var(--shadow);
 }
+/* the centred card lifts by taking a brighter edge of its own palette, not a
+   fixed white: on a white ground that edge was invisible and on a black one it
+   was a hard outline */
 .narr .fcard.is-center .fhit {
   box-shadow: 0 46px 90px -34px var(--shadow);
-  border-color: #fff;
+  border-color: var(--rule);
 }
 .narr .fshot {
   display: block;
@@ -1250,6 +1271,14 @@ body.narr main {
   background: var(--accent);
   width: 20px;
   border-radius: 100px;
+}
+
+/* the line under the deck that explains it. Its spacing is the last thing
+   between the deck and the gate, so it lives here rather than inline on the
+   element, where a narrow screen could not shorten it without !important */
+.narr .pilenote {
+  text-align: center;
+  margin-top: 1rem;
 }
 
 /* ── the breakdown, centred over the page ── */
@@ -2174,7 +2203,7 @@ body.narr footer {
     margin-top: 0.7rem;
   }
   .narr .pilenote {
-    margin-top: 0.5rem !important;
+    margin-top: 0.5rem;
   }
   .narr .fteaser {
     -webkit-line-clamp: 2;
@@ -2278,11 +2307,26 @@ body.narr footer {
 }
 
 @media (max-width: 900px) {
-  /* a phone gives the deck almost the whole screen, and the card takes it */
+  /* Thicker glass on a small screen. The cards sit much closer together here
+     than on a wide one, so at the shared alpha the card behind reads straight
+     through the one in front and the two compete. Set on the same selector as
+     the base value and later in the file, so it wins without a specificity
+     trick. */
+  body.narr {
+    --paper-a: 0.94;
+  }
+
+  /* A phone gives the deck almost the whole screen, and the card takes it.
+     The ceiling is not taste: below the deck sit its arrows and the line that
+     explains them, and below those the gate. Taller than this and the note
+     lands on the gate's own label and neither can be read. */
   .narr .flow {
     --fade: 30px;
-    height: clamp(345px, 46vh, 470px);
+    height: clamp(360px, 51vh, 470px);
     padding: 10px 0 var(--fade);
+  }
+  .narr .pilenote {
+    margin-top: 0.5rem;
   }
   /* sized to the room the deck actually has below a card, so the shadow fades
      out inside the container instead of meeting its edge */

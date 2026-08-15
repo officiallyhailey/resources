@@ -42,7 +42,7 @@ export const PROJECTS = [
       tag: 'Operations platform',
       scope: '2023 - ongoing · In production',
       teaser:
-        'A full operations landing platform for owners and managers to navigate their daily tasks, approvals, and reports. Includes a connection to claude that auto runs payroll, parses invoices, and generates a weekly scorecard.',
+        'A full operations landing platform for owners and managers to navigate their daily tasks, approvals, and reports. Includes a connection to Claude that auto runs payroll, parses invoices, and generates a weekly scorecard.',
       stack: ['Next.js', 'Airtable', 'Claude'],
       cta: 'Read case study',
     },

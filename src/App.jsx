@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import HomePage from '@/features/home/HomePage';
+// The homepage is the narrative deck. The scrolling design it replaced is
+// still in src/features/home - unrouted, not deleted, until this one has been
+// tested properly.
+import NarrativeHome from '@/features/narrative/NarrativeHome';
 import ToolboxPage from '@/features/toolbox/ToolboxPage';
 import { TransitionProvider } from '@/components/PageTransition';
 import LogoBanner from '@/components/LogoBanner';
@@ -19,8 +22,8 @@ export default function App() {
     <TransitionProvider>
       <Routes>
         <Route path="/resources" element={<><LogoBanner /><ToolboxPage theme={theme} onToggleTheme={toggleTheme} /></>} />
-        <Route path="/"    element={<HomePage />} />
-        <Route path="*"    element={<HomePage />} />
+        <Route path="/"    element={<NarrativeHome />} />
+        <Route path="*"    element={<NarrativeHome />} />
       </Routes>
     </TransitionProvider>
   );

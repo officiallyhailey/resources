@@ -17,6 +17,8 @@ export const SITES = [
     tilt: { rot: '-9deg', dy: '16px' },
     thumb: '/img/site-scc.jpg',
     thumbAlt: 'The Silk City Coffee storefront homepage.',
+    // What it actually runs on, for the chips on the narrative deck's cards.
+    stack: ['Shopify', 'Square'],
     teaser:
       'The storefront customers actually buy from. Retail beans, gift cards, a subscription coffee club and a wholesale portal for trade accounts.',
     // The only site whose story continues into tier 1 - same business, other half.
@@ -74,6 +76,7 @@ export const SITES = [
     tilt: { rot: '2deg', dy: '-10px' },
     thumb: '/img/site-livinghope.jpg',
     thumbAlt: 'The Living Hope Farms homepage.',
+    stack: ['Squarespace', 'Airtable'],
     teaser:
       'Nonprofit residential home for survivors of human trafficking. Donations, an Airtable build application, resource pages and a social-enterprise shop.',
     role: {

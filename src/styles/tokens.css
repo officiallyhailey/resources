@@ -1,6 +1,12 @@
 /* ─── Tokens ───────────────────────────────────────────────────────── */
 
+/* Light is the base and dark arrives by preference, with either reachable by a
+   class the shell sets. Written this way round so the page still follows the
+   machine with no script at all: keying dark only on `html.dark` left a
+   dark-mode reader on a white page whenever the bundle had not booted yet. */
+
 :root {
+  color-scheme: light;
   --bg: #e7eaf1;
   --vignette-color: rgba(231, 234, 241, 0.7);
   --text: #3e3e3e;
@@ -17,7 +23,27 @@
   --radius: 18px;
 }
 
+/* `:not(.light)` rather than relying on source order: an explicit light choice
+   on a dark machine matches both this and the class below at equal
+   specificity, and which one won would otherwise depend on which came last. */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    color-scheme: dark;
+    --bg: #191919;
+    --vignette-color: rgba(25, 25, 25, 0.7);
+    --text: #e7eaf1;
+    --text-muted: #999999;
+    --glass-bg: rgba(15, 15, 15, 0.55);
+    --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.45), 1px 1px 20px rgba(255, 255, 255, 0.6) inset;
+    --accent-subtle: rgba(184, 155, 122, 0.1);
+    --nav-bg: #191919;
+    --tag-bg: rgba(184, 150, 122, 0.1);
+    --tag-text: #e58e03;
+  }
+}
+
 html.dark {
+  color-scheme: dark;
   --bg: #191919;
   --vignette-color: rgba(25, 25, 25, 0.7);
   --text: #e7eaf1;
@@ -28,6 +54,10 @@ html.dark {
   --nav-bg: #191919;
   --tag-bg: rgba(184, 150, 122, 0.1);
   --tag-text: #e58e03;
+}
+
+html.light {
+  color-scheme: light;
 }
 
 /* ─── Reset ────────────────────────────────────────────────────────── */

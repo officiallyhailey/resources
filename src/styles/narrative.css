@@ -29,6 +29,15 @@ body.narr {
   --pad-x: clamp(1.25rem, 4.2vw, 4rem);
   --wrap: 1280px;
 
+  /* The small-type scale. These are the mono labels, tags and chips, and they
+     were set in raw pixels in sixteen places between 8.5px and 11px, which is
+     below what is comfortable to read whatever the letter-spacing does for it.
+     One scale so the next adjustment is one edit rather than a sweep. */
+  --t-micro: 10.5px;
+  --t-label: 11px;
+  --t-tag: 11.5px;
+  --t-mono: 12px;
+
   /* How much of what sits behind a glass surface comes through. Kept out of
      the two palettes and in one place, because it is not a colour: a narrow
      screen needs a thicker glass than a wide one and should be able to say so
@@ -182,7 +191,7 @@ body.narr main {
 
 .narr .mono {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: var(--t-mono);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
@@ -524,7 +533,7 @@ body.narr main {
 }
 .narr .wfocus .chips span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 8.5px;
+  font-size: var(--t-micro);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0.3rem 0.55rem;
@@ -736,7 +745,7 @@ body.narr main {
   position: absolute;
   top: 0.7rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: var(--t-label);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   /* nearly opaque on purpose: these sit on the photograph, and translucent a
@@ -845,7 +854,7 @@ body.narr main {
   padding: 0.7rem 0.95rem;
   border-top: 1px solid var(--rule);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: var(--t-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
@@ -931,7 +940,7 @@ body.narr main {
 }
 .narr .gate-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9.5px;
+  font-size: var(--t-tag);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1140,7 +1149,7 @@ body.narr main {
   align-items: center;
   gap: 0.4rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: var(--t-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1154,7 +1163,7 @@ body.narr main {
 }
 .narr .fbadge {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 8.5px;
+  font-size: var(--t-micro);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0.28rem 0.55rem;
@@ -1187,7 +1196,7 @@ body.narr main {
 }
 .narr .fchips span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 8.5px;
+  font-size: var(--t-micro);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0.3rem 0.55rem;
@@ -1440,7 +1449,7 @@ body.narr main {
 }
 .narr .chip {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9.5px;
+  font-size: var(--t-tag);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0.34rem 0.6rem;
@@ -1470,10 +1479,10 @@ body.narr main {
 .narr .bd-layer {
   display: block;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: var(--t-label);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 400;
   padding-bottom: 0.5rem;
   margin-bottom: 0.9rem;
@@ -1513,7 +1522,7 @@ body.narr main {
   margin-left: auto;
   align-self: center;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 8.5px;
+  font-size: var(--t-micro);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0.28rem 0.55rem;
@@ -1587,7 +1596,7 @@ body.narr main {
 .narr .bd-shotcap b {
   display: block;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: var(--t-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1691,10 +1700,10 @@ body.narr main {
 .narr .bd-beat > b {
   display: block;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9.5px;
+  font-size: var(--t-tag);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 400;
   margin-bottom: 0.3rem;
 }
@@ -1703,9 +1712,13 @@ body.narr main {
   line-height: 1.6;
   color: var(--ink);
 }
+/* --accent-ink, never --accent: the fill is solved to carry black or white ON
+   it, and nothing about that makes it readable AS text on the page. At the
+   warm end of the walk the two are close enough that the difference does not
+   show; at green the fill measured 1.9 on a light surface. */
 .narr .bd-beat p em {
   font-style: normal;
-  color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 500;
 }
 .narr .bd-beat p b {
@@ -1753,7 +1766,7 @@ body.narr main {
 }
 .narr .fact b {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: var(--t-tag);
   letter-spacing: 0.14em;
   color: var(--muted);
 }
@@ -1823,7 +1836,7 @@ body.narr main {
 }
 .narr .tool span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: var(--t-tag);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent-ink);
@@ -2012,7 +2025,7 @@ body.narr main {
 .narr .cform label span {
   display: block;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: var(--t-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
@@ -2144,7 +2157,7 @@ body.narr footer {
   /* the contact button is fixed bottom-right and paints over everything, so
      the centred note has to stay clear of the ~74px it occupies */
   .narr .pilenote {
-    font-size: 9.5px;
+    font-size: var(--t-tag);
     letter-spacing: 0.1em;
   }
 }

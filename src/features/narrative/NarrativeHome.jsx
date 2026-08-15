@@ -36,7 +36,8 @@ const GATE_GAP = 14;
    markup: full-height decorative layers measure as content, and the last
    child in source order is not the lowest one on screen. A list is duller and
    it does not guess. */
-const BLOCKS = 'h1, h2, h3, p, ul, ol, form, figure, .flow, .flow-nav, .pcard, .lanes, .arc';
+const BLOCKS =
+  'h1, h2, h3, p, a, li, ul, ol, form, figure, .flow, .flow-nav, .pcard, .lanes, .arc';
 
 const blockBottom = (p) => {
   const box = p.getBoundingClientRect();
@@ -66,9 +67,18 @@ const blockBottom = (p) => {
 
 const ALL = ['intro', ...PAGE_ORDER];
 
-// the surface the accent will be read on, whichever palette is in force
-const cardColour = () => {
-  const v = getComputedStyle(document.body).getPropertyValue('--card').trim() || '#0d0e10';
+/* The accent ink has to clear its bar on EVERY surface it is read on, so it is
+   solved against the hardest one rather than the commonest. --well is that
+   surface in both modes by construction: it is the lightest of the dark
+   palette and the darkest of the light one, so whatever passes on it passes on
+   the ground and the cards too.
+
+   Solving against --card instead was a real gap. The breakdown dialog sits on
+   a lighter panel than a card, so at the blue end of the walk its labels
+   measured 4.27 against a bar of 4.5 while the same ink passed everywhere the
+   card was the backing. */
+const inkSurface = () => {
+  const v = getComputedStyle(document.body).getPropertyValue('--well').trim() || '#16181b';
   const m = v.replace('#', '');
   return [0, 2, 4].map((i) => parseInt(m.slice(i, i + 2), 16));
 };
@@ -157,7 +167,7 @@ export default function NarrativeHome() {
     // so the two never have to share a mutable value
     const repaint = () => {
       const h = parseFloat(getComputedStyle(document.body).getPropertyValue('--accent-h')) || 20;
-      paintAccent(document.body, h, cardColour());
+      paintAccent(document.body, h, inkSurface());
     };
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
     const mo = new MutationObserver(repaint);
@@ -177,7 +187,7 @@ export default function NarrativeHome() {
   useEffect(() => {
     const to = ACCENT_WALK[accentStep(current, beatAt, visible)];
     if (to === undefined) return undefined;
-    const ground = cardColour();
+    const ground = inkSurface();
     const from = hueRef.current;
     // always the short way round, so it never spins the long way for one step
     const delta = ((to - from + 540) % 360) - 180;

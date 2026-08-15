@@ -107,6 +107,34 @@ export function tokenise(line) {
    skip the typing the first run had only just started. */
 const runs = new WeakMap();
 
+/* One caret per typed block, made once and reused. It lives in the block
+   rather than on the current character precisely so that it is not part of any
+   line: see the note on .tcaret in narrative.css for what a per-character
+   pseudo-element cost. */
+function caretFor(host) {
+  let caret = host.querySelector(':scope > .tcaret');
+  if (!caret) {
+    caret = document.createElement('span');
+    caret.className = 'tcaret';
+    caret.setAttribute('aria-hidden', 'true');
+    host.appendChild(caret);
+  }
+  // stays hidden until it has somewhere to be, so it never flashes at 0,0
+  caret.hidden = true;
+  return caret;
+}
+
+/* Sit the caret against the right edge of a character. Offsets are read from
+   the character's own box and applied as a transform, so moving the caret
+   never writes a layout-affecting property. */
+function placeCaret(caret, cell) {
+  const x = cell.offsetLeft + cell.offsetWidth;
+  const y = cell.offsetTop;
+  caret.style.height = `${cell.offsetHeight * 0.78}px`;
+  caret.style.transform = `translate(${x}px, ${y + cell.offsetHeight * 0.16}px)`;
+  caret.hidden = false;
+}
+
 export function playTyped(host) {
   if (!host) return Promise.resolve();
   const already = runs.get(host);
@@ -126,6 +154,8 @@ export function playTyped(host) {
   const lead = 180;
   host.classList.add('writing');
 
+  const caret = caretFor(host);
+
   const run = new Promise((resolve) => {
     let start = performance.now();
     let last = start;
@@ -142,10 +172,14 @@ export function playTyped(host) {
         cells[shown].classList.add('on');
         shown += 1;
       }
-      if (shown > 0 && cells[shown - 1] !== tip) {
-        if (tip) tip.classList.remove('tip');
-        tip = cells[shown - 1];
-        tip.classList.add('tip');
+      /* The caret rides the last revealed character, but never a space: a
+         blank has no right edge for it to sit against, so it would read as
+         floating in the gap between two words. */
+      let mark = shown - 1;
+      while (mark > 0 && !cells[mark].textContent.trim()) mark -= 1;
+      if (shown > 0 && cells[mark] !== tip) {
+        tip = cells[mark];
+        placeCaret(caret, tip);
       }
       if (shown < cells.length) {
         requestAnimationFrame(frame);
@@ -153,7 +187,7 @@ export function playTyped(host) {
       }
       host.classList.remove('writing');
       setTimeout(() => {
-        if (tip) tip.classList.remove('tip');
+        caret.hidden = true;
         resolve();
       }, 140);
     };

@@ -280,8 +280,10 @@ body.narr main {
    is the whole trick - a version that retypes into a growing text node
    re-centres the line on every keystroke.
    ══════════════════════════════════════════════════════════════════════ */
+/* the caret is placed against this box, so it has to be the offset parent */
 .narr .tblock {
   display: block;
+  position: relative;
 }
 .narr .tline {
   display: block;
@@ -306,18 +308,31 @@ body.narr main {
 .narr .c.on {
   opacity: 1;
 }
-/* the caret rides the last revealed character and is absolutely placed, so
-   it cannot push anything sideways either */
-.narr .c.tip::after {
-  content: '';
+/* ONE caret per block, moved by transform - not a pseudo-element on whichever
+   character is current.
+
+   A pseudo generates a box on that character's inline, and generating a box
+   re-lays-out the inline. That is normally invisible, but a line whose content
+   measures its container to the pixel - the contact heading's second line was
+   278px inside 278px - re-breaks on any re-layout, and the block grew 33px for
+   a frame as the last word dropped and came back. The reveal itself never did
+   this: adding `on` to a character changes only paint.
+
+   Absolutely placed and moved with a transform, the caret is outside the line
+   entirely, so it has nothing to say about where a line breaks. */
+.narr .tcaret {
   position: absolute;
-  right: -0.08em;
-  top: 0.16em;
-  bottom: 0.06em;
+  left: 0;
+  top: 0;
   width: 0.05em;
   background: var(--accent);
   opacity: 0.75;
+  pointer-events: none;
   animation: narr-blink 1.05s steps(1) infinite;
+  will-change: transform;
+}
+.narr .tcaret[hidden] {
+  display: none;
 }
 @keyframes narr-blink {
   0%,
@@ -2282,7 +2297,7 @@ body.narr footer {
   .narr .gate-btn::after {
     animation: none;
   }
-  .narr .c.tip::after {
+  .narr .tcaret {
     animation: none;
   }
   .narr .fab.beckon::after {

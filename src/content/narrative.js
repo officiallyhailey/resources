@@ -44,7 +44,7 @@ export const FORM = {
   fields: { name: 'Name', email: 'Email', message: 'What do you need?' },
   send: 'Send it',
   sending: 'Sending…',
-  sent: { heading: 'That reached me.', body: "I'll reply as soon as I can." },
+  sent: { heading: 'Got it!', body: "I'll reply as soon as I can." },
 };
 
 export const PROFILE_CARD = {

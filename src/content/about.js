@@ -158,7 +158,7 @@ export const CONTACT_FORM = {
   sending: 'Sending…',
   sent: {
     label: 'Sent',
-    heading: 'Thanks - that reached me.',
+    heading: 'Thank you, I will respond within 24 hours!',
     body: 'I read everything that comes through here and will reply as soon as I can.',
     close: 'Close',
   },

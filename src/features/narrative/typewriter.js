@@ -112,13 +112,14 @@ const runs = new WeakMap();
    line: see the note on .tcaret in narrative.css for what a per-character
    pseudo-element cost. */
 function caretFor(host) {
-  let caret = host.querySelector(':scope > .tcaret');
+  let caret = host.querySelector('.tcaret');
   if (!caret) {
     caret = document.createElement('span');
     caret.className = 'tcaret';
     caret.setAttribute('aria-hidden', 'true');
-    host.appendChild(caret);
   }
+  // Deliberately not parented here. Where it belongs depends on the character
+  // it is about to sit against, and placeCaret is what knows that.
   // stays hidden until it has somewhere to be, so it never flashes at 0,0
   caret.hidden = true;
   return caret;
@@ -128,10 +129,23 @@ function caretFor(host) {
    the character's own box and applied as a transform, so moving the caret
    never writes a layout-affecting property. */
 function placeCaret(caret, cell) {
-  const x = cell.offsetLeft + cell.offsetWidth;
-  const y = cell.offsetTop;
+  /* The caret is parented to the very box its numbers are measured from, and
+     re-parented if that changes. Both come from the character, so they cannot
+     disagree.
+
+     They did disagree: playTyped is sometimes handed the heading that WRAPS a
+     typed block rather than the block itself, and hanging the caret on that
+     put it in a different positioning context from the offsets - which are
+     always relative to the nearest positioned ancestor, the block. The numbers
+     described a spot a few hundred pixels into the block; the caret read them
+     against the whole panel and sat up near the top of the screen. */
+  const anchor = cell.offsetParent;
+  if (!anchor) return;
+  if (caret.parentElement !== anchor) anchor.appendChild(caret);
   caret.style.height = `${cell.offsetHeight * 0.78}px`;
-  caret.style.transform = `translate(${x}px, ${y + cell.offsetHeight * 0.16}px)`;
+  caret.style.transform = `translate(${cell.offsetLeft + cell.offsetWidth}px, ${
+    cell.offsetTop + cell.offsetHeight * 0.16
+  }px)`;
   caret.hidden = false;
 }
 

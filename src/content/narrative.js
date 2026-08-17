@@ -44,7 +44,9 @@ export const FORM = {
   fields: { name: 'Name', email: 'Email', message: 'What do you need?' },
   send: 'Send it',
   sending: 'Sending…',
-  sent: { heading: 'Got it!', body: "I'll reply as soon as I can." },
+  // No second line: the heading carries the whole message, and the body used
+  // to soften the same promise it makes.
+  sent: { heading: 'Thank you, I will respond within 24 hours!' },
 };
 
 export const PROFILE_CARD = {

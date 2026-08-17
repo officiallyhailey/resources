@@ -19,7 +19,9 @@ export default function ContactForm({ open, onClose }) {
       {state.succeeded ? (
         <>
           <h4>{T.sent.heading}</h4>
-          <p>{T.sent.body}</p>
+          {/* optional: with none written there is no empty line holding its
+              own margin open under the heading */}
+          {T.sent.body ? <p>{T.sent.body}</p> : null}
         </>
       ) : (
         <>

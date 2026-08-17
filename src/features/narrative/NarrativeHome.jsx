@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
   ACCENT_WALK,
   accentStep,
@@ -214,9 +214,16 @@ export default function NarrativeHome({ theme, onToggleTheme }) {
   }, [current, beatAt, visible]);
 
   /* ── the page is a deck, so the document itself must not scroll ──────
-     Scoped to a class rather than set on html/body outright: /resources is
-     still the old design and still scrolls. */
-  useEffect(() => {
+     Scoped to a class rather than set on html/body outright: /resources still
+     scrolls.
+
+     A LAYOUT effect, not a passive one. Passive effects run after the browser
+     has painted, so on a first load the deck appeared for a frame as bare
+     unstyled HTML - every rule here is scoped to `narr`, and the class was not
+     on the document yet. index.html sets it before the bundle runs, which
+     covers the first load; this covers arriving from another route, where
+     there is no fresh document to bootstrap. */
+  useLayoutEffect(() => {
     document.documentElement.classList.add('narr');
     document.body.classList.add('narr');
     return () => {

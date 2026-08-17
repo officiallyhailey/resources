@@ -97,6 +97,24 @@
     -->
     <script>
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+      // Every rule the deck is drawn with is scoped to `narr`, so until that
+      // class is on the document the stylesheet is loaded and inert: the page
+      // paints as bare HTML with every panel stacked down the screen. React
+      // used to add it from an effect, and passive effects run AFTER the paint,
+      // so that bare frame was on screen every single load.
+      //
+      // Set here rather than in <head> because body does not exist yet up
+      // there, and this runs before the deferred module either way.
+      // /resources is the older design and scrolls, so it is left alone.
+      (function () {
+        try {
+          if (!/^\/resources\/?$/.test(location.pathname)) {
+            document.documentElement.classList.add('narr');
+            document.body.classList.add('narr');
+          }
+        } catch (e) {}
+      })();
     </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>

@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { RESOURCE_BOXES, ACTIVITY_IDEAS, QUOTES } from '@/content/toolbox';
 import ResourceBox from './ResourceBox';
 import LinkList from './LinkList';
 import profileImg from '@/assets/profile-pic.png';
+import { clearAccent } from '@/features/narrative/accent';
 import './toolbox.css';
 
 // The Toolbox page: a live clock, a random quote/advice/activity, and curated
@@ -14,6 +15,22 @@ export default function ToolboxPage({ theme, onToggleTheme }) {
   const [advice, setAdvice] = useState('');
   const [activity, setActivity] = useState('');
   const contentRef = useRef(null);
+
+  /* ── this page scrolls, whatever the reader arrived from ─────────────
+     index.html freezes the document for the deck before the bundle runs, and
+     until now only NarrativeHome took that back off again. Reaching this route
+     without the deck ever mounting left the freeze in place: overflow:hidden
+     on html and body, so the page would not scroll, and --accent solved from
+     the walk's hue instead of the site's own orange.
+
+     A layout effect for the same reason the deck uses one - it has to be off
+     before the first paint, not after it. */
+  useLayoutEffect(() => {
+    document.documentElement.classList.remove('narr');
+    document.body.classList.remove('narr');
+    clearAccent(document.body);
+    document.body.style.removeProperty('--accent-h');
+  }, []);
 
   // Live clock
   useEffect(() => {

@@ -13,7 +13,7 @@ import ContactForm from './ContactForm';
 import Gate from './Gate';
 import Stage from './Stage';
 import { AboutPanel, ContactPanel, ExperiencePanel, ToolkitPanel, WorkPanel } from './sections';
-import { paintAccent } from './accent';
+import { clearAccent, paintAccent } from './accent';
 import { clamp, REDUCED, settled, wait } from './typewriter';
 import '@/styles/narrative.css';
 
@@ -201,6 +201,10 @@ export default function NarrativeHome({ theme, onToggleTheme }) {
     const DUR = 2600;
     let raf;
     const frame = (now) => {
+      // A queued frame can still land after the class has come off, between
+      // the layout cleanup above and this effect's own. Painting then would
+      // put the properties straight back on a body that has already left.
+      if (!document.body.classList.contains('narr')) return;
       const t2 = Math.min(1, (now - start) / DUR);
       const eased = t2 < 0.5 ? 2 * t2 * t2 : 1 - (-2 * t2 + 2) ** 2 / 2;
       const h = from + delta * eased;
@@ -229,6 +233,13 @@ export default function NarrativeHome({ theme, onToggleTheme }) {
     return () => {
       document.documentElement.classList.remove('narr');
       document.body.classList.remove('narr');
+      /* The classes were never the whole of it. The walk and the gate write
+         custom properties straight onto <body>, and an inline value outlives
+         the class it was set beside, so leaving them on handed the next route
+         the deck's last hue. */
+      clearAccent(document.body);
+      document.body.style.removeProperty('--accent-h');
+      document.body.style.removeProperty('--gate-lift');
     };
   }, []);
 

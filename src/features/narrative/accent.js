@@ -90,3 +90,11 @@ export function paintAccent(el, h, surface) {
   el.style.setProperty('--on-accent', onAccent(fill));
   el.style.setProperty('--accent-ink', rgb(accentInk(h, surface)));
 }
+
+/* Everything paintAccent writes, so the deck can take all of it back off the
+   document when it leaves. Inline properties outlive the class they were set
+   alongside, and /resources reads --accent too: left behind, the old page came
+   up in whatever colour the walk happened to stop on. */
+export function clearAccent(el) {
+  ['--accent', '--on-accent', '--accent-ink'].forEach((p) => el.style.removeProperty(p));
+}
